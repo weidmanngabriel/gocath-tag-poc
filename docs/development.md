@@ -1,0 +1,2 @@
+# Entwicklung
+Python 3.12, Installation über requirements.txt. Lokal: python -m unittest discover -s tests -v. Integration: python -m src.main --limit 20 mit gesetzten Umgebungsvariablen GOCATH_GEMINI_CLASSIFIER_KEY und GOOGLE_SERVICE_ACCOUNT_JSON. Optional GEMINI_MODEL und GOOGLE_SHEET_ID. Keine Secrets in Repository oder Artefakte schreiben. Beim Runner-Test die GoCath-HTML-Struktur und die Sheets-Berechtigung prüfen.
