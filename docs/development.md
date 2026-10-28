@@ -24,3 +24,7 @@ Im bestehenden manuellen GitHub-Actions-Workflow `tag-events.yml` mit dem Modus 
 ## Groq-Vergleich (manuell, read-only)
 
 `tag-events.yml` bietet den Modus `compare-groq` auf dem Test-Branch. Jeweils dieselben öffentlichen Veranstaltungen werden mit `gemini-3.5-flash-lite` (`thinkingLevel=minimal`) und `openai/gpt-oss-20b` auf Groq (`reasoning_effort=low`) klassifiziert. Das ist ein Vergleich mit geringem Reasoning, kein vollständig identisches Thinking-Niveau. Die Reihenfolge wechselt pro Veranstaltung. Es gibt keine Schreibzugriffe auf Sheets und keine Änderung des regulären Modells. Das Secret `GROQ_API_KEY` wird ausschließlich als Authorization-Header verwendet, nie geloggt. `output/groq-comparison.json` hält Ergebnis-Tags, HTTP-Status, Sekunden und Tokenverbrauch fest. Keine unvalidierten Fehlantworten als Erfolg zählen. Tag-Übereinstimmung zwischen Modellen beweist keine fachliche Richtigkeit.
+
+## Groq-Rate-Limits
+
+Der reguläre Groq-Runner behandelt HTTP 429 sowie vorübergehende 5xx-Fehler durch maximal vier Versuche pro Veranstaltung. Er berücksichtigt einen numerischen `Retry-After`-Header (begrenzt auf 120 Sekunden) und wartet ansonsten gestaffelt 10, 20, 30 Sekunden. HTTP-Fehler werden nur als Statuscode protokolliert; Secrets und Antworttexte nicht. Bei dauerhaftem Fehler bricht der Lauf ab und behauptet keine erfolgreiche Klassifizierung. Nicht erneut versuchen bei anderen HTTP-Fehlern.
