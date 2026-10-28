@@ -21,3 +21,11 @@
 - Das GitHub-Environment `github-pages` erlaubt **nur** Deployments von `main`. Diese Einschränkung weder ändern noch umgehen.
 - Auf Feature-/Fix-Branches ausschließlich Build und Tests durchführen. Fehlgeschlagene Pages-Deployments auf Nicht-main-Branches sind durch die Environment-Regel erklärbar.
 - Geprüften Code per Squash-PR nach `main` übernehmen; danach das reale Pages-Deployment, Google OAuth und den Sheet-Zugriff validieren. Browser-E2E vor Veröffentlichung nicht behaupten. Bei Folgefehlern erneuten temporären Fix-Branch verwenden.
+
+## Dokumentation ist Teil jeder Aufgabe (verbindlich)
+- **Bei jeder Code-, Konfigurations-, Workflow- oder Architekturänderung gleichzeitig die betroffenen Dokumentationsstellen prüfen und aktualisieren.** Dokumentation ist Bestandteil der Definition of Done, kein optionaler Nachtrag.
+- Dokumentiere neue Funktionen, Datenfelder, Schnittstellen, Betriebsabläufe, Einschränkungen und Entscheidungen dort, wo sie hingehören (README als Einstieg; docs/ für Details). Bestehende widersprüchliche oder überholte Aussagen im selben PR korrigieren.
+- Beschreibe konfigurierbare Werte und Laufgrenzen **als Konfiguration**, nicht als starre Zahlen. Verweise auf die maßgebliche Quelle (z. B. `Config` im Google Sheet, `Tags` für die Tag-Liste). Nur stabile technische Grenzen aus dem Code dürfen ausdrücklich als solche benannt werden.
+- Nach jeder Aufgabe prüfen, ob `AGENTS.md`, `README.md`, `docs/concept.md`, `docs/architecture.md`, `docs/domain.md`, `docs/development.md`, `docs/dashboard.md`, `docs/setup.md` oder `docs/agent-workflow.md` betroffen sind. Unveränderte Dokumente müssen nicht künstlich bearbeitet werden.
+- Änderungen und Dokumentationsupdates in **demselben Feature-/Fix-Branch und PR** committen. Vor Merge auf widerspruchsfreie, aktuelle Angaben prüfen; bei nicht verifizierten Aussagen Unsicherheit transparent benennen.
+- Keine Secrets, personenbezogenen Zugangsdaten, temporären Token oder vertraulichen Logs dokumentieren.
