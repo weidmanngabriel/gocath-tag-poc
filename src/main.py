@@ -91,7 +91,7 @@ def main():
         t0 = time.perf_counter()
         log_run(doc, run_id, start, "success", len(results), model, usage_total)
         print(f"[timing] log_run={time.perf_counter()-t0:.3f}s total={time.perf_counter()-overall_t0:.3f}s",flush=True)
-        print("Gemini usage:", usage_total, flush=True)
+        print(f"{provider} usage:", usage_total, flush=True)
         print(f"{len(results)} erfolgreich klassifiziert und ins Sheet übertragen.", flush=True)
     except Exception as exc:
         log_run(doc, run_id, start, "failed", 0, type(exc).__name__)
