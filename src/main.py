@@ -67,7 +67,7 @@ def main():
                         break
                     if response["http_status"] not in (429, 500, 502, 503, 504) or groq_attempt == 3:
                         raise RuntimeError("Groq classification failed: " + response["status"] + "; HTTP " + str(response["http_status"]))
-                    delay = min(60, 10 * (groq_attempt + 1))
+                    delay = max(10 * (groq_attempt + 1), response.get("retry_after_seconds") or 0)
                     print(f"[groq-retry] http={response['http_status']} attempt={groq_attempt+1} wait={delay}s", flush=True)
                     time.sleep(delay)
                 tags = {k: response[k] for k in ("standard_tags", "additional_tags", "reason")}
