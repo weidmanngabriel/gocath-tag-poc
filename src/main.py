@@ -43,7 +43,7 @@ def main():
         for event in events:
             usage = {}
             tags = classify(event, key, model, config["tags"], config["additional_tags_enabled"],
-                            config["gemini_prompt"], config["gemini_temperature"], config["max_additional_tags"], usage_sink=usage)
+                            config["gemini_prompt"], config["gemini_temperature"], config["max_additional_tags"], usage_sink=usage, synonyms=config["tag_synonyms"])
             for name in usage_total:
                 usage_total[name] += usage.get(name, 0)
             input_cost = price(usage.get("input_tokens",0), config["cost_input_per_million_usd"])
