@@ -18,7 +18,7 @@ def main():
     credentials = os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"]
     model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
     events = fetch_events(options.limit)
-    print(f"Gefundene Veranstaltungen: {len(events)}")
+    print(f"Gefundene Veranstaltungen: {len(events)}", flush=True)
     results = []
     failures = 0
     for event in events:
@@ -28,15 +28,16 @@ def main():
         except Exception as exc:
             failures += 1
             tags = {"standard_tags": [], "additional_tags": [], "reason": ""}
-            status = "error: " + type(exc).__name__
-            print("Gemini-Fehler für " + event["url"] + ": " + status)
+            status = "error: " + str(exc)[:120]
+            print("Gemini-Fehler für " + event["url"] + ": " + status, flush=True)
         results.append({"event": event, "tags": tags, "status": status})
     Path("output").mkdir(exist_ok=True)
     Path("output/results.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
+    if failures:
+        # Never overwrite previously successful classifications with empty failures.
+        raise RuntimeError(f"{failures}/{len(results)} Klassifizierungen fehlgeschlagen; kein Sheet-Update.")
     publish(results, credentials, os.environ.get("GOOGLE_SHEET_ID", DEFAULT_SHEET))
-    print(f"{len(results)-failures}/{len(results)} klassifiziert und ins Sheet übertragen.")
-    if failures == len(results):
-        raise RuntimeError("Alle Klassifizierungen fehlgeschlagen.")
+    print(f"{len(results)} erfolgreich klassifiziert und ins Sheet übertragen.")
 
 if __name__ == "__main__":
     main()

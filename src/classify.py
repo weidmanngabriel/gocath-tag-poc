@@ -1,8 +1,11 @@
-"""Use Gemini to select exact controlled tags and propose optional search terms."""
+"""Use Gemini for grounded search tags; log safe HTTP diagnostics."""
 import json
 import time
 import requests
 from .tags import STANDARD_TAGS
+
+class GeminiAPIError(RuntimeError):
+    pass
 
 def clean(data):
     if not isinstance(data, dict):
@@ -32,9 +35,12 @@ def classify(event, api_key, model):
             if response.status_code in (429, 500, 502, 503, 504) and attempt < 2:
                 time.sleep(2 ** attempt * 3)
                 continue
-            response.raise_for_status()
+            if not response.ok:
+                # Never log response bodies: upstream responses may echo request data.
+                raise GeminiAPIError(f"Gemini API HTTP {response.status_code}; model={model}")
             return clean(json.loads(response.json()["candidates"][0]["content"]["parts"][0]["text"]))
-        except (KeyError, ValueError, IndexError, requests.RequestException):
+        except (KeyError, ValueError, IndexError, requests.RequestException) as exc:
             if attempt == 2:
-                raise
+                raise RuntimeError(f"Gemini response/transport error: {type(exc).__name__}") from None
             time.sleep(2 ** attempt * 2)
+    raise RuntimeError("Unreachable Gemini retry state")
