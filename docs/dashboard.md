@@ -17,7 +17,7 @@ Für den Vergleich verschiedener Parameter `changed_only=false` belassen. Durch 
 4. Unter **Settings → Pages** GitHub Actions als Quelle wählen. `Deploy dashboard to Pages` stellt `web/dist` bereit.
 5. Dashboard öffnen: `https://weidmanngabriel.github.io/gocath-tag-poc/`. Bei Google anmelden und Konfiguration speichern.
 
-Die Browser-Anwendung nutzt den Google Sheets OAuth Scope; der Zugriffs-Token wird ausschließlich im Arbeitsspeicher gehalten. Nur Google-Accounts mit Sheet-Rechten können auf die Daten zugreifen. Die Pages-Seite selbst ist öffentlich erreichbar.
+Die Browser-Anwendung nutzt den Google Sheets OAuth Scope; der kurzlebige Zugriffs-Token wird für Reloads innerhalb desselben Browser-Tabs in sessionStorage gehalten und nach Ablauf verworfen. Kein Refresh-Token wird gespeichert. Nur Google-Accounts mit Sheet-Rechten können auf die Daten zugreifen. Die Pages-Seite selbst ist öffentlich erreichbar.
 
 ## Release
 Auf temporärem Branch entwickeln, CI prüfen, Live-OAuth und Runner validieren, danach erst Squash-Merge auf main. Bei fehlender OAuth-Konfiguration kein vollständiger E2E-Nachweis.
@@ -31,3 +31,7 @@ Das `github-pages`-Environment gestattet nur `main` als Deployment-Branch. **Kei
 Bei jeder erfolgreichen Gemini-Antwort liest der Runner `usageMetadata` (Input-/Output-/Thinking-/Gesamt-Tokens). Die Werte werden pro Veranstaltung in `ResultsHistory` und als Summe in `Runs` gespeichert. Das Dashboard zeigt beide Ebenen an. Alte Läufe haben diese Felder nicht und werden nicht rückwirkend geschätzt.
 
 Die **Kosten sind keine echte Abrechnung**. Im Tabellenblatt `Config` sind `cost_input_per_million_usd` und `cost_output_per_million_usd` editierbar (USD je Million Tokens). Beide Felder leer lassen, wenn keine verlässlichen Modellpreise vorliegen; dann bleibt das Kostenfeld leer. Für einen Tarif die aktuellen Preise von https://ai.google.dev/gemini-api/docs/pricing übernehmen. Output-Preis umfasst bei Gemini auch Thinking-Tokens. Die Zahl berücksichtigt nicht zwingend Sondertarife, Caching, Fehlversuche oder Modell-Preflight-Aufrufe. Ob tatsächlich Kosten entstehen, hängt außerdem vom Google-Tarif ab. API-Schlüssel bleiben ausschließlich in GitHub Secrets.
+
+## Google-Sitzung beim Neuladen
+
+Ein einmal erteilter OAuth-Token wird mit Ablaufzeit im Tab-spezifischen `sessionStorage` zwischengespeichert, sodass ein Neuladen der Seite nicht sofort eine erneute Anmeldung erfordert. Nach Tokenablauf, nach Schließen des Tabs oder bei einer 401-Antwort ist eine neue Google-Autorisierung nötig. Bewusst keine dauerhafte Speicherung per `localStorage` und kein eigener Backend-Refresh-Service.
