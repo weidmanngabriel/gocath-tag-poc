@@ -12,6 +12,7 @@ class UsageTests(unittest.TestCase):
                 "promptTokenCount": 230,
                 "candidatesTokenCount": 35,
                 "thoughtsTokenCount": 12,
+                "cachedContentTokenCount": 80,
                 "totalTokenCount": 277,
             },
         }
@@ -21,4 +22,5 @@ class UsageTests(unittest.TestCase):
         self.assertEqual(classified["standard_tags"], ["Gebet"])
         self.assertEqual(usage["input_tokens"], 230)
         self.assertEqual(usage["thinking_tokens"], 12)
+        self.assertEqual(usage["cached_tokens"], 80)
         self.assertEqual(usage["total_tokens"], 277)
