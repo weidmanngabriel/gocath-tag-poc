@@ -1,13 +1,17 @@
-# GoCath Tagging POC
+# GoCath Auto Event Tagging – POC
 
-Manueller GitHub Actions-Test: Bis zu 20 echte Veranstaltungen von https://gocath.org/de/finde abrufen, mit Gemini klassifizieren und in das Google Sheet **GoCath Auto Event Tagging** schreiben. Keine zusätzliche Webrecherche.
+Eine minimale TypeScript-Oberfläche für **manuelle** GoCath-Klassifizierungen. Öffentliche GoCath-Veranstaltungen werden über GitHub Actions gelesen, durch Gemini mit konfigurierbarem Prompt klassifiziert und in ein Google Sheet geschrieben.
 
-## Starten
-1. Repository-Secrets `GOCATH_GEMINI_CLASSIFIER_KEY` und `GOOGLE_SERVICE_ACCOUNT_JSON` (vollständiger JSON-Inhalt) müssen gesetzt sein.
-2. Die Google Sheets API muss aktiviert sein; Service-Account-`client_email` benötigt Bearbeiterrechte im Zielsheet.
-3. GitHub **Actions → GoCath Tagging POC → Run workflow** auswählen.
-4. Ergebnisse im Sheet prüfen; zusätzlich wird `results.json` als Actions-Artefakt hochgeladen.
+- `web/`: Vite/TypeScript Dashboard für Google OAuth, Konfiguration und Vergleich der historischen Tag-Zuordnungen
+- `src/`: Python Runner, Gemini-Modell und Google-Sheets-Anbindung
+- `.github/workflows/tag-events.yml`: ausschließlich manueller Klassifizierungstrigger
+- `.github/workflows/pages.yml`: GitHub-Pages-Auslieferung des Dashboards
+- `.github/workflows/check.yml`: Python-Tests und TypeScript-Build
 
-Der POC verwendet Gemini `gemini-2.5-flash-lite`; Modell per `GEMINI_MODEL` änderbar. Wenn GoCath die öffentliche HTML-Struktur ändert, muss der Scraper angepasst werden. Keine stillen Demo-Daten.
+**Pro Testlauf 10 Veranstaltungen** (Wert `max_events_per_run` im Google Sheet `Config`). Jeder Lauf bekommt die nächste freie numerische Run-ID aus `Runs`. Die Ergebnisse werden unverändert in `ResultsHistory` gespeichert und lassen sich im Dashboard nach Lauf vergleichen. Das bisherige erste Blatt zeigt weiter die letzten Tags je Event.
 
-Siehe [Architektur](docs/architecture.md), [Fachregeln](docs/domain.md), [Entwicklung](docs/development.md) und [Tests](docs/testing.md).
+**Prompt & KI-Parameter:** `gemini_prompt`, `gemini_model` (optional), `gemini_temperature`, `max_additional_tags` sowie aktivierte Tags aus `Tags` werden beim Runner-Start direkt aus Google Sheets geladen.
+
+**Einrichtung:** [docs/dashboard.md](docs/dashboard.md). Für die Google-Anmeldung fehlt bis zur Einrichtung die öffentliche GitHub-Actions-Variable `VITE_GOOGLE_CLIENT_ID`; OAuth muss den Pages-Origin autorisieren. API-Keys und Service-Account-JSON bleiben ausschließlich GitHub Secrets.
+
+**Tests:** `python -m unittest discover -s tests -v` und in `web/`: `npm install && npm run build`.
