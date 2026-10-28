@@ -55,7 +55,7 @@ def fetch_events(limit=20):
             response.raise_for_status()
             return response.text
         listing=get(LIST_URL)
-        links=event_links(listing, max(limit*4,limit))
+        links=event_links(listing, 1000)
         if not links:
             raise RuntimeError("Keine Regnum-Christi-Veranstaltungslinks gefunden; Kalender-Markup prüfen.")
         events=[]
