@@ -33,3 +33,19 @@ def run_count(doc):
 def log_run(doc, run_id, start, status, classified, details):
     from datetime import datetime,timezone
     doc.worksheet("Runs").append_row([run_id,start,datetime.now(timezone.utc).isoformat(),status,classified,details],value_input_option="RAW")
+
+def next_run_id(doc):
+    """Sequential POC run IDs; no parallel executions are scheduled."""
+    rows=doc.worksheet("Runs").get_all_values()
+    ids=[int(row[0]) for row in rows[1:] if row and row[0].isdigit()]
+    return str(max(ids, default=0)+1)
+
+def save_history(doc, run_id, results, model, prompt, classified_at):
+    rows=[
+      [run_id, x["event"]["url"], x["event"]["title"],
+       ", ".join(x["tags"]["standard_tags"]), ", ".join(x["tags"]["additional_tags"]),
+       x["tags"]["reason"], model, prompt, classified_at]
+      for x in results
+    ]
+    if rows:
+        doc.worksheet("ResultsHistory").append_rows(rows, value_input_option="RAW")
