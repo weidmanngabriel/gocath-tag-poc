@@ -17,6 +17,10 @@ def settings(credentials_json, sheet_id):
         "monthly_limit":max(0,int(config.get("monthly_limit","100"))),
         "changed_only":config.get("changed_only","false").lower()=="true",
         "additional_tags_enabled":config.get("additional_tags_enabled","true").lower()=="true",
+        "gemini_prompt":config.get("gemini_prompt", "").strip(),
+        "gemini_model":config.get("gemini_model", "").strip(),
+        "gemini_temperature":max(0.0,min(1.0,float(config.get("gemini_temperature", "0.1")))),
+        "max_additional_tags":max(0,min(8,int(config.get("max_additional_tags", "8")))),
         "tags":tags or STANDARD_TAGS
     }
 
