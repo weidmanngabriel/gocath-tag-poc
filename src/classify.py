@@ -23,12 +23,17 @@ def choose_model(api_key, requested=None):
                  "gemini-2.0-flash", "gemini-2.0-flash-lite"]
     candidates = ([m for m in preferred if m in models] + [m for m in models if m.startswith("gemini-") and "flash" in m and not any(x in m for x in ("tts", "image", "audio", "live", "embedding")) and m not in preferred])[:6]
     for model in candidates:
-        test = requests.post(
-            f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
-            headers={"x-goog-api-key": api_key},
-            json={"contents": [{"parts": [{"text": "Antworte mit OK."}]}],
-                  "generationConfig": {"maxOutputTokens": 16}}, timeout=30)
-        # Only print the structured API status, never raw error body or token.
+        try:
+            test = requests.post(
+                f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                headers={"x-goog-api-key": api_key},
+                json={"contents": [{"parts": [{"text": "Antworte mit OK."}]}],
+                      "generationConfig": {"maxOutputTokens": 16}}, timeout=12)
+        except requests.Timeout:
+            print(f"Gemini preflight: {model} timed out", flush=True)
+            continue
+        except requests.RequestException as exc:
+            raise GeminiAPIError(f"Gemini preflight connection failure: {type(exc).__name__}") from None
         api_status = ""
         if not test.ok:
             try:
@@ -38,8 +43,9 @@ def choose_model(api_key, requested=None):
         print(f"Gemini preflight: {model} → HTTP {test.status_code} ({api_status})", flush=True)
         if test.ok:
             return model
-        if test.status_code not in (404, 400):
-            raise GeminiAPIError(f"Gemini preflight HTTP {test.status_code}, model={model}")
+        if test.status_code in (404, 400, 429, 503):
+            continue
+        raise GeminiAPIError(f"Gemini preflight HTTP {test.status_code}, model={model}")
     raise GeminiAPIError("All available Gemini generateContent models failed preflight")
 
 class GeminiAPIError(RuntimeError):
