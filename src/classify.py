@@ -21,7 +21,7 @@ def choose_model(api_key, requested=None):
     # ListModels can advertise entries that still return 404 on generateContent.
     preferred = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-3-flash",
                  "gemini-2.0-flash", "gemini-2.0-flash-lite"]
-    candidates = [m for m in preferred if m in models] + [m for m in models if m.startswith("gemini-") and m not in preferred and not any(x in m for x in ("tts", "image", "audio", "live", "embedding"))]
+    candidates = [m for m in preferred if m in models][:3]
     for model in candidates:
         test = requests.post(
             f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
