@@ -56,12 +56,19 @@ def main():
     usage_total = {"input_tokens":0,"output_tokens":0,"thinking_tokens":0,"total_tokens":0}
     def price(tokens, per_million):
         return tokens * float(per_million) / 1_000_000 if per_million else None
+    last_groq_request = None
     try:
         for idx,event in enumerate(events,1):
             t0 = time.perf_counter()
             usage = {}
             if provider == "groq":
                 for groq_attempt in range(4):
+                    if last_groq_request is not None:
+                        pause = max(0, 15 - (time.monotonic() - last_groq_request))
+                        if pause:
+                            print(f"[groq-pacing] wait={pause:.1f}s to respect 8K TPM free-tier budget", flush=True)
+                            time.sleep(pause)
+                    last_groq_request = time.monotonic()
                     response = invoke_groq("groq", event, config, {"groq": provider_key})
                     if response["status"] == "ok":
                         break
