@@ -3,10 +3,21 @@ declare global { interface Window { google?: { accounts: { oauth2: { initTokenCl
 const SHEET="1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w";
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined;
 const API="https://sheets.googleapis.com/v4/spreadsheets/"+SHEET;
-let token="", config: string[][]=[], tags: string[][]=[], runs:string[][]=[], history:string[][]=[];
+const SESSION_KEY="gocath_sheets_oauth_session";
+type SavedSession={accessToken:string; expiresAt:number};
+function restoreSession():string {
+  try{
+    const saved=JSON.parse(sessionStorage.getItem(SESSION_KEY)||"null") as SavedSession|null;
+    if(saved && typeof saved.accessToken==="string" && Number.isFinite(saved.expiresAt) && saved.expiresAt>Date.now()+30000) return saved.accessToken;
+  }catch{}
+  sessionStorage.removeItem(SESSION_KEY);
+  return "";
+}
+function clearSession(){token="";sessionStorage.removeItem(SESSION_KEY);}
+let token=restoreSession(), config: string[][]=[], tags: string[][]=[], runs:string[][]=[], history:string[][]=[];
 const app=document.querySelector<HTMLDivElement>("#app")!;
 function safe(s:string):string {return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");}
-async function api(url:string,opts:RequestInit={}) {const r=await fetch(url,{...opts,headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json",...(opts.headers||{})}});if(!r.ok)throw new Error("Google Sheets HTTP "+r.status+"; Zugriff und OAuth-Freigabe prüfen");return r.json();}
+async function api(url:string,opts:RequestInit={}) {const r=await fetch(url,{...opts,headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json",...(opts.headers||{})}});if(r.status===401){clearSession();render();throw new Error("Google-Sitzung abgelaufen. Bitte erneut mit Google anmelden.");}if(!r.ok)throw new Error("Google Sheets HTTP "+r.status+"; Zugriff und OAuth-Freigabe prüfen");return r.json();}
 const read=async(range:string):Promise<string[][]>=>{const x=await api(API+"/values/"+encodeURIComponent(range));return x.values||[]};
 async function load(){[config,tags,runs,history]=await Promise.all([read("Config!A1:C100"),read("Tags!A1:B300"),read("Runs!A1:K100"),read("ResultsHistory!A1:N500")]);render();}
 function status(s:string,isError=false){const e=document.querySelector("#status");if(e){e.textContent=s;e.className=isError?"error":"";}}
@@ -30,7 +41,8 @@ function render(){
 }
 function login(){if(!CLIENT_ID){status("OAuth Client-ID fehlt. GitHub Variable VITE_GOOGLE_CLIENT_ID konfigurieren.",true);return;}
  if(!window.google?.accounts?.oauth2){status("Google Identity Services lädt noch; Seite neu laden.",true);return;}
- const client=window.google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:"https://www.googleapis.com/auth/spreadsheets",callback:async(r:{access_token?:string,error?:string})=>{if(!r.access_token){status("Anmeldung fehlgeschlagen: "+(r.error||"unbekannt"),true);return;}token=r.access_token;try{await load();status("Google Sheets verbunden")}catch(e){status(String(e),true)}}});
+ const client=window.google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:"https://www.googleapis.com/auth/spreadsheets",prompt:"",callback:async(r:{access_token?:string,expires_in?:number,error?:string})=>{if(!r.access_token){status("Anmeldung fehlgeschlagen: "+(r.error||"unbekannt"),true);return;}token=r.access_token;sessionStorage.setItem(SESSION_KEY,JSON.stringify({accessToken:token,expiresAt:Date.now()+Math.max(0,Number(r.expires_in)||0)*1000}));try{await load();status("Google Sheets verbunden")}catch(e){status(String(e),true)}}});
  client.requestAccessToken();
 }
 render();
+if(token)load().catch(e=>status(String(e),true));
