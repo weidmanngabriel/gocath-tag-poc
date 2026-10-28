@@ -45,3 +45,7 @@ Im Dashboard unter **Ergebnisse nach Run-ID** filtert das Suchfeld ausschließli
 ## Klassifizierungsanbieter
 
 Im Sheet `Config` wählt `classifier_provider` zwischen `groq` (Standard) und `gemini`. Das Dashboard stellt dafür ein Dropdown bereit. `groq` verwendet das Modell `openai/gpt-oss-20b` mit `GROQ_API_KEY` aus GitHub Secrets; `gemini` verwendet die vorhandene Gemini-Modellauswahl und den Key `GOCATH_GEMINI_CLASSIFIER_KEY`. Der manuelle Runner verwendet je Lauf ausschließlich den gewählten Anbieter; kein stiller Fallback. Standard-Tags, Synonyme und Promptregeln werden für beide Anbieter aus dem Sheet gelesen. Gemini-Preise im Sheet werden nicht auf Groq-Kosten übertragen; für Groq bleibt die Kostenschätzung leer. Das gewählte Modell wird in Runs/ResultsHistory dokumentiert.
+
+### Groq Free-Tier-Drosselung
+
+Bei `openai/gpt-oss-20b` kann trotz ausreichendem Anfragekontingent das Tokenlimit pro Minute erreicht werden (derzeit laut Kontolimit 8.000 TPM). Der reguläre Runner hält deshalb mindestens 15 Sekunden Abstand zwischen Starts von Groq-Anfragen. Bei HTTP 429 und temporären Serverfehlern wartet er zusätzlich begrenzt und wiederholt maximal viermal; wenn die individuellen Prompts mehr Tokens benötigen, kann das Limit dennoch erreicht werden. Das konkrete Kontingent kann sich ändern. Beim Benchmark-Modus wird absichtlich ohne Drosselung gemessen.
