@@ -25,3 +25,9 @@ Auf temporärem Branch entwickeln, CI prüfen, Live-OAuth und Runner validieren,
 ### Pages-Branchschutz
 
 Das `github-pages`-Environment gestattet nur `main` als Deployment-Branch. **Kein Preview-Deployment von Feature-Branches**. Stattdessen auf dem temporären Branch CI (`npm run build`, Python-Tests) ausführen, anschließend den geprüften PR per Squash auf `main` übernehmen und dort das automatisch ausgelöste Deployment prüfen. Erst auf der live veröffentlichten Seite kann die OAuth-/Sheets-Integration vollständig getestet werden. Die Deployment-Branch-Regel nicht umgehen.
+
+## Gemini-Verbrauch und Kostenschätzung
+
+Bei jeder erfolgreichen Gemini-Antwort liest der Runner `usageMetadata` (Input-/Output-/Thinking-/Gesamt-Tokens). Die Werte werden pro Veranstaltung in `ResultsHistory` und als Summe in `Runs` gespeichert. Das Dashboard zeigt beide Ebenen an. Alte Läufe haben diese Felder nicht und werden nicht rückwirkend geschätzt.
+
+Die **Kosten sind keine echte Abrechnung**. Im Tabellenblatt `Config` sind `cost_input_per_million_usd` und `cost_output_per_million_usd` editierbar (USD je Million Tokens). Beide Felder leer lassen, wenn keine verlässlichen Modellpreise vorliegen; dann bleibt das Kostenfeld leer. Für einen Tarif die aktuellen Preise von https://ai.google.dev/gemini-api/docs/pricing übernehmen. Output-Preis umfasst bei Gemini auch Thinking-Tokens. Die Zahl berücksichtigt nicht zwingend Sondertarife, Caching, Fehlversuche oder Modell-Preflight-Aufrufe. Ob tatsächlich Kosten entstehen, hängt außerdem vom Google-Tarif ab. API-Schlüssel bleiben ausschließlich in GitHub Secrets.
