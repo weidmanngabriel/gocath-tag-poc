@@ -28,7 +28,7 @@ def main():
         return
     start = datetime.now(timezone.utc).isoformat()
     run_id = os.environ.get("GITHUB_RUN_ID", start)
-    model = choose_model(key, os.environ.get("GEMINI_MODEL"))
+    model = choose_model(key, config["gemini_model"] or os.environ.get("GEMINI_MODEL"))
     events = fetch_events(limit)
     if config["changed_only"]:
         previous = doc.sheet1.get_all_values()
@@ -38,7 +38,8 @@ def main():
     results = []
     try:
         for event in events:
-            tags = classify(event, key, model, config["tags"], config["additional_tags_enabled"])
+            tags = classify(event, key, model, config["tags"], config["additional_tags_enabled"],
+                            config["gemini_prompt"], config["gemini_temperature"], config["max_additional_tags"])
             results.append({"event": event, "tags": tags, "status": "ok"})
         Path("output").mkdir(exist_ok=True)
         Path("output/results.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
