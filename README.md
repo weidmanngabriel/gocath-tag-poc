@@ -17,3 +17,5 @@ Eine minimale TypeScript-Oberfläche für **manuelle** GoCath-Klassifizierungen.
 **Tests:** `python -m unittest discover -s tests -v` und in `web/`: `npm install && npm run build`.
 
 **Aktueller Zustand:** Standard-Tag-Aktivierung und Synonyme sind im Sheet `Tags` pflegbar; Run-Historie, Token- und Kostenschätzung sowie Contains-/Fuzzy-Suche stehen im Dashboard bereit. Der Runner verwendet Gemini und wird ausschließlich manuell gestartet. Die maßgeblichen aktuellen Einstellungen stehen im Google Sheet, nicht in dieser README.
+
+**KI-Anbieter:** Der aktive Klassifizierungsanbieter ist im Dashboard unter `classifier_provider` zwischen Groq und Gemini auswählbar. Groq (`openai/gpt-oss-20b`) ist voreingestellt. Beide API-Keys liegen ausschließlich in GitHub Secrets; die Klassifizierung bleibt manuell und schreibt nur ins Test-Sheet.

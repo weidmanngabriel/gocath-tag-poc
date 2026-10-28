@@ -44,11 +44,16 @@ def invoke(provider, event, config, secrets):
                    "temperature":float(config["gemini_temperature"])}
     started = time.perf_counter()
     out = {"provider":provider,"model":GEMINI_MODEL if provider=="gemini" else GROQ_MODEL,
-           "status":"error","http_status":None,"seconds":None,
+           "status":"error","http_status":None,"retry_after_seconds":None,"seconds":None,
            "input_tokens":0,"output_tokens":0,"standard_tags":[],"additional_tags":[],"reason":""}
     try:
         response = requests.post(url, headers=headers, json=payload, timeout=(10,65))
         out["http_status"] = response.status_code
+        if response.status_code == 429:
+            try:
+                out["retry_after_seconds"] = max(0, min(120, float(response.headers.get("Retry-After", ""))))
+            except (ValueError, TypeError):
+                pass
         if not response.ok:
             out["status"] = "http_error"
         else:
