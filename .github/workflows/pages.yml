@@ -1,7 +1,7 @@
 name: Deploy dashboard to Pages
 on:
   push:
-    branches: [main, feature/sheets-dashboard-poc]
+    branches: [main]
     paths: ['web/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
