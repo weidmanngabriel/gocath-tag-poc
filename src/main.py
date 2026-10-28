@@ -6,7 +6,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 from .scrape import fetch_events
 from .classify import classify, choose_model
-from .config import settings, run_count, log_run
+from .config import settings, run_count, log_run, next_run_id, save_history
 from .sheets import publish
 
 SHEET_ID = "1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w"
@@ -27,7 +27,7 @@ def main():
         print("Monatslimit erreicht; keine Klassifizierung.")
         return
     start = datetime.now(timezone.utc).isoformat()
-    run_id = os.environ.get("GITHUB_RUN_ID", start)
+    run_id = next_run_id(doc)
     model = choose_model(key, config["gemini_model"] or os.environ.get("GEMINI_MODEL"))
     events = fetch_events(limit)
     if config["changed_only"]:
@@ -45,6 +45,7 @@ def main():
         Path("output/results.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
         if results:
             publish(results, credentials, sheet_id)
+        save_history(doc, run_id, results, model, config["gemini_prompt"], start)
         log_run(doc, run_id, start, "success", len(results), model)
         print(f"{len(results)} erfolgreich klassifiziert und ins Sheet übertragen.", flush=True)
     except Exception as exc:
