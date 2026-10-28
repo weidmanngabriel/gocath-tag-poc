@@ -1,6 +1,14 @@
 name: GoCath Tagging POC
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Regular tagging or read-only A/B benchmark'
+        type: choice
+        options:
+          - classify
+          - compare
+        default: classify
 permissions:
   contents: read
 jobs:
@@ -16,14 +24,25 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -v
       - name: Classify events and update test sheet
+        if: inputs.mode != 'compare'
         env:
           GOCATH_GEMINI_CLASSIFIER_KEY: ${{ secrets.GOCATH_GEMINI_CLASSIFIER_KEY }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_SHEET_ID: 1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w
         run: python -m src.main
+      - name: Compare Gemini and Gemma without changing Google Sheet
+        if: inputs.mode == 'compare'
+        env:
+          GOCATH_GEMINI_CLASSIFIER_KEY: ${{ secrets.GOCATH_GEMINI_CLASSIFIER_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SHEET_ID: 1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w
+        run: python -m src.benchmark --limit 10
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: tag-results
-          path: output/results.json
+          path: |
+            output/results.json
+            output/ab-results.json
+            output/ab-results.csv
           if-no-files-found: ignore
