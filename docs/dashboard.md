@@ -3,7 +3,7 @@
 - **Dashboard:** statisches TypeScript/Vite auf GitHub Pages, Google Identity Services OAuth im Browser.
 - **Google Sheet:** bestehendes Dokument mit vier relevanten Tabs: `Config` (Schlüssel/Wert), `Tags` (Tag/aktiviert), `Runs` (fortlaufende Run-ID, Zeit und Status), `ResultsHistory` (Ergebnis jeder Veranstaltung je Run-ID). Das bisherige `Tabellenblatt1` dient weiter als letzte Ergebnisansicht.
 - **Runner:** Python über GitHub Actions, nur manuell per `workflow_dispatch`; liest Einstellungen, zulässige Tags und Gemini-Prompt vor jedem Lauf aus dem Sheet. Datenquelle bleibt ausschließlich die öffentliche GoCath-Webseite.
-- **Experiment:** Standardlimit 10 Veranstaltungen. Wiederholte Läufe verarbeiten dieselben ersten zehn Links der Seite, sofern die Reihenfolge unverändert bleibt. Es gibt bewusst keine starke Duplikatsperre oder produktive Konsistenzlogik. Für den Vergleich nutzt man `ResultsHistory` nach Run-ID.
+- **Experiment:** Die Zahl verarbeiteter Veranstaltungen wird durch die Einstellungen in `Config` und die technischen Runner-Grenzen bestimmt. Wiederholte Läufe verarbeiten bei unveränderter Quellreihenfolge und deaktiviertem Änderungsfilter dieselben ersten Links. Es gibt bewusst keine starke Duplikatsperre oder produktive Konsistenzlogik. Für den Vergleich nutzt man `ResultsHistory` nach Run-ID.
 
 ## Konfiguration
 Die Werte `max_events_per_run`, `monthly_limit`, `changed_only`, `additional_tags_enabled`, `gemini_prompt`, `gemini_model`, `gemini_temperature`, `max_additional_tags` liegen in `Config`. Prompt ist freier Text und wird mit der aktuellen Liste aktiver Tags und der JSON-Anweisung ergänzt. Die API-Schlüssel stehen **nicht** im Sheet.
