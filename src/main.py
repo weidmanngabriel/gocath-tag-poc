@@ -61,9 +61,15 @@ def main():
             t0 = time.perf_counter()
             usage = {}
             if provider == "groq":
-                response = invoke_groq("groq", event, config, {"groq": provider_key})
-                if response["status"] != "ok":
-                    raise RuntimeError("Groq classification failed: " + response["status"] + "; HTTP " + str(response["http_status"]))
+                for groq_attempt in range(4):
+                    response = invoke_groq("groq", event, config, {"groq": provider_key})
+                    if response["status"] == "ok":
+                        break
+                    if response["http_status"] not in (429, 500, 502, 503, 504) or groq_attempt == 3:
+                        raise RuntimeError("Groq classification failed: " + response["status"] + "; HTTP " + str(response["http_status"]))
+                    delay = min(60, 10 * (groq_attempt + 1))
+                    print(f"[groq-retry] http={response['http_status']} attempt={groq_attempt+1} wait={delay}s", flush=True)
+                    time.sleep(delay)
                 tags = {k: response[k] for k in ("standard_tags", "additional_tags", "reason")}
                 usage.update({"input_tokens": response["input_tokens"], "output_tokens": response["output_tokens"], "thinking_tokens": 0,
                               "total_tokens": response["input_tokens"] + response["output_tokens"]})
