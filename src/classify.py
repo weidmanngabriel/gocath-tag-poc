@@ -71,7 +71,7 @@ DEFAULT_PROMPT = (
 )
 
 def classify(event, api_key, model, allowed_tags=None, additional_tags=True,
-             prompt=None, temperature=0.1, max_additional_tags=8):
+             prompt=None, temperature=0.1, max_additional_tags=8, usage_sink=None):
     vocabulary = allowed_tags if allowed_tags is not None else STANDARD_TAGS
     count = max(0, min(8, max_additional_tags if additional_tags else 0))
     instruction = (
@@ -96,7 +96,17 @@ def classify(event, api_key, model, allowed_tags=None, additional_tags=True,
             if not response.ok:
                 # Never log response bodies: upstream responses may echo request data.
                 raise GeminiAPIError(f"Gemini API HTTP {response.status_code}; model={model}")
-            result = clean(json.loads(response.json()["candidates"][0]["content"]["parts"][0]["text"]), vocabulary)
+            data = response.json()
+            if usage_sink is not None:
+                raw = data.get("usageMetadata", {})
+                usage_sink.update({
+                    "input_tokens": int(raw.get("promptTokenCount", 0)),
+                    "output_tokens": int(raw.get("candidatesTokenCount", 0)),
+                    "thinking_tokens": int(raw.get("thoughtsTokenCount", 0)),
+                    "cached_tokens": int(raw.get("cachedContentTokenCount", 0)),
+                    "total_tokens": int(raw.get("totalTokenCount", 0)),
+                })
+            result = clean(json.loads(data["candidates"][0]["content"]["parts"][0]["text"]), vocabulary)
             result["standard_tags"] = [tag for tag in result["standard_tags"] if tag in vocabulary]
             result["additional_tags"] = result["additional_tags"][:count]
             return result
