@@ -23,6 +23,7 @@ def settings(credentials_json, sheet_id):
         "max_additional_tags":max(0,min(8,int(config.get("max_additional_tags", "8")))),
         "cost_input_per_million_usd": config.get("cost_input_per_million_usd", ""),
         "cost_output_per_million_usd": config.get("cost_output_per_million_usd", ""),
+        "cost_cached_input_per_million_usd": config.get("cost_cached_input_per_million_usd", ""),
         "tags":tags or STANDARD_TAGS,
         "tag_synonyms": {r[0]: [v.strip() for v in r[2].split(",") if v.strip()] for r in tag_rows[1:] if len(r)>2 and len(r)>1 and r[1].lower()=="true" and r[0]}
     }
@@ -36,7 +37,7 @@ def run_count(doc):
 def log_run(doc, run_id, start, status, classified, details, metrics=None):
     from datetime import datetime,timezone
     m = metrics or {}
-    doc.worksheet("Runs").append_row([run_id,start,datetime.now(timezone.utc).isoformat(),status,classified,details,m.get("input_tokens",0),m.get("output_tokens",0),m.get("thinking_tokens",0),m.get("total_tokens",0),m.get("estimated_cost_usd","")],value_input_option="RAW")
+    doc.worksheet("Runs").append_row([run_id,start,datetime.now(timezone.utc).isoformat(),status,classified,details,m.get("input_tokens",0),m.get("output_tokens",0),m.get("thinking_tokens",0),m.get("total_tokens",0),m.get("estimated_cost_usd",""),m.get("cached_tokens",0)],value_input_option="RAW")
 
 def next_run_id(doc):
     """Sequential POC run IDs; no parallel executions are scheduled."""
@@ -49,7 +50,7 @@ def save_history(doc, run_id, results, model, prompt, classified_at):
       [run_id, x["event"]["url"], x["event"]["title"],
        ", ".join(x["tags"]["standard_tags"]), ", ".join(x["tags"]["additional_tags"]),
        x["tags"]["reason"], model, prompt, classified_at,
-       x.get("usage",{}).get("input_tokens",0), x.get("usage",{}).get("output_tokens",0), x.get("usage",{}).get("thinking_tokens",0), x.get("usage",{}).get("total_tokens",0), x.get("estimated_cost_usd","")]
+       x.get("usage",{}).get("input_tokens",0), x.get("usage",{}).get("output_tokens",0), x.get("usage",{}).get("thinking_tokens",0), x.get("usage",{}).get("total_tokens",0), x.get("estimated_cost_usd",""), x.get("usage",{}).get("cached_tokens",0)]
       for x in results
     ]
     if rows:
