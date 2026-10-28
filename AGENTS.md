@@ -16,3 +16,8 @@
 5. **Erst danach** PR erstellen bzw. fertigstellen und **ausschließlich per Squash-Merge** auf `main` übernehmen. Bei roten Checks oder unbelegter Integration nicht mergen.
 6. Kann die Pipeline wegen fehlender GitHub-Rechte, externer Quoten oder fehlender Secrets nicht selbst gestartet oder erfolgreich validiert werden, Blocker dokumentieren und **nicht mergen**; niemals Erfolg behaupten.
 7. Nach dem Merge den Branch bereinigen, soweit Berechtigungen dies zulassen. Details: [docs/agent-workflow.md](docs/agent-workflow.md).
+
+## GitHub Pages: Nur main darf deployen
+- Das GitHub-Environment `github-pages` erlaubt **nur** Deployments von `main`. Diese Einschränkung weder ändern noch umgehen.
+- Auf Feature-/Fix-Branches ausschließlich Build und Tests durchführen. Fehlgeschlagene Pages-Deployments auf Nicht-main-Branches sind durch die Environment-Regel erklärbar.
+- Geprüften Code per Squash-PR nach `main` übernehmen; danach das reale Pages-Deployment, Google OAuth und den Sheet-Zugriff validieren. Browser-E2E vor Veröffentlichung nicht behaupten. Bei Folgefehlern erneuten temporären Fix-Branch verwenden.
