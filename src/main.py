@@ -36,7 +36,7 @@ def main():
         events = [event for event in events if descriptions.get(event["url"]) != event["description"]]
     print(f"Zu klassifizieren: {len(events)}, Modell: {model}", flush=True)
     results = []
-    usage_total = {"input_tokens":0,"output_tokens":0,"thinking_tokens":0,"total_tokens":0}
+    usage_total = {"input_tokens":0,"output_tokens":0,"thinking_tokens":0,"total_tokens":0,"cached_tokens":0}
     def price(tokens, per_million):
         return tokens * float(per_million) / 1_000_000 if per_million else None
     try:
@@ -46,9 +46,12 @@ def main():
                             config["gemini_prompt"], config["gemini_temperature"], config["max_additional_tags"], usage_sink=usage, synonyms=config["tag_synonyms"])
             for name in usage_total:
                 usage_total[name] += usage.get(name, 0)
-            input_cost = price(usage.get("input_tokens",0), config["cost_input_per_million_usd"])
+            cached = usage.get("cached_tokens",0)
+            uncached = max(0,usage.get("input_tokens",0)-cached)
+            input_cost = price(uncached, config["cost_input_per_million_usd"])
+            cached_cost = price(cached, config["cost_cached_input_per_million_usd"]) if cached else 0
             output_cost = price(usage.get("output_tokens",0)+usage.get("thinking_tokens",0), config["cost_output_per_million_usd"])
-            cost = round(input_cost + output_cost, 8) if input_cost is not None and output_cost is not None else ""
+            cost = round(input_cost + cached_cost + output_cost, 8) if input_cost is not None and output_cost is not None and cached_cost is not None else ""
             results.append({"event": event, "tags": tags, "usage": usage, "estimated_cost_usd": cost, "status": "ok"})
         Path("output").mkdir(exist_ok=True)
         Path("output/results.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")

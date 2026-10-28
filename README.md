@@ -17,3 +17,5 @@ Eine minimale TypeScript-Oberfläche für **manuelle** GoCath-Klassifizierungen.
 **Tests:** `python -m unittest discover -s tests -v` und in `web/`: `npm install && npm run build`.
 
 **Aktueller Zustand:** Standard-Tag-Aktivierung und Synonyme sind im Sheet `Tags` pflegbar; Run-Historie, Token- und Kostenschätzung sowie Contains-/Fuzzy-Suche stehen im Dashboard bereit. Der Runner verwendet Gemini und wird ausschließlich manuell gestartet. Die maßgeblichen aktuellen Einstellungen stehen im Google Sheet, nicht in dieser README.
+
+**Gemini-Cache-Monitoring:** Der Runner speichert gemeldete Cache-Tokens zusätzlich zu normalen Tokenzahlen. Die Kostenschätzung unterscheidet optional gecachte und nicht gecachte Input-Tokens. Cache-Preise werden über `Config` gepflegt; siehe [Dashboard-Dokumentation](docs/dashboard.md).
