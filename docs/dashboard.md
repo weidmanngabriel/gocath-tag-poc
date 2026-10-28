@@ -21,3 +21,7 @@ Die Browser-Anwendung nutzt den Google Sheets OAuth Scope; der Zugriffs-Token wi
 
 ## Release
 Auf temporärem Branch entwickeln, CI prüfen, Live-OAuth und Runner validieren, danach erst Squash-Merge auf main. Bei fehlender OAuth-Konfiguration kein vollständiger E2E-Nachweis.
+
+### Pages-Branchschutz
+
+Das `github-pages`-Environment gestattet nur `main` als Deployment-Branch. **Kein Preview-Deployment von Feature-Branches**. Stattdessen auf dem temporären Branch CI (`npm run build`, Python-Tests) ausführen, anschließend den geprüften PR per Squash auf `main` übernehmen und dort das automatisch ausgelöste Deployment prüfen. Erst auf der live veröffentlichten Seite kann die OAuth-/Sheets-Integration vollständig getestet werden. Die Deployment-Branch-Regel nicht umgehen.

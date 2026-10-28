@@ -42,3 +42,9 @@ Sheet-Tabs:
 - **Gemini-Fehler**: GitHub-Actions-Laufprotokoll prüfen; Modell-ID leer lassen, um erreichbare Flash-Modelle automatisch auszuwählen.
 
 Das Dashboard selbst ist auf GitHub Pages öffentlich abrufbar; der Sheet-Inhalt erfordert Google-Authentifizierung mit entsprechenden Rechten. Der POC hat keinen Backend-Service und keine produktive Datenkonsistenzgarantie.
+
+## Verbindliche GitHub-Pages-Deploymentregel
+
+Das GitHub-Environment `github-pages` erlaubt **ausschließlich Deployments vom Branch `main`**. Dies ist eine beabsichtigte Repository-Einstellung und darf nicht zum Testen gelockert werden. Ein Deployment aus einem Feature- oder Fix-Branch scheitert bereits an der Environment-Regel; es ist kein Beweis für einen fehlerhaften Dashboard-Build.
+
+**Ablauf:** Auf temporärem Branch TypeScript-Build und Python-Tests per CI prüfen → PR erstellen → per Squash nach `main` mergen → die Pages-Deployment-Pipeline auf `main` prüfen → Login und Google-Sheets-Zugriff live prüfen. Die Live-OAuth-Prüfung kann deshalb erst **nach** der ersten Veröffentlichung erfolgen. Probleme danach wieder auf einem separaten Branch korrigieren und per Squash übernehmen.
