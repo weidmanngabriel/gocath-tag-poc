@@ -1,5 +1,6 @@
 """Use Gemini for grounded search tags; log safe HTTP diagnostics."""
 import json
+import unicodedata
 import time
 import requests
 from .tags import STANDARD_TAGS
@@ -70,8 +71,17 @@ DEFAULT_PROMPT = (
     "standard_tags (Liste), additional_tags (Liste) und reason (kurzer Satz)."
 )
 
+def normalize_tag(value):
+    return " ".join(unicodedata.normalize("NFKC", value).casefold().split())
+
+def filter_duplicate_synonyms(result, synonyms):
+    selected = set(result["standard_tags"])
+    redundant = {normalize_tag(item) for tag in selected for item in [tag, *(synonyms or {}).get(tag, [])]}
+    result["additional_tags"] = [item for item in result["additional_tags"] if normalize_tag(item) not in redundant]
+    return result
+
 def classify(event, api_key, model, allowed_tags=None, additional_tags=True,
-             prompt=None, temperature=0.1, max_additional_tags=8, usage_sink=None):
+             prompt=None, temperature=0.1, max_additional_tags=8, usage_sink=None, synonyms=None):
     vocabulary = allowed_tags if allowed_tags is not None else STANDARD_TAGS
     count = max(0, min(8, max_additional_tags if additional_tags else 0))
     instruction = (
@@ -79,6 +89,8 @@ def classify(event, api_key, model, allowed_tags=None, additional_tags=True,
         + "Zulässige Standard-Tags (nur diese Werte): " + ", ".join(vocabulary)
         + f"\nMaximal {count} zusätzliche freie deutsche Suchbegriffe."
         + ("\nWenn null, gib ein leeres additional_tags-Array zurück." if count == 0 else "")
+        + "\nSynonyme der Standard-Tags: " + json.dumps({k:v for k,v in (synonyms or {}).items() if k in vocabulary}, ensure_ascii=False)
+        + "\nIst ein Standard-Tag ausgewählt, gib seine Synonyme NICHT als zusätzliche Tags zurück."
         + "\nDie Antwort muss ein JSON-Objekt mit standard_tags, additional_tags, reason sein."
     )
     payload = {
@@ -109,7 +121,7 @@ def classify(event, api_key, model, allowed_tags=None, additional_tags=True,
             result = clean(json.loads(data["candidates"][0]["content"]["parts"][0]["text"]), vocabulary)
             result["standard_tags"] = [tag for tag in result["standard_tags"] if tag in vocabulary]
             result["additional_tags"] = result["additional_tags"][:count]
-            return result
+            return filter_duplicate_synonyms(result, synonyms)
         except (KeyError, ValueError, IndexError, requests.RequestException) as exc:
             if attempt == 2:
                 raise RuntimeError(f"Gemini response/transport error: {type(exc).__name__}") from None
