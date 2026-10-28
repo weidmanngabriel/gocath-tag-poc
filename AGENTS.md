@@ -12,7 +12,7 @@
 1. **Nie einen Fix direkt auf `main` entwickeln.** Immer einen temporären Branch (`fix/*` oder `feature/*`) von aktuellem `main` anlegen.
 2. Ursache mithilfe von GitHub-Actions-Logs untersuchen; reproduzierbaren Fix mit Tests einchecken.
 3. **GitHub-Actions-Pipeline auf dem temporären Branch selbst starten**, beobachten und Logs kontrollieren. Fehlgeschlagene Runs eigenständig auswerten und auf demselben Branch nachbessern; erneut starten, bis die Pipeline erfolgreich ist.
-4. Eine grüne Pipeline allein reicht nicht: Auch tatsächlichen Ergebnisfluss (echte Events, Gemini-Klassifizierungen, Google-Sheet-Schreibzugriff) anhand von Logs und Ergebnisdaten validieren. Keine Fehler ignorieren oder durch Dummy-Daten kaschieren.
+4. Eine grüne Pipeline allein reicht bei Änderungen am Klassifizierungs- oder Datenfluss nicht: Auch tatsächlichen Ergebnisfluss (echte Events, Gemini-Klassifizierungen, Google-Sheet-Schreibzugriff) anhand von Logs und Ergebnisdaten validieren. Bei reinen Dokumentationsänderungen bestehende Implementierung und Quellen prüfen; ein kostenpflichtiger Klassifizierungslauf ist dafür nicht nötig. Keine Fehler ignorieren oder durch Dummy-Daten kaschieren.
 5. **Erst danach** PR erstellen bzw. fertigstellen und **ausschließlich per Squash-Merge** auf `main` übernehmen. Bei roten Checks oder unbelegter Integration nicht mergen.
 6. Kann die Pipeline wegen fehlender GitHub-Rechte, externer Quoten oder fehlender Secrets nicht selbst gestartet oder erfolgreich validiert werden, Blocker dokumentieren und **nicht mergen**; niemals Erfolg behaupten.
 7. Nach dem Merge den Branch bereinigen, soweit Berechtigungen dies zulassen. Details: [docs/agent-workflow.md](docs/agent-workflow.md).
