@@ -23,7 +23,8 @@ def settings(credentials_json, sheet_id):
         "max_additional_tags":max(0,min(8,int(config.get("max_additional_tags", "8")))),
         "cost_input_per_million_usd": config.get("cost_input_per_million_usd", ""),
         "cost_output_per_million_usd": config.get("cost_output_per_million_usd", ""),
-        "tags":tags or STANDARD_TAGS
+        "tags":tags or STANDARD_TAGS,
+        "tag_synonyms": {r[0]: [v.strip() for v in r[2].split(",") if v.strip()] for r in tag_rows[1:] if len(r)>2 and len(r)>1 and r[1].lower()=="true" and r[0]}
     }
 
 def run_count(doc):
