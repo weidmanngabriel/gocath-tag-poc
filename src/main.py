@@ -2,6 +2,7 @@
 import argparse
 import json
 import os
+import time
 from pathlib import Path
 from datetime import datetime, timezone
 from .scrape import fetch_events
@@ -18,7 +19,10 @@ def main():
     key = os.environ["GOCATH_GEMINI_CLASSIFIER_KEY"]
     credentials = os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"]
     sheet_id = os.environ.get("GOOGLE_SHEET_ID", SHEET_ID)
+    overall_t0 = time.perf_counter()
+    t0 = time.perf_counter()
     doc, config = settings(credentials, sheet_id)
+    print(f'[timing] config_and_auth={time.perf_counter()-t0:.3f}s',flush=True)
     limit = config["max_events_per_run"]
     if args.limit is not None:
         limit = min(limit, max(1, args.limit))
@@ -28,8 +32,12 @@ def main():
         return
     start = datetime.now(timezone.utc).isoformat()
     run_id = next_run_id(doc)
+    t0 = time.perf_counter()
     model = choose_model(key, config["gemini_model"] or os.environ.get("GEMINI_MODEL"))
+    print(f'[timing] model_selection={time.perf_counter()-t0:.3f}s',flush=True)
+    t0 = time.perf_counter()
     events = fetch_events(limit)
+    print(f'[timing] fetch_events={time.perf_counter()-t0:.3f}s count={len(events)}',flush=True)
     if config["changed_only"]:
         previous = doc.sheet1.get_all_values()
         descriptions = {r[0]: r[2] for r in previous[1:] if len(r) > 6 and r[6] == "ok"}
@@ -40,10 +48,12 @@ def main():
     def price(tokens, per_million):
         return tokens * float(per_million) / 1_000_000 if per_million else None
     try:
-        for event in events:
+        for idx,event in enumerate(events,1):
+            t0 = time.perf_counter()
             usage = {}
             tags = classify(event, key, model, config["tags"], config["additional_tags_enabled"],
                             config["gemini_prompt"], config["gemini_temperature"], config["max_additional_tags"], usage_sink=usage, synonyms=config["tag_synonyms"])
+            print(f'[timing] classify_event={idx}/{len(events)} duration={time.perf_counter()-t0:.3f}s',flush=True)
             for name in usage_total:
                 usage_total[name] += usage.get(name, 0)
             input_cost = price(usage.get("input_tokens",0), config["cost_input_per_million_usd"])
@@ -53,11 +63,17 @@ def main():
         Path("output").mkdir(exist_ok=True)
         Path("output/results.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
         if results:
+            t0 = time.perf_counter()
             publish(results, credentials, sheet_id)
+            print(f"[timing] publish_sheet={time.perf_counter()-t0:.3f}s",flush=True)
+        t0 = time.perf_counter()
         save_history(doc, run_id, results, model, config["gemini_prompt"], start)
+        print(f"[timing] save_history={time.perf_counter()-t0:.3f}s",flush=True)
         prices = [row["estimated_cost_usd"] for row in results]
         usage_total["estimated_cost_usd"] = round(sum(prices),8) if all(isinstance(p,(int,float)) for p in prices) else ""
+        t0 = time.perf_counter()
         log_run(doc, run_id, start, "success", len(results), model, usage_total)
+        print(f"[timing] log_run={time.perf_counter()-t0:.3f}s total={time.perf_counter()-overall_t0:.3f}s",flush=True)
         print("Gemini usage:", usage_total, flush=True)
         print(f"{len(results)} erfolgreich klassifiziert und ins Sheet übertragen.", flush=True)
     except Exception as exc:
