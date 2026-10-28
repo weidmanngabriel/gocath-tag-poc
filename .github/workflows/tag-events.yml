@@ -8,7 +8,7 @@ on:
       limit:
         description: 'Number of events (1–50)'
         required: true
-        default: '20'
+        default: '2'
 permissions:
   contents: read
 jobs:
@@ -28,7 +28,7 @@ jobs:
           GOCATH_GEMINI_CLASSIFIER_KEY: ${{ secrets.GOCATH_GEMINI_CLASSIFIER_KEY }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_SHEET_ID: 1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w
-          LIMIT: ${{ inputs.limit || '20' }}
+          LIMIT: ${{ inputs.limit || '2' }}
         run: python -m src.main --limit "$LIMIT"
       - uses: actions/upload-artifact@v4
         if: always()
