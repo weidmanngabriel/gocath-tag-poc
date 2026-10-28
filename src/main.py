@@ -3,7 +3,7 @@ import json
 import os
 from pathlib import Path
 from .scrape import fetch_events
-from .classify import classify
+from .classify import classify, choose_model
 from .sheets import publish
 
 DEFAULT_SHEET = "1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w"
@@ -16,7 +16,8 @@ def main():
         parser.error("limit must be between 1 and 50")
     key = os.environ["GOCATH_GEMINI_CLASSIFIER_KEY"]
     credentials = os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"]
-    model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
+    model = choose_model(key, os.environ.get("GEMINI_MODEL"))
+    print("Using accessible Gemini model: " + model, flush=True)
     events = fetch_events(options.limit)
     print(f"Gefundene Veranstaltungen: {len(events)}", flush=True)
     results = []
