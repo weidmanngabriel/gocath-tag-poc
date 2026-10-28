@@ -34,7 +34,7 @@ def parse_event(html, url):
         anchor = next((a for a in soup.select("a[href]") if parse_qs(urlparse(urljoin(LIST_URL,a["href"])).query).get("vid", [""])[0]==vid), None)
         name = anchor.get_text(" ", strip=True) if anchor else ""
         node = anchor
-        while node is not None and len(node.get_text(" ",strip=True)) < 180 and node.parent is not None:
+        while node is not None and len(node.get_text(" ",strip=True)) < 250 and node.parent is not None:
             node = node.parent
         description = node.get_text(" ",strip=True)[:5500] if node else ""
     else:
@@ -61,7 +61,7 @@ def fetch_events(limit=20):
         events=[]
         for url in links:
             try:
-                event=parse_event(get(url),url)
+                event=parse_event(listing,url)
                 if event["title"] and event["description"]:
                     events.append(event)
             except requests.RequestException as exc:
