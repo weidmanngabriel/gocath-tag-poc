@@ -51,14 +51,15 @@ def choose_model(api_key, requested=None):
 class GeminiAPIError(RuntimeError):
     pass
 
-def clean(data):
+def clean(data, vocabulary=None):
     if not isinstance(data, dict):
         raise ValueError("Unexpected Gemini JSON")
     fixed = data.get("standard_tags", [])
     free = data.get("additional_tags", [])
     if not isinstance(fixed, list) or not isinstance(free, list):
         raise ValueError("Tags must be arrays")
-    fixed = list(dict.fromkeys(x for x in fixed if isinstance(x, str) and x in STANDARD_TAGS))[:12]
+    allowed = vocabulary if vocabulary is not None else STANDARD_TAGS
+    fixed = list(dict.fromkeys(x for x in fixed if isinstance(x, str) and x in allowed))[:12]
     free = list(dict.fromkeys(x.strip() for x in free if isinstance(x, str) and 2 <= len(x.strip()) <= 60))[:8]
     return {"standard_tags": fixed, "additional_tags": free, "reason": str(data.get("reason", ""))[:400]}
 
@@ -83,7 +84,7 @@ def classify(event, api_key, model, allowed_tags=None, additional_tags=True):
             if not response.ok:
                 # Never log response bodies: upstream responses may echo request data.
                 raise GeminiAPIError(f"Gemini API HTTP {response.status_code}; model={model}")
-            result = clean(json.loads(response.json()["candidates"][0]["content"]["parts"][0]["text"]))
+            result = clean(json.loads(response.json()["candidates"][0]["content"]["parts"][0]["text"]), vocabulary)
             result["standard_tags"] = [tag for tag in result["standard_tags"] if tag in vocabulary]
             if not additional_tags:
                 result["additional_tags"] = []
