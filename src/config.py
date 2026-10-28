@@ -21,6 +21,8 @@ def settings(credentials_json, sheet_id):
         "gemini_model":config.get("gemini_model", "").strip(),
         "gemini_temperature":max(0.0,min(1.0,float(config.get("gemini_temperature", "0.1")))),
         "max_additional_tags":max(0,min(8,int(config.get("max_additional_tags", "8")))),
+        "cost_input_per_million_usd": config.get("cost_input_per_million_usd", ""),
+        "cost_output_per_million_usd": config.get("cost_output_per_million_usd", ""),
         "tags":tags or STANDARD_TAGS
     }
 
@@ -30,9 +32,10 @@ def run_count(doc):
     month=datetime.now(timezone.utc).strftime("%Y-%m")
     return sum(int(r[4]) for r in rows[1:] if len(r)>4 and r[1].startswith(month) and r[3]=="success" and r[4].isdigit())
 
-def log_run(doc, run_id, start, status, classified, details):
+def log_run(doc, run_id, start, status, classified, details, metrics=None):
     from datetime import datetime,timezone
-    doc.worksheet("Runs").append_row([run_id,start,datetime.now(timezone.utc).isoformat(),status,classified,details],value_input_option="RAW")
+    m = metrics or {}
+    doc.worksheet("Runs").append_row([run_id,start,datetime.now(timezone.utc).isoformat(),status,classified,details,m.get("input_tokens",0),m.get("output_tokens",0),m.get("thinking_tokens",0),m.get("total_tokens",0),m.get("estimated_cost_usd","")],value_input_option="RAW")
 
 def next_run_id(doc):
     """Sequential POC run IDs; no parallel executions are scheduled."""
@@ -44,7 +47,8 @@ def save_history(doc, run_id, results, model, prompt, classified_at):
     rows=[
       [run_id, x["event"]["url"], x["event"]["title"],
        ", ".join(x["tags"]["standard_tags"]), ", ".join(x["tags"]["additional_tags"]),
-       x["tags"]["reason"], model, prompt, classified_at]
+       x["tags"]["reason"], model, prompt, classified_at,
+       x.get("usage",{}).get("input_tokens",0), x.get("usage",{}).get("output_tokens",0), x.get("usage",{}).get("thinking_tokens",0), x.get("usage",{}).get("total_tokens",0), x.get("estimated_cost_usd","")]
       for x in results
     ]
     if rows:
