@@ -21,14 +21,21 @@ def choose_model(api_key, requested=None):
     # ListModels can advertise entries that still return 404 on generateContent.
     preferred = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-3-flash",
                  "gemini-2.0-flash", "gemini-2.0-flash-lite"]
-    candidates = [m for m in preferred if m in models] + [m for m in models if m.startswith("gemini-") and m not in preferred]
+    candidates = [m for m in preferred if m in models] + [m for m in models if m.startswith("gemini-") and m not in preferred and not any(x in m for x in ("tts", "image", "audio", "live", "embedding"))]
     for model in candidates:
         test = requests.post(
             f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
             headers={"x-goog-api-key": api_key},
             json={"contents": [{"parts": [{"text": "Antworte mit OK."}]}],
                   "generationConfig": {"maxOutputTokens": 16}}, timeout=30)
-        print(f"Gemini preflight: {model} → HTTP {test.status_code}", flush=True)
+        # Only print the structured API status, never raw error body or token.
+        api_status = ""
+        if not test.ok:
+            try:
+                api_status = str(test.json().get("error", {}).get("status", ""))[:60]
+            except (ValueError, AttributeError):
+                pass
+        print(f"Gemini preflight: {model} → HTTP {test.status_code} ({api_status})", flush=True)
         if test.ok:
             return model
         if test.status_code not in (404, 400):
