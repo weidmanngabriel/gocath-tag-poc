@@ -1,5 +1,6 @@
 """Read only publicly available GoCath event webpages."""
 import re
+import time
 from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
@@ -36,7 +37,9 @@ def parse_event(html, url):
 def fetch_events(limit=20):
     session = requests.Session()
     def html(url):
+        t0 = time.perf_counter()
         res = session.get(url, timeout=30, headers=HEADERS)
+        print(f"[timing] source_get duration={time.perf_counter()-t0:.3f}s http_status={res.status_code}",flush=True)
         res.raise_for_status()
         return res.text
     try:

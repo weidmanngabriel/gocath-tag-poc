@@ -100,9 +100,12 @@ def classify(event, api_key, model, allowed_tags=None, additional_tags=True,
     }
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     for attempt in range(3):
+        request_t0 = time.perf_counter()
         try:
             response = requests.post(url, headers={"x-goog-api-key": api_key}, json=payload, timeout=60)
+            print(f"[timing] gemini_request attempt={attempt+1} http_status={response.status_code} duration={time.perf_counter()-request_t0:.3f}s",flush=True)
             if response.status_code in (429, 500, 502, 503, 504) and attempt < 2:
+                print(f"[timing] gemini_retry_wait={2 ** attempt * 3}s",flush=True)
                 time.sleep(2 ** attempt * 3)
                 continue
             if not response.ok:
@@ -123,6 +126,7 @@ def classify(event, api_key, model, allowed_tags=None, additional_tags=True,
             result["additional_tags"] = result["additional_tags"][:count]
             return filter_duplicate_synonyms(result, synonyms)
         except (KeyError, ValueError, IndexError, requests.RequestException) as exc:
+            print(f"[timing] gemini_retry_exception={type(exc).__name__} attempt={attempt+1} elapsed={time.perf_counter()-request_t0:.3f}s",flush=True)
             if attempt == 2:
                 raise RuntimeError(f"Gemini response/transport error: {type(exc).__name__}") from None
             time.sleep(2 ** attempt * 2)

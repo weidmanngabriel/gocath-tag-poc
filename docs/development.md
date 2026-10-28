@@ -12,3 +12,7 @@ Vor dem Squash-Merge echte GitHub-Actions-Logs und erfolgreiche Google-Sheet-Sch
 
 ## Dokumentationspflicht
 Jede neue oder geänderte Funktion muss im selben Branch die dazugehörige Dokumentation aktualisieren. Konfigurierbare Werte abstrakt beschreiben und auf die maßgebliche Quelle verweisen, damit Dokumente bei Änderungen im Sheet nicht veralten. Details: [agent-workflow.md](agent-workflow.md).
+
+## Laufzeitdiagnose
+
+Der manuelle Runner protokolliert mit dem Präfix `[timing]` monotone Laufzeiten in Sekunden: Konfiguration/Authentifizierung, Modellauswahl, Webseitenabrufe (ohne URL-Inhalt), jede Gemini-Anfrage mit HTTP-Status/Versuch, etwaige Retry-Wartezeiten, Dauer je Klassifizierung, Google-Sheet-Publikation, History- und Run-Schreibvorgänge und Gesamtlaufzeit. Diese Messungen verändern Modell, Request-Reihenfolge, Retry-Verhalten und Verarbeitung nicht. Der Ablauf vor dem Start des Python-Prozesses (Runner-Start, Paketinstallation, Tests) bleibt über GitHub-Actions-Schrittzeiten nachvollziehbar. Keine API-Schlüssel, Prompts oder Eventtexte in Diagnose-Logs ausgeben.
