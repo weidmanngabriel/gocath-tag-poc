@@ -35,3 +35,9 @@ Die **Kosten sind keine echte Abrechnung**. Im Tabellenblatt `Config` sind `cost
 ## Google-Sitzung beim Neuladen
 
 Ein einmal erteilter OAuth-Token wird mit Ablaufzeit im Tab-spezifischen `sessionStorage` zwischengespeichert, sodass ein Neuladen der Seite nicht sofort eine erneute Anmeldung erfordert. Nach Tokenablauf, nach Schließen des Tabs oder bei einer 401-Antwort ist eine neue Google-Autorisierung nötig. Bewusst keine dauerhafte Speicherung per `localStorage` und kein eigener Backend-Refresh-Service.
+
+## Tag-Synonyme und Ergebnis-Suche
+
+Das Tabellenblatt `Tags` enthält nun die dritte Spalte `synonyms` (Komma-getrennte Begriffe je Standard-Tag). Beispiel: `Heilige Messe` → `Hl. Messe, Gottesdienst`. In der Dashboard-Tag-Verwaltung lassen sich die Synonyme bearbeiten. Beim nächsten manuellen Klassifizierungslauf werden Synonyme in den Gemini-Systemprompt übernommen; der Runner entfernt redundant erzeugte freie Tags, wenn der zugehörige Standard-Tag ausgewählt ist.
+
+Im Dashboard unter **Ergebnisse nach Run-ID** filtert das Suchfeld ausschließlich die gerade gewählte Run-ID. Durchsucht werden Veranstaltungstitel, Standard-Tags, freie Tags, Begründung und die Synonyme der tatsächlich gewählten Standard-Tags. Die Suche ignoriert Groß-/Kleinschreibung und erlaubt je Suchwort höchstens einen eingefügten, entfernten oder ersetzten Buchstaben (Levenshtein-Distanz ≤ 1). Mehrere Suchwörter müssen jeweils irgendwo in den durchsuchten Begriffen vorkommen. Nicht gefundene Veranstaltungen werden als möglicher Hinweis auf fehlende Tags oder Synonyme angezeigt. Die Suchfunktion ist clientseitig und verändert weder die gespeicherten Run-Ergebnisse noch die KI-Zuordnungen. Neue Synonyme lassen sich damit unmittelbar auch auf alten Läufen erproben.
