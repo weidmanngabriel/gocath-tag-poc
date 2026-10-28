@@ -4,6 +4,26 @@ import time
 import requests
 from .tags import STANDARD_TAGS
 
+def choose_model(api_key, requested=None):
+    """Resolve an actual generateContent-capable model from this key's model list."""
+    res = requests.get("https://generativelanguage.googleapis.com/v1beta/models",
+                       headers={"x-goog-api-key": api_key}, params={"pageSize": 1000}, timeout=30)
+    if not res.ok:
+        raise GeminiAPIError(f"Gemini ListModels HTTP {res.status_code}")
+    models = [m["name"].removeprefix("models/") for m in res.json().get("models", [])
+              if "generateContent" in m.get("supportedGenerationMethods", [])]
+    if not models:
+        raise GeminiAPIError("No accessible generateContent models for this API key")
+    if requested:
+        if requested not in models:
+            raise GeminiAPIError("Configured Gemini model unavailable: " + requested + "; available: " + ", ".join(models[:15]))
+        return requested
+    for prefix in ("gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash-lite", "gemini-2.0-flash", "gemini-3-flash", "gemini-"):
+        candidates = [m for m in models if m == prefix]
+        if candidates:
+            return candidates[0]
+    raise GeminiAPIError("No supported cost-conscious Gemini Flash model found; available: " + ", ".join(models[:15]))
+
 class GeminiAPIError(RuntimeError):
     pass
 
