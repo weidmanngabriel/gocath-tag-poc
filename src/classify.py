@@ -18,11 +18,22 @@ def choose_model(api_key, requested=None):
         if requested not in models:
             raise GeminiAPIError("Configured Gemini model unavailable: " + requested + "; available: " + ", ".join(models[:15]))
         return requested
-    for prefix in ("gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash-lite", "gemini-2.0-flash", "gemini-3-flash", "gemini-"):
-        candidates = [m for m in models if m == prefix]
-        if candidates:
-            return candidates[0]
-    raise GeminiAPIError("No supported cost-conscious Gemini Flash model found; available: " + ", ".join(models[:15]))
+    # ListModels can advertise entries that still return 404 on generateContent.
+    preferred = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-3-flash",
+                 "gemini-2.0-flash", "gemini-2.0-flash-lite"]
+    candidates = [m for m in preferred if m in models] + [m for m in models if m.startswith("gemini-") and m not in preferred]
+    for model in candidates:
+        test = requests.post(
+            f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+            headers={"x-goog-api-key": api_key},
+            json={"contents": [{"parts": [{"text": "Antworte mit OK."}]}],
+                  "generationConfig": {"maxOutputTokens": 16}}, timeout=30)
+        print(f"Gemini preflight: {model} → HTTP {test.status_code}", flush=True)
+        if test.ok:
+            return model
+        if test.status_code not in (404, 400):
+            raise GeminiAPIError(f"Gemini preflight HTTP {test.status_code}, model={model}")
+    raise GeminiAPIError("All available Gemini generateContent models failed preflight")
 
 class GeminiAPIError(RuntimeError):
     pass
