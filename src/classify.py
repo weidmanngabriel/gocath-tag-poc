@@ -19,9 +19,9 @@ def choose_model(api_key, requested=None):
             raise GeminiAPIError("Configured Gemini model unavailable: " + requested + "; available: " + ", ".join(models[:15]))
         return requested
     # ListModels can advertise entries that still return 404 on generateContent.
-    preferred = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-3-flash",
+    preferred = ["gemini-3.8-flash", "gemini-3-flash", "gemini-2.5-flash", "gemini-2.5-flash-lite",
                  "gemini-2.0-flash", "gemini-2.0-flash-lite"]
-    candidates = [m for m in preferred if m in models][:3]
+    candidates = ([m for m in preferred if m in models] + [m for m in models if m.startswith("gemini-") and "flash" in m and not any(x in m for x in ("tts", "image", "audio", "live", "embedding")) and m not in preferred])[:6]
     for model in candidates:
         test = requests.post(
             f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
