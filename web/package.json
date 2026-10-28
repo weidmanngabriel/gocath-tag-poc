@@ -1,0 +1,14 @@
+{
+  "name": "gocath-tag-dashboard",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vite": "^6.1.0"
+  }
+}
