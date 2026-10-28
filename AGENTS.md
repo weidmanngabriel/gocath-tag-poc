@@ -12,7 +12,7 @@
 1. **Nie einen Fix direkt auf `main` entwickeln.** Immer einen temporären Branch (`fix/*` oder `feature/*`) von aktuellem `main` anlegen.
 2. Ursache mithilfe von GitHub-Actions-Logs untersuchen; reproduzierbaren Fix mit Tests einchecken.
 3. **GitHub-Actions-Pipeline auf dem temporären Branch selbst starten**, beobachten und Logs kontrollieren. Fehlgeschlagene Runs eigenständig auswerten und auf demselben Branch nachbessern; erneut starten, bis die Pipeline erfolgreich ist.
-4. Eine grüne Pipeline allein reicht nicht: Auch tatsächlichen Ergebnisfluss (echte Events, Gemini-Klassifizierungen, Google-Sheet-Schreibzugriff) anhand von Logs und Ergebnisdaten validieren. Keine Fehler ignorieren oder durch Dummy-Daten kaschieren.
+4. Eine grüne Pipeline allein reicht bei Änderungen am Klassifizierungs- oder Datenfluss nicht: Auch tatsächlichen Ergebnisfluss (echte Events, Gemini-Klassifizierungen, Google-Sheet-Schreibzugriff) anhand von Logs und Ergebnisdaten validieren. Bei reinen Dokumentationsänderungen bestehende Implementierung und Quellen prüfen; ein kostenpflichtiger Klassifizierungslauf ist dafür nicht nötig. Keine Fehler ignorieren oder durch Dummy-Daten kaschieren.
 5. **Erst danach** PR erstellen bzw. fertigstellen und **ausschließlich per Squash-Merge** auf `main` übernehmen. Bei roten Checks oder unbelegter Integration nicht mergen.
 6. Kann die Pipeline wegen fehlender GitHub-Rechte, externer Quoten oder fehlender Secrets nicht selbst gestartet oder erfolgreich validiert werden, Blocker dokumentieren und **nicht mergen**; niemals Erfolg behaupten.
 7. Nach dem Merge den Branch bereinigen, soweit Berechtigungen dies zulassen. Details: [docs/agent-workflow.md](docs/agent-workflow.md).
@@ -21,3 +21,11 @@
 - Das GitHub-Environment `github-pages` erlaubt **nur** Deployments von `main`. Diese Einschränkung weder ändern noch umgehen.
 - Auf Feature-/Fix-Branches ausschließlich Build und Tests durchführen. Fehlgeschlagene Pages-Deployments auf Nicht-main-Branches sind durch die Environment-Regel erklärbar.
 - Geprüften Code per Squash-PR nach `main` übernehmen; danach das reale Pages-Deployment, Google OAuth und den Sheet-Zugriff validieren. Browser-E2E vor Veröffentlichung nicht behaupten. Bei Folgefehlern erneuten temporären Fix-Branch verwenden.
+
+## Dokumentation ist Teil jeder Aufgabe (verbindlich)
+- **Bei jeder Code-, Konfigurations-, Workflow- oder Architekturänderung gleichzeitig die betroffenen Dokumentationsstellen prüfen und aktualisieren.** Dokumentation ist Bestandteil der Definition of Done, kein optionaler Nachtrag.
+- Dokumentiere neue Funktionen, Datenfelder, Schnittstellen, Betriebsabläufe, Einschränkungen und Entscheidungen dort, wo sie hingehören (README als Einstieg; docs/ für Details). Bestehende widersprüchliche oder überholte Aussagen im selben PR korrigieren.
+- Beschreibe konfigurierbare Werte und Laufgrenzen **als Konfiguration**, nicht als starre Zahlen. Verweise auf die maßgebliche Quelle (z. B. `Config` im Google Sheet, `Tags` für die Tag-Liste). Nur stabile technische Grenzen aus dem Code dürfen ausdrücklich als solche benannt werden.
+- Nach jeder Aufgabe prüfen, ob `AGENTS.md`, `README.md`, `docs/concept.md`, `docs/architecture.md`, `docs/domain.md`, `docs/development.md`, `docs/dashboard.md`, `docs/setup.md` oder `docs/agent-workflow.md` betroffen sind. Unveränderte Dokumente müssen nicht künstlich bearbeitet werden.
+- Änderungen und Dokumentationsupdates in **demselben Feature-/Fix-Branch und PR** committen. Vor Merge auf widerspruchsfreie, aktuelle Angaben prüfen; bei nicht verifizierten Aussagen Unsicherheit transparent benennen.
+- Keine Secrets, personenbezogenen Zugangsdaten, temporären Token oder vertraulichen Logs dokumentieren.

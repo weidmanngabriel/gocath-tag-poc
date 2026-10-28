@@ -21,17 +21,17 @@
 
 Nach validiertem Squash-Merge auf `main` GitHub Actions → **Deploy dashboard to Pages** → **Run workflow**. Alternativ wird die Aktion beim Push auf main automatisch zum **Deployment** ausgelöst; **nicht** die Klassifizierung.
 
-Die vorgesehene URL ist https://weidmanngabriel.github.io/gocath-tag-poc/ . Im Dashboard **Mit Google anmelden** klicken. Konfigurationswert oder Tag ändern, speichern, Browser neu laden und Änderung prüfen.
+Die Dashboard-URL ist https://weidmanngabriel.github.io/gocath-tag-poc/ . Im Dashboard **Mit Google anmelden** klicken. Konfigurationswert oder Tag ändern, speichern, Browser neu laden und Änderung prüfen.
 
 ## 4. Manuelle Klassifizierung
 
 GitHub Actions → **GoCath Tagging POC** → **Run workflow**. Die Einstellungen werden direkt aus dem Sheet gelesen. Kein automatischer Klassifizierungstrigger.
 
 Sheet-Tabs:
-- `Config`: max_events_per_run (Standard 10), monthly_limit, changed_only (für Vergleichsversuche `false`), additional_tags_enabled, gemini_prompt (mehrzeilig), gemini_model (leer = automatische Modellauswahl), gemini_temperature (0 bis 1), max_additional_tags (0 bis 8).
-- `Tags`: Standard-Tags aktivieren/deaktivieren oder ergänzen.
-- `Runs`: laufende numerische Run-IDs und Metadaten.
-- `ResultsHistory`: Klassifizierungen bleiben für Run-Vergleich erhalten.
+- `Config`: max_events_per_run (konfigurierbares Laufmaximum), monthly_limit, changed_only (für Vergleichsversuche `false`), additional_tags_enabled, gemini_prompt (mehrzeilig), gemini_model (leer = automatische Modellauswahl), gemini_temperature (0 bis 1), max_additional_tags (technisch begrenzt) sowie optionale USD-Preise pro Million Input-/Output-Tokens zur Kostenschätzung.
+- `Tags`: Standard-Tags aktivieren/deaktivieren oder ergänzen; Synonyme kommagetrennt in der dritten Spalte verwalten.
+- `Runs`: fortlaufende numerische Run-IDs, Metadaten, Token-Verbrauch und optionale geschätzte Kosten.
+- `ResultsHistory`: Klassifizierungen einschließlich Tokenverbrauch bleiben für Run-Vergleich und Ergebnis-Suche erhalten.
 - `Tabellenblatt1`: jeweils aktuelle Ergebnisse pro Veranstaltung.
 
 ## Fehlerdiagnose
