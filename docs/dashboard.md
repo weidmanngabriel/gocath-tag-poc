@@ -20,7 +20,7 @@ Für den Vergleich verschiedener Parameter `changed_only=false` belassen. Durch 
 Die Browser-Anwendung nutzt den Google Sheets OAuth Scope; der kurzlebige Zugriffs-Token wird für Reloads innerhalb desselben Browser-Tabs in sessionStorage gehalten und nach Ablauf verworfen. Kein Refresh-Token wird gespeichert. Nur Google-Accounts mit Sheet-Rechten können auf die Daten zugreifen. Die Pages-Seite selbst ist öffentlich erreichbar.
 
 ## Release
-Auf temporärem Branch entwickeln, CI prüfen, Live-OAuth und Runner validieren, danach erst Squash-Merge auf main. Bei fehlender OAuth-Konfiguration kein vollständiger E2E-Nachweis.
+Auf temporärem Branch entwickeln und die automatisch per `pull_request` beziehungsweise Push auf `feature/**` ausgelöste CI prüfen. Bei reinen UI-Änderungen ohne Eingriff in den Klassifizierungs- oder Datenfluss genügen grüne Tests, Dashboard-Build und Codeprüfung für den Squash-Merge; Live-OAuth- und Runner-Tests sind dafür nicht verpflichtend. Bei Änderungen am Klassifizierungs- oder Datenfluss bleibt die Integrationsprüfung Pflicht. Bei fehlender OAuth-Konfiguration kein vollständiger E2E-Nachweis.
 
 ### Pages-Branchschutz
 
