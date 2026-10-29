@@ -61,3 +61,7 @@ Bei `openai/gpt-oss-20b` kann trotz ausreichendem Anfragekontingent das Tokenlim
 Die Navigation teilt das Dashboard in **Konfiguration**, **Standard-Tags**, **Metriken**, **Ergebnisse** und **Läufe**. Alle Bereiche bleiben in derselben Ansicht; die Tabs wechseln nur den sichtbaren Bereich.
 
 In **Standard-Tags** entfernt die Schaltfläche **Löschen** einen Eintrag zunächst nur aus dem Formular (nach Bestätigung). Erst **Tags speichern** übernimmt die verbleibende Liste in das Google Sheet `Tags` und leert die dadurch frei gewordenen alten Zeilen einschließlich der Synonyme. Vorheriges Neuladen verwirft ungespeicherte Löschungen. Mindestens ein Standard-Tag muss verbleiben. Die Löschung verändert historische Klassifizierungen nicht; neue Läufe verwenden die aktuelle aktive Tag-Liste aus dem Sheet.
+
+## Mobile Darstellung der Konfiguration
+
+Bei schmalen Ansichten (bis 760 px) erscheinen Eingaben und Dropdowns im Bereich **Konfiguration** unter der jeweiligen Beschriftung und nutzen die verfügbare Kartenbreite. Lange technische Schlüssel brechen um, statt das Layout horizontal zu erweitern. Desktop-Layouts bleiben unverändert.
