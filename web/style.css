@@ -45,25 +45,36 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
   .panel{min-width:0}
 }
 
-/* Results: full available viewport width and readable mobile rows */
+/* Mobile results: compact scrollable table using the full panel width */
 @media(max-width:760px){
   main{padding-left:12px;padding-right:12px}
-  .panel[data-view="results"]{padding:16px 12px;min-width:0}
+  .panel[data-view="results"]{padding:16px 10px;min-width:0}
   .panel[data-view="results"] .search-label{display:flex!important;flex-direction:column;align-items:stretch}
   .panel[data-view="results"] #historySearch{width:100%;max-width:100%;min-width:0}
-  .panel[data-view="results"] .table-scroll{overflow-x:visible;min-width:0}
-  .panel[data-view="results"] table,
-  .panel[data-view="results"] tbody,
-  .panel[data-view="results"] tr,
-  .panel[data-view="results"] td{display:block;width:100%;min-width:0}
-  .panel[data-view="results"] thead{display:none}
-  .panel[data-view="results"] tbody tr{padding:12px 0;border-bottom:1px solid #dce7df}
-  .panel[data-view="results"] tbody td{padding:7px 0;border:0;overflow-wrap:anywhere;word-break:normal;white-space:normal}
-  .panel[data-view="results"] tbody td::before{display:block;font-weight:600;color:#60746a;font-size:12px;margin-bottom:3px}
-  .panel[data-view="results"] tbody td:nth-child(1)::before{content:"Veranstaltung"}
-  .panel[data-view="results"] tbody td:nth-child(2)::before{content:"Standard-Tags"}
-  .panel[data-view="results"] tbody td:nth-child(3)::before{content:"Weitere Tags"}
-  .panel[data-view="results"] tbody td:nth-child(4)::before{content:"Begründung"}
-  .panel[data-view="results"] tbody td:nth-child(5)::before{content:"Tokens"}
-  .panel[data-view="results"] tbody td:nth-child(6)::before{content:"Kosten (USD)"}
+  .panel[data-view="results"] .table-scroll{
+    display:block;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  .panel[data-view="results"] table{
+    display:table;
+    width:max-content;
+    min-width:100%;
+    table-layout:auto;
+  }
+  .panel[data-view="results"] th,
+  .panel[data-view="results"] td{
+    padding:9px 12px;
+    min-width:130px;
+    max-width:270px;
+    vertical-align:top;
+    overflow-wrap:anywhere;
+    white-space:normal;
+  }
+  .panel[data-view="results"] th:first-child,
+  .panel[data-view="results"] td:first-child{min-width:180px}
 }
