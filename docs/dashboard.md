@@ -55,3 +55,9 @@ Bei `openai/gpt-oss-20b` kann trotz ausreichendem Anfragekontingent das Tokenlim
 Über `Config.event_source` und das Dashboard-Dropdown kann zwischen `gocath` (Standard; `https://gocath.org/de/finde`) und `regnum_christi` (`https://www.regnumchristi.eu/demnaechst/`) gewählt werden. Die gewählte Quelle wird beim nächsten manuellen Klassifizierungslauf abgerufen; dieselben Tag-Regeln und die aktive KI-Anbieterauswahl gelten für beide. Die Regnum-Christi-Seite verwendet Kalenderlinks mit `?vid=...`. Verändert sich deren HTML, muss der Parser aktualisiert werden; es gibt keinen stillen Wechsel zur GoCath-Quelle. Der Abruf ist lesend. Achtung: Regnum Christi kann im Kalender auch vergangene Termine anzeigen; die Korrektheit der Quelleninhalte und die Kalendersortierung müssen beim Live-Test geprüft werden.
 
 **Parser-Korrektur:** Regnum-Christi-Termine werden aus den Kalendereinträgen der Übersichtsseite extrahiert, da die `vid`-URLs beim Abruf kein separat auswertbares Veranstaltungs-Markup lieferten. Kalenderinhalt und Datumsfilter müssen im Live-Test geprüft werden.
+
+## Standard-Tags löschen und Tabs
+
+Die Navigation teilt das Dashboard in **Konfiguration**, **Standard-Tags**, **Metriken**, **Ergebnisse** und **Läufe**. Alle Bereiche bleiben in derselben Ansicht; die Tabs wechseln nur den sichtbaren Bereich.
+
+In **Standard-Tags** entfernt die Schaltfläche **Löschen** einen Eintrag zunächst nur aus dem Formular (nach Bestätigung). Erst **Tags speichern** übernimmt die verbleibende Liste in das Google Sheet `Tags` und leert die dadurch frei gewordenen alten Zeilen einschließlich der Synonyme. Vorheriges Neuladen verwirft ungespeicherte Löschungen. Mindestens ein Standard-Tag muss verbleiben. Die Löschung verändert historische Klassifizierungen nicht; neue Läufe verwenden die aktuelle aktive Tag-Liste aus dem Sheet.
