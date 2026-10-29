@@ -65,3 +65,7 @@ In **Standard-Tags** entfernt die Schaltfläche **Löschen** einen Eintrag zunä
 ## Mobile Darstellung der Konfiguration
 
 Bei schmalen Ansichten (bis 760 px) erscheinen Eingaben und Dropdowns im Bereich **Konfiguration** unter der jeweiligen Beschriftung und nutzen die verfügbare Kartenbreite. Lange technische Schlüssel brechen um, statt das Layout horizontal zu erweitern. Desktop-Layouts bleiben unverändert.
+
+## Mobile Ergebnisdarstellung
+
+Die Ergebnisse eines ausgewählten Runs nutzen auf Smartphones die verfügbare Bildschirmbreite. Statt einer horizontal abgeschnittenen Tabelle wird jede Veranstaltung als vertikal gegliederter Eintrag mit beschrifteten Feldern dargestellt (Veranstaltung, Standard-Tags, weitere Tags, Begründung, Tokens, Kosten). Die Suchfunktion und die Daten bleiben unverändert. Auf größeren Bildschirmen bleibt die Tabelle bestehen.
