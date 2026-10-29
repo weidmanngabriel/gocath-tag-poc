@@ -20,7 +20,7 @@ Für den Vergleich verschiedener Parameter `changed_only=false` belassen. Durch 
 Die Browser-Anwendung nutzt den Google Sheets OAuth Scope; der kurzlebige Zugriffs-Token wird für Reloads innerhalb desselben Browser-Tabs in sessionStorage gehalten und nach Ablauf verworfen. Kein Refresh-Token wird gespeichert. Nur Google-Accounts mit Sheet-Rechten können auf die Daten zugreifen. Die Pages-Seite selbst ist öffentlich erreichbar.
 
 ## Release
-Auf temporärem Branch entwickeln, CI prüfen, Live-OAuth und Runner validieren, danach erst Squash-Merge auf main. Bei fehlender OAuth-Konfiguration kein vollständiger E2E-Nachweis.
+Auf temporärem Branch entwickeln und die automatisch per `pull_request` beziehungsweise Push auf `feature/**` ausgelöste CI prüfen. Bei reinen UI-Änderungen ohne Eingriff in den Klassifizierungs- oder Datenfluss genügen grüne Tests, Dashboard-Build und Codeprüfung für den Squash-Merge; Live-OAuth- und Runner-Tests sind dafür nicht verpflichtend. Bei Änderungen am Klassifizierungs- oder Datenfluss bleibt die Integrationsprüfung Pflicht. Bei fehlender OAuth-Konfiguration kein vollständiger E2E-Nachweis.
 
 ### Pages-Branchschutz
 
@@ -55,3 +55,9 @@ Bei `openai/gpt-oss-20b` kann trotz ausreichendem Anfragekontingent das Tokenlim
 Über `Config.event_source` und das Dashboard-Dropdown kann zwischen `gocath` (Standard; `https://gocath.org/de/finde`) und `regnum_christi` (`https://www.regnumchristi.eu/demnaechst/`) gewählt werden. Die gewählte Quelle wird beim nächsten manuellen Klassifizierungslauf abgerufen; dieselben Tag-Regeln und die aktive KI-Anbieterauswahl gelten für beide. Die Regnum-Christi-Seite verwendet Kalenderlinks mit `?vid=...`. Verändert sich deren HTML, muss der Parser aktualisiert werden; es gibt keinen stillen Wechsel zur GoCath-Quelle. Der Abruf ist lesend. Achtung: Regnum Christi kann im Kalender auch vergangene Termine anzeigen; die Korrektheit der Quelleninhalte und die Kalendersortierung müssen beim Live-Test geprüft werden.
 
 **Parser-Korrektur:** Regnum-Christi-Termine werden aus den Kalendereinträgen der Übersichtsseite extrahiert, da die `vid`-URLs beim Abruf kein separat auswertbares Veranstaltungs-Markup lieferten. Kalenderinhalt und Datumsfilter müssen im Live-Test geprüft werden.
+
+## Standard-Tags löschen und Tabs
+
+Die Navigation teilt das Dashboard in **Konfiguration**, **Standard-Tags**, **Metriken**, **Ergebnisse** und **Läufe**. Alle Bereiche bleiben in derselben Ansicht; die Tabs wechseln nur den sichtbaren Bereich.
+
+In **Standard-Tags** entfernt die Schaltfläche **Löschen** einen Eintrag zunächst nur aus dem Formular (nach Bestätigung). Erst **Tags speichern** übernimmt die verbleibende Liste in das Google Sheet `Tags` und leert die dadurch frei gewordenen alten Zeilen einschließlich der Synonyme. Vorheriges Neuladen verwirft ungespeicherte Löschungen. Mindestens ein Standard-Tag muss verbleiben. Die Löschung verändert historische Klassifizierungen nicht; neue Läufe verwenden die aktuelle aktive Tag-Liste aus dem Sheet.

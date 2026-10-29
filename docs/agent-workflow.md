@@ -2,8 +2,8 @@
 
 1. Vor der Implementierung Anforderungen, docs und aktuelle Runs/Logs prüfen.
 2. Pro Änderung einen temporären Branch von `main` erstellen; `main` nie direkt beschreiben.
-3. Tests und CI auf dem Branch ausführen; Github Actions **selbst** starten und auf Abschluss prüfen. Bei Fehlern: Logs lesen → Ursache fixen → erneut ausführen.
-4. Integration gegen echte Veranstaltungen, Gemini und Google Sheets validieren. Prüfen, ob im Sheet erfolgreiche neue Tag-Zuordnungen vorliegen; reine Unit-Tests sind unzureichend.
+3. Tests und CI auf dem Branch prüfen. `.github/workflows/check.yml` wird bei Push auf `feature/**` und bei `pull_request` automatisch ausgelöst. Bereits laufende PR-Checks verwenden, ihren Abschluss und Status prüfen; kein zusätzlicher manueller Start erforderlich. Bei Fehlern: Logs lesen → Ursache fixen → erneut ausführen.
+4. Prüfungen nach Änderungsart: Änderungen am Klassifizierungs- oder Datenfluss mit echten Veranstaltungen, KI-Klassifizierung und Google Sheets validieren; Unit-Tests allein reichen dafür nicht. Bei reinen UI-Änderungen ohne Änderung dieses Datenflusses genügen erfolgreiche PR-CI (Tests und Dashboard-Build) und Codeprüfung für den Merge. Live-OAuth- oder Sheets-End-to-End-Tests sind dann keine Pflicht.
 5. Bei fehlenden Zugriffsrechten, Quota- oder Secret-Problemen keine Scheinlösungen und **kein Merge**. Klar dokumentieren, welche externe Maßnahme nötig ist.
 6. Nach grünem Runner und fachlicher Prüfung einen PR **per Squash-Merge** in `main` übernehmen. Niemals Merge/Rebase-Merge oder Direktcommit.
 7. Dokumentation und Entscheidungen aktuell halten; Branch aufräumen, soweit möglich.
