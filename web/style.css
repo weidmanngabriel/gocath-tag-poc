@@ -15,3 +15,32 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
 .tag-entry .remove-tag{margin:0;padding:6px 9px;background:transparent;color:#a6213a;border:1px solid #e8bdc6;font-size:12px}
 .tag-entry .remove-tag:hover{background:#fbeef1}
 @media(max-width:760px){.section-tabs{flex-wrap:nowrap;overflow-x:auto}.section-tabs button{white-space:nowrap}}
+
+/* Mobile: settings controls below their labels, never beyond the panel */
+@media (max-width:760px){
+  .panel[data-view="config"] #settings > label{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:8px;
+    min-width:0;
+  }
+  .panel[data-view="config"] #settings > label > span{
+    display:block;
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+  .panel[data-view="config"] #settings > label > :is(input,select,textarea){
+    display:block;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    font:inherit;
+    box-sizing:border-box;
+  }
+  .panel[data-view="config"] #settings > label > select{
+    white-space:normal;
+    text-overflow:ellipsis;
+  }
+  .panel{min-width:0}
+}
