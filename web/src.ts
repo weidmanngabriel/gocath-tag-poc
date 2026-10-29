@@ -23,7 +23,7 @@ const read=async(range:string):Promise<string[][]>=>{const x=await api(API+"/val
 async function load(){[config,tags,runs,history]=await Promise.all([read("Config!A1:C100"),read("Tags!A1:C300"),read("Runs!A1:K100"),read("ResultsHistory!A1:N500")]);render();}
 function status(s:string,isError=false){const e=document.querySelector("#status");if(e){e.textContent=s;e.className=isError?"error":"";}}
 
-function norm(value:string):string{return value.normalize("NFKC").toLocaleLowerCase("de").replace(/[.,;:!?()]/g," ").replace(/\\s+/g," ").trim();}
+function norm(value:string):string{return value.normalize("NFKC").toLocaleLowerCase("de").replace(/[.,;:!?()]/g," ").replace(/\s+/g," ").trim();}
 function oneEdit(a:string,b:string):boolean{
  if(Math.abs(a.length-b.length)>1)return false;
  let i=0,j=0,errors=0;
@@ -37,6 +37,8 @@ function oneEdit(a:string,b:string):boolean{
 function containsFuzzy(term:string,word:string):boolean{
  if(term.length<3)return false;
  if(word.includes(term))return true;
+ // Short search terms cause too many false positives with one-edit matching.
+ if(term.length<5)return false;
  for(let length=Math.max(1,term.length-1);length<=Math.min(word.length,term.length+1);length++){
   for(let start=0;start+length<=word.length;start++){
    if(oneEdit(term,word.slice(start,start+length)))return true;

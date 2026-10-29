@@ -78,3 +78,13 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
   .panel[data-view="results"] th:first-child,
   .panel[data-view="results"] td:first-child{min-width:180px}
 }
+
+/* Compact first two result columns on mobile; wider space for details */
+@media(max-width:760px){
+ .panel[data-view="results"] th:nth-child(1),
+ .panel[data-view="results"] td:nth-child(1){min-width:105px;max-width:135px;width:120px}
+ .panel[data-view="results"] th:nth-child(2),
+ .panel[data-view="results"] td:nth-child(2){min-width:105px;max-width:130px;width:115px}
+ .panel[data-view="results"] th:nth-child(3),
+ .panel[data-view="results"] td:nth-child(3){min-width:210px;max-width:300px}
+}
