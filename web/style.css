@@ -2,3 +2,16 @@
 textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100%;border:1px solid #d6e1d8;border-radius:8px;padding:12px;background:#fafcfb}.panel label:has(textarea){display:block}.panel label:has(textarea) textarea{margin-top:8px}
 
 .tag-entry{padding:8px;background:#f5f8f5;border-radius:9px}.tag-entry input.synonyms{width:100%;margin-top:6px;font-size:13px}.search-label{margin:14px 0;display:flex!important;flex-wrap:wrap}.search-label input{width:min(100%,400px);flex:1}.tag-grid{align-items:start}
+
+/* Dashboard navigation and tag deletion */
+.columns{display:block}
+.panel[data-view]{display:none}
+.panel[data-view].active{display:block}
+.section-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;border-bottom:1px solid #dce7df;padding-bottom:10px}
+.section-tabs button{margin:0;background:#fff;color:#315a49;border:1px solid #d6e1d8;padding:10px 14px}
+.section-tabs button[aria-pressed=true]{background:#23654a;color:#fff;border-color:#23654a}
+.tag-entry-header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tag-entry-header .tag{min-width:0}
+.tag-entry .remove-tag{margin:0;padding:6px 9px;background:transparent;color:#a6213a;border:1px solid #e8bdc6;font-size:12px}
+.tag-entry .remove-tag:hover{background:#fbeef1}
+@media(max-width:760px){.section-tabs{flex-wrap:nowrap;overflow-x:auto}.section-tabs button{white-space:nowrap}}
