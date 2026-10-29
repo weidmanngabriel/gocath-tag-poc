@@ -68,4 +68,4 @@ Bei schmalen Ansichten (bis 760 px) erscheinen Eingaben und Dropdowns im Bereich
 
 ## Mobile Ergebnisdarstellung
 
-Die Ergebnisse eines ausgewählten Runs nutzen auf Smartphones die verfügbare Bildschirmbreite. Statt einer horizontal abgeschnittenen Tabelle wird jede Veranstaltung als vertikal gegliederter Eintrag mit beschrifteten Feldern dargestellt (Veranstaltung, Standard-Tags, weitere Tags, Begründung, Tokens, Kosten). Die Suchfunktion und die Daten bleiben unverändert. Auf größeren Bildschirmen bleibt die Tabelle bestehen.
+Die Ergebnisse eines ausgewählten Runs nutzen auf Smartphones die verfügbare Bildschirmbreite. Die Ergebnistabelle bleibt auch mobil eine Tabelle mit horizontaler Scrollmöglichkeit innerhalb der Karte. Die Tabellenzellen haben begrenzte Breiten und umbrechende Texte; Suchfeld und Tabellencontainer nutzen die volle verfügbare Kartenbreite. Die Suchfunktion und die Daten bleiben unverändert. Auf größeren Bildschirmen bleibt die Tabelle bestehen.
