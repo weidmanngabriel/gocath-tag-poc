@@ -49,3 +49,9 @@ Im Sheet `Config` wählt `classifier_provider` zwischen `groq` (Standard) und `g
 ### Groq Free-Tier-Drosselung
 
 Bei `openai/gpt-oss-20b` kann trotz ausreichendem Anfragekontingent das Tokenlimit pro Minute erreicht werden (derzeit laut Kontolimit 8.000 TPM). Der reguläre Runner hält deshalb mindestens 15 Sekunden Abstand zwischen Starts von Groq-Anfragen. Bei HTTP 429 und temporären Serverfehlern wartet er zusätzlich begrenzt und wiederholt maximal viermal; wenn die individuellen Prompts mehr Tokens benötigen, kann das Limit dennoch erreicht werden. Das konkrete Kontingent kann sich ändern. Beim Benchmark-Modus wird absichtlich ohne Drosselung gemessen.
+
+## Alternative Veranstaltungsquelle
+
+Über `Config.event_source` und das Dashboard-Dropdown kann zwischen `gocath` (Standard; `https://gocath.org/de/finde`) und `regnum_christi` (`https://www.regnumchristi.eu/demnaechst/`) gewählt werden. Die gewählte Quelle wird beim nächsten manuellen Klassifizierungslauf abgerufen; dieselben Tag-Regeln und die aktive KI-Anbieterauswahl gelten für beide. Die Regnum-Christi-Seite verwendet Kalenderlinks mit `?vid=...`. Verändert sich deren HTML, muss der Parser aktualisiert werden; es gibt keinen stillen Wechsel zur GoCath-Quelle. Der Abruf ist lesend. Achtung: Regnum Christi kann im Kalender auch vergangene Termine anzeigen; die Korrektheit der Quelleninhalte und die Kalendersortierung müssen beim Live-Test geprüft werden.
+
+**Parser-Korrektur:** Regnum-Christi-Termine werden aus den Kalendereinträgen der Übersichtsseite extrahiert, da die `vid`-URLs beim Abruf kein separat auswertbares Veranstaltungs-Markup lieferten. Kalenderinhalt und Datumsfilter müssen im Live-Test geprüft werden.

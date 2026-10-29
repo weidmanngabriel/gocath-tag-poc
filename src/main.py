@@ -6,6 +6,7 @@ import time
 from pathlib import Path
 from datetime import datetime, timezone
 from .scrape import fetch_events
+from .regnum_scrape import fetch_events as fetch_regnum_events
 from .classify import classify, choose_model
 from .groq_compare import invoke as invoke_groq
 from .config import settings, run_count, log_run, next_run_id, save_history
@@ -45,7 +46,11 @@ def main():
         model = choose_model(provider_key, config["gemini_model"] or os.environ.get("GEMINI_MODEL"))
     print(f'[timing] model_selection={time.perf_counter()-t0:.3f}s',flush=True)
     t0 = time.perf_counter()
-    events = fetch_events(limit)
+    event_source = config['event_source']
+    if event_source not in ('gocath', 'regnum_christi'):
+        raise ValueError('Unknown event_source; expected gocath or regnum_christi')
+    events = fetch_events(limit) if event_source == 'gocath' else fetch_regnum_events(limit)
+    print(f'[source] selected={event_source}',flush=True)
     print(f'[timing] fetch_events={time.perf_counter()-t0:.3f}s count={len(events)}',flush=True)
     if config["changed_only"]:
         previous = doc.sheet1.get_all_values()

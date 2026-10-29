@@ -20,6 +20,7 @@ def settings(credentials_json, sheet_id):
         "gemini_prompt":config.get("gemini_prompt", "").strip(),
         "gemini_model":config.get("gemini_model", "").strip(),
         "classifier_provider": config.get("classifier_provider", "groq").strip().lower(),
+        "event_source": config.get("event_source", "gocath").strip().lower(),
         "gemini_temperature":max(0.0,min(1.0,float(config.get("gemini_temperature", "0.1")))),
         "max_additional_tags":max(0,min(8,int(config.get("max_additional_tags", "8")))),
         "cost_input_per_million_usd": config.get("cost_input_per_million_usd", ""),
