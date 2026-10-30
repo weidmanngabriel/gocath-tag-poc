@@ -32,3 +32,7 @@ Der reguläre Groq-Runner behandelt HTTP 429 sowie vorübergehende 5xx-Fehler du
 ## Fehlerdiagnose Groq
 
 Wenn ein Groq-Classify-Aufruf fehlschlägt, schreibt der Runner `output/failed-groq-request-response.json` mit dem JSON-Request ohne Authorization-Header, dem erhaltenen Response-Inhalt, HTTP-Status und Fehlertyp. Der GitHub-Actions-Workflow lädt die Datei auch bei einem fehlgeschlagenen Job als `tag-results`-Artefakt hoch. API-Schlüssel werden vor dem Schreiben maskiert. Das Artefakt kann öffentliche Veranstaltungsdaten und den Klassifizierungs-Prompt enthalten und ist daher nur zur gezielten Fehleranalyse gedacht. Keine vollständigen Antworten oder Veranstaltungstexte in Actions-Logs ausgeben.
+
+## Groq-Antwort mit einzelnem Standard-Tag
+
+Bei einem einzelnen Standard-Tag kann Groq trotz JSON-Vorgabe `standard_tags` als String statt als Liste ausgeben. Die Antwortverarbeitung wandelt einen einzelnen String in eine Liste um, prüft anschließend wie bisher gegen die zulässige Standard-Tag-Liste und verwirft unbekannte Werte. Andere ungültige Formate bleiben Fehler. Bei Prompt-Anpassungen explizit `standard_tags` und `additional_tags` als JSON-Arrays verlangen.
