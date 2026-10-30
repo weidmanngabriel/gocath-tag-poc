@@ -55,4 +55,5 @@ jobs:
             output/results.json
             output/latency-probe.json
             output/groq-comparison.json
+            output/failed-groq-request-response.json
           if-no-files-found: ignore
