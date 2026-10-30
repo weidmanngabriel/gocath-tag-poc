@@ -21,3 +21,29 @@ jobs:
           node-version: '22'
       - run: npm install && npm run build
         working-directory: web
+
+  live-classify-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/prompt-contract-v2'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Live classification smoke test (one event, test sheet)
+        env:
+          GOCATH_GEMINI_CLASSIFIER_KEY: ${{ secrets.GOCATH_GEMINI_CLASSIFIER_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SHEET_ID: 1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w
+        run: python -m src.main --limit 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-smoke-diagnostics
+          path: |
+            output/results.json
+            output/failed-groq-request-response.json
+          if-no-files-found: ignore
