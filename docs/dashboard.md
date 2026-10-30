@@ -71,3 +71,7 @@ Bei schmalen Ansichten (bis 760 px) erscheinen Eingaben und Dropdowns im Bereich
 Die Ergebnisse eines ausgewählten Runs nutzen auf Smartphones die verfügbare Bildschirmbreite. Die Ergebnistabelle bleibt auch mobil eine Tabelle mit horizontaler Scrollmöglichkeit innerhalb der Karte. Die Tabellenzellen haben begrenzte Breiten und umbrechende Texte; Suchfeld und Tabellencontainer nutzen die volle verfügbare Kartenbreite. Die Suchfunktion und die Daten bleiben unverändert. Auf größeren Bildschirmen bleibt die Tabelle bestehen.
 
 Mobil sind die ersten beiden Ergebnisspalten schmaler als bisher (Veranstaltung und Standard-Tags); weitere Tags und Begründung erhalten relativ mehr Platz in der horizontal scrollbar Tabelle.
+
+## Begründungen im Dialog
+
+In der Ergebnis-Tabelle zeigt die Spalte Begründung nur einen Button „Anzeigen“. Dieser öffnet einen Dialog mit der vollständigen KI-Begründung und einem Schließen-Button. Die zusätzlichen Tags erhalten dadurch mehr Tabellenbreite. Auf kleinen Displays bleibt die Tabelle horizontal scrollbar; Klassifizierung und gespeicherte Daten ändern sich nicht.
