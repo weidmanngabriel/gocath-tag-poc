@@ -14,6 +14,11 @@ from .sheets import publish
 
 SHEET_ID = "1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w"
 
+def retryable_groq_response(response):
+    """Retry temporary HTTP failures and malformed successful model responses."""
+    return (response["http_status"] in (429, 500, 502, 503, 504) or
+            (response["http_status"] == 200 and response["status"] in ("ValueError", "KeyError", "IndexError", "TypeError")))
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None)
@@ -77,7 +82,7 @@ def main():
                     response = invoke_groq("groq", event, config, {"groq": provider_key})
                     if response["status"] == "ok":
                         break
-                    if not (response["http_status"] in (429, 500, 502, 503, 504) or (response["http_status"] == 200 and response["status"] in ("ValueError", "KeyError", "IndexError", "TypeError"))) or groq_attempt == 3:
+                    if not retryable_groq_response(response) or groq_attempt == 3:
                         raise RuntimeError("Groq classification failed: " + response["status"] + "; HTTP " + str(response["http_status"]))
                     delay = max(10 * (groq_attempt + 1), response.get("retry_after_seconds") or 0)
                     print(f"[groq-retry] http={response['http_status']} attempt={groq_attempt+1} wait={delay}s", flush=True)
