@@ -43,6 +43,8 @@ def invoke(provider, event, config, secrets):
                    "reasoning_effort":"low",
                    "temperature":float(config["gemini_temperature"])}
     started = time.perf_counter()
+    response_body = None
+    failure_details = None
     out = {"provider":provider,"model":GEMINI_MODEL if provider=="gemini" else GROQ_MODEL,
            "status":"error","http_status":None,"retry_after_seconds":None,"seconds":None,
            "input_tokens":0,"output_tokens":0,"standard_tags":[],"additional_tags":[],"reason":""}
@@ -56,8 +58,10 @@ def invoke(provider, event, config, secrets):
                 pass
         if not response.ok:
             out["status"] = "http_error"
+            response_body = response.text if isinstance(getattr(response, "text", None), str) else None
         else:
             body = response.json()
+            response_body = body
             if provider=="gemini":
                 usage=body.get("usageMetadata",{})
                 out["input_tokens"]=usage.get("promptTokenCount",0)
@@ -68,25 +72,32 @@ def invoke(provider, event, config, secrets):
                 out["input_tokens"]=usage.get("prompt_tokens",0)
                 out["output_tokens"]=usage.get("completion_tokens",0)
                 answer=body["choices"][0]["message"]["content"]
-            try:
-                parsed=clean(json.loads(answer),config["tags"])
-            except (ValueError, TypeError, KeyError, IndexError) as exc:
-                if provider == "groq":
-                    # Report the generated answer, not the full API response or request.
-                    # Prevent the event text and credentials from being echoed into Actions logs.
-                    diagnostic = answer if isinstance(answer, str) else repr(answer)
-                    for sensitive in [event_text, *[v for v in event.values() if isinstance(v, str)], *secrets.values()]:
-                        if isinstance(sensitive, str) and sensitive:
-                            diagnostic = diagnostic.replace(sensitive, "[REDACTED]")
-                    print("[groq-invalid-output] error={} answer={}".format(
-                        type(exc).__name__, json.dumps(diagnostic[:4000], ensure_ascii=False)), flush=True)
-                raise
+            parsed=clean(json.loads(answer),config["tags"])
             parsed["additional_tags"]=parsed["additional_tags"][:config["max_additional_tags"] if config["additional_tags_enabled"] else 0]
             out.update(filter_duplicate_synonyms(parsed,config["tag_synonyms"]))
             out["status"]="ok"
     except (requests.RequestException,KeyError,IndexError,ValueError,TypeError) as exc:
         out["status"]=type(exc).__name__
+        failure_details = type(exc).__name__
     finally:
+        if provider == "groq" and out["status"] != "ok":
+            # Artifact contains request JSON (without Authorization) and response.
+            # Public event text and the prompt may be included: do not commit the artifact.
+            detail = {
+                "status": out["status"],
+                "http_status": out["http_status"],
+                "exception": failure_details,
+                "request": {"method": "POST", "url": url, "body": payload},
+                "response": response_body,
+            }
+            serialized = json.dumps(detail, ensure_ascii=False, indent=2, default=str)
+            for key in secrets.values():
+                if isinstance(key, str) and key:
+                    serialized = serialized.replace(key, "[REDACTED]")
+            Path("output").mkdir(exist_ok=True)
+            Path("output/failed-groq-request-response.json").write_text(
+                serialized[:120000], encoding="utf-8")
+            print("[groq-diagnostic] Failed request/response saved as Actions artifact.", flush=True)
         out["seconds"]=round(time.perf_counter()-started,3)
         print("[groq-compare] provider={} status={} http={} seconds={}".format(provider,out["status"],out["http_status"],out["seconds"]),flush=True)
     return out
