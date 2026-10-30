@@ -23,7 +23,7 @@ jobs:
         working-directory: web
 
   live-classify-smoke:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/prompt-contract-v2'
+    if: github.head_ref == 'feature/prompt-contract-v2' || github.ref == 'refs/heads/feature/prompt-contract-v2'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
