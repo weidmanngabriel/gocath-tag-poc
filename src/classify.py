@@ -57,6 +57,8 @@ def clean(data, vocabulary=None):
         raise ValueError("Unexpected Gemini JSON")
     fixed = data.get("standard_tags", [])
     free = data.get("additional_tags", [])
+    if isinstance(fixed, str):
+        fixed = [fixed]  # Models occasionally return one valid standard tag as a scalar.
     if not isinstance(fixed, list) or not isinstance(free, list):
         raise ValueError("Tags must be arrays")
     allowed = vocabulary if vocabulary is not None else STANDARD_TAGS
