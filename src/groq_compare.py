@@ -43,6 +43,8 @@ def invoke(provider, event, config, secrets):
                    "reasoning_effort":"low",
                    "temperature":float(config["gemini_temperature"])}
     started = time.perf_counter()
+    response_body = None
+    failure_details = None
     out = {"provider":provider,"model":GEMINI_MODEL if provider=="gemini" else GROQ_MODEL,
            "status":"error","http_status":None,"retry_after_seconds":None,"seconds":None,
            "input_tokens":0,"output_tokens":0,"standard_tags":[],"additional_tags":[],"reason":""}
@@ -56,8 +58,10 @@ def invoke(provider, event, config, secrets):
                 pass
         if not response.ok:
             out["status"] = "http_error"
+            response_body = response.text if isinstance(getattr(response, "text", None), str) else None
         else:
             body = response.json()
+            response_body = body
             if provider=="gemini":
                 usage=body.get("usageMetadata",{})
                 out["input_tokens"]=usage.get("promptTokenCount",0)
@@ -74,7 +78,26 @@ def invoke(provider, event, config, secrets):
             out["status"]="ok"
     except (requests.RequestException,KeyError,IndexError,ValueError,TypeError) as exc:
         out["status"]=type(exc).__name__
+        failure_details = type(exc).__name__
     finally:
+        if provider == "groq" and out["status"] != "ok":
+            # Artifact contains request JSON (without Authorization) and response.
+            # Public event text and the prompt may be included: do not commit the artifact.
+            detail = {
+                "status": out["status"],
+                "http_status": out["http_status"],
+                "exception": failure_details,
+                "request": {"method": "POST", "url": url, "body": payload},
+                "response": response_body,
+            }
+            serialized = json.dumps(detail, ensure_ascii=False, indent=2, default=str)
+            for key in secrets.values():
+                if isinstance(key, str) and key:
+                    serialized = serialized.replace(key, "[REDACTED]")
+            Path("output").mkdir(exist_ok=True)
+            Path("output/failed-groq-request-response.json").write_text(
+                serialized[:120000], encoding="utf-8")
+            print("[groq-diagnostic] Failed request/response saved as Actions artifact.", flush=True)
         out["seconds"]=round(time.perf_counter()-started,3)
         print("[groq-compare] provider={} status={} http={} seconds={}".format(provider,out["status"],out["http_status"],out["seconds"]),flush=True)
     return out
