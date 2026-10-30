@@ -68,7 +68,19 @@ def invoke(provider, event, config, secrets):
                 out["input_tokens"]=usage.get("prompt_tokens",0)
                 out["output_tokens"]=usage.get("completion_tokens",0)
                 answer=body["choices"][0]["message"]["content"]
-            parsed=clean(json.loads(answer),config["tags"])
+            try:
+                parsed=clean(json.loads(answer),config["tags"])
+            except (ValueError, TypeError, KeyError, IndexError) as exc:
+                if provider == "groq":
+                    # Report the generated answer, not the full API response or request.
+                    # Prevent the event text and credentials from being echoed into Actions logs.
+                    diagnostic = answer if isinstance(answer, str) else repr(answer)
+                    for sensitive in [event_text, *[v for v in event.values() if isinstance(v, str)], *secrets.values()]:
+                        if isinstance(sensitive, str) and sensitive:
+                            diagnostic = diagnostic.replace(sensitive, "[REDACTED]")
+                    print("[groq-invalid-output] error={} answer={}".format(
+                        type(exc).__name__, json.dumps(diagnostic[:4000], ensure_ascii=False)), flush=True)
+                raise
             parsed["additional_tags"]=parsed["additional_tags"][:config["max_additional_tags"] if config["additional_tags_enabled"] else 0]
             out.update(filter_duplicate_synonyms(parsed,config["tag_synonyms"]))
             out["status"]="ok"
