@@ -71,6 +71,29 @@ DEFAULT_PROMPT = (
     "standard_tags (Liste), additional_tags (Liste) und reason (kurzer Satz)."
 )
 
+OUTPUT_CONTRACT = (
+    "TECHNISCHES AUSGABEFORMAT (verbindlich): "
+    "Antworte ausschließlich mit einem gültigen JSON-Objekt. "
+    "standard_tags ist immer ein Array von Strings (auch bei genau einem Tag oder keinem Treffer). "
+    "additional_tags ist immer ein Array von Strings (auch bei keinem Treffer). "
+    "reason ist immer ein String. "
+    "Keine weiteren Felder, keine Markdown-Codeblöcke und kein Text außerhalb des JSON. "
+    'Beispiel: {"standard_tags":["Anbetung"],"additional_tags":[],"reason":"Im Text belegt."}'
+)
+
+def build_instruction(prompt, vocabulary, count, synonyms=None):
+    """Stable output contract first, editable classification rules second."""
+    return (
+        OUTPUT_CONTRACT + "\n\n"
+        + "KLASSIFIZIERUNGSREGELN:\n" + (prompt or DEFAULT_PROMPT)
+        + "\n\nZulässige Standard-Tags (nur diese Werte): " + ", ".join(vocabulary)
+        + f"\nMaximal {count} zusätzliche freie deutsche Suchbegriffe."
+        + ("\nWenn null, gib ein leeres additional_tags-Array zurück." if count == 0 else "")
+        + "\nSynonyme der Standard-Tags: "
+        + json.dumps({k: v for k, v in (synonyms or {}).items() if k in vocabulary}, ensure_ascii=False)
+        + "\nIst ein Standard-Tag ausgewählt, gib seine Synonyme NICHT als zusätzliche Tags zurück."
+    )
+
 def normalize_tag(value):
     return " ".join(unicodedata.normalize("NFKC", value).casefold().split())
 
@@ -84,15 +107,7 @@ def classify(event, api_key, model, allowed_tags=None, additional_tags=True,
              prompt=None, temperature=0.1, max_additional_tags=8, usage_sink=None, synonyms=None):
     vocabulary = allowed_tags if allowed_tags is not None else STANDARD_TAGS
     count = max(0, min(8, max_additional_tags if additional_tags else 0))
-    instruction = (
-        (prompt or DEFAULT_PROMPT) + "\n\n"
-        + "Zulässige Standard-Tags (nur diese Werte): " + ", ".join(vocabulary)
-        + f"\nMaximal {count} zusätzliche freie deutsche Suchbegriffe."
-        + ("\nWenn null, gib ein leeres additional_tags-Array zurück." if count == 0 else "")
-        + "\nSynonyme der Standard-Tags: " + json.dumps({k:v for k,v in (synonyms or {}).items() if k in vocabulary}, ensure_ascii=False)
-        + "\nIst ein Standard-Tag ausgewählt, gib seine Synonyme NICHT als zusätzliche Tags zurück."
-        + "\nDie Antwort muss ein JSON-Objekt mit standard_tags, additional_tags, reason sein."
-    )
+    instruction = build_instruction(prompt, vocabulary, count, synonyms)
     payload = {
         "systemInstruction": {"parts": [{"text": instruction}]},
         "contents": [{"parts": [{"text": json.dumps(event, ensure_ascii=False)}]}],

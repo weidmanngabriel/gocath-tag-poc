@@ -8,20 +8,14 @@ from pathlib import Path
 import requests
 from .scrape import fetch_events
 from .config import settings
-from .classify import DEFAULT_PROMPT, clean, filter_duplicate_synonyms
+from .classify import build_instruction, clean, filter_duplicate_synonyms
 
 GEMINI_MODEL = "gemini-3.5-flash-lite"
 GROQ_MODEL = "openai/gpt-oss-20b"
 
 def instruction(config):
-    tags = config["tags"]
     count = config["max_additional_tags"] if config["additional_tags_enabled"] else 0
-    return ((config["gemini_prompt"] or DEFAULT_PROMPT) + "\n\n"
-        + "Zulässige Standard-Tags (nur diese Werte): " + ", ".join(tags)
-        + "\nMaximal " + str(count) + " zusätzliche freie deutsche Suchbegriffe."
-        + "\nSynonyme der Standard-Tags: " + json.dumps(config["tag_synonyms"], ensure_ascii=False)
-        + "\nIst ein Standard-Tag ausgewählt, gib seine Synonyme NICHT als zusätzliche Tags zurück."
-        + "\nDie Antwort muss ein JSON-Objekt mit standard_tags, additional_tags, reason sein.")
+    return build_instruction(config["gemini_prompt"], config["tags"], count, config["tag_synonyms"])
 
 def invoke(provider, event, config, secrets):
     system = instruction(config)
