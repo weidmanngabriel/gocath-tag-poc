@@ -18,6 +18,7 @@ SHEET_ID = "1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w"
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--provider", choices=("groq", "gemini", "openai"), default=None)
     args = parser.parse_args()
     provider_key = None
     credentials = os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"]
@@ -35,7 +36,7 @@ def main():
         return
     start = datetime.now(timezone.utc).isoformat()
     run_id = next_run_id(doc)
-    provider = config["classifier_provider"]
+    provider = args.provider or config["classifier_provider"]
     if provider not in ("groq", "gemini", "openai"):
         raise ValueError("Unknown classifier_provider; expected groq, gemini or openai")
     t0 = time.perf_counter()
