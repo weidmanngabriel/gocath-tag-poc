@@ -105,3 +105,6 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
 .reason-dialog-head button{margin:0}
 .reason-dialog p{line-height:1.6;overflow-wrap:anywhere}
 @media(max-width:760px){.panel[data-view='results'] table{table-layout:auto;width:max-content;min-width:100%}.panel[data-view='results'] th:nth-child(3),.panel[data-view='results'] td:nth-child(3){min-width:230px}.panel[data-view='results'] th:nth-child(4),.panel[data-view='results'] td:nth-child(4){min-width:100px;max-width:120px}}
+
+/* The configuration field selector must respect provider-specific visibility. */
+.panel[data-view="config"] #settings > label[hidden]{display:none!important}

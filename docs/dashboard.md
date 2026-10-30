@@ -75,3 +75,9 @@ Mobil sind die ersten beiden Ergebnisspalten schmaler als bisher (Veranstaltung 
 ## Begründungen im Dialog
 
 In der Ergebnis-Tabelle zeigt die Spalte Begründung nur einen Button „Anzeigen“. Dieser öffnet einen Dialog mit der vollständigen KI-Begründung und einem Schließen-Button. Die zusätzlichen Tags erhalten dadurch mehr Tabellenbreite. Auf kleinen Displays bleibt die Tabelle horizontal scrollbar; Klassifizierung und gespeicherte Daten ändern sich nicht.
+
+## Anbieterabhängige Konfigurationsfelder
+
+Das Dropdown `classifier_provider` steuert die sichtbaren Einstellungen: Gemini-Modell nur bei Gemini, Temperatur bei Gemini und Groq, OpenAI Reasoning-Stufe nur bei OpenAI. Preisfelder erscheinen nur bei Anbietern, für die eine Kostenschätzung berechnet wird (Gemini und OpenAI). Gemeinsame Einstellungen und der bearbeitbare Klassifizierungs-Prompt gelten für alle Anbieter und bleiben sichtbar. Versteckte Felder bleiben beim Speichern unverändert im Sheet erhalten. Die technischen Schlüssel bleiben aus Kompatibilitätsgründen erhalten, obwohl die UI neutralere Bezeichnungen verwendet. Preisfelder sind derzeit anbieterübergreifend und müssen bei Anbieterwechsel kontrolliert werden.
+
+Konfigurationswerte mit festen Auswahlmöglichkeiten werden als Dropdown dargestellt: Ja/Nein-Schalter (`changed_only`, `additional_tags_enabled`), Temperatur-Presets, Anzahl zusätzlicher Tags (0–8), Anbieter, Quelle und OpenAI-Reasoning. Beliebige Limits, Preise, Modellkennungen und der Klassifizierungs-Prompt bleiben Freitextfelder. Der OpenAI-Provider wurde im PR-Branch mit einer echten Veranstaltung erfolgreich gegen das Test-Sheet validiert (Run-ID 21, Modell `gpt-6-luna`).

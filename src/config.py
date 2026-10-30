@@ -18,6 +18,7 @@ def settings(credentials_json, sheet_id):
         "changed_only":config.get("changed_only","false").lower()=="true",
         "additional_tags_enabled":config.get("additional_tags_enabled","true").lower()=="true",
         "gemini_prompt":config.get("gemini_prompt", "").strip(),
+        "openai_reasoning_effort":config.get("openai_reasoning_effort", "low").strip().lower() or "low",
         "gemini_model":config.get("gemini_model", "").strip(),
         "classifier_provider": config.get("classifier_provider", "groq").strip().lower(),
         "event_source": config.get("event_source", "gocath").strip().lower(),
