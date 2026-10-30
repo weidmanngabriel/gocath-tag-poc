@@ -23,25 +23,3 @@ jobs:
         working-directory: web
 
 
-  openai-live-smoke:
-    if: github.head_ref == 'feature/openai-luna-provider'
-    runs-on: ubuntu-latest
-    timeout-minutes: 12
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: pip install -r requirements.txt
-      - name: Classify one real event via OpenAI into test sheet
-        env:
-          GOCATH_OPENAI: ${{ secrets.GOCATH_OPENAI }}
-          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          GOOGLE_SHEET_ID: 1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w
-        run: python -m src.main --limit 1 --provider openai
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: openai-live-smoke
-          path: output/results.json
-          if-no-files-found: ignore
