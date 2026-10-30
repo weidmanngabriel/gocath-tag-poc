@@ -28,3 +28,7 @@ Im bestehenden manuellen GitHub-Actions-Workflow `tag-events.yml` mit dem Modus 
 ## Groq-Rate-Limits
 
 Der reguläre Groq-Runner behandelt HTTP 429 sowie vorübergehende 5xx-Fehler durch maximal vier Versuche pro Veranstaltung. Er berücksichtigt einen numerischen `Retry-After`-Header (begrenzt auf 120 Sekunden) und wartet ansonsten gestaffelt 10, 20, 30 Sekunden. HTTP-Fehler werden nur als Statuscode protokolliert; Secrets und Antworttexte nicht. Bei dauerhaftem Fehler bricht der Lauf ab und behauptet keine erfolgreiche Klassifizierung. Nicht erneut versuchen bei anderen HTTP-Fehlern.
+
+## Fehlerdiagnose Groq
+
+Wenn ein Groq-Classify-Aufruf fehlschlägt, schreibt der Runner `output/failed-groq-request-response.json` mit dem JSON-Request ohne Authorization-Header, dem erhaltenen Response-Inhalt, HTTP-Status und Fehlertyp. Der GitHub-Actions-Workflow lädt die Datei auch bei einem fehlgeschlagenen Job als `tag-results`-Artefakt hoch. API-Schlüssel werden vor dem Schreiben maskiert. Das Artefakt kann öffentliche Veranstaltungsdaten und den Klassifizierungs-Prompt enthalten und ist daher nur zur gezielten Fehleranalyse gedacht. Keine vollständigen Antworten oder Veranstaltungstexte in Actions-Logs ausgeben.
