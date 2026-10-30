@@ -98,7 +98,7 @@ def main():
             for name in usage_total:
                 usage_total[name] += usage.get(name, 0)
             input_cost = price(usage.get("input_tokens",0), config["cost_input_per_million_usd"])
-            output_cost = price(usage.get("output_tokens",0)+usage.get("thinking_tokens",0), config["cost_output_per_million_usd"])
+            output_cost = price(usage.get("output_tokens",0)+(usage.get("thinking_tokens",0) if provider == "gemini" else 0), config["cost_output_per_million_usd"])
             cost = round(input_cost + output_cost, 8) if provider in ("gemini", "openai") and input_cost is not None and output_cost is not None else ""
             results.append({"event": event, "tags": tags, "usage": usage, "estimated_cost_usd": cost, "status": "ok"})
         Path("output").mkdir(exist_ok=True)
