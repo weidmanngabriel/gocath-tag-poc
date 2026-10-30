@@ -75,3 +75,7 @@ Mobil sind die ersten beiden Ergebnisspalten schmaler als bisher (Veranstaltung 
 ## Begründungen im Dialog
 
 In der Ergebnis-Tabelle zeigt die Spalte Begründung nur einen Button „Anzeigen“. Dieser öffnet einen Dialog mit der vollständigen KI-Begründung und einem Schließen-Button. Die zusätzlichen Tags erhalten dadurch mehr Tabellenbreite. Auf kleinen Displays bleibt die Tabelle horizontal scrollbar; Klassifizierung und gespeicherte Daten ändern sich nicht.
+
+## Anbieterabhängige Konfigurationsfelder
+
+Das Dropdown `classifier_provider` steuert die sichtbaren Einstellungen: Gemini-Modell nur bei Gemini, Temperatur bei Gemini und Groq, OpenAI Reasoning-Stufe nur bei OpenAI. Preisfelder erscheinen nur bei Anbietern, für die eine Kostenschätzung berechnet wird (Gemini und OpenAI). Gemeinsame Einstellungen und der bearbeitbare Klassifizierungs-Prompt gelten für alle Anbieter und bleiben sichtbar. Versteckte Felder bleiben beim Speichern unverändert im Sheet erhalten. Die technischen Schlüssel bleiben aus Kompatibilitätsgründen erhalten, obwohl die UI neutralere Bezeichnungen verwendet. Preisfelder sind derzeit anbieterübergreifend und müssen bei Anbieterwechsel kontrolliert werden.
