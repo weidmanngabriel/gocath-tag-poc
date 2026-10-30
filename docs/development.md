@@ -32,3 +32,7 @@ Der reguläre Groq-Runner behandelt HTTP 429 sowie vorübergehende 5xx-Fehler du
 ## Fehlerdiagnose Groq
 
 Wenn ein Groq-Classify-Aufruf fehlschlägt, schreibt der Runner `output/failed-groq-request-response.json` mit dem JSON-Request ohne Authorization-Header, dem erhaltenen Response-Inhalt, HTTP-Status und Fehlertyp. Der GitHub-Actions-Workflow lädt die Datei auch bei einem fehlgeschlagenen Job als `tag-results`-Artefakt hoch. API-Schlüssel werden vor dem Schreiben maskiert. Das Artefakt kann öffentliche Veranstaltungsdaten und den Klassifizierungs-Prompt enthalten und ist daher nur zur gezielten Fehleranalyse gedacht. Keine vollständigen Antworten oder Veranstaltungstexte in Actions-Logs ausgeben.
+
+## Trennung von Ausgabeformat und Klassifizierungsregeln
+
+Die feste technische JSON-Ausgabevorgabe liegt in `src/classify.py` als `OUTPUT_CONTRACT` und steht am Anfang jeder Modell-Systemanweisung (Groq und Gemini). Die veränderlichen Klassifizierungsregeln werden weiterhin aus `Config.gemini_prompt` im Google Sheet gelesen und folgen erst danach; zulässige Tags, Synonyme und das Maximum zusätzlicher Tags werden dynamisch ergänzt. Der Veranstaltungstext wird getrennt als User-Nachricht bzw. Gemini-Content zuletzt übergeben. `standard_tags` und `additional_tags` müssen immer JSON-Arrays sein, `reason` ein String. Die feste Reihenfolge begünstigt einen gemeinsamen Prompt-Präfix, garantiert jedoch kein Provider-Caching oder Token-Rabatt. Der Schlüssel `gemini_prompt` gilt technisch für beide Anbieter.
