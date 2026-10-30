@@ -88,3 +88,20 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
  .panel[data-view="results"] th:nth-child(3),
  .panel[data-view="results"] td:nth-child(3){min-width:210px;max-width:300px}
 }
+
+/* Compact results with a reason dialog */
+.panel[data-view='results'] table{table-layout:fixed;width:100%}
+.panel[data-view='results'] th:nth-child(1){width:20%}
+.panel[data-view='results'] th:nth-child(2){width:17%}
+.panel[data-view='results'] th:nth-child(3){width:43%}
+.panel[data-view='results'] th:nth-child(4){width:10%}
+.panel[data-view='results'] th:nth-child(5){width:5%}
+.panel[data-view='results'] th:nth-child(6){width:5%}
+.reason-button{margin:0;padding:7px 10px}
+.reason-dialog{border:0;border-radius:14px;padding:24px;width:min(92vw,580px);max-height:80vh;overflow:auto}
+.reason-dialog::backdrop{background:rgba(0,0,0,.55)}
+.reason-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.reason-dialog-head h2{margin:0}
+.reason-dialog-head button{margin:0}
+.reason-dialog p{line-height:1.6;overflow-wrap:anywhere}
+@media(max-width:760px){.panel[data-view='results'] table{table-layout:auto;width:max-content;min-width:100%}.panel[data-view='results'] th:nth-child(3),.panel[data-view='results'] td:nth-child(3){min-width:230px}.panel[data-view='results'] th:nth-child(4),.panel[data-view='results'] td:nth-child(4){min-width:100px;max-width:120px}}
