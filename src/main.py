@@ -9,6 +9,7 @@ from .scrape import fetch_events
 from .regnum_scrape import fetch_events as fetch_regnum_events
 from .classify import classify, choose_model
 from .groq_compare import invoke as invoke_groq
+from .openai_classify import classify_openai, MODEL as OPENAI_MODEL
 from .config import settings, run_count, log_run, next_run_id, save_history
 from .sheets import publish
 
@@ -35,12 +36,15 @@ def main():
     start = datetime.now(timezone.utc).isoformat()
     run_id = next_run_id(doc)
     provider = config["classifier_provider"]
-    if provider not in ("groq", "gemini"):
-        raise ValueError("Unknown classifier_provider; expected groq or gemini")
+    if provider not in ("groq", "gemini", "openai"):
+        raise ValueError("Unknown classifier_provider; expected groq, gemini or openai")
     t0 = time.perf_counter()
     if provider == "groq":
         provider_key = os.environ["GROQ_API_KEY"]
         model = "openai/gpt-oss-20b"
+    elif provider == "openai":
+        provider_key = os.environ["GOCATH_OPENAI"]
+        model = OPENAI_MODEL
     else:
         provider_key = os.environ["GOCATH_GEMINI_CLASSIFIER_KEY"]
         model = choose_model(provider_key, config["gemini_model"] or os.environ.get("GEMINI_MODEL"))
@@ -85,6 +89,8 @@ def main():
                 tags = {k: response[k] for k in ("standard_tags", "additional_tags", "reason")}
                 usage.update({"input_tokens": response["input_tokens"], "output_tokens": response["output_tokens"], "thinking_tokens": 0,
                               "total_tokens": response["input_tokens"] + response["output_tokens"]})
+            elif provider == "openai":
+                tags = classify_openai(event, provider_key, config, usage_sink=usage)
             else:
                 tags = classify(event, provider_key, model, config["tags"], config["additional_tags_enabled"],
                                 config["gemini_prompt"], config["gemini_temperature"], config["max_additional_tags"], usage_sink=usage, synonyms=config["tag_synonyms"])
@@ -93,7 +99,7 @@ def main():
                 usage_total[name] += usage.get(name, 0)
             input_cost = price(usage.get("input_tokens",0), config["cost_input_per_million_usd"])
             output_cost = price(usage.get("output_tokens",0)+usage.get("thinking_tokens",0), config["cost_output_per_million_usd"])
-            cost = round(input_cost + output_cost, 8) if provider == "gemini" and input_cost is not None and output_cost is not None else ""
+            cost = round(input_cost + output_cost, 8) if provider in ("gemini", "openai") and input_cost is not None and output_cost is not None else ""
             results.append({"event": event, "tags": tags, "usage": usage, "estimated_cost_usd": cost, "status": "ok"})
         Path("output").mkdir(exist_ok=True)
         Path("output/results.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
