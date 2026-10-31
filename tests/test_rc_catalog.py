@@ -36,7 +36,7 @@ class CatalogTests(unittest.TestCase):
             calls.append(1)
             return {"criteria_scores":[{"id":"prayer","score":.9,"matched":True}]}
         sync(state,[event],classify)
-        original=state["events"]["rc-123"]["classification_config_revision"]
+        original=state["events"]["rc-123"]["classification"]["classification_config_revision"]
         publish_questions(state,{"criteria":[{**criterion,"label":"Gebetsveranstaltung","threshold":0.8,"category":"Inhalt"}]})
         self.assertEqual(state["active_questionnaire"]["semantic_revision"],original)
         self.assertEqual(sync(state,[event],classify,mode="reclassify")["classified"],0)
