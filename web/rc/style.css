@@ -165,3 +165,5 @@ a:hover{color:var(--rc-red-deep)}
 .card .match-extra[hidden]{display:none}
 .card .match-expand{font:inherit;color:#910803;background:#faf7f7;border:1px solid #e4dada;border-radius:6px;font-size:.78rem;font-weight:650;padding:3px 7px;line-height:1.35;cursor:pointer}
 .card .match-expand:focus-visible{outline:2px solid #c78282;outline-offset:2px}
+
+.match-empty{display:inline-flex;align-items:center;font-size:.78rem;line-height:1.35;padding:3px 7px;border-radius:7px;background:#f1f1f1;color:#626262;border:1px solid #dedede}
