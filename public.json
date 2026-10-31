@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T12:27:13.604933+00:00",
+  "generated_at": "2026-10-31T12:48:44.648285+00:00",
   "questionnaire": {
     "revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
     "criteria": [
@@ -595,16 +595,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5484,
+          "input_tokens": 5489,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5484
+          "total_tokens": 5489
         },
-        "estimated_cost_usd": 0.0005484
+        "estimated_cost_usd": 0.0005489
       },
       "inactive": false,
       "stale": false
@@ -932,16 +932,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5477,
+          "input_tokens": 5482,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5477
+          "total_tokens": 5482
         },
-        "estimated_cost_usd": 0.0005477
+        "estimated_cost_usd": 0.0005482
       },
       "inactive": false,
       "stale": false
@@ -1269,16 +1269,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5477,
+          "input_tokens": 5482,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5477
+          "total_tokens": 5482
         },
-        "estimated_cost_usd": 0.0005477
+        "estimated_cost_usd": 0.0005482
       },
       "inactive": false,
       "stale": false
@@ -1606,16 +1606,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5692,
+          "input_tokens": 5697,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5692
+          "total_tokens": 5697
         },
-        "estimated_cost_usd": 0.0005692
+        "estimated_cost_usd": 0.0005697
       },
       "inactive": false,
       "stale": false
@@ -1943,16 +1943,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5543,
+          "input_tokens": 5548,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5543
+          "total_tokens": 5548
         },
-        "estimated_cost_usd": 0.0005543
+        "estimated_cost_usd": 0.0005548
       },
       "inactive": false,
       "stale": false
@@ -2280,16 +2280,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:55:47.940100+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5572,
+          "input_tokens": 5577,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5572
+          "total_tokens": 5577
         },
-        "estimated_cost_usd": 0.0005572
+        "estimated_cost_usd": 0.0005577
       },
       "inactive": false,
       "stale": false
@@ -2618,16 +2618,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5665,
+          "input_tokens": 5670,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5665
+          "total_tokens": 5670
         },
-        "estimated_cost_usd": 0.0005665
+        "estimated_cost_usd": 0.000567
       },
       "inactive": false,
       "stale": false
@@ -2955,16 +2955,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5680,
+          "input_tokens": 5685,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5680
+          "total_tokens": 5685
         },
-        "estimated_cost_usd": 0.000568
+        "estimated_cost_usd": 0.0005685
       },
       "inactive": false,
       "stale": false
@@ -2992,11 +2992,11 @@
             "category": "Format",
             "label": "Gottesdienst / Heilige Messe",
             "type": "predicate",
-            "score": 0.02,
+            "score": 0.03,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.02
+              "probability": 0.03
             }
           },
           {
@@ -3016,11 +3016,11 @@
             "category": "Format",
             "label": "Gebetsveranstaltung",
             "type": "predicate",
-            "score": 0.15,
+            "score": 0.16,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.15
+              "probability": 0.16
             }
           },
           {
@@ -3028,11 +3028,11 @@
             "category": "Format",
             "label": "Vortrag",
             "type": "predicate",
-            "score": 0.04,
+            "score": 0.06,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.04
+              "probability": 0.06
             }
           },
           {
@@ -3040,11 +3040,11 @@
             "category": "Format",
             "label": "Workshop / Seminar",
             "type": "predicate",
-            "score": 0.14,
+            "score": 0.18,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.14
+              "probability": 0.18
             }
           },
           {
@@ -3064,11 +3064,11 @@
             "category": "Format",
             "label": "Exerzitien / Einkehr",
             "type": "predicate",
-            "score": 0.19,
+            "score": 0.25,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.19
+              "probability": 0.25
             }
           },
           {
@@ -3076,11 +3076,11 @@
             "category": "Format",
             "label": "Gemeinschaftstreffen",
             "type": "predicate",
-            "score": 0.17,
+            "score": 0.23,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.17
+              "probability": 0.23
             }
           },
           {
@@ -3088,11 +3088,11 @@
             "category": "Thema",
             "label": "Liturgie und Sakramente",
             "type": "predicate",
-            "score": 0.07,
+            "score": 0.05,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.07
+              "probability": 0.05
             }
           },
           {
@@ -3100,11 +3100,11 @@
             "category": "Thema",
             "label": "Gebet und Spiritualität",
             "type": "predicate",
-            "score": 0.97,
+            "score": 0.95,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.97
+              "probability": 0.95
             }
           },
           {
@@ -3112,11 +3112,11 @@
             "category": "Thema",
             "label": "Glaubensbildung",
             "type": "predicate",
-            "score": 0.71,
+            "score": 0.82,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.71
+              "probability": 0.82
             }
           },
           {
@@ -3124,11 +3124,11 @@
             "category": "Thema",
             "label": "Kirche und Mission",
             "type": "predicate",
-            "score": 0.94,
+            "score": 0.87,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.94
+              "probability": 0.87
             }
           },
           {
@@ -3136,11 +3136,11 @@
             "category": "Thema",
             "label": "Christliche Gemeinschaft",
             "type": "predicate",
-            "score": 0.91,
+            "score": 0.92,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.91
+              "probability": 0.92
             }
           },
           {
@@ -3148,11 +3148,11 @@
             "category": "Zielgruppe",
             "label": "Kinder",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.02,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.02
             }
           },
           {
@@ -3160,11 +3160,11 @@
             "category": "Zielgruppe",
             "label": "Jugendliche",
             "type": "predicate",
-            "score": 0.07,
+            "score": 0.05,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.07
+              "probability": 0.05
             }
           },
           {
@@ -3172,11 +3172,11 @@
             "category": "Zielgruppe",
             "label": "Junge Erwachsene",
             "type": "predicate",
-            "score": 0.75,
+            "score": 0.72,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.75
+              "probability": 0.72
             }
           },
           {
@@ -3184,11 +3184,11 @@
             "category": "Zielgruppe",
             "label": "Erwachsene",
             "type": "predicate",
-            "score": 0.97,
+            "score": 0.99,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.97
+              "probability": 0.99
             }
           },
           {
@@ -3208,11 +3208,11 @@
             "category": "Zielgruppe",
             "label": "Familien",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.03,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.03
             }
           },
           {
@@ -3244,11 +3244,11 @@
             "category": "Kontext",
             "label": "Katholischer Veranstalter",
             "type": "predicate",
-            "score": 0.02,
+            "score": 0.04,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.02
+              "probability": 0.04
             }
           },
           {
@@ -3256,11 +3256,11 @@
             "category": "Kontext",
             "label": "Kirchlicher Kontext",
             "type": "predicate",
-            "score": 0.75,
+            "score": 0.72,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.75
+              "probability": 0.72
             }
           },
           {
@@ -3289,20 +3289,20 @@
           }
         ],
         "relevance": {
-          "score": 0.97,
+          "score": 0.95,
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:43:10.945123+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5441,
+          "input_tokens": 5453,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5441
+          "total_tokens": 5453
         },
-        "estimated_cost_usd": 0.0005441
+        "estimated_cost_usd": 0.0005453
       },
       "inactive": false,
       "stale": false
@@ -3631,16 +3631,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5446,
+          "input_tokens": 5451,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5446
+          "total_tokens": 5451
         },
-        "estimated_cost_usd": 0.0005446
+        "estimated_cost_usd": 0.0005451
       },
       "inactive": false,
       "stale": false
@@ -3969,16 +3969,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5443,
+          "input_tokens": 5448,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5443
+          "total_tokens": 5448
         },
-        "estimated_cost_usd": 0.0005443
+        "estimated_cost_usd": 0.0005448
       },
       "inactive": false,
       "stale": false
@@ -4281,11 +4281,11 @@
             "category": "Zielgruppe",
             "label": "Speziell Paare oder Ehepaare",
             "type": "predicate",
-            "score": 0.95,
-            "matched": true,
+            "score": 0.06,
+            "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.95
+              "probability": 0.06
             }
           },
           {
@@ -4306,16 +4306,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5841,
+          "input_tokens": 5846,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5841
+          "total_tokens": 5846
         },
-        "estimated_cost_usd": 0.0005841
+        "estimated_cost_usd": 0.0005846
       },
       "inactive": false,
       "stale": false
@@ -4644,16 +4644,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5591,
+          "input_tokens": 5596,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5591
+          "total_tokens": 5596
         },
-        "estimated_cost_usd": 0.0005591
+        "estimated_cost_usd": 0.0005596
       },
       "inactive": false,
       "stale": false
@@ -4981,16 +4981,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5591,
+          "input_tokens": 5596,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5591
+          "total_tokens": 5596
         },
-        "estimated_cost_usd": 0.0005591
+        "estimated_cost_usd": 0.0005596
       },
       "inactive": false,
       "stale": false
@@ -5320,16 +5320,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:55:47.940100+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5727,
+          "input_tokens": 5732,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5727
+          "total_tokens": 5732
         },
-        "estimated_cost_usd": 0.0005727
+        "estimated_cost_usd": 0.0005732
       },
       "inactive": false,
       "stale": false
@@ -5657,16 +5657,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5528,
+          "input_tokens": 5533,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5528
+          "total_tokens": 5533
         },
-        "estimated_cost_usd": 0.0005528
+        "estimated_cost_usd": 0.0005533
       },
       "inactive": false,
       "stale": false
@@ -5994,16 +5994,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5542,
+          "input_tokens": 5547,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5542
+          "total_tokens": 5547
         },
-        "estimated_cost_usd": 0.0005542
+        "estimated_cost_usd": 0.0005547
       },
       "inactive": false,
       "stale": false
@@ -6329,16 +6329,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5472,
+          "input_tokens": 5477,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5472
+          "total_tokens": 5477
         },
-        "estimated_cost_usd": 0.0005472
+        "estimated_cost_usd": 0.0005477
       },
       "inactive": false,
       "stale": false
@@ -6666,16 +6666,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5437,
+          "input_tokens": 5442,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5437
+          "total_tokens": 5442
         },
-        "estimated_cost_usd": 0.0005437
+        "estimated_cost_usd": 0.0005442
       },
       "inactive": false,
       "stale": false
@@ -7001,16 +7001,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5461,
+          "input_tokens": 5466,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5461
+          "total_tokens": 5466
         },
-        "estimated_cost_usd": 0.0005461
+        "estimated_cost_usd": 0.0005466
       },
       "inactive": false,
       "stale": false
@@ -7338,16 +7338,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5475,
+          "input_tokens": 5480,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5475
+          "total_tokens": 5480
         },
-        "estimated_cost_usd": 0.0005475
+        "estimated_cost_usd": 0.000548
       },
       "inactive": false,
       "stale": false
@@ -7675,16 +7675,16 @@
           "status": "review"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:55:47.940100+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5469,
+          "input_tokens": 5474,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5469
+          "total_tokens": 5474
         },
-        "estimated_cost_usd": 0.0005469
+        "estimated_cost_usd": 0.0005474
       },
       "inactive": false,
       "stale": false
@@ -8012,16 +8012,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5479,
+          "input_tokens": 5484,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5479
+          "total_tokens": 5484
         },
-        "estimated_cost_usd": 0.0005479
+        "estimated_cost_usd": 0.0005484
       },
       "inactive": false,
       "stale": false
@@ -8349,16 +8349,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5503,
+          "input_tokens": 5508,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5503
+          "total_tokens": 5508
         },
-        "estimated_cost_usd": 0.0005503
+        "estimated_cost_usd": 0.0005508
       },
       "inactive": false,
       "stale": false
@@ -8686,16 +8686,16 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5486,
+          "input_tokens": 5491,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5486
+          "total_tokens": 5491
         },
-        "estimated_cost_usd": 0.0005486
+        "estimated_cost_usd": 0.0005491
       },
       "inactive": false,
       "stale": false

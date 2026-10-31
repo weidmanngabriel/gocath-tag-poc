@@ -1043,11 +1043,11 @@
             "category": "Format",
             "label": "Gottesdienst / Heilige Messe",
             "type": "predicate",
-            "score": 0.02,
+            "score": 0.03,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.02
+              "probability": 0.03
             }
           },
           {
@@ -1067,11 +1067,11 @@
             "category": "Format",
             "label": "Gebetsveranstaltung",
             "type": "predicate",
-            "score": 0.15,
+            "score": 0.16,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.15
+              "probability": 0.16
             }
           },
           {
@@ -1079,11 +1079,11 @@
             "category": "Format",
             "label": "Vortrag",
             "type": "predicate",
-            "score": 0.04,
+            "score": 0.06,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.04
+              "probability": 0.06
             }
           },
           {
@@ -1091,11 +1091,11 @@
             "category": "Format",
             "label": "Workshop / Seminar",
             "type": "predicate",
-            "score": 0.14,
+            "score": 0.18,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.14
+              "probability": 0.18
             }
           },
           {
@@ -1115,11 +1115,11 @@
             "category": "Format",
             "label": "Exerzitien / Einkehr",
             "type": "predicate",
-            "score": 0.19,
+            "score": 0.25,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.19
+              "probability": 0.25
             }
           },
           {
@@ -1127,11 +1127,11 @@
             "category": "Format",
             "label": "Gemeinschaftstreffen",
             "type": "predicate",
-            "score": 0.17,
+            "score": 0.23,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.17
+              "probability": 0.23
             }
           },
           {
@@ -1139,11 +1139,11 @@
             "category": "Thema",
             "label": "Liturgie und Sakramente",
             "type": "predicate",
-            "score": 0.07,
+            "score": 0.05,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.07
+              "probability": 0.05
             }
           },
           {
@@ -1151,11 +1151,11 @@
             "category": "Thema",
             "label": "Gebet und Spiritualität",
             "type": "predicate",
-            "score": 0.97,
+            "score": 0.95,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.97
+              "probability": 0.95
             }
           },
           {
@@ -1163,11 +1163,11 @@
             "category": "Thema",
             "label": "Glaubensbildung",
             "type": "predicate",
-            "score": 0.71,
+            "score": 0.82,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.71
+              "probability": 0.82
             }
           },
           {
@@ -1175,11 +1175,11 @@
             "category": "Thema",
             "label": "Kirche und Mission",
             "type": "predicate",
-            "score": 0.94,
+            "score": 0.87,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.94
+              "probability": 0.87
             }
           },
           {
@@ -1187,11 +1187,11 @@
             "category": "Thema",
             "label": "Christliche Gemeinschaft",
             "type": "predicate",
-            "score": 0.91,
+            "score": 0.92,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.91
+              "probability": 0.92
             }
           },
           {
@@ -1199,11 +1199,11 @@
             "category": "Zielgruppe",
             "label": "Kinder",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.02,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.02
             }
           },
           {
@@ -1211,11 +1211,11 @@
             "category": "Zielgruppe",
             "label": "Jugendliche",
             "type": "predicate",
-            "score": 0.07,
+            "score": 0.05,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.07
+              "probability": 0.05
             }
           },
           {
@@ -1223,11 +1223,11 @@
             "category": "Zielgruppe",
             "label": "Junge Erwachsene",
             "type": "predicate",
-            "score": 0.75,
+            "score": 0.72,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.75
+              "probability": 0.72
             }
           },
           {
@@ -1235,11 +1235,11 @@
             "category": "Zielgruppe",
             "label": "Erwachsene",
             "type": "predicate",
-            "score": 0.97,
+            "score": 0.99,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.97
+              "probability": 0.99
             }
           },
           {
@@ -1259,11 +1259,11 @@
             "category": "Zielgruppe",
             "label": "Familien",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.03,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.03
             }
           },
           {
@@ -1295,11 +1295,11 @@
             "category": "Kontext",
             "label": "Katholischer Veranstalter",
             "type": "predicate",
-            "score": 0.02,
+            "score": 0.04,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.02
+              "probability": 0.04
             }
           },
           {
@@ -1307,11 +1307,11 @@
             "category": "Kontext",
             "label": "Kirchlicher Kontext",
             "type": "predicate",
-            "score": 0.75,
+            "score": 0.72,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.75
+              "probability": 0.72
             }
           },
           {
@@ -1340,22 +1340,24 @@
           }
         ],
         "relevance": {
-          "score": 0.97,
+          "score": 0.95,
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:43:10.945123+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5441,
+          "input_tokens": 5453,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5441
+          "total_tokens": 5453
         },
-        "estimated_cost_usd": 0.0005441
+        "estimated_cost_usd": 0.0005453
       },
-      "classification_hash": "049dca8c102edf13db0c71235355a1ed54c96d2806ac3c43af34a2c225240218"
+      "classification_hash": "049dca8c102edf13db0c71235355a1ed54c96d2806ac3c43af34a2c225240218",
+      "last_attempt_hash": "049dca8c102edf13db0c71235355a1ed54c96d2806ac3c43af34a2c225240218",
+      "classification_status": "success"
     },
     "rc-38014": {
       "event": {
@@ -3712,18 +3714,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5475,
+          "input_tokens": 5480,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5475
+          "total_tokens": 5480
         },
-        "estimated_cost_usd": 0.0005475
+        "estimated_cost_usd": 0.000548
       },
-      "classification_hash": "0c55c35ab1da8a5a284e8a386ace64f0b29597ee1b14fcdf0488f591dbd72d8e"
+      "classification_hash": "0c55c35ab1da8a5a284e8a386ace64f0b29597ee1b14fcdf0488f591dbd72d8e",
+      "last_attempt_hash": "0c55c35ab1da8a5a284e8a386ace64f0b29597ee1b14fcdf0488f591dbd72d8e",
+      "classification_status": "success"
     },
     "rc-37958": {
       "event": {
@@ -4051,18 +4055,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5503,
+          "input_tokens": 5508,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5503
+          "total_tokens": 5508
         },
-        "estimated_cost_usd": 0.0005503
+        "estimated_cost_usd": 0.0005508
       },
-      "classification_hash": "63b17581a28829e79c1e7de2c34b265dd9d84cc91477024590d3c605fba80d50"
+      "classification_hash": "63b17581a28829e79c1e7de2c34b265dd9d84cc91477024590d3c605fba80d50",
+      "last_attempt_hash": "63b17581a28829e79c1e7de2c34b265dd9d84cc91477024590d3c605fba80d50",
+      "classification_status": "success"
     },
     "rc-38417": {
       "event": {
@@ -5067,18 +5073,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5665,
+          "input_tokens": 5670,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5665
+          "total_tokens": 5670
         },
-        "estimated_cost_usd": 0.0005665
+        "estimated_cost_usd": 0.000567
       },
-      "classification_hash": "9558bbd9c19ef899f0be4f0560b13f77abc23ade17a9fcd3dfe4743d6a041e93"
+      "classification_hash": "9558bbd9c19ef899f0be4f0560b13f77abc23ade17a9fcd3dfe4743d6a041e93",
+      "last_attempt_hash": "9558bbd9c19ef899f0be4f0560b13f77abc23ade17a9fcd3dfe4743d6a041e93",
+      "classification_status": "success"
     },
     "rc-36368": {
       "event": {
@@ -5407,18 +5415,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5484,
+          "input_tokens": 5489,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5484
+          "total_tokens": 5489
         },
-        "estimated_cost_usd": 0.0005484
+        "estimated_cost_usd": 0.0005489
       },
-      "classification_hash": "faaedca369b54fd5e693f85212658c526b886213ee578095a1706505f27f864c"
+      "classification_hash": "faaedca369b54fd5e693f85212658c526b886213ee578095a1706505f27f864c",
+      "last_attempt_hash": "faaedca369b54fd5e693f85212658c526b886213ee578095a1706505f27f864c",
+      "classification_status": "success"
     },
     "rc-38428": {
       "event": {
@@ -6736,11 +6746,11 @@
             "category": "Zielgruppe",
             "label": "Speziell Paare oder Ehepaare",
             "type": "predicate",
-            "score": 0.95,
-            "matched": true,
+            "score": 0.06,
+            "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.95
+              "probability": 0.06
             }
           },
           {
@@ -6761,18 +6771,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5841,
+          "input_tokens": 5846,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5841
+          "total_tokens": 5846
         },
-        "estimated_cost_usd": 0.0005841
+        "estimated_cost_usd": 0.0005846
       },
-      "classification_hash": "1aec8b6c90c20d4f4d35c8309cc1536b8cdf88e49f5f4f0d409260dab455ce3c"
+      "classification_hash": "1aec8b6c90c20d4f4d35c8309cc1536b8cdf88e49f5f4f0d409260dab455ce3c",
+      "last_attempt_hash": "1aec8b6c90c20d4f4d35c8309cc1536b8cdf88e49f5f4f0d409260dab455ce3c",
+      "classification_status": "success"
     },
     "rc-38133": {
       "event": {
@@ -11175,18 +11187,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5692,
+          "input_tokens": 5697,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5692
+          "total_tokens": 5697
         },
-        "estimated_cost_usd": 0.0005692
+        "estimated_cost_usd": 0.0005697
       },
-      "classification_hash": "1a6d391a49fc6826fb4ad37648106ae7ce7dcfc978ae2a7eaf6364e535a18615"
+      "classification_hash": "1a6d391a49fc6826fb4ad37648106ae7ce7dcfc978ae2a7eaf6364e535a18615",
+      "last_attempt_hash": "1a6d391a49fc6826fb4ad37648106ae7ce7dcfc978ae2a7eaf6364e535a18615",
+      "classification_status": "success"
     },
     "rc-38009": {
       "event": {
@@ -12529,18 +12543,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5543,
+          "input_tokens": 5548,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5543
+          "total_tokens": 5548
         },
-        "estimated_cost_usd": 0.0005543
+        "estimated_cost_usd": 0.0005548
       },
-      "classification_hash": "8618782c841f80daec0f732aa2c6a139ca8edb6c1f65b56bd5e01e290b282bfa"
+      "classification_hash": "8618782c841f80daec0f732aa2c6a139ca8edb6c1f65b56bd5e01e290b282bfa",
+      "last_attempt_hash": "8618782c841f80daec0f732aa2c6a139ca8edb6c1f65b56bd5e01e290b282bfa",
+      "classification_status": "success"
     },
     "rc-38113": {
       "event": {
@@ -13207,18 +13223,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5680,
+          "input_tokens": 5685,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5680
+          "total_tokens": 5685
         },
-        "estimated_cost_usd": 0.000568
+        "estimated_cost_usd": 0.0005685
       },
-      "classification_hash": "15eeefebd48c5fd96f718720de4a242986ac5edb2f9a397b0d48f97dbc901655"
+      "classification_hash": "15eeefebd48c5fd96f718720de4a242986ac5edb2f9a397b0d48f97dbc901655",
+      "last_attempt_hash": "15eeefebd48c5fd96f718720de4a242986ac5edb2f9a397b0d48f97dbc901655",
+      "classification_status": "success"
     },
     "rc-37788": {
       "event": {
@@ -13547,18 +13565,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5446,
+          "input_tokens": 5451,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5446
+          "total_tokens": 5451
         },
-        "estimated_cost_usd": 0.0005446
+        "estimated_cost_usd": 0.0005451
       },
-      "classification_hash": "598b182d22a815e58def034311a9135cefa29c8caa2826017927e8edb051ae96"
+      "classification_hash": "598b182d22a815e58def034311a9135cefa29c8caa2826017927e8edb051ae96",
+      "last_attempt_hash": "598b182d22a815e58def034311a9135cefa29c8caa2826017927e8edb051ae96",
+      "classification_status": "success"
     },
     "rc-38230": {
       "event": {
@@ -14226,18 +14246,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5591,
+          "input_tokens": 5596,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5591
+          "total_tokens": 5596
         },
-        "estimated_cost_usd": 0.0005591
+        "estimated_cost_usd": 0.0005596
       },
-      "classification_hash": "fbc5fdc5d819bd350d7bbb86e20db70f4e001350d9ff7b4d829997eff9b28270"
+      "classification_hash": "fbc5fdc5d819bd350d7bbb86e20db70f4e001350d9ff7b4d829997eff9b28270",
+      "last_attempt_hash": "fbc5fdc5d819bd350d7bbb86e20db70f4e001350d9ff7b4d829997eff9b28270",
+      "classification_status": "success"
     },
     "rc-38427": {
       "event": {
@@ -15244,18 +15266,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5477,
+          "input_tokens": 5482,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5477
+          "total_tokens": 5482
         },
-        "estimated_cost_usd": 0.0005477
+        "estimated_cost_usd": 0.0005482
       },
-      "classification_hash": "fbeeefd902388e02cfad2488ff15983a25749a095c80c586105aaa5e47742830"
+      "classification_hash": "fbeeefd902388e02cfad2488ff15983a25749a095c80c586105aaa5e47742830",
+      "last_attempt_hash": "fbeeefd902388e02cfad2488ff15983a25749a095c80c586105aaa5e47742830",
+      "classification_status": "success"
     },
     "rc-38124": {
       "event": {
@@ -16600,18 +16624,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5542,
+          "input_tokens": 5547,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5542
+          "total_tokens": 5547
         },
-        "estimated_cost_usd": 0.0005542
+        "estimated_cost_usd": 0.0005547
       },
-      "classification_hash": "56807bf52e7772e36b111de9ec7f6c04293bc8ab0b6843cd77284962402e84fb"
+      "classification_hash": "56807bf52e7772e36b111de9ec7f6c04293bc8ab0b6843cd77284962402e84fb",
+      "last_attempt_hash": "56807bf52e7772e36b111de9ec7f6c04293bc8ab0b6843cd77284962402e84fb",
+      "classification_status": "success"
     },
     "rc-37878": {
       "event": {
@@ -16939,18 +16965,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5528,
+          "input_tokens": 5533,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5528
+          "total_tokens": 5533
         },
-        "estimated_cost_usd": 0.0005528
+        "estimated_cost_usd": 0.0005533
       },
-      "classification_hash": "87ba177e52f34b29c144f9c177485bff637dad44bad334380fea971714190bc7"
+      "classification_hash": "87ba177e52f34b29c144f9c177485bff637dad44bad334380fea971714190bc7",
+      "last_attempt_hash": "87ba177e52f34b29c144f9c177485bff637dad44bad334380fea971714190bc7",
+      "classification_status": "success"
     },
     "rc-37789": {
       "event": {
@@ -17279,18 +17307,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5443,
+          "input_tokens": 5448,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5443
+          "total_tokens": 5448
         },
-        "estimated_cost_usd": 0.0005443
+        "estimated_cost_usd": 0.0005448
       },
-      "classification_hash": "877409076fee4f270031e646faf2783d66145ddac8901d4b463057b2fd44e22b"
+      "classification_hash": "877409076fee4f270031e646faf2783d66145ddac8901d4b463057b2fd44e22b",
+      "last_attempt_hash": "877409076fee4f270031e646faf2783d66145ddac8901d4b463057b2fd44e22b",
+      "classification_status": "success"
     },
     "rc-38059": {
       "event": {
@@ -18633,18 +18663,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5477,
+          "input_tokens": 5482,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5477
+          "total_tokens": 5482
         },
-        "estimated_cost_usd": 0.0005477
+        "estimated_cost_usd": 0.0005482
       },
-      "classification_hash": "a70543497070638b269406da14dd91af9a4ab0ecd89eb40731cf9424872b4be1"
+      "classification_hash": "a70543497070638b269406da14dd91af9a4ab0ecd89eb40731cf9424872b4be1",
+      "last_attempt_hash": "a70543497070638b269406da14dd91af9a4ab0ecd89eb40731cf9424872b4be1",
+      "classification_status": "success"
     },
     "rc-38110": {
       "event": {
@@ -19311,18 +19343,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5479,
+          "input_tokens": 5484,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5479
+          "total_tokens": 5484
         },
-        "estimated_cost_usd": 0.0005479
+        "estimated_cost_usd": 0.0005484
       },
-      "classification_hash": "f396d32d091724e09a5cc21c0a8c80dad0a31ea4f50bd6a378e80ba34ae5370e"
+      "classification_hash": "f396d32d091724e09a5cc21c0a8c80dad0a31ea4f50bd6a378e80ba34ae5370e",
+      "last_attempt_hash": "f396d32d091724e09a5cc21c0a8c80dad0a31ea4f50bd6a378e80ba34ae5370e",
+      "classification_status": "success"
     },
     "rc-38212": {
       "event": {
@@ -19989,18 +20023,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5486,
+          "input_tokens": 5491,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5486
+          "total_tokens": 5491
         },
-        "estimated_cost_usd": 0.0005486
+        "estimated_cost_usd": 0.0005491
       },
-      "classification_hash": "71433c6943574821457ad22ce777a40c3cbd2c7b646475182da74073e489d2cb"
+      "classification_hash": "71433c6943574821457ad22ce777a40c3cbd2c7b646475182da74073e489d2cb",
+      "last_attempt_hash": "71433c6943574821457ad22ce777a40c3cbd2c7b646475182da74073e489d2cb",
+      "classification_status": "success"
     },
     "rc-38103": {
       "event": {
@@ -23036,18 +23072,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5472,
+          "input_tokens": 5477,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5472
+          "total_tokens": 5477
         },
-        "estimated_cost_usd": 0.0005472
+        "estimated_cost_usd": 0.0005477
       },
-      "classification_hash": "f4c65ed0939bfe89e4c4ba08ec2143a8daa103775350641f0db5af1e2b783a40"
+      "classification_hash": "f4c65ed0939bfe89e4c4ba08ec2143a8daa103775350641f0db5af1e2b783a40",
+      "last_attempt_hash": "f4c65ed0939bfe89e4c4ba08ec2143a8daa103775350641f0db5af1e2b783a40",
+      "classification_status": "success"
     },
     "rc-38234": {
       "event": {
@@ -24395,18 +24433,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5591,
+          "input_tokens": 5596,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5591
+          "total_tokens": 5596
         },
-        "estimated_cost_usd": 0.0005591
+        "estimated_cost_usd": 0.0005596
       },
-      "classification_hash": "fa4fe7448dcba55412c2e6500676ec4d36911ef14afe49e52d9049424a9355cf"
+      "classification_hash": "fa4fe7448dcba55412c2e6500676ec4d36911ef14afe49e52d9049424a9355cf",
+      "last_attempt_hash": "fa4fe7448dcba55412c2e6500676ec4d36911ef14afe49e52d9049424a9355cf",
+      "classification_status": "success"
     },
     "rc-38060": {
       "event": {
@@ -29137,18 +29177,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5437,
+          "input_tokens": 5442,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5437
+          "total_tokens": 5442
         },
-        "estimated_cost_usd": 0.0005437
+        "estimated_cost_usd": 0.0005442
       },
-      "classification_hash": "220687970d0853a3140ba7219b6a47e320f6b4eb6e591bbd6dd07315bc562964"
+      "classification_hash": "220687970d0853a3140ba7219b6a47e320f6b4eb6e591bbd6dd07315bc562964",
+      "last_attempt_hash": "220687970d0853a3140ba7219b6a47e320f6b4eb6e591bbd6dd07315bc562964",
+      "classification_status": "success"
     },
     "rc-38243": {
       "event": {
@@ -29813,18 +29855,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:53:52.861274+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5461,
+          "input_tokens": 5466,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5461
+          "total_tokens": 5466
         },
-        "estimated_cost_usd": 0.0005461
+        "estimated_cost_usd": 0.0005466
       },
-      "classification_hash": "c5e528e615df2635d07fc72638faa8dc64a54cc0be0add7ffc3f610a9bf137c4"
+      "classification_hash": "c5e528e615df2635d07fc72638faa8dc64a54cc0be0add7ffc3f610a9bf137c4",
+      "last_attempt_hash": "c5e528e615df2635d07fc72638faa8dc64a54cc0be0add7ffc3f610a9bf137c4",
+      "classification_status": "success"
     },
     "rc-37962": {
       "event": {
@@ -35939,18 +35983,20 @@
           "status": "review"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:55:47.940100+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5469,
+          "input_tokens": 5474,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5469
+          "total_tokens": 5474
         },
-        "estimated_cost_usd": 0.0005469
+        "estimated_cost_usd": 0.0005474
       },
-      "classification_hash": "2697bd9d55005de8992d855e357a4e5c02bbd344f7016d8dfcf2063c92c9dce4"
+      "classification_hash": "2697bd9d55005de8992d855e357a4e5c02bbd344f7016d8dfcf2063c92c9dce4",
+      "last_attempt_hash": "2697bd9d55005de8992d855e357a4e5c02bbd344f7016d8dfcf2063c92c9dce4",
+      "classification_status": "success"
     },
     "rc-38123": {
       "event": {
@@ -39332,18 +39378,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:55:47.940100+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5727,
+          "input_tokens": 5732,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5727
+          "total_tokens": 5732
         },
-        "estimated_cost_usd": 0.0005727
+        "estimated_cost_usd": 0.0005732
       },
-      "classification_hash": "55cac538c0e3bf175c1646df73b05fb1cccc62c05dab9de4f61cb9d6c5ed2a03"
+      "classification_hash": "55cac538c0e3bf175c1646df73b05fb1cccc62c05dab9de4f61cb9d6c5ed2a03",
+      "last_attempt_hash": "55cac538c0e3bf175c1646df73b05fb1cccc62c05dab9de4f61cb9d6c5ed2a03",
+      "classification_status": "success"
     },
     "rc-38118": {
       "event": {
@@ -43058,18 +43106,20 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T08:55:47.940100+00:00",
-        "questionnaire_revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+        "classified_at": "2026-10-31T12:48:44.648285+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
         "usage": {
-          "input_tokens": 5572,
+          "input_tokens": 5577,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
-          "total_tokens": 5572
+          "total_tokens": 5577
         },
-        "estimated_cost_usd": 0.0005572
+        "estimated_cost_usd": 0.0005577
       },
-      "classification_hash": "0a00651f0fa3322539b954805ecbc0ec758098ede02239d7275561721dfa2c1b"
+      "classification_hash": "0a00651f0fa3322539b954805ecbc0ec758098ede02239d7275561721dfa2c1b",
+      "last_attempt_hash": "0a00651f0fa3322539b954805ecbc0ec758098ede02239d7275561721dfa2c1b",
+      "classification_status": "success"
     },
     "rc-38275": {
       "event": {
@@ -43679,21 +43729,123 @@
     ],
     "published_at": "2026-10-31T11:05:00.528163+00:00"
   },
-  "campaign": null,
-  "last_sync_at": "2026-10-31T12:27:13.604933+00:00",
+  "campaign": {
+    "revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
+    "started_at": "2026-10-31T12:48:44.647597+00:00",
+    "pending": [
+      "rc-37962",
+      "rc-37977",
+      "rc-37980",
+      "rc-37999",
+      "rc-38000",
+      "rc-38001",
+      "rc-38002",
+      "rc-38003",
+      "rc-38009",
+      "rc-38012",
+      "rc-38013",
+      "rc-38014",
+      "rc-38052",
+      "rc-38054",
+      "rc-38059",
+      "rc-38060",
+      "rc-38062",
+      "rc-38067",
+      "rc-38068",
+      "rc-38069",
+      "rc-38070",
+      "rc-38071",
+      "rc-38073",
+      "rc-38074",
+      "rc-38075",
+      "rc-38080",
+      "rc-38101",
+      "rc-38103",
+      "rc-38105",
+      "rc-38106",
+      "rc-38107",
+      "rc-38108",
+      "rc-38109",
+      "rc-38110",
+      "rc-38112",
+      "rc-38113",
+      "rc-38114",
+      "rc-38115",
+      "rc-38117",
+      "rc-38118",
+      "rc-38119",
+      "rc-38121",
+      "rc-38122",
+      "rc-38123",
+      "rc-38124",
+      "rc-38126",
+      "rc-38127",
+      "rc-38128",
+      "rc-38129",
+      "rc-38130",
+      "rc-38131",
+      "rc-38132",
+      "rc-38133",
+      "rc-38134",
+      "rc-38135",
+      "rc-38137",
+      "rc-38139",
+      "rc-38140",
+      "rc-38141",
+      "rc-38142",
+      "rc-38169",
+      "rc-38170",
+      "rc-38194",
+      "rc-38212",
+      "rc-38214",
+      "rc-38218",
+      "rc-38219",
+      "rc-38220",
+      "rc-38224",
+      "rc-38229",
+      "rc-38230",
+      "rc-38231",
+      "rc-38232",
+      "rc-38234",
+      "rc-38235",
+      "rc-38239",
+      "rc-38240",
+      "rc-38241",
+      "rc-38242",
+      "rc-38243",
+      "rc-38244",
+      "rc-38245",
+      "rc-38247",
+      "rc-38258",
+      "rc-38259",
+      "rc-38260",
+      "rc-38271",
+      "rc-38273",
+      "rc-38274",
+      "rc-38275",
+      "rc-38276",
+      "rc-38277",
+      "rc-38346",
+      "rc-38412",
+      "rc-38417",
+      "rc-38418",
+      "rc-38419",
+      "rc-38420",
+      "rc-38422",
+      "rc-38423",
+      "rc-38425",
+      "rc-38426",
+      "rc-38427",
+      "rc-38428"
+    ]
+  },
+  "last_sync_at": "2026-10-31T12:48:44.648285+00:00",
   "last_run": {
-    "mode": "delta",
+    "mode": "continue",
     "source_count": 129,
-    "queued": 1,
-    "classified": 0,
-    "failures": [
-      {
-        "id": "rc-38107",
-        "type": "ValueError",
-        "reason": "Decisions answer type mismatch for context_catholic: expected predicate, got 'refusal'",
-        "retry_on_change_only": true
-      }
-    ],
-    "remaining_campaign": 0
+    "queued": 129,
+    "classified": 25,
+    "failures": [],
+    "remaining_campaign": 104
   }
 }
