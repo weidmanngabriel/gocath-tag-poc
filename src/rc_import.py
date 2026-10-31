@@ -36,7 +36,7 @@ def event_container(anchor):
         if node.name not in ("div","article","li","section"):continue
         text=node.get_text(" ",strip=True)
         if not 100<=len(text)<=14000:continue
-        count=sum(bool(url_id(urljoin(LIST_URL,a.get("href","")))) for a in node.select("a[href]"))
+        count=len({url_id(urljoin(LIST_URL,a.get("href",""))) for a in node.select("a[href]") if url_id(urljoin(LIST_URL,a.get("href","")))})
         if count>1:continue
         candidate=node
         if any(x in text for x in ("Adresse","Direktlink","Beginn:")):
