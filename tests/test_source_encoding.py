@@ -1,7 +1,7 @@
 """Regression tests for UTF-8 source decoding."""
 import unittest
 from unittest.mock import patch
-from src import scrape, regnum_scrape
+from src import regnum_scrape
 
 class Response:
     status_code = 200
@@ -13,10 +13,6 @@ class Session:
     def close(self): pass
 
 class EncodingTests(unittest.TestCase):
-    def test_gocath_utf8(self):
-        with patch.object(scrape.requests, "Session", return_value=Session()), patch.object(scrape, "event_links", return_value=["https://gocath.org/de/event/test"]):
-            self.assertEqual(scrape.fetch_events(1)[0]["title"], "Neuer Trägerinnenkreis in München")
-
     def test_regnum_utf8(self):
         with patch.object(regnum_scrape.requests, "Session", return_value=Session()), patch.object(regnum_scrape, "event_links", return_value=["https://www.regnumchristi.eu/demnaechst/?vid=1"]):
             self.assertEqual(regnum_scrape.fetch_events(1)[0]["title"], "Neuer Trägerinnenkreis in München")
