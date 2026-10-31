@@ -20,6 +20,30 @@ def event_links(html, limit):
             break
     return links
 
+# These site-wide blocks are navigation, not evidence about the event.
+RELATED_MARKERS = ("Ähnliche Veranstaltungen", "Mehr zum Thema")
+BOILERPLATE = (
+    "Google Maps kann aufgrund Deiner Datenschutzeinstellungen leider nicht angezeigt werden. Bitte akzeptiere die Cookies.",
+    "Cookie akzeptieren",
+    "Alle Angaben ohne Gewähr. Bitte prüfe Datum, Uhrzeit und Ort vor dem Besuch auf der offiziellen Veranstaltungsseite.",
+    "Fehler melden",
+)
+
+def clean_event_text(text):
+    """Remove exact GoCath navigation/cookie copy without editing event facts.
+
+    Do not guess at semantic content: dates, locations, organiser names,
+    liturgy, audience and the complete event body are deliberately retained.
+    """
+    for marker in RELATED_MARKERS:
+        at = text.find(marker)
+        if at != -1:
+            text = text[:at]
+    for fragment in BOILERPLATE:
+        text = text.replace(fragment, " ")
+    text = re.sub(r"\\s+", " ", text).strip()
+    return text
+
 def parse_event(html, url):
     soup = BeautifulSoup(html, "html.parser")
     main = soup.select_one("main") or soup
@@ -31,7 +55,7 @@ def parse_event(html, url):
         name = title.get_text(" ", strip=True)
     for node in main.select("script,style,nav,footer"):
         node.decompose()
-    description = main.get_text(" ", strip=True)[:5500]
+    description = clean_event_text(main.get_text(" ", strip=True))[:5500]
     return {"url": url, "title": name, "description": description}
 
 def fetch_events(limit=20):
