@@ -49,6 +49,9 @@ def start_campaign(state):
                        "pending":sorted(state["events"])}
     return len(state["campaign"]["pending"])
 
+def permanent_classification_failure(exc):
+    return isinstance(exc, ValueError) and (str(exc).startswith("Decisions ") or str(exc) == "Incomplete score set")
+
 def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
     if not 1<=max_paid<=100: raise ValueError("max_paid must be 1..100")
     config=active_config(state)
@@ -69,7 +72,6 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
         row=dict(prev)
         row["event"]=normalized
         row["display_hash"]=hashes["display_hash"]
-        row["last_seen_at"]=at
         row["missing_checks"]=0
         row["inactive"]=False
         state["events"][key]=row
@@ -83,8 +85,7 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
         candidates=[]  # Correct display metadata without any API calls.
     elif mode=="delta":
         candidates=[key for key,event in source.items() if
-                    state["events"][key].get("classification_hash")!=fingerprints(event)["classification_hash"]
-                    or not state["events"][key].get("classification")]
+                    (state["events"][key].get("last_attempt_hash") or state["events"][key].get("classification_hash"))!=fingerprints(event)["classification_hash"]]
     else: raise ValueError("Unknown mode")
     successes=0
     failures=[]
@@ -95,13 +96,24 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
             scores=result["criteria_scores"]
             if len(scores)!=len(config["criteria"]): raise ValueError("Incomplete score set")
         except Exception as exc:
-            failures.append({"id":key,"type":type(exc).__name__, "reason":str(exc)[:240]})
+            permanent=permanent_classification_failure(exc)
+            record=state["events"][key]
+            if permanent:
+                record["last_attempt_hash"]=fingerprints(source[key])["classification_hash"]
+                record["classification_status"]="failed"
+                record["classification_error"]={"type":type(exc).__name__,"reason":str(exc)[:240]}
+            failures.append({"id":key,"type":type(exc).__name__, "reason":str(exc)[:240], "retry_on_change_only":permanent})
+            if mode=="continue" and permanent:
+                state["campaign"]["pending"].remove(key)
             continue
         record=state["events"][key]
         record["classification"]={"scores":scores,"relevance":relevance(scores,config),
             "model":MODEL,"classified_at":at,"questionnaire_revision":state["active_questionnaire"]["revision"],
             "usage":usage,"estimated_cost_usd":round(usage.get("input_tokens",0)*.10/1000000,8)}
         record["classification_hash"]=fingerprints(source[key])["classification_hash"]
+        record["last_attempt_hash"]=record["classification_hash"]
+        record["classification_status"]="success"
+        record.pop("classification_error",None)
         successes+=1
         if mode=="continue": state["campaign"]["pending"].remove(key)
     if mode=="continue" and not state["campaign"]["pending"]:
