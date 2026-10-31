@@ -41,7 +41,7 @@ def clean_event_text(text):
             text = text[:at]
     for fragment in BOILERPLATE:
         text = text.replace(fragment, " ")
-    text = re.sub(r"\\s+", " ", text).strip()
+    text = re.sub(r"\s+", " ", text).strip()
     return text
 
 def parse_event(html, url, *, clean=True, truncate=True):
