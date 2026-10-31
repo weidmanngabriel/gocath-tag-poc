@@ -34,6 +34,39 @@ def active_config(state):
     if not q: raise RuntimeError("Publish the questionnaire before classification")
     return {"criteria":q["criteria"],"tags":q.get("tags",[])}
 
+def criterion_signature(criterion):
+    """Semantic fingerprint: display labels and thresholds do not invalidate AI answers."""
+    return digest({"type":criterion.get("type","predicate"),
+                   "label":criterion.get("label",""),
+                   "description":criterion.get("description",""),
+                   "options":criterion.get("options",[])})
+
+def presentation_scores(classification, questionnaire):
+    """Show only answers that still match the active question's semantic definition."""
+    if not classification:
+        return []
+    current = {c["id"]:c for c in (questionnaire or {}).get("criteria",[])}
+    signatures = classification.get("criterion_signatures",{})
+    out = []
+    for original in classification.get("scores",[]):
+        criterion = current.get(original["id"])
+        if criterion is None:
+            continue
+        # Legacy classifications have no per-question signature. Treat as unknown
+        # when the questionnaire revision differs.
+        if signatures:
+            if signatures.get(original["id"]) != criterion_signature(criterion):
+                continue
+        elif classification.get("questionnaire_revision") != (questionnaire or {}).get("revision"):
+            continue
+        row = copy.deepcopy(original)
+        row["category"] = criterion.get("category", row.get("category",""))
+        row["label"] = criterion.get("label", row.get("label",""))
+        if criterion.get("type","predicate") == "predicate":
+            row["matched"] = row["score"] >= criterion.get("threshold",0.65)
+        out.append(row)
+    return out
+
 def relevance(scores,config):
     weights={c["id"]:c["weight"] for c in config["criteria"]}
     signals=[s["score"]*weights.get(s["id"],0) for s in scores if weights.get(s["id"],0)>0]
@@ -109,6 +142,7 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
         record=state["events"][key]
         record["classification"]={"scores":scores,"relevance":relevance(scores,config),
             "model":MODEL,"classified_at":at,"questionnaire_revision":state["active_questionnaire"]["revision"],
+            "criterion_signatures":{c["id"]:criterion_signature(c) for c in config["criteria"]},
             "usage":usage,"estimated_cost_usd":round(usage.get("input_tokens",0)*.10/1000000,8)}
         record["classification_hash"]=fingerprints(source[key])["classification_hash"]
         record["last_attempt_hash"]=record["classification_hash"]
@@ -131,7 +165,11 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
 def public_feed(state):
     return {"generated_at":state.get("last_sync_at"),
             "questionnaire":copy.deepcopy(state.get("active_questionnaire")),
-            "events":[{"id":key,"event":item["event"],"classification":item.get("classification"),
+            "events":[{"id":key,"event":item["event"],"classification":({**item["classification"],
+                       "scores":presentation_scores(item["classification"],state.get("active_questionnaire")),
+                       "pending_criteria":[c["id"] for c in (state.get("active_questionnaire") or {}).get("criteria",[])
+                          if c["id"] not in {s["id"] for s in presentation_scores(item["classification"],state.get("active_questionnaire"))}]}
+                          if item.get("classification") else None),
                        "inactive":item.get("inactive",False),
                        "stale":bool(item.get("classification") and item.get("classification_hash")!=
                                     fingerprints(item["event"])["classification_hash"])}
