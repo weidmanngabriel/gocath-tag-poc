@@ -1,5 +1,7 @@
 # GoCath Auto Event Tagging – POC
 
+> **Aktueller Betrieb (31.10.2026):** Der aktive RC-Veranstaltungskatalog läuft über `.github/workflows/rc-catalog.yml` (stündlich zur Minute 17 UTC und manuell) mit `delta`, `reclassify` und `refresh`, speichert den Katalog auf `rc-data` und veröffentlicht `/rc/`. Der frühere manuelle Tagging-Workflow `tag-events.yml` wurde außer Betrieb genommen. Die im Folgenden beschriebene Gemini-/Groq-Tagging-Strecke samt `src/main.py`, `Config`, `Tags`, `ResultsHistory` und `ClassificationDetails` ist **Legacy** und kein unterstützter Produktionsweg. Der Google-Sheets-OAuth-Editor bleibt vorerst verfügbar, insbesondere für `Criteria`. Historische Tabellen bleiben unberührt. Gesichertes vollständiges Sheet: [Legacy Backup 2026-10-31](https://docs.google.com/spreadsheets/d/18kEBFk6DWStx9q6CHay3jHWZ09_ku2S77k1nXLMlTJ0/edit).
+
 Eine minimale TypeScript-Oberfläche für **manuelle** GoCath-Klassifizierungen. Öffentliche GoCath-Veranstaltungen werden über GitHub Actions gelesen, durch den in `Config.classifier_provider` gewählten Anbieter klassifiziert und in ein Google Sheet geschrieben.
 
 - `web/`: Vite/TypeScript Dashboard für Google OAuth, Konfiguration und Vergleich der historischen Tag-Zuordnungen
