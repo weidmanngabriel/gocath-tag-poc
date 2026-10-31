@@ -96,3 +96,34 @@ a:hover{color:var(--rc-red-deep)}
 .chips .no-hits{background:#f6f6f6;border-color:#e5e5e5;color:#666}
 @media(max-width:780px){.filters{grid-template-columns:1fr 1fr}}
 @media(max-width:460px){.filters{grid-template-columns:1fr}}
+
+/* Individual criterion relevance: matching, uncertain, low and unavailable. */
+.match-chip.match-relevant{background:#e7f4eb;color:#17613a;border-color:#b7dec4}
+.score-relevant .track div{background:#26834c}
+.score-review .track div{background:#cc920f}
+.score-irrelevant .track div{background:#c45353}
+.score-unknown .track div{background:#9a9a9a}
+.score-relevant .score-head b{color:#17613a}
+.score-review .score-head b{color:#876000}
+.score-irrelevant .score-head b{color:#a43b3b}
+.score-unknown .score-head b{color:#696969}
+
+/* Compact grouped match display, with top two items per group visible. */
+.matched-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0 4px}
+.match-group{min-width:0;background:#fbf9f9;border:1px solid #e8dddd;border-radius:12px;padding:12px}
+.match-group-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:9px;color:#4b3437}
+.match-group-heading strong{font-size:.9rem}
+.match-group-heading small{color:#786b6c;font-size:.75rem;white-space:nowrap}
+.match-list{display:flex;flex-wrap:wrap;gap:6px}
+.match-chip{font-size:.82rem;line-height:1.4;border:1px solid #b7dec4;border-radius:7px;background:#e7f4eb;color:#17613a;padding:6px 9px;overflow-wrap:anywhere}
+.match-more{margin-top:8px}
+.match-more summary{color:#910803;font-size:.85rem;font-weight:600;cursor:pointer;padding:5px 0}
+.match-more[open] summary{margin-bottom:6px}
+.match-more summary:focus-visible{outline:2px solid #c78282;outline-offset:2px}
+.matched-groups .no-hits{grid-column:1/-1;color:#666;font-size:.9rem;margin:0}
+@media(max-width:680px){.matched-groups{grid-template-columns:1fr;gap:9px}.match-group{padding:11px}}
+
+/* Match badges use the same threshold-based palette as detail bars. */
+.match-chip.match-review{background:#fff3d6;color:#805600;border-color:#f0dda5}
+.match-chip.match-irrelevant{background:#fbe8e8;color:#962b2b;border-color:#eac0c0}
+.match-chip.match-unknown{background:#f1f1f1;color:#5d5d5d;border-color:#dedede}
