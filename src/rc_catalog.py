@@ -77,7 +77,10 @@ def relevance(scores,config):
 def start_campaign(state):
     if not state.get("active_questionnaire"): raise RuntimeError("No active questionnaire")
     if state.get("campaign") and state["campaign"]["pending"]:
-        raise RuntimeError("Full reclassification already in progress")
+        if state["campaign"]["revision"] == state["active_questionnaire"]["revision"]:
+            raise RuntimeError("Full reclassification already in progress")
+        # Explicit reclassify replaces a campaign from an outdated questionnaire.
+        # Existing per-event classifications remain until successfully replaced.
     state["campaign"]={"revision":state["active_questionnaire"]["revision"],"started_at":now(),
                        "pending":sorted(state["events"])}
     return len(state["campaign"]["pending"])
