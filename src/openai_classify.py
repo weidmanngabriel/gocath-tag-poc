@@ -20,6 +20,7 @@ def classify_openai(event, api_key, config, usage_sink=None):
                          "Zielgruppen bewerten nach Eignung, spezielle Geschlechtergruppen "
                          "nur bei ausdrücklicher Ausrichtung. evidence ist eine kurze "
                          "Textstelle oder leer. Gib genau eine Bewertung pro ID zurück.\n"
+                         + "Das zusätzliche Feld criteria_scores ist verpflichtend. "
                          + json.dumps([{"id": c["id"], "description": c["description"]} for c in criteria], ensure_ascii=False))
     payload = {
         "model": MODEL,
@@ -64,6 +65,8 @@ def classify_openai(event, api_key, config, usage_sink=None):
         except (TypeError, ValueError, KeyError):
             continue
         scores[item["id"]] = {"score": round(score, 4), "evidence": str(item.get("evidence", ""))[:240]}
+    if criteria and set(scores) != set(configured):
+        raise ValueError("OpenAI response missing criterion scores")
     tags["criteria_scores"] = [dict(id=c["id"], category=c["category"], label=c["label"],
         score=scores.get(c["id"], {}).get("score", 0.0),
         evidence=scores.get(c["id"], {}).get("evidence", ""),
