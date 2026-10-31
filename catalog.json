@@ -43067,7 +43067,7 @@
     }
   },
   "active_questionnaire": {
-    "revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+    "revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
     "criteria": [
       {
         "id": "format_mass",
@@ -43303,7 +43303,7 @@
         "id": "q_speziell_paare_oder_ehepaare",
         "category": "Zielgruppe",
         "label": "Speziell Paare oder Ehepaare",
-        "description": "Angebote, die sich explizit an Paare und Ehepaare richten",
+        "description": "Angebote, die sich explizit an Paare und Ehepaare richten, nicht an Einzelpersonen",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
@@ -43334,7 +43334,7 @@
       "Wallfahrten & Reisen",
       "Sonstiges"
     ],
-    "published_at": "2026-10-31T08:39:59.815306+00:00"
+    "published_at": "2026-10-31T11:05:00.528163+00:00"
   },
   "campaign": null,
   "last_sync_at": "2026-10-31T09:18:21.703010+00:00",
