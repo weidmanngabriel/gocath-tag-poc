@@ -33,14 +33,23 @@ def classify_decisions(event, api_key, config, usage_sink=None):
 
     questions = []
     for c in criteria:
-        detail = c["description"].strip()
-        instructions = ("Ist die folgende Aussage durch diese konkreten Veranstaltungsinformationen "
-                        "belegt oder zutreffend? " + detail
-                        + " Bewerte nur die beschriebene Veranstaltung; der bloße Domainname "
-                        "der Quelle ist KEIN Beweis für einen kirchlichen Veranstalter. "
-                        "Keine zusätzlichen Aktivitäten oder Eigenschaften erfinden. "
-                        "Spezifische Zielgruppen nur bei ausdrücklicher Ausrichtung.")
-        questions.append({"type": "predicate", "name": c["id"], "instructions": instructions})
+        question_type = c.get("type", "predicate")
+        detail = (c.get("description") or "").strip()
+        title = (c.get("label") or "").strip()
+        instructions = ("Frage: " + title + ". " + detail
+                        + " Nutze ausschließlich belegte Veranstaltungsinformationen. "
+                        "Der bloße Domainname ist kein Beweis für einen katholischen Veranstalter. "
+                        "Erfinde keine Aktivitäten. Spezielle Zielgruppen nur bei ausdrücklicher Ausrichtung.")
+        q = {"type": question_type, "name": c["id"], "instructions": instructions}
+        if question_type == "choice":
+            q["choices"] = [{"value": o["value"], "description": o.get("description", "")}
+                            for o in c["options"]]
+        elif question_type == "score":
+            q["levels"] = [{"label": o["label"], "description": o.get("description", "")}
+                           for o in c["options"]]
+        elif question_type != "predicate":
+            raise ValueError("Unsupported question type: " + question_type)
+        questions.append(q)
 
     payload = {
         "model": MODEL,
@@ -59,25 +68,58 @@ def classify_decisions(event, api_key, config, usage_sink=None):
     answers = body.get("answers")
     if not isinstance(answers, list):
         raise ValueError("Decisions response missing answers")
+    configured = {c["id"]: c for c in criteria}
     by_id = {}
+    def valid_unit(x):
+        return (not isinstance(x, bool) and isinstance(x, (int, float))
+                and math.isfinite(x) and 0 <= x <= 1)
+
     for a in answers:
-        if not isinstance(a, dict) or a.get("name") not in ids or a.get("type") != "predicate":
+        if not isinstance(a, dict) or a.get("name") not in configured:
             raise ValueError("Decisions answer has unexpected name or type")
         name = a["name"]
+        c = configured[name]
+        question_type = c.get("type", "predicate")
+        if a.get("type") != question_type:
+            raise ValueError("Decisions answer has unexpected name or type")
         if name in by_id:
             raise ValueError("Decisions answer duplicate: " + name)
-        score = a.get("probability")
-        if isinstance(score, bool) or not isinstance(score, (int, float)) or not math.isfinite(score) or not 0 <= score <= 1:
-            raise ValueError("Decisions answer has invalid probability: " + name)
-        by_id[name] = float(score)
+        if question_type == "predicate":
+            value = a.get("probability")
+            if not valid_unit(value):
+                raise ValueError("Decisions answer has invalid probability: " + name)
+            result = {"score": float(value), "answer": {"probability": value}}
+        elif question_type == "choice":
+            value = a.get("choice")
+            options = [o["value"] for o in c["options"]]
+            if not isinstance(value, str) or value not in options:
+                raise ValueError("Decisions answer has invalid choice: " + name)
+            confidence = a.get("confidence")
+            if not valid_unit(confidence):
+                raise ValueError("Decisions answer has invalid confidence: " + name)
+            result = {"score": float(confidence), "answer": {"choice": value, "confidence": confidence,
+                      "probabilities": a.get("probabilities", [])}}
+        else:
+            value = a.get("score")
+            length = len(c["options"])
+            if (isinstance(value, bool) or not isinstance(value, (int, float))
+                    or not math.isfinite(value) or not 0 <= value <= length - 1):
+                raise ValueError("Decisions answer has invalid score: " + name)
+            confidence = a.get("confidence")
+            if not valid_unit(confidence):
+                raise ValueError("Decisions answer has invalid confidence: " + name)
+            result = {"score": float(value) / (length - 1), "answer": {
+                      "score": value, "confidence": confidence, "probabilities": a.get("probabilities", [])}}
+        by_id[name] = result
     if set(by_id) != set(ids):
         raise ValueError("Decisions response missing criterion answers")
 
     result_scores = [
         {"id": c["id"], "category": c["category"], "label": c["label"],
-         "score": round(by_id[c["id"]], 4),
-         "matched": by_id[c["id"]] >= c["threshold"],
-         "evidence": ""}
+         "type": c.get("type", "predicate"),
+         "score": round(by_id[c["id"]]["score"], 4),
+         "matched": by_id[c["id"]]["score"] >= c["threshold"],
+         "evidence": "", "answer": by_id[c["id"]]["answer"]}
         for c in criteria
     ]
     # Decisions does not return text or structured freeform fields.
@@ -85,7 +127,7 @@ def classify_decisions(event, api_key, config, usage_sink=None):
     allowed = set(config.get("tags") or [])
     legacy = []
     for row in result_scores:
-        if row["matched"]:
+        if row["matched"] and row["type"] == "predicate":
             for tag in LEGACY_ALIASES.get(row["id"], ()):
                 if tag in allowed and tag not in legacy:
                     legacy.append(tag)
