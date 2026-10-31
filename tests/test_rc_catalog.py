@@ -4,11 +4,11 @@ from src.rc_catalog import publish_questions, sync
 class CatalogTests(unittest.TestCase):
     def test_publish(self):
         s={'events': {}}
-        publish_questions(s, {'criteria': []})
-        self.assertIn('revision', s['active_questionnaire'])
+        with self.assertRaisesRegex(ValueError, 'No active Criteria'):
+            publish_questions(s, {'criteria': []})
 
     def test_delta_and_manual_reclassification(self):
-        from src.rc_catalog import sync,start_campaign
+        from src.rc_catalog import sync
         event={"url":"https://www.regnumchristi.eu/demnaechst/?vid=12","title":"Gebet","description":"Gemeinsames Gebet"}
         state={"schema_version":1,"events":{}}
         publish_questions(state,{"criteria":[{"id":"prayer","weight":1}]})
@@ -20,10 +20,44 @@ class CatalogTests(unittest.TestCase):
         sync(state,[event],classify)
         sync(state,[event],classify)
         self.assertEqual(len(calls),1)
-        self.assertEqual(start_campaign(state),1)
-        sync(state,[event],classify,mode="continue")
+        self.assertEqual(sync(state,[event],classify,mode="reclassify")["classified"],0)
+        publish_questions(state,{"criteria":[{"id":"prayer","weight":1,"description":"Neue Bedeutung"}]})
+        self.assertEqual(sync(state,[event],classify,mode="delta")["classified"],0)
+        self.assertEqual(sync(state,[event],classify,mode="reclassify")["classified"],1)
         self.assertEqual(len(calls),2)
-        self.assertIsNone(state["campaign"])
+
+    def test_display_edits_do_not_reclassify(self):
+        event={"url":"https://www.regnumchristi.eu/demnaechst/?vid=123","title":"Gebet","description":"Gebet"}
+        state={"schema_version":1,"events":{}}
+        criterion={"id":"prayer","label":"Gebet","category":"Format","description":"Gebet","threshold":0.65,"weight":1}
+        publish_questions(state,{"criteria":[criterion]})
+        calls=[]
+        def classify(e,c,u):
+            calls.append(1)
+            return {"criteria_scores":[{"id":"prayer","score":.9,"matched":True}]}
+        sync(state,[event],classify)
+        original=state["events"]["rc-123"]["classification_config_revision"]
+        publish_questions(state,{"criteria":[{**criterion,"label":"Gebetsveranstaltung","threshold":0.8,"category":"Inhalt"}]})
+        self.assertEqual(state["active_questionnaire"]["semantic_revision"],original)
+        self.assertEqual(sync(state,[event],classify,mode="reclassify")["classified"],0)
+        self.assertEqual(len(calls),1)
+
+    def test_reclassify_batches_only_stale_versions(self):
+        state={"schema_version":1,"events":{}}
+        old={"id":"prayer","label":"Gebet","description":"Gebet","threshold":0.65,"weight":1}
+        publish_questions(state,{"criteria":[old]})
+        events=[{"url":f"https://www.regnumchristi.eu/demnaechst/?vid={n}","title":f"Event {n}","description":"Gebet"} for n in range(201,204)]
+        calls=[]
+        def classify(e,c,u):
+            calls.append(e["title"])
+            return {"criteria_scores":[{"id":"prayer","score":.9,"matched":True}]}
+        sync(state,events,classify,max_paid=3)
+        publish_questions(state,{"criteria":[{**old,"description":"Geistliches Gebet"}]})
+        self.assertEqual(sync(state,events,classify,mode="delta")["classified"],0)
+        self.assertEqual(sync(state,events,classify,mode="reclassify",max_paid=1)["classified"],1)
+        self.assertEqual(sync(state,events,classify,mode="reclassify",max_paid=2)["classified"],2)
+        self.assertEqual(sync(state,events,classify,mode="reclassify")["classified"],0)
+        self.assertEqual(len(calls),6)
 
     def test_failed_update_keeps_previous_classification(self):
         from src.rc_catalog import sync
