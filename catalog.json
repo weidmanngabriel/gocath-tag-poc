@@ -1022,7 +1022,21 @@
       },
       "classification_hash": "63d2d91307eed1d2359fe79c1ea45b3ec03243fd0d24576b1872b7d26eda695d",
       "last_attempt_hash": "63d2d91307eed1d2359fe79c1ea45b3ec03243fd0d24576b1872b7d26eda695d",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Kinderveranstaltung",
+          "Kindergebetsaktion",
+          "Heiligenfest",
+          "Allerheiligen",
+          "Religiöse Kinderaktivität",
+          "Familienveranstaltung",
+          "Kinderkirche",
+          "Messfeierstagendeskindesfokus"
+        ],
+        "revision": "42f1c0844139f7b58a62f644d8a52d10fdc64cf491d2717448ce1491048187b0",
+        "content_hash": "63d2d91307eed1d2359fe79c1ea45b3ec03243fd0d24576b1872b7d26eda695d"
+      }
     },
     "rc-37977": {
       "event": {
@@ -130208,6 +130222,24 @@
       "classification_hash": "abb1a204909dee460e92423f7626c6cc5c3e1b574fa899e0b2af000ac4693470",
       "last_attempt_hash": "abb1a204909dee460e92423f7626c6cc5c3e1b574fa899e0b2af000ac4693470",
       "classification_status": "success"
+    },
+    "rc-38429": {
+      "event": {
+        "title": "GrowDeep Südostbayern JLH WE",
+        "description": "05.12. - 06.12.2026 Jugendliche (ab 16 Jahre) - Junge Erwachsene Obing Deutschland Obing (DE) anmelden Preis: 85 EUR Normal: 85€, Geschwister: je 70€, Einsteiger: 60€ Verwendungszweck bei Überweisungen: RJSB26GDJM11 Direktlink Termin speichern Kontakt Cornelius Weidmann Tel: +49 176 40463079 E-Mail: Geistliche Leitung P. Andrew Torrey LC Emmertinger Str. 12 84524 Neuötting Tel: +49 162 3252654 E-Mail: GrowDeep × Junge Leute Helfen 2026 GrowDeep - Junge Leute Helfen WE 5.–6. Dezember 2026 · Obing Mann sein, Frau sein, Liebe & Beziehung Was bedeutet es, Mann oder Frau zu sein? Wie gelingen Liebe und Beziehungen? Und was sagt der christliche Glaube dazu? Gemeinsam gehen wir diesen Fragen auf den Grund. Bei der Junge Leute Helfen-Verladeaktion packen wir gemeinsam an und helfen, Hilfspakete für Menschen in Not auf den Weg zu bringen. Außerdem erwarten dich gemeinsames Gebet, die Heilige Messe, Aktivität und ein gemütlicher Abend mit Pizza und Mocktails. Adresse Pfarrheim Obing, Kienberger Straße 1 83119 Obing Deutschland anmelden",
+        "organizer": "",
+        "target_groups": [
+          "Jugendliche (ab 16 Jahre) - Junge Erwachsene O"
+        ],
+        "categories": [],
+        "location": "Pfarrheim Obing, Kienberger Straße 1 83119 Obing",
+        "starts_at": "2026-12-05",
+        "ends_at": "2026-12-06",
+        "url": "https://www.regnumchristi.eu/demnaechst/?vid=38429"
+      },
+      "display_hash": "60d1dc1576a03f1c251d892ec320b8cddb1c6b13d1fb1a512845144d858709b7",
+      "missing_checks": 0,
+      "inactive": false
     }
   },
   "active_questionnaire": {
@@ -130987,13 +131019,19 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-10-31T16:23:07.374206+00:00",
+  "last_sync_at": "2026-10-31T18:50:23.043510+00:00",
   "last_run": {
-    "mode": "reclassify",
-    "source_count": 129,
-    "queued": 4,
-    "classified": 4,
+    "mode": "refresh",
+    "source_count": 130,
+    "queued": 0,
+    "classified": 0,
     "failures": [],
     "remaining": 0
+  },
+  "last_tag_run": {
+    "queued": 130,
+    "tagged": 1,
+    "failures": [],
+    "mode": "delta"
   }
 }
