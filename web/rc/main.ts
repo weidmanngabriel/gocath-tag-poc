@@ -7,6 +7,7 @@ const SOURCE="https://raw.githubusercontent.com/weidmanngabriel/gocath-tag-poc/r
 const root=document.querySelector<HTMLElement>("#app")!;
 const esc=(s:unknown)=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]||c));
 const pct=(n:number)=>Math.round((n||0)*100)+" %";
+const statusKind=(s:string)=>s==="likely_relevant"?"relevant":s==="review"?"review":s==="likely_not_relevant"?"irrelevant":"unknown";
 const status=(s:string)=>s==="likely_relevant"?"Wahrscheinlich relevant":s==="review"?"Prüfen":s==="likely_not_relevant"?"Eher nicht relevant":"Noch nicht klassifiziert";
 let records:Event[]=[];
 let questionnaire:Questionnaire|null=null;
@@ -18,7 +19,7 @@ function card(item:Event){
  const tabs=[...groups,"Beschreibung"];
  const buttons=tabs.map((g,i)=>`<button type="button" role="tab" id="tab-${esc(item.id)}-${i}" aria-controls="panel-${esc(item.id)}-${i}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-tab="${i}">${esc(g)}</button>`).join("");
  const panels=tabs.map((g,i)=>`<div role="tabpanel" id="panel-${esc(item.id)}-${i}" aria-labelledby="tab-${esc(item.id)}-${i}" ${i!==0?"hidden":""}>${g==="Beschreibung"?`<p class="description">${esc(item.event.description||"Keine Beschreibung verfügbar.")}</p><a href="${esc(item.event.url)}" target="_blank" rel="noopener noreferrer">Originalveranstaltung öffnen</a>`:(c?.scores.filter(s=>s.category===g).sort((a,b)=>b.score-a.score).map(scoreRow).join("")||"<p>Keine Bewertung verfügbar.</p>")}</div>`).join("");
- return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div><span class="status">${status(c?.relevance.status||"")} ${c?pct(c.relevance.score):""}</span></div><div class="chips">${hits.map(s=>`<span>${esc(s.label)} · ${pct(s.score)}</span>`).join("")}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
+ return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div><span class="status status-${statusKind(c?.relevance.status||"")}">${status(c?.relevance.status||"")} ${c?pct(c.relevance.score):""}</span></div><div class="chips">${hits.map(s=>`<span>${esc(s.label)} · ${pct(s.score)}</span>`).join("")}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
 }
 function switchItemTab(button:HTMLButtonElement,focus=false){
  const tabs=button.closest<HTMLElement>(".item-tabs");
