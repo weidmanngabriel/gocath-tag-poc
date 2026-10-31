@@ -16,13 +16,31 @@ def settings(credentials_json, sheet_id):
         criteria_rows = doc.worksheet("Criteria").get_all_values()
     except gspread.WorksheetNotFound:
         criteria_rows = []
-    criteria = [
-        {"id": r[0].strip(), "category": r[1].strip(), "label": r[2].strip(),
-         "description": r[3].strip(), "weight": float(r[5] or 0),
-         "threshold": float(r[6] or 0.65)}
-        for r in criteria_rows[1:]
-        if len(r) >= 7 and r[0].strip() and r[4].strip().lower() == "true"
-    ]
+    criteria = []
+    for r in criteria_rows[1:]:
+        if len(r) < 7 or not r[0].strip() or r[4].strip().lower() != "true":
+            continue
+        question_type = (r[7].strip().lower() if len(r) > 7 and r[7].strip() else "predicate")
+        if question_type not in ("predicate", "choice", "score"):
+            raise ValueError("Invalid question type in Criteria: " + r[0])
+        options = json.loads(r[8]) if len(r) > 8 and r[8].strip() else []
+        if question_type == "choice" and not (isinstance(options, list) and 2 <= len(options) <= 255):
+            raise ValueError("Choice requires 2–255 options: " + r[0])
+        if question_type == "score" and not (isinstance(options, list) and 2 <= len(options) <= 10):
+            raise ValueError("Score requires 2–10 levels: " + r[0])
+        if question_type != "predicate":
+            if not all(isinstance(o, dict) and isinstance(o.get("value" if question_type == "choice" else "label"), str)
+                       and o.get("value" if question_type == "choice" else "label") for o in options):
+                raise ValueError("Invalid question options: " + r[0])
+            keys = [o["value" if question_type == "choice" else "label"] for o in options]
+            if len(set(keys)) != len(keys):
+                raise ValueError("Duplicate question options: " + r[0])
+        weight = float(r[5] or 0)
+        if question_type != "predicate" and weight != 0:
+            raise ValueError("Only predicate questions can influence relevance: " + r[0])
+        criteria.append({"id": r[0].strip(), "category": r[1].strip(), "label": r[2].strip(),
+            "description": r[3].strip(), "weight": weight, "threshold": float(r[6] or 0.65),
+            "type": question_type, "options": options})
     return doc, {
         "max_events_per_run":max(1,min(50,int(config.get("max_events_per_run","2")))),
         "monthly_limit":max(0,int(config.get("monthly_limit","100"))),
@@ -80,6 +98,7 @@ def save_classification_details(doc, run_id, results, model, classified_at):
             rows.append([run_id, event["url"], event["title"], model, classified_at,
                          score["id"], score["category"], score["label"], score["score"],
                          str(score["matched"]).lower(), item.get("relevance_score", ""),
-                         item.get("relevance_status", "not_evaluated"), score.get("evidence", "")])
+                         item.get("relevance_status", "not_evaluated"), score.get("evidence", ""), score.get("type", "predicate"),
+                         json.dumps(score.get("answer", {}), ensure_ascii=False)])
     if rows:
         doc.worksheet("ClassificationDetails").append_rows(rows, value_input_option="RAW")
