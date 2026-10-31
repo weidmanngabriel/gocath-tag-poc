@@ -9,7 +9,7 @@ from .rc_delta import event_id
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument("--mode",choices=("delta","publish-questions","reclassify","continue"),required=True)
+    p.add_argument("--mode",choices=("delta","publish-questions","reclassify","continue","refresh"),required=True)
     p.add_argument("--state",default="state/catalog.json")
     p.add_argument("--public",default="public/catalog.json")
     p.add_argument("--max-paid",type=int,default=25)
