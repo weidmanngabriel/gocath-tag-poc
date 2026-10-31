@@ -10,7 +10,7 @@ from .regnum_scrape import fetch_events as fetch_regnum_events
 from .classify import classify, choose_model
 from .groq_compare import invoke as invoke_groq
 from .openai_classify import classify_openai, MODEL as OPENAI_MODEL
-from .config import settings, run_count, log_run, next_run_id, save_history
+from .config import settings, run_count, log_run, next_run_id, save_history, save_classification_details
 from .sheets import publish
 
 SHEET_ID = "1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w"
@@ -95,13 +95,24 @@ def main():
             else:
                 tags = classify(event, provider_key, model, config["tags"], config["additional_tags_enabled"],
                                 config["gemini_prompt"], config["gemini_temperature"], config["max_additional_tags"], usage_sink=usage, synonyms=config["tag_synonyms"])
+            scores = tags.get("criteria_scores", [])
+            # Conservative rule: one strong or two medium Catholic signals.
+            weights = {c["id"]: c["weight"] for c in config.get("criteria", [])}
+            signals = sorted((x["score"] * weights.get(x["id"], 0) for x in scores if weights.get(x["id"], 0) > 0), reverse=True)
+            relevance_score = round(min(1.0, max(signals, default=0.0)), 4)
+            strong = any(x >= 0.7 for x in signals)
+            multiple = sum(x >= 0.45 for x in signals) >= 2
+            relevance_status = ("likely_relevant" if strong or multiple else
+                                "review" if any(x >= 0.25 for x in signals) else
+                                "likely_not_relevant") if scores else "not_evaluated"
             print(f'[timing] classify_event={idx}/{len(events)} duration={time.perf_counter()-t0:.3f}s',flush=True)
             for name in usage_total:
                 usage_total[name] += usage.get(name, 0)
             input_cost = price(usage.get("input_tokens",0), config["cost_input_per_million_usd"])
             output_cost = price(usage.get("output_tokens",0)+(usage.get("thinking_tokens",0) if provider == "gemini" else 0), config["cost_output_per_million_usd"])
             cost = round(input_cost + output_cost, 8) if provider in ("gemini", "openai") and input_cost is not None and output_cost is not None else ""
-            results.append({"event": event, "tags": tags, "usage": usage, "estimated_cost_usd": cost, "status": "ok"})
+            results.append({"event": event, "tags": tags, "usage": usage, "estimated_cost_usd": cost, "status": "ok", "criteria_scores": scores,
+                            "relevance_score": relevance_score, "relevance_status": relevance_status})
         Path("output").mkdir(exist_ok=True)
         Path("output/results.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
         if results:
@@ -111,6 +122,9 @@ def main():
         t0 = time.perf_counter()
         save_history(doc, run_id, results, model, config["gemini_prompt"], start)
         print(f"[timing] save_history={time.perf_counter()-t0:.3f}s",flush=True)
+        t0 = time.perf_counter()
+        save_classification_details(doc, run_id, results, model, start)
+        print(f"[timing] save_classification_details={time.perf_counter()-t0:.3f}s",flush=True)
         prices = [row["estimated_cost_usd"] for row in results]
         usage_total["estimated_cost_usd"] = round(sum(prices),8) if all(isinstance(p,(int,float)) for p in prices) else ""
         t0 = time.perf_counter()

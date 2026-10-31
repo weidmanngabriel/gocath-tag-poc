@@ -24,6 +24,46 @@ class OpenAIProviderTests(unittest.TestCase):
         self.assertEqual(post.call_args.kwargs["json"]["model"],MODEL)
         self.assertEqual(post.call_args.kwargs["json"]["reasoning"]["effort"],"medium")
 
+
+    @patch("src.openai_classify.requests.post")
+    def test_all_criteria_scores_returned(self, post):
+        import json
+        config=self.config()
+        config["criteria"]=[
+            {"id":"topic_liturgy","category":"Thema","label":"Liturgie",
+             "description":"Katholische Liturgie","weight":2.0,"threshold":0.65},
+            {"id":"context_catholic","category":"Kontext","label":"Katholischer Veranstalter",
+             "description":"Kirchlicher Träger","weight":1.5,"threshold":0.65},
+        ]
+        payload={"standard_tags":[],"additional_tags":[],"reason":"Bewertet",
+                 "criteria_scores":[
+                     {"id":"topic_liturgy","score":0.91,"evidence":"Heilige Messe"},
+                     {"id":"context_catholic","score":0.1,"evidence":""}]}
+        response=Mock(ok=True)
+        response.json.return_value={"status":"completed","output":[{"content":[
+            {"type":"output_text","text":json.dumps(payload)}]}],"usage":{}}
+        post.return_value=response
+        result=classify_openai({"title":"Heilige Messe"},"dummy",config)
+        self.assertEqual(len(result["criteria_scores"]),2)
+        self.assertTrue(result["criteria_scores"][0]["matched"])
+        self.assertFalse(result["criteria_scores"][1]["matched"])
+        schema=post.call_args.kwargs["json"]["text"]["format"]["schema"]
+        self.assertIn("criteria_scores",schema["required"])
+
+    @patch("src.openai_classify.requests.post")
+    def test_incomplete_criteria_scores_rejected(self, post):
+        import json
+        config=self.config()
+        config["criteria"]=[{"id":"topic_liturgy","category":"Thema","label":"Liturgie",
+                            "description":"Katholische Liturgie","weight":2,"threshold":0.65}]
+        response=Mock(ok=True)
+        response.json.return_value={"status":"completed","output":[{"content":[
+            {"type":"output_text","text":json.dumps({"standard_tags":[],
+                "additional_tags":[],"reason":"Unklar","criteria_scores":[]})}]}],"usage":{}}
+        post.return_value=response
+        with self.assertRaisesRegex(ValueError,"missing criterion scores"):
+            classify_openai({"title":"Test"},"dummy",config)
+
     def test_invalid_effort(self):
         config=self.config()
         config["openai_reasoning_effort"]="invalid"

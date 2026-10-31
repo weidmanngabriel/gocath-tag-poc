@@ -108,3 +108,14 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
 
 /* The configuration field selector must respect provider-specific visibility. */
 .panel[data-view="config"] #settings > label[hidden]{display:none!important}
+
+/* Classification dashboard */
+.panel[data-view="results"] table{table-layout:auto;min-width:960px}
+.panel[data-view="results"] th{width:auto!important}
+.panel[data-view="results"] td{vertical-align:top;overflow-wrap:anywhere}
+.result-chip{display:inline-block;background:#e8f3ed;color:#23523e;border:1px solid #cde4d5;border-radius:999px;padding:4px 9px;margin:2px;font-size:12px;white-space:nowrap}
+.panel[data-view="criteria"] table{min-width:920px}
+.panel[data-view="criteria"] td{vertical-align:middle}
+.panel[data-view="criteria"] input:not([type=checkbox]){width:100%;min-width:80px}
+.panel[data-view="criteria"] td:nth-child(3){min-width:280px}
+.panel[data-view="criteria"] td:nth-child(5),.panel[data-view="criteria"] td:nth-child(6){width:105px}

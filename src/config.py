@@ -12,6 +12,17 @@ def settings(credentials_json, sheet_id):
     config={r[0]:r[1] for r in rows[1:] if len(r)>1 and r[0]}
     tag_rows=doc.worksheet("Tags").get_all_values()
     tags=[r[0] for r in tag_rows[1:] if len(r)>1 and r[1].lower()=="true" and r[0]]
+    try:
+        criteria_rows = doc.worksheet("Criteria").get_all_values()
+    except gspread.WorksheetNotFound:
+        criteria_rows = []
+    criteria = [
+        {"id": r[0].strip(), "category": r[1].strip(), "label": r[2].strip(),
+         "description": r[3].strip(), "weight": float(r[5] or 0),
+         "threshold": float(r[6] or 0.65)}
+        for r in criteria_rows[1:]
+        if len(r) >= 7 and r[0].strip() and r[4].strip().lower() == "true"
+    ]
     return doc, {
         "max_events_per_run":max(1,min(50,int(config.get("max_events_per_run","2")))),
         "monthly_limit":max(0,int(config.get("monthly_limit","100"))),
@@ -27,6 +38,7 @@ def settings(credentials_json, sheet_id):
         "cost_input_per_million_usd": config.get("cost_input_per_million_usd", ""),
         "cost_output_per_million_usd": config.get("cost_output_per_million_usd", ""),
         "tags":tags or STANDARD_TAGS,
+        "criteria": criteria,
         "tag_synonyms": {r[0]: [v.strip() for v in r[2].split(",") if v.strip()] for r in tag_rows[1:] if len(r)>2 and len(r)>1 and r[1].lower()=="true" and r[0]}
     }
 
@@ -57,3 +69,17 @@ def save_history(doc, run_id, results, model, prompt, classified_at):
     ]
     if rows:
         doc.worksheet("ResultsHistory").append_rows(rows, value_input_option="RAW")
+
+
+def save_classification_details(doc, run_id, results, model, classified_at):
+    """Append every criterion score, including low-relevance events; never filter."""
+    rows = []
+    for item in results:
+        event = item["event"]
+        for score in item.get("criteria_scores", []):
+            rows.append([run_id, event["url"], event["title"], model, classified_at,
+                         score["id"], score["category"], score["label"], score["score"],
+                         str(score["matched"]).lower(), item.get("relevance_score", ""),
+                         item.get("relevance_status", "not_evaluated"), score.get("evidence", "")])
+    if rows:
+        doc.worksheet("ClassificationDetails").append_rows(rows, value_input_option="RAW")

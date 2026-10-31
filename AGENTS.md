@@ -29,3 +29,11 @@
 - Nach jeder Aufgabe prüfen, ob `AGENTS.md`, `README.md`, `docs/concept.md`, `docs/architecture.md`, `docs/domain.md`, `docs/development.md`, `docs/dashboard.md`, `docs/setup.md` oder `docs/agent-workflow.md` betroffen sind. Unveränderte Dokumente müssen nicht künstlich bearbeitet werden.
 - Änderungen und Dokumentationsupdates in **demselben Feature-/Fix-Branch und PR** committen. Vor Merge auf widerspruchsfreie, aktuelle Angaben prüfen; bei nicht verifizierten Aussagen Unsicherheit transparent benennen.
 - Keine Secrets, personenbezogenen Zugangsdaten, temporären Token oder vertraulichen Logs dokumentieren.
+
+## Eigenständig bis zum Abschluss arbeiten (kein Pingpong)
+- **Standard: selbst erledigen statt Aufgaben an den Nutzer zurückgeben.** Vorhandene GitHub-, CI-, Google-Sheets- und andere autorisierte Werkzeuge aktiv verwenden, um Implementierung, Tests, Fehlerbehebung, Dokumentation und zulässige Integrationsprüfungen eigenständig abzuschließen.
+- **Keine unnötigen Rückfragen oder Zwischenfreigaben.** Bereits bekannte Projektangaben nicht erneut erfragen. Keine bloßen Statusmeldungen als Abschluss ausgeben und den Nutzer nicht auffordern, selbst CI-Checks, Logs oder erreichbare Daten zu prüfen.
+- **Bis zum belastbaren Endzustand weiterarbeiten:** Änderungen umsetzen, passende Tests hinzufügen, CI-Logs auswerten, Fehler beheben, Ergebnisdaten kontrollieren und den in diesem Dokument vorgeschriebenen PR-/Squash-Merge-Prozess eigenständig durchführen, sofern alle Voraussetzungen belegt sind.
+- **Bei echten Blockern exakt sagen, was der Nutzer tun muss:** konkrete Oberfläche/URL, präzise Aktion, warum nur der Nutzer sie ausführen kann und welches Ergebnis anschließend vorliegen soll. Keine vagen Anweisungen wie „bitte prüfen“ oder „Testlauf machen“.
+- **Nicht auf Verdacht abschließen oder mergen:** fehlende Zugriffsrechte, Secrets, kostenpflichtige API-Aktionen, externe Limits oder nicht durchführbare Browser-/Live-Tests offen als Blocker benennen. CI-Erfolg nicht als bestandenen End-to-End-Test darstellen.
+- **Keine asynchronen Versprechen:** Arbeit innerhalb der aktiven Bearbeitung durchführen; falls eine externe Prüfung noch läuft und nicht abgeschlossen werden kann, den genauen offenen Zustand und die nächste erforderliche Aktion nennen, statt spätere eigenständige Nachlieferung zu versprechen.
