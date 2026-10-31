@@ -131,3 +131,6 @@ Treffer werden nach `category` in Format, Thema, Zielgruppe, Kontext und gegeben
 
 ### Kompakte mobile RC-Trefferanzeige
 Die bisherigen separaten Gruppenkarten werden als kompakte Zeilen mit schmaler Bereichsbeschriftung und flexiblen Treffer-Chips dargestellt. Pro Bereich erscheinen die beiden stärksten Treffer; `+N` blendet die übrigen Treffer direkt in derselben Zeile ein. Die Farben und Schwellenwerte bleiben unverändert. Die vollständigen Einzelbewertungen bleiben separat aufklappbar.
+
+### Nachbesserung der kompakten Trefferanzeige
+Die mobile Trefferliste setzt ausdrücklich die allgemeinen `.card section`- und `.card details`-Abstände zurück, damit die Gruppen nicht durch vererbte Außenabstände unnötig hoch werden. Bereichslabel, Chips und `+N` erscheinen auf einer kompakten Zeile; zusätzliche Treffer werden darunter geöffnet.
