@@ -159,3 +159,9 @@ a:hover{color:var(--rc-red-deep)}
 .card details.match-more[open]{display:block;flex-basis:100%;width:100%}
 .card details.match-more[open]>summary{display:inline-block}
 @media(max-width:460px){.card .match-group-heading{flex-basis:66px;width:66px}.card .match-chip{font-size:.75rem;padding:3px 6px}.card .match-group{gap:6px;padding:4px 0!important}}
+
+/* Expanded items stay in the same wrapping flow, no extra full-width block. */
+.card .match-extra{display:contents}
+.card .match-extra[hidden]{display:none}
+.card .match-expand{font:inherit;color:#910803;background:#faf7f7;border:1px solid #e4dada;border-radius:6px;font-size:.78rem;font-weight:650;padding:3px 7px;line-height:1.35;cursor:pointer}
+.card .match-expand:focus-visible{outline:2px solid #c78282;outline-offset:2px}
