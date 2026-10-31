@@ -17,7 +17,7 @@ Für den Vergleich verschiedener Parameter `changed_only=false` belassen. Durch 
 4. Unter **Settings → Pages** GitHub Actions als Quelle wählen. `Deploy dashboard to Pages` stellt `web/dist` bereit.
 5. Dashboard öffnen: `https://weidmanngabriel.github.io/gocath-tag-poc/`. Bei Google anmelden und Konfiguration speichern.
 
-Die Browser-Anwendung nutzt den Google Sheets OAuth Scope; der kurzlebige Zugriffs-Token wird für Reloads innerhalb desselben Browser-Tabs in sessionStorage gehalten und nach Ablauf verworfen. Kein Refresh-Token wird gespeichert. Nur Google-Accounts mit Sheet-Rechten können auf die Daten zugreifen. Die Pages-Seite selbst ist öffentlich erreichbar.
+Die Browser-Anwendung nutzt den Google Sheets OAuth Scope; der kurzlebige Zugriffs-Token wird für Reloads innerhalb desselben Browser-Tabs in `sessionStorage` gehalten. Bei ausdrücklichem Opt-in wird er bis zum Ablauf zusätzlich in `localStorage` für weitere Tabs und Deployments wiederverwendet. Kein Refresh-Token wird gespeichert. Nur Google-Accounts mit Sheet-Rechten können auf die Daten zugreifen. Die Pages-Seite selbst ist öffentlich erreichbar.
 
 ## Release
 Auf temporärem Branch entwickeln und die automatisch per `pull_request` beziehungsweise Push auf `feature/**` ausgelöste CI prüfen. Bei reinen UI-Änderungen ohne Eingriff in den Klassifizierungs- oder Datenfluss genügen grüne Tests, Dashboard-Build und Codeprüfung für den Squash-Merge; Live-OAuth- und Runner-Tests sind dafür nicht verpflichtend. Bei Änderungen am Klassifizierungs- oder Datenfluss bleibt die Integrationsprüfung Pflicht. Bei fehlender OAuth-Konfiguration kein vollständiger E2E-Nachweis.
@@ -34,7 +34,9 @@ Die **Kosten sind keine echte Abrechnung**. Im Tabellenblatt `Config` sind `cost
 
 ## Google-Sitzung beim Neuladen
 
-Ein einmal erteilter OAuth-Token wird mit Ablaufzeit im Tab-spezifischen `sessionStorage` zwischengespeichert, sodass ein Neuladen der Seite nicht sofort eine erneute Anmeldung erfordert. Nach Tokenablauf, nach Schließen des Tabs oder bei einer 401-Antwort ist eine neue Google-Autorisierung nötig. Bewusst keine dauerhafte Speicherung per `localStorage` und kein eigener Backend-Refresh-Service.
+Ohne Opt-in liegt der Google Access-Token ausschließlich im Tab-spezifischen `sessionStorage`. Wer auf dem Login-Bildschirm **„Für die Restlaufzeit des Google-Tokens auf diesem Gerät angemeldet bleiben“** markiert, speichert den vorhandenen, befristeten Token zusätzlich im `localStorage`. Er funktioniert dann auch in neuen Tabs und nach Pages-Deployments, sofern er noch gültig ist. Der Token ist für denselben OAuth-Client und Scope gebunden und wird bei Ablauf, ungültigen Daten, HTTP 401 oder per Button **„Auf diesem Gerät abmelden“** lokal entfernt. **Kein Refresh-Token und kein dauerhaftes Login:** Googles browserbasierter Token-Flow erfordert nach Ablauf erneut eine Nutzeraktion.
+
+**Sicherheit:** `localStorage` kann von JavaScript mit derselben GitHub-Pages-Origin gelesen werden, einschließlich anderer Seiten unter `weidmanngabriel.github.io`. Da der Token Schreibzugriff auf das berechtigte Sheet bietet, die Option nur in einem vertrauenswürdigen Browser auf eigenem Gerät aktivieren. Für echte dauerhafte Anmeldung wäre ein eigener Backend-Code-Flow mit sicherem Refresh-Token-Speicher nötig. GitHub Pages allein kann dies nicht leisten.
 
 ## Tag-Synonyme und Ergebnis-Suche
 

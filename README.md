@@ -29,3 +29,7 @@ Die Decisions API erzeugt **keinen Freitext**: `additional_tags` ist bei neuen O
 
 ## Fragebogeneditor
 In der Web-App unter **Kriterien** können Fragen als aufklappbare Karten mit Titel, Beschreibung, Fragetyp und Antwortregeln direkt geändert und ergänzt werden. Das Test-Google-Sheet `Criteria` verwendet hierfür zusätzliche Spalten `question_type` (`predicate`, `choice`, `score`) und `answer_options_json`. Änderungen speichern beim Verlassen eines Feldes. Für `choice` und `score` werden die vollständigen Wahrscheinlichkeitsverteilungen im erweiterten `ClassificationDetails` (`question_type`, `answer_json`) gespeichert und als Balken im Ergebnis-Tab angezeigt. Bestehende Fragen bleiben ohne Migration als `predicate` interpretierbar. Aktuell steuern nur `predicate`-Fragen die Relevanzberechnung; `choice` und `score` sind zusätzliche Auswertungen. Vor einem Merge sind CI und ein echter Lauf mit neuen Fragetypen nötig.
+
+## Google-Anmeldung bei neuen Deployments
+
+Der Google-Sheets-Token liegt normalerweise nur im aktuellen Browser-Tab. Optional kann der Nutzer auf dem Login-Bildschirm **„Für die Restlaufzeit des Google-Tokens auf diesem Gerät angemeldet bleiben“** aktivieren: Dann wird der kurzlebige Token über Tabs und GitHub-Pages-Deployments hinweg wiederverwendet, bis er abläuft. Der Button **„Auf diesem Gerät abmelden“** löscht die gespeicherten Token. Ohne Backend ist ein dauerhaftes Login wegen fehlender Refresh-Tokens nicht möglich; siehe [OAuth-Einrichtung](docs/setup.md) und [Dashboard-Sicherheit](docs/dashboard.md).
