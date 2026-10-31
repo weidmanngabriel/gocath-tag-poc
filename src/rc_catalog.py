@@ -118,6 +118,7 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
 
 def public_feed(state):
     return {"generated_at":state.get("last_sync_at"),
+            "questionnaire":copy.deepcopy(state.get("active_questionnaire")),
             "events":[{"id":key,"event":item["event"],"classification":item.get("classification"),
                        "inactive":item.get("inactive",False),
                        "stale":bool(item.get("classification") and item.get("classification_hash")!=
