@@ -1,0 +1,5 @@
+name: RC Catalog
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
