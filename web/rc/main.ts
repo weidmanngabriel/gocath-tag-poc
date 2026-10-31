@@ -1,5 +1,7 @@
 import "./style.css";
 type Score={id:string,category:string,label:string,score:number,matched:boolean,answer?:{probabilities?:{value:string,probability:number}[]}};
+type Criterion={id:string,label:string,category:string,description?:string,type?:string,threshold?:number,weight?:number,options?:{value?:string,label?:string,description?:string}[]};
+type Questionnaire={revision:string,published_at:string,criteria:Criterion[]};
 type Event={id:string,event:{title:string,description:string,url:string,location?:string,starts_at?:string},inactive?:boolean,stale?:boolean,classification?:{scores:Score[],relevance:{status:string,score:number}}};
 const SOURCE="https://raw.githubusercontent.com/weidmanngabriel/gocath-tag-poc/rc-data/public.json";
 const root=document.querySelector<HTMLElement>("#app")!;
@@ -7,6 +9,7 @@ const esc=(s:unknown)=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&l
 const pct=(n:number)=>Math.round((n||0)*100)+" %";
 const status=(s:string)=>s==="likely_relevant"?"Wahrscheinlich relevant":s==="review"?"Prüfen":s==="likely_not_relevant"?"Eher nicht relevant":"Noch nicht klassifiziert";
 let records:Event[]=[];
+let questionnaire:Questionnaire|null=null;
 function scoreRow(s:Score){const distribution=s.answer?.probabilities||[];return `<div class="score"><div class="score-head"><span>${esc(s.label)}</span><b>${pct(s.score)}</b></div><div class="track"><div style="width:${Math.max(0,Math.min(100,s.score*100))}%"></div></div>${distribution.map(p=>`<small>${esc(p.value)}: ${pct(p.probability)}</small>`).join("")}</div>`;}
 function card(item:Event){
  const c=item.classification;
@@ -33,6 +36,13 @@ function switchItemTab(button:HTMLButtonElement,focus=false){
  if(focus)button.focus();
 }
 
+function questionnaireView(q:Questionnaire|null){
+ if(!q)return '<p>Der veröffentlichte Fragebogen ist noch nicht verfügbar. Bitte den RC-Katalog einmal im Modus „refresh“ aktualisieren.</p>';
+ const date=new Date(q.published_at);
+ const stamp=Number.isNaN(date.getTime())?"Unbekannt":date.toLocaleString("de-DE");
+ const categories=[...new Set(q.criteria.map(c=>c.category))].sort((a,b)=>a.localeCompare(b,"de"));
+ return `<p>Dies ist der zuletzt veröffentlichte Fragebogen, der für neue Bewertungen verwendet wird. Ältere Bewertungen können noch auf einer früheren Version beruhen.</p><p class="questionnaire-meta">Veröffentlicht: ${esc(stamp)} · ${q.criteria.length} Kriterien</p>${categories.map(category=>`<section class="questionnaire-group"><h3>${esc(category)}</h3>${q.criteria.filter(c=>c.category===category).map(c=>`<article class="questionnaire-item"><h4>${esc(c.label)}</h4><p>${esc(c.description||"Keine zusätzliche Beschreibung hinterlegt.")}</p>${c.type==="predicate"||!c.type?`<small>Gilt ab ${Math.round((c.threshold||0)*100)} % Wahrscheinlichkeit als passend.</small>`:""}${c.options?.length?`<div class="questionnaire-options"><strong>${c.type==="choice"?"Mögliche Antworten:":"Bewertungsstufen:"}</strong><ul>${c.options.map(o=>`<li>${esc(o.label||o.value||"")}${o.description?": "+esc(o.description):""}</li>`).join("")}</ul></div>`:""}</article>`).join("")}</section>`).join("")}<p class="questionnaire-contact">Fehlt ein Kriterium oder ist etwas unklar? <a href="mailto:gweidmann@regnumchristi.eu?subject=R%C3%BCckmeldung%20zum%20RC-Fragebogen">Gabriel Weidmann kontaktieren</a>.</p>`;
+}
 function display(){
  const q=(document.querySelector<HTMLInputElement>("#q")?.value||"").toLocaleLowerCase("de");
  const relevance=document.querySelector<HTMLSelectElement>("#relevance")?.value||"";
@@ -44,13 +54,18 @@ function display(){
  document.querySelector<HTMLElement>("#results")!.innerHTML=filtered.map(card).join("")||"<p>Keine Veranstaltungen gefunden.</p>";
 }
 async function init(){
- root.innerHTML=`<div class="shell"><header><a href="../">GoCath</a><h1>RC Veranstaltungen</h1><p>Öffentliche KI-Einordnung mit allen Einzelwerten. Modellschätzungen, keine redaktionelle Bewertung.</p></header><section class="purpose"><h2>Damit deine Veranstaltung besser gefunden wird</h2><p>Dieses Tool hilft dir dabei, deine Veranstaltung so zu beschreiben, dass Interessierte sie leichter finden – zum Beispiel über Google, GoCath oder den RC-Kalender.</p><details><summary>Mehr dazu erfahren</summary><p>Eine KI prüft, ob aus deinem Veranstaltungstext klar hervorgeht, worum es geht und für wen die Veranstaltung gedacht ist.</p><p><strong>Wichtig:</strong> Hier wird nicht die Qualität deiner Veranstaltung bewertet. Niedrige Werte können einfach bedeuten, dass wichtige Informationen in der Beschreibung fehlen. Die KI kann sich auch irren.</p></details><p class="purpose-meta">Die Liste wird derzeit manuell aktualisiert. Eine stündliche Aktualisierung ist geplant, aber noch nicht aktiviert.</p><p class="purpose-contact">Fragen oder Rückmeldungen? Gabriel Weidmann · <a href="mailto:gweidmann@regnumchristi.eu">gweidmann@regnumchristi.eu</a></p></section><div class="filters"><input id="q" type="search" placeholder="Veranstaltung suchen" aria-label="Suche"/><select id="relevance" aria-label="Relevanz"><option value="">Alle Relevanzstufen</option><option value="likely_relevant">Wahrscheinlich relevant</option><option value="review">Prüfen</option><option value="likely_not_relevant">Eher nicht relevant</option></select><details class="criterion-filter" id="criterion-filter"><summary>Kriterien auswählen <span id="filter-count"></span></summary><div class="criterion-options" id="criterion-options"></div><button type="button" id="clear-criteria">Auswahl löschen</button></details><select id="sort" aria-label="Sortierung"><option value="date">Nach Datum</option><option value="score">Nach Relevanz</option><option value="title">Alphabetisch</option></select></div><p id="count"></p><section id="results">Daten werden geladen …</section><footer>Quelle: <a href="https://www.regnumchristi.eu/demnaechst/">Regnum Christi</a></footer></div>`;
+ root.innerHTML=`<div class="shell"><header><a href="../">GoCath</a><h1>RC Veranstaltungen</h1><p>Öffentliche KI-Einordnung mit allen Einzelwerten. Modellschätzungen, keine redaktionelle Bewertung.</p></header><section class="purpose"><h2>Damit deine Veranstaltung besser gefunden wird</h2><p>Dieses Tool hilft dir dabei, deine Veranstaltung so zu beschreiben, dass Interessierte sie leichter finden – zum Beispiel über Google, GoCath oder den RC-Kalender.</p><details><summary>Mehr dazu erfahren</summary><p>Eine KI prüft, ob aus deinem Veranstaltungstext klar hervorgeht, worum es geht und für wen die Veranstaltung gedacht ist.</p><p><strong>Wichtig:</strong> Hier wird nicht die Qualität deiner Veranstaltung bewertet. Niedrige Werte können einfach bedeuten, dass wichtige Informationen in der Beschreibung fehlen. Die KI kann sich auch irren.</p></details><p class="purpose-meta">Die Liste wird derzeit manuell aktualisiert. Eine stündliche Aktualisierung ist geplant, aber noch nicht aktiviert.</p><p class="purpose-contact">Fragen oder Rückmeldungen? Gabriel Weidmann · <a href="mailto:gweidmann@regnumchristi.eu">gweidmann@regnumchristi.eu</a></p></section><nav class="catalog-nav" aria-label="Katalogansicht"><button type="button" id="show-events" aria-pressed="true">Veranstaltungen</button><button type="button" id="show-questionnaire" aria-pressed="false">Bewertungskriterien</button></nav><section id="events-view"><div class="filters"><input id="q" type="search" placeholder="Veranstaltung suchen" aria-label="Suche"/><select id="relevance" aria-label="Relevanz"><option value="">Alle Relevanzstufen</option><option value="likely_relevant">Wahrscheinlich relevant</option><option value="review">Prüfen</option><option value="likely_not_relevant">Eher nicht relevant</option></select><details class="criterion-filter" id="criterion-filter"><summary>Kriterien auswählen <span id="filter-count"></span></summary><div class="criterion-options" id="criterion-options"></div><button type="button" id="clear-criteria">Auswahl löschen</button></details><select id="sort" aria-label="Sortierung"><option value="date">Nach Datum</option><option value="score">Nach Relevanz</option><option value="title">Alphabetisch</option></select></div><p id="count"></p><section id="results">Daten werden geladen …</section></section><section id="questionnaire-view" hidden><h2>So werden Veranstaltungen bewertet</h2><div id="questionnaire-content"></div></section><footer>Quelle: <a href="https://www.regnumchristi.eu/demnaechst/">Regnum Christi</a></footer></div>`;
  try{
  const response=await fetch(SOURCE+"?v="+Math.floor(Date.now()/60000),{cache:"no-store"});
  if(!response.ok)throw Error("Katalog noch nicht veröffentlicht ("+response.status+")");
- const json=await response.json() as {events:Event[]};
+ const json=await response.json() as {events:Event[],questionnaire?:Questionnaire};
  if(!Array.isArray(json.events))throw Error("Ungültiges Datenformat");
  records=json.events;
+ questionnaire=json.questionnaire||null;
+ document.querySelector<HTMLElement>("#questionnaire-content")!.innerHTML=questionnaireView(questionnaire);
+ const toggle=(showQuestions:boolean)=>{document.querySelector<HTMLElement>("#events-view")!.hidden=showQuestions;document.querySelector<HTMLElement>("#questionnaire-view")!.hidden=!showQuestions;document.querySelector<HTMLButtonElement>("#show-events")!.setAttribute("aria-pressed",String(!showQuestions));document.querySelector<HTMLButtonElement>("#show-questionnaire")!.setAttribute("aria-pressed",String(showQuestions));};
+ document.querySelector<HTMLButtonElement>("#show-events")!.addEventListener("click",()=>toggle(false));
+ document.querySelector<HTMLButtonElement>("#show-questionnaire")!.addEventListener("click",()=>toggle(true));
  const criteria=new Map<string,{category:string,label:string}>();
  records.forEach(e=>e.classification?.scores.forEach(score=>criteria.set(score.id,{category:score.category,label:score.label})));
  const groups=new Map<string,Array<[string,string]>>();
