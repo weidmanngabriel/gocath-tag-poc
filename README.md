@@ -33,3 +33,7 @@ In der Web-App unter **Kriterien** können Fragen als aufklappbare Karten mit Ti
 ## Google-Anmeldung bei neuen Deployments
 
 Der Google-Sheets-Token liegt normalerweise nur im aktuellen Browser-Tab. Optional kann der Nutzer auf dem Login-Bildschirm **„Für die Restlaufzeit des Google-Tokens auf diesem Gerät angemeldet bleiben“** aktivieren: Dann wird der kurzlebige Token über Tabs und GitHub-Pages-Deployments hinweg wiederverwendet, bis er abläuft. Der Button **„Auf diesem Gerät abmelden“** löscht die gespeicherten Token. Ohne Backend ist ein dauerhaftes Login wegen fehlender Refresh-Tokens nicht möglich; siehe [OAuth-Einrichtung](docs/setup.md) und [Dashboard-Sicherheit](docs/dashboard.md).
+
+## Decisions-Inputkosten senken
+
+Die allgemeine Entscheidungsregel wird nicht mehr für jedes einzelne Merkmal wiederholt. Das Modell erhält nur Titel und Beschreibung der Veranstaltung; die URL bleibt für Quellverweise im Sheet erhalten. GoCath-Webseiten werden um eindeutig erkennbare Cookie-/Navigations- und Empfehlungstexte bereinigt. Alle aktiven Fragen und Antwortoptionen bleiben unverändert. Im manuellen Actions-Workflow gibt es den lesenden Modus `compare-input`, um vorher/nachher Input-Tokens sowie Relevanz- und Score-Abweichungen mit denselben Veranstaltungsdaten zu vergleichen; dieser Test verursacht zusätzliche API-Kosten, aber keine Sheet-Schreibzugriffe. Details in [docs/development.md](docs/development.md).
