@@ -36,6 +36,15 @@ class DecisionsClassifierTests(unittest.TestCase):
         self.assertEqual([q["name"] for q in payload["questions"]],
                          ["format_mass", "topic_faith"])
         self.assertTrue(all(q["type"] == "predicate" for q in payload["questions"]))
+        # Global safety / evidence rules appear exactly once, not once per question.
+        common = "Der bloße Domainname ist kein Beweis für einen katholischen Veranstalter."
+        self.assertEqual(payload["input"][0]["content"][0]["text"].count(common), 1)
+        self.assertTrue(all(common not in q["instructions"] for q in payload["questions"]))
+        self.assertEqual(payload["questions"][0]["instructions"],
+                         "Frage: Heilige Messe. Eine Messe findet statt")
+        self.assertEqual(payload["questions"][1]["instructions"],
+                         "Frage: Glaubensbildung. Glaubensinhalte")
+        self.assertEqual(payload["input"][0]["content"][1]["data"], self.event)
         self.assertEqual([s["score"] for s in tags["criteria_scores"]], [0.94, 0.02])
         self.assertEqual(tags["standard_tags"], ["Heilige Messe"])
         self.assertEqual(tags["additional_tags"], [])
