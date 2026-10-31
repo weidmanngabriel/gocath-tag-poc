@@ -1,6 +1,6 @@
 # GoCath Auto Event Tagging – POC
 
-Eine minimale TypeScript-Oberfläche für **manuelle** GoCath-Klassifizierungen. Öffentliche GoCath-Veranstaltungen werden über GitHub Actions gelesen, durch Gemini mit konfigurierbarem Prompt klassifiziert und in ein Google Sheet geschrieben.
+Eine minimale TypeScript-Oberfläche für **manuelle** GoCath-Klassifizierungen. Öffentliche GoCath-Veranstaltungen werden über GitHub Actions gelesen, durch den in `Config.classifier_provider` gewählten Anbieter klassifiziert und in ein Google Sheet geschrieben.
 
 - `web/`: Vite/TypeScript Dashboard für Google OAuth, Konfiguration und Vergleich der historischen Tag-Zuordnungen
 - `src/`: Python Runner, Gemini-Modell und Google-Sheets-Anbindung
@@ -16,6 +16,8 @@ Eine minimale TypeScript-Oberfläche für **manuelle** GoCath-Klassifizierungen.
 
 **Tests:** `python -m unittest discover -s tests -v` und in `web/`: `npm install && npm run build`.
 
-**Aktueller Zustand:** Standard-Tag-Aktivierung und Synonyme sind im Sheet `Tags` pflegbar; Run-Historie, Token- und Kostenschätzung sowie Contains-/Fuzzy-Suche stehen im Dashboard bereit. Der Runner verwendet Gemini und wird ausschließlich manuell gestartet. Die maßgeblichen aktuellen Einstellungen stehen im Google Sheet, nicht in dieser README.
+**Neue Kriterien (PR #27):** `Criteria` enthält bearbeitbare Merkmale (Format, Thema, Zielgruppe, Kontext) und Relevanzgewichte. Bei OpenAI werden pro Event alle Scores einschließlich der niedrigen Werte in `ClassificationDetails` append-only gespeichert. Die Relevanz wird regelbasiert abgeleitet, **nicht** zum Ausschluss verwendet. Die Dashboard-Seite zeigt je Run die vollständigen Scores; Änderungen an vorhandenen Kriterien/Einstellungen werden beim Verlassen des Feldes automatisch gespeichert. Die alten Standard-Tags bleiben zur Kompatibilität erhalten. Gemini und Groq erzeugen noch keine neuen Kriterienscores.
 
-**KI-Anbieter:** Der aktive Klassifizierungsanbieter ist im Dashboard unter `classifier_provider` zwischen Groq und Gemini auswählbar. Groq (`openai/gpt-oss-20b`) ist voreingestellt. Beide API-Keys liegen ausschließlich in GitHub Secrets; die Klassifizierung bleibt manuell und schreibt nur ins Test-Sheet.
+**Aktueller Zustand:** Standard-Tag-Aktivierung und Synonyme sind im Sheet `Tags` pflegbar; Run-Historie, Token- und Kostenschätzung sowie Contains-/Fuzzy-Suche stehen im Dashboard bereit. Der Runner wird ausschließlich manuell gestartet. Die maßgeblichen aktuellen Einstellungen stehen im Google Sheet, nicht in dieser README.
+
+**KI-Anbieter:** Der aktive Klassifizierungsanbieter ist im Dashboard unter `classifier_provider` zwischen OpenAI, Groq und Gemini auswählbar. Der aktuelle Wert steht ausschließlich im Sheet. Beide API-Keys liegen ausschließlich in GitHub Secrets; die Klassifizierung bleibt manuell und schreibt nur ins Test-Sheet.
