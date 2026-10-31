@@ -37,10 +37,11 @@ function editor(row:string[],idx:number){const n=idx+1,type=row[7]||"predicate";
 <small class="muted">ID: ${esc(row[0])}</small></div></details>`;}
 function render(){
  const matches=rows.slice(1).map((r,i)=>({r,i:i+1})).filter(x=>x.r[0]&&[x.r[0],x.r[1],x.r[2],x.r[3]].join(" ").toLowerCase().includes(search.toLowerCase()));
- root.innerHTML=`<header><div class="brand"><span class="mark">✝</span><div><b>GoCath · Criteria</b><small>RC-Fragebogen bearbeiten</small></div></div><span class="muted">${token?"Google Sheets verbunden":"Nicht verbunden"}</span></header><main><section class="hero"><h1>RC-Kriterieneditor</h1><p>Fragen werden direkt im Google Sheet gespeichert. Semantische Änderungen erfordern einen bewusst gestarteten reclassify-Lauf.</p><div class="actions"><button id="login">${token?"Erneut anmelden":"Mit Google anmelden"}</button>${token?'<button id="logout">Abmelden</button>':""}<a href="/rc/">RC-Katalog</a><a href="https://docs.google.com/spreadsheets/d/${SHEET}/edit" target="_blank" rel="noopener">Google Sheet</a></div>${!token?'<label><input type="checkbox" id="remember"> Auf diesem Gerät bis zum Token-Ablauf angemeldet bleiben</label>':""}<p id="status" aria-live="polite"></p></section>${token?`<section class="panel"><h2>Kriterien (${matches.length})</h2><input id="search" type="search" placeholder="Kriterien suchen" value="${esc(search)}"><p class="hint">Bestehende Fragen ändern und bei Verlassen des Feldes speichern. Neue Fragen im Google Sheet hinzufügen; IDs bleiben unverändert.</p><div id="questions">${matches.map(({r,i})=>editor(r,i)).join("")}</div></section>`:""}</main>`;
+ root.innerHTML=`<header><div class="brand"><span class="mark">✝</span><div><b>GoCath · Criteria</b><small>RC-Fragebogen bearbeiten</small></div></div><span class="muted">${token?"Google Sheets verbunden":"Nicht verbunden"}</span></header><main><section class="hero"><h1>RC-Kriterieneditor</h1><p>Fragen werden direkt im Google Sheet gespeichert. Semantische Änderungen erfordern einen bewusst gestarteten reclassify-Lauf.</p><div class="actions"><button id="login">${token?"Erneut anmelden":"Mit Google anmelden"}</button>${token?'<button id="logout">Abmelden</button>':""}<a href="/rc/">RC-Katalog</a><a href="https://docs.google.com/spreadsheets/d/${SHEET}/edit" target="_blank" rel="noopener">Google Sheet</a></div>${!token?'<label><input type="checkbox" id="remember"> Auf diesem Gerät bis zum Token-Ablauf angemeldet bleiben</label>':""}<p id="status" aria-live="polite"></p></section>${token?`<section class="panel"><h2>Kriterien (${matches.length})</h2><input id="search" type="search" placeholder="Kriterien suchen" value="${esc(search)}"><p class="hint">Bestehende Fragen ändern und bei Verlassen des Feldes speichern. Neue Fragen im Google Sheet hinzufügen; IDs bleiben unverändert.</p><div id="questions">${matches.map(({r,i})=>editor(r,i)).join("")}</div><details class="question-card"><summary><strong>+ Neue Frage hinzufügen</strong></summary><div class="question-fields"><label>Titel<input id="newTitle" placeholder="Titel der Frage"></label><label>Bereich<input id="newCategory" placeholder="Format"></label><label>Entscheidungsregel<textarea id="newDescription" rows="3"></textarea></label><label>Fragetyp<select id="newType"><option value="predicate">Wahrscheinlichkeit</option><option value="choice">Einzelauswahl</option><option value="score">Bewertungsskala</option></select></label><label>Antwortoptionen (Name | Beschreibung)<textarea id="newOptions" rows="4"></textarea></label><label>Relevanzgewicht<input id="newWeight" type="number" min="0" max="3" step="0.1" value="0"></label><label>Trefferschwelle<input id="newThreshold" type="number" min="0" max="1" step="0.05" value="0.65"></label><button id="addQuestion" type="button">Frage hinzufügen</button></div></details></section>`:""}</main>`;
  document.querySelector<HTMLButtonElement>("#login")?.addEventListener("click",login);
  document.querySelector<HTMLButtonElement>("#logout")?.addEventListener("click",logout);
  document.querySelector<HTMLInputElement>("#search")?.addEventListener("input",e=>{search=(e.target as HTMLInputElement).value;const container=document.querySelector("#questions");if(container)container.innerHTML=rows.slice(1).map((r,i)=>({r,i:i+1})).filter(x=>x.r[0]&&[x.r[0],x.r[1],x.r[2],x.r[3]].join(" ").toLowerCase().includes(search.toLowerCase())).map(x=>editor(x.r,x.i)).join("");bindFields();});
+ document.querySelector<HTMLButtonElement>("#addQuestion")?.addEventListener("click",addQuestion);
  bindFields();
 }
 function bindFields(){
@@ -55,6 +56,25 @@ function bindFields(){
  notify("Speichert …");await api("Criteria!"+col+row,{values:[[value]]});rows[row-1][pos]=value;notify("Gespeichert.");if(col==="H")render();
  }catch(e){notify("Nicht gespeichert: "+String(e),true);el.value=col==="I"?formatOptions(current):current;}
  }));
+}
+async function addQuestion(){
+ const value=(id:string)=>(document.querySelector<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>("#"+id)?.value||"").trim();
+ const title=value("newTitle"),category=value("newCategory"),description=value("newDescription");
+ const type=value("newType")||"predicate",weight=Number(value("newWeight")),threshold=Number(value("newThreshold"));
+ if(!title||!category||!description){notify("Titel, Bereich und Entscheidungsregel sind erforderlich.",true);return;}
+ if(!Number.isFinite(weight)||weight<0||weight>3||!Number.isFinite(threshold)||threshold<0||threshold>1){notify("Gewicht oder Trefferschwelle ungültig.",true);return;}
+ let options="[]";
+ try{if(type!=="predicate")options=encodeOptions(value("newOptions"),type);}catch(e){notify(String(e),true);return;}
+ const slug=title.toLowerCase().normalize("NFKD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,55);
+ const ids=new Set(rows.slice(1).map(r=>r[0]));
+ let newId="rc_"+slug,index=2;while(ids.has(newId)){newId="rc_"+slug+"_"+index++;}
+ const newRow=[newId,category,title,description,"true",type==="predicate"?String(weight):"0",String(threshold),type,options];
+ try{
+  notify("Speichert neue Frage …");
+  const response=await fetch(API+"/values/"+encodeURIComponent("Criteria!A:I")+":append?valueInputOption=RAW&insertDataOption=INSERT_ROWS",{method:"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:JSON.stringify({values:[newRow]})});
+  if(!response.ok)throw Error("Google Sheets HTTP "+response.status);
+  await load();notify("Frage hinzugefügt: "+newId);
+ }catch(e){notify("Nicht gespeichert: "+String(e),true);}
 }
 function login(){
  if(!CLIENT_ID||!window.google?.accounts?.oauth2){notify("Google OAuth nicht verfügbar. Client-ID oder Google-Skript prüfen.",true);return;}
