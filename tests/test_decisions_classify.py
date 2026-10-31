@@ -59,7 +59,7 @@ class DecisionsClassifierTests(unittest.TestCase):
             {"type": "predicate", "name": "topic_faith", "probability": 0.1},
         ]}
         post.return_value = response
-        with self.assertRaisesRegex(ValueError, "unexpected name or type"):
+        with self.assertRaisesRegex(ValueError, "type mismatch for format_mass"):
             classify_decisions(self.event, "secret", self.config)
 
     @patch("src.decisions_classify.requests.post")
