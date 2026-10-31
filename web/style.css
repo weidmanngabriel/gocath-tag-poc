@@ -187,3 +187,8 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
 .empty-results{border:1px dashed #cbdcd2;border-radius:12px;padding:25px;text-align:center;color:#5a7164}
 @media(max-width:1000px){.result-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.result-filters{grid-template-columns:1fr}.event-card-main{padding:15px}.event-expand>summary{padding:12px 15px}.event-expanded{padding:5px 15px 16px}.event-card-title h3{font-size:16px}.detail-questions{grid-template-columns:1fr}.question-tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:14px}.question-tabs button{white-space:nowrap;flex-shrink:0}.relevance-tag{white-space:normal}}
+
+/* Optional browser-persistent OAuth token (explicit opt-in only). */
+.hero .remember-device{display:flex;align-items:flex-start;gap:9px;margin-top:13px;color:#f0f9f1;font-size:13px;line-height:1.45;max-width:680px}
+.hero .remember-device input{width:17px;height:17px;flex-shrink:0;accent-color:#ebfaf0;margin-top:2px}
+.hero #logout{margin:0;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)}
