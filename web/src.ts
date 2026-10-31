@@ -215,7 +215,7 @@ function render(){
 <label id="newQuestionOptionsWrap" hidden>Antworten und Regeln<textarea id="questionOptions" rows="5" placeholder="Option | Wähle diese Antwort, wenn …"></textarea></label>
 <label>Relevanzgewicht (nur Wahrscheinlichkeit)<input id="questionWeight" type="number" min="0" max="3" step="0.1" value="0"/></label>
 <label>Trefferschwelle<input id="questionThreshold" type="number" min="0" max="1" step="0.05" value="0.65"/></label><button id="addQuestion" type="button">Frage hinzufügen</button></div></details></section>
- <section class="panel" data-view="metrics"><h2>KI-Metriken</h2><p class="hint">Vom jeweiligen KI-Anbieter gemeldete Tokens je Lauf. Kosten sind Schätzungen auf Basis der hinterlegten Preise, keine Anbieterrechnung.</p><div class="table-scroll"><table><thead><tr><th>Run</th><th>Input</th><th>Output</th><th>Thinking</th><th>Gesamt</th><th>Kosten (USD, geschätzt)</th></tr></thead><tbody>${runs.slice(1).filter(x=>x[0]).reverse().slice(0,20).map(r=>`<tr><td>${safe(r[0]||"")}</td><td>${safe(r[6]||"–")}</td><td>${safe(r[7]||"–")}</td><td>${safe(r[8]||"–")}</td><td>${safe(r[9]||"–")}</td><td>${safe(r[10]||"nicht konfiguriert")}</td></tr>`).join("")}</tbody></table></div></section><section class="panel results-panel" data-view="results"><div class="results-heading"><h2>Veranstaltungen</h2><p class="hint">Alle Events bleiben sichtbar, unabhängig von ihrer Relevanz. Filter betreffen nur die Anzeige. Die Relevanzbewertung misst nur, ob der Text genügend Hinweise für die automatische katholische Einordnung und Klassifizierung enthält. Sie bewertet nicht die sprachliche Qualität, Attraktivität oder die Wahrscheinlichkeit einer Teilnahme.</p></div><div class="result-filters"><label><span>Klassifizierungslauf</span><select id="runFilter">${[...new Set(history.slice(1).map(r=>r[0]).filter(Boolean))].reverse().map(id=>`<option value="${safe(id)}">Run ${safe(id)}</option>`).join("")}</select></label><label><span>Relevanz</span><select id="relevanceFilter"><option value="all">Alle Bewertungen</option><option value="likely_relevant">Wahrscheinlich relevant</option><option value="review">Prüfen</option><option value="likely_not_relevant">Eher nicht relevant</option><option value="unknown">Nicht bewertet</option></select></label><label><span>Treffer in Bereich</span><select id="resultCategoryFilter"><option value="all">Alle Bereiche</option></select></label><label class="result-search"><span>Suche</span><input id="historySearch" type="search" placeholder="Titel, Tag oder Begründung (ab 3 Zeichen)" autocomplete="off"/></label></div><p class="hint" id="matchCount" aria-live="polite"></p><div id="historyView" class="event-list"></div></section>
+ <section class="panel" data-view="metrics"><h2>KI-Metriken</h2><p class="hint">Vom jeweiligen KI-Anbieter gemeldete Tokens je Lauf. Kosten sind Schätzungen auf Basis der hinterlegten Preise, keine Anbieterrechnung.</p><div class="table-scroll"><table><thead><tr><th>Run</th><th>Input</th><th>Output</th><th>Thinking</th><th>Gesamt</th><th>Kosten (USD, geschätzt)</th></tr></thead><tbody>${runs.slice(1).filter(x=>x[0]).reverse().slice(0,20).map(r=>`<tr><td>${safe(r[0]||"")}</td><td>${safe(r[6]||"–")}</td><td>${safe(r[7]||"–")}</td><td>${safe(r[8]||"–")}</td><td>${safe(r[9]||"–")}</td><td>${safe(r[10]||"nicht konfiguriert")}</td></tr>`).join("")}</tbody></table></div></section><section class="panel results-panel" data-view="results"><div class="results-heading"><h2>Veranstaltungen</h2><p class="hint">Alle Events bleiben sichtbar, unabhängig von ihrer Relevanz. Filter betreffen nur die Anzeige. Die Relevanzbewertung misst nur, ob der Text genügend Hinweise für die automatische katholische Einordnung und Klassifizierung enthält. Sie bewertet nicht die sprachliche Qualität, Attraktivität oder die Wahrscheinlichkeit einer Teilnahme.</p></div><div class="result-filters"><label><span>Klassifizierungslauf</span><select id="runFilter">${[...new Set(history.slice(1).map(r=>r[0]).filter(Boolean))].reverse().map(id=>`<option value="${safe(id)}">Run ${safe(id)}</option>`).join("")}</select></label><label><span>Relevanz</span><select id="relevanceFilter"><option value="all">Alle Bewertungen</option><option value="likely_relevant">Wahrscheinlich relevant</option><option value="review">Prüfen</option><option value="likely_not_relevant">Eher nicht relevant</option><option value="unknown">Nicht bewertet</option></select></label><label class="result-search"><span>Suche</span><input id="historySearch" type="search" placeholder="Titel, Tag oder Begründung (ab 3 Zeichen)" autocomplete="off"/></label></div><div class="criterion-filter-panel"><div class="criterion-filter-heading"><strong>Kriterienfilter</strong><button type="button" id="clearCriterionFilters">Auswahl zurücksetzen</button></div><p class="hint">Alle ausgewählten Kriterien müssen zutreffen (UND), auch innerhalb einer Gruppe.</p><div id="criterionFilterGroups"></div></div><p class="hint" id="matchCount" aria-live="polite"></p><div id="historyView" class="event-list"></div></section>
  <section class="panel" data-view="rc-history"><h2>RC-Laufstatistik</h2><p class="hint">Stündliche RC-Katalogläufe, getrennt von den Google-Sheet-Läufen.</p><div id="rcRunHistory">Laufhistorie wird geladen …</div></section><section class="panel" data-view="runs"><h2>Letzte Läufe</h2><div class="table-scroll"><table><thead><tr><th>Run-ID</th><th>Beginn</th><th>Ende</th><th>Status</th><th>Klassifiziert</th></tr></thead><tbody>${runs.slice(1).filter(x=>x[0]).reverse().slice(0,15).map(r=>`<tr>${r.slice(0,5).map(v=>`<td>${safe(v||"")}</td>`).join("")}</tr>`).join("")}</tbody></table></div></section>`:`<section class="panel"><h2>Google-Anmeldung erforderlich</h2><p>Der Google-Account benötigt Bearbeiterzugriff auf das Sheet. Es werden keine API-Schlüssel im Browser gespeichert.</p>${!CLIENT_ID?"<p class='error'>VITE_GOOGLE_CLIENT_ID ist noch nicht für den GitHub-Pages-Build konfiguriert.</p>":""}</section>`}
  <dialog id="reasonDialog" class="reason-dialog" aria-labelledby="reasonDialogTitle"><div class="reason-dialog-head"><h2 id="reasonDialogTitle">Begründung</h2><form method="dialog"><button type="submit">Schließen</button></form></div><p id="reasonDialogText"></p></dialog><footer>GoCath Proof of Concept · Keine automatische Ausführung</footer></main>`;
  loadRcHistory();
@@ -245,32 +245,41 @@ function render(){
  const view=document.querySelector<HTMLDivElement>("#historyView");
  const search=document.querySelector<HTMLInputElement>("#historySearch");
  const relevanceFilter=document.querySelector<HTMLSelectElement>("#relevanceFilter");
- const categoryFilter=document.querySelector<HTMLSelectElement>("#resultCategoryFilter");
+ const criterionHost=document.querySelector<HTMLElement>("#criterionFilterGroups");
+ const chosenCriteria=new Set<string>();
+ let criteriaForRun="";
  const showHistory=()=>{
   if(!filter||!view)return;
   const source=history.slice(1).filter(r=>r[0]===filter.value);
   const term=search?.value.trim()||"";
   const relevance=relevanceFilter?.value||"all";
-  const allCategories=[...new Set(source.flatMap(r=>matchingDetails(r[0],r[1]).map(d=>d[6]).filter(Boolean)))].sort(germanSort.compare);
-  if(categoryFilter){
-   const old=categoryFilter.value;
-   categoryFilter.innerHTML='<option value="all">Alle Bereiche</option>'+allCategories.map(v=>`<option value="${safe(v)}">${safe(v)}</option>`).join("");
-   categoryFilter.value=allCategories.includes(old)?old:"all";
+  if(criterionHost&&criteriaForRun!==filter.value){
+   criteriaForRun=filter.value;
+   chosenCriteria.clear();
+   const available=new Map<string,Map<string,string>>();
+   for(const r of source)for(const d of matchingDetails(r[0],r[1])){
+    if((d[13]||"predicate")!=="predicate")continue;
+    const group=d[6]||"Sonstiges",id=d[5],title=d[7]||id;
+    if(!id)continue;
+    if(!available.has(group))available.set(group,new Map());
+    available.get(group)!.set(id,title);
+   }
+   criterionHost.innerHTML=[...available.entries()].sort((a,b)=>germanSort.compare(a[0],b[0])).map(([group,items])=>`<fieldset class="criterion-filter-group"><legend>${safe(group)}</legend><div class="criterion-filter-options">${[...items.entries()].sort((a,b)=>germanSort.compare(a[1],b[1])).map(([id,title])=>`<label><input type="checkbox" data-filter-criterion="${safe(id)}"/><span>${safe(title)}</span></label>`).join("")}</div></fieldset>`).join("")||'<p class="hint">Für diesen Lauf sind keine Kriterien vorhanden.</p>';
   }
-  const category=categoryFilter?.value||"all";
   const invalid=Boolean(term&&norm(term).split(" ").some(part=>part.length<3));
   const rows=source.filter(r=>{
    if(invalid||(term&&!matchesHistory(r,term,t)))return false;
    const ds=matchingDetails(r[0],r[1]);
    const status=ds[0]?.[11]||"unknown";
    if(relevance!=="all"&&relevance!==status)return false;
-   return category==="all"||ds.some(d=>d[6]===category&&isPositiveMatch(d));
+   return [...chosenCriteria].every(id=>ds.some(d=>d[5]===id&&isPositiveMatch(d)));
   }).sort((a,b)=>germanSort.compare(a[2]||"",b[2]||""));
   const count=document.querySelector("#matchCount");
   if(count)count.textContent=invalid?"Mindestens 3 Zeichen pro Suchwort eingeben":`${rows.length} von ${source.length} Veranstaltungen angezeigt`;
   view.innerHTML=rows.length?rows.map(renderEventCard).join(""):'<p class="empty-results">Keine Veranstaltungen für diese Filter gefunden.</p>';
  };
- if(filter){filter.onchange=showHistory;if(search)search.oninput=showHistory;if(relevanceFilter)relevanceFilter.onchange=showHistory;if(categoryFilter)categoryFilter.onchange=showHistory;showHistory();}
+ if(filter){filter.onchange=showHistory;if(search)search.oninput=showHistory;if(relevanceFilter)relevanceFilter.onchange=showHistory;if(criterionHost)criterionHost.addEventListener("change",event=>{const input=event.target as HTMLInputElement;if(!input.matches("[data-filter-criterion]"))return;const id=input.dataset.filterCriterion||"";if(input.checked)chosenCriteria.add(id);else chosenCriteria.delete(id);showHistory();});
+  document.querySelector<HTMLButtonElement>("#clearCriterionFilters")?.addEventListener("click",()=>{chosenCriteria.clear();criterionHost?.querySelectorAll<HTMLInputElement>("input[data-filter-criterion]").forEach(input=>input.checked=false);showHistory();});showHistory();}
  const cols:Record<string,number>={B:1,C:2,D:3,E:4,F:5,G:6,H:7,I:8};
  const pending=new Set<string>();
  const writeQuestion=async(row:number,col:string,value:string)=>{
