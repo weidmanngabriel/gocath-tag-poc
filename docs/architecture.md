@@ -12,3 +12,6 @@ Es gibt keinen eigenen Backend-Service und keine automatische Klassifizierung. H
 
 ## Decisions API
 Bei OpenAI ruft der Runner die Decisions API `POST /v1/decisions` (Modell `gpt-6-luna`) statt der Responses API auf. Ein Request enthält sämtliche aktivierten Kriterien aus `Criteria` als benannte `predicate`-Fragen und die Veranstaltungsdaten als `input_json`. Der Rückgabewert `answers[].probability` wird vollständig in `ClassificationDetails` gespeichert. Die bestehende gewichtete Relevanzberechnung im Python-Code bleibt unabhängig vom Modell. Die API generiert keine Freitext-Suchbegriffe; `additional_tags` wird nicht mehr für neue OpenAI-Läufe befüllt. Die anderen Anbieter bleiben unverändert.
+
+## Konfigurierbarer Decisions-Fragebogen
+Der Sheet-Tab `Criteria` speichert die editierbare Fragedefinition einschließlich Fragetyp und JSON-Optionen. Die statische Web-App bearbeitet diese Werte direkt über die Sheets-API. `src/config.py` lädt sie vor jedem manuellen Runner-Lauf, `src/decisions_classify.py` erzeugt typisierte Fragen und prüft vollständig die gelieferten Verteilungen. Das Append-only-Log `ClassificationDetails` ergänzt die bislang 13 Felder um den Fragetyp und die typisierte Antwort als JSON. Nur `predicate` wirkt auf die bestehende Relevanzheuristik.
