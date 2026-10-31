@@ -1,5 +1,7 @@
 # Architektur
 
+Hinweis zur Bereinigung: Der aktuelle RC-Leser nutzt nur die Sheets `Config` und `Criteria`. Alte Provider-Runner und History-Schreibmodule sind entfernt; das vollständige historische Google Sheet ist separat gesichert.
+
 **RC-Backend:** `src/config.py:settings` liest für den aktiven Katalog ausschließlich `Criteria` und `Config`; das frühere Blatt `Tags` wird nicht mehr benötigt. Historische Daten und Tags sind im Legacy-Backup gesichert. Eine spätere Umstellung auf nur `Criteria` erfordert eine gesonderte Migration der Modell- und Preisparameter.
 
 
