@@ -12,7 +12,7 @@ DISPLAY_FIELDS = CLASSIFICATION_FIELDS + ("location", "starts_at", "ends_at", "u
 
 def canonical_text(value):
     value = unicodedata.normalize("NFC", str(value or ""))
-    return re.sub(r"\\s+", " ", value).strip()
+    return re.sub(r"\s+", " ", value).strip()
 
 
 def canonical_event(event):
