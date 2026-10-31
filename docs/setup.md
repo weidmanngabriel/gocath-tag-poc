@@ -21,7 +21,7 @@
 
 Nach validiertem Squash-Merge auf `main` GitHub Actions → **Deploy dashboard to Pages** → **Run workflow**. Alternativ wird die Aktion beim Push auf main automatisch zum **Deployment** ausgelöst; **nicht** die Klassifizierung.
 
-Die Dashboard-URL ist https://weidmanngabriel.github.io/gocath-tag-poc/ . Im Dashboard **Mit Google anmelden** klicken. Konfigurationswert oder Tag ändern, speichern, Browser neu laden und Änderung prüfen.
+Die Dashboard-URL ist https://weidmanngabriel.github.io/gocath-tag-poc/ . Im Dashboard **Mit Google anmelden** klicken. Optional vorher **„Für die Restlaufzeit des Google-Tokens auf diesem Gerät angemeldet bleiben“** auswählen, um den vorhandenen Access-Token auch in neuen Tabs und nach Deployments wiederzuverwenden (höchstens bis zur Token-Ablaufzeit, üblicherweise etwa eine Stunde). Danach einen Konfigurationswert oder Tag ändern, speichern, Browser neu laden und Änderung prüfen. **„Auf diesem Gerät abmelden“** löscht beide lokalen Token-Kopien.
 
 ## 4. Manuelle Klassifizierung
 
@@ -33,6 +33,10 @@ Sheet-Tabs:
 - `Runs`: fortlaufende numerische Run-IDs, Metadaten, Token-Verbrauch und optionale geschätzte Kosten.
 - `ResultsHistory`: Klassifizierungen einschließlich Tokenverbrauch bleiben für Run-Vergleich und Ergebnis-Suche erhalten.
 - `Tabellenblatt1`: jeweils aktuelle Ergebnisse pro Veranstaltung.
+
+## Einschränkung der Login-Dauer
+
+Das Dashboard ist eine rein statische GitHub-Pages-App ohne Backend. Der Google Identity Services Token-Flow stellt **keinen Refresh-Token** zur Verfügung. Ist der Token abgelaufen, kann das Dashboard nicht ohne neue Nutzeraktion auf Google Sheets zugreifen. Das Häkchen zur Wiederverwendung speichert einen kurzlebigen, schreibberechtigten Google-Token im `localStorage`; auf gemeinsam verwendeten Geräten und bei anderen nicht vertrauenswürdigen Seiten unter derselben `github.io`-Origin nicht aktivieren. Für mehrtägige Anmeldung benötigt das Projekt einen Backend-basierten Autorisierungscode-Flow und einen sicheren Cookie-/Refresh-Token-Speicher.
 
 ## Fehlerdiagnose
 
