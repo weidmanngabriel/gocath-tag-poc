@@ -25,7 +25,7 @@ def write(path,data):
 
 def semantic_revision(criteria):
     """Fingerprint only changes that affect AI classification, not labels or thresholds."""
-    return digest([{"id": c["id"], "signature": criterion_signature(c)} for c in criteria])
+    return digest([{"id": c["id"], "signature": criterion_signature(c)} for c in sorted(criteria,key=lambda c:c["id"])])
 
 
 def publish_questions(state, config):
