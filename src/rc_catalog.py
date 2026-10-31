@@ -95,7 +95,7 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
             scores=result["criteria_scores"]
             if len(scores)!=len(config["criteria"]): raise ValueError("Incomplete score set")
         except Exception as exc:
-            failures.append({"id":key,"type":type(exc).__name__})
+            failures.append({"id":key,"type":type(exc).__name__, "reason":str(exc)[:240]})
             continue
         record=state["events"][key]
         record["classification"]={"scores":scores,"relevance":relevance(scores,config),
