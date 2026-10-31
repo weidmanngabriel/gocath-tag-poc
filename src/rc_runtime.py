@@ -7,6 +7,29 @@ from .decisions_classify import classify_decisions
 from .rc_import import fetch_all_events
 from .rc_delta import event_id
 
+def classify_with_fallback(event, api_key, config, usage):
+    """Recover one malformed Decisions response using smaller question batches."""
+    try:
+        return classify_decisions(event,api_key,config,usage)
+    except ValueError as exc:
+        if not str(exc).startswith("Decisions ") or len(config["criteria"])<2:
+            raise
+        print("Invalid Decisions response; retrying as two criterion batches:", str(exc), flush=True)
+        criteria=config["criteria"]
+        split=(len(criteria)+1)//2
+        combined=[]
+        cumulative=dict(usage)
+        for part in (criteria[:split],criteria[split:]):
+            part_config=dict(config,criteria=part)
+            part_usage={}
+            result=classify_decisions(event,api_key,part_config,part_usage)
+            combined.extend(result["criteria_scores"])
+            for name in ("input_tokens","output_tokens","thinking_tokens","cached_tokens","total_tokens"):
+                cumulative[name]=cumulative.get(name,0)+part_usage.get(name,0)
+        usage.update(cumulative)
+        return {"criteria_scores":combined}
+
+
 def main():
     p=argparse.ArgumentParser()
     p.add_argument("--mode",choices=("delta","publish-questions","reclassify","continue","refresh"),required=True)
@@ -28,7 +51,7 @@ def main():
             print("Queued:",start_campaign(state))
             mode="continue"
         result=sync(state,events,lambda event,config,usage:
-            classify_decisions(event,os.environ["GOCATH_OPENAI"],config,usage),max_paid=a.max_paid,mode=mode)
+            classify_with_fallback(event,os.environ["GOCATH_OPENAI"],config,usage),max_paid=a.max_paid,mode=mode)
         print(json.dumps(result,ensure_ascii=False))
     write(a.state,state)
     dest=Path(a.public)
