@@ -36,3 +36,11 @@
 - Formate werden zukünftig unabhängig durch `predicate`-Fragen beurteilt; neben den vorhandenen acht Formatfragen gibt es nun `format_freizeit_sport`. Damit können **alle** Formatwerte gleichzeitig niedrig sein, wenn keines ausreichend durch die Veranstaltungsdaten gestützt ist. Formate können auch gleichzeitig hohe Werte haben.
 - Deaktivierte frühere Einzelauswahlfragen werden nicht mehr als aktuelle Hauptformat-Chips in der Ergebnisübersicht gezeigt. In historischen Details bleiben sie als deaktivierte frühere Auswahl einsehbar.
 - Die Änderung wirkt auf **neue** Klassifizierungsläufe. Historische Klassifizierungen werden weder überschrieben noch neu bewertet. Der Relevanzstatus ist weiterhin unabhängig aus den dafür gewichteten Merkmalen abgeleitet.
+
+
+## RC-Versionierung und Reclassify-Auswahl
+- **`delta`:** Nur neue oder inhaltlich geänderte Veranstaltungsdaten klassifizieren. Eine bloße Änderung im Google Sheet startet **keine** massenhafte Neuklassifizierung.
+- **`reclassify`:** Neu/geändert oder noch nicht mit der aktuellen *semantischen* Konfigurationsversion erfolgreich bewertet. Aufeinanderfolgende Runs mit `max_paid` bearbeiten nur noch offene Kandidaten; `continue` entfällt.
+- **`refresh`:** Aktuelle Konfiguration und Veranstaltungstexte laden und veröffentlichen, aber keine kostenpflichtigen KI-Anfragen.
+- Kategoriebezeichnungen, Anzeigenamen und Prädikat-Trefferschwellen wirken sofort auf bestehende kompatible Ergebnisse. Inhaltliche Fragen, Fragetypen und Antwortoptionen ändern den semantischen Fingerprint und erfordern einen bewussten `reclassify`-Lauf.
+- Klassifizierungsversion und Zeitstempel werden pro Veranstaltung mit dem letzten erfolgreichen Ergebnis gespeichert. Fehler löschen dieses Ergebnis nicht. Für dauerhafte API-Fehler werden erneute Versuche mit unveränderten Inhalten und unveränderter semantischer Version unterdrückt.
