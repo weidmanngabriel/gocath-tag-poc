@@ -88,3 +88,11 @@ a:hover{color:var(--rc-red-deep)}
 
 .rc-brand .rc-logo{height:58px;width:auto;max-width:min(340px,80vw);display:block;object-fit:contain}
 @media(max-width:460px){.rc-brand .rc-logo{height:44px}}
+
+/* RC catalog: criteria are the primary result, not the internal relevance score. */
+.filters{grid-template-columns:minmax(220px,2fr) minmax(180px,1fr) minmax(155px,1fr)}
+.chips{margin-top:14px;gap:8px}
+.chips span{font-size:.88rem;line-height:1.4;padding:7px 11px;border:1px solid #e7dfdf;border-radius:9px;background:#f8f3f3;color:#651a20}
+.chips .no-hits{background:#f6f6f6;border-color:#e5e5e5;color:#666}
+@media(max-width:780px){.filters{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.filters{grid-template-columns:1fr}}
