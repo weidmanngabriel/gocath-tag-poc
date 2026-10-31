@@ -55,6 +55,20 @@ def publish_questions(state, config):
             if cls.get("questionnaire_revision") == previous.get("revision"):
                 cls.setdefault("classification_config_revision", old_semantic)
                 cls.setdefault("classification_config_updated_at", previous.get("published_at"))
+    # Historical per-question signatures included the display label. Convert
+    # only signatures which match the saved *previous* question definition.
+    # This preserves existing results across cosmetic label/threshold changes.
+    old_criteria={c["id"]:c for c in previous.get("criteria",[])}
+    for row in state.get("events",{}).values():
+        cls=row.get("classification") or {}
+        signatures=cls.get("criterion_signatures") or {}
+        for key, old in old_criteria.items():
+            legacy=digest({"type":old.get("type","predicate"),
+                           "label":old.get("label",""),
+                           "description":old.get("description",""),
+                           "options":old.get("options",[])})
+            if signatures.get(key)==legacy:
+                signatures[key]=criterion_signature(old)
     state.pop("campaign", None)
     return rev
 
