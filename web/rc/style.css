@@ -127,3 +127,19 @@ a:hover{color:var(--rc-red-deep)}
 .match-chip.match-review{background:#fff3d6;color:#805600;border-color:#f0dda5}
 .match-chip.match-irrelevant{background:#fbe8e8;color:#962b2b;border-color:#eac0c0}
 .match-chip.match-unknown{background:#f1f1f1;color:#5d5d5d;border-color:#dedede}
+
+/* Dense mobile layout: a category label and its chips share the same row. */
+.matched-groups{display:flex;flex-direction:column;gap:0;margin:12px 0 4px}
+.match-group{display:grid;grid-template-columns:92px minmax(0,1fr);align-items:start;gap:10px;background:none;border:0;border-bottom:1px solid #eee6e6;border-radius:0;padding:9px 0}
+.match-group:last-child{border-bottom:0}
+.match-group-heading{display:block;margin:0;padding-top:6px}
+.match-group-heading strong{font-size:.8rem;color:#75666a;font-weight:650}
+.match-group-heading small{display:none}
+.match-list{display:flex;align-items:center;flex-wrap:wrap;gap:5px;min-width:0}
+.match-chip{font-size:.8rem;padding:5px 8px;border-radius:7px}
+.match-more{display:inline-flex;position:relative;align-items:center;margin:0;min-width:0}
+.match-more summary{font-size:.8rem;font-weight:650;margin:0!important;padding:5px 7px;border:1px solid #e8dada;border-radius:7px;background:#faf7f7;white-space:nowrap}
+.match-more[open]{display:contents}
+.match-more[open] summary{display:inline-block}
+.match-more .match-list{display:contents}
+@media(max-width:460px){.matched-groups{gap:0}.match-group{grid-template-columns:77px minmax(0,1fr);gap:7px;padding:8px 0}.match-chip{font-size:.77rem;padding:5px 7px}}
