@@ -128,3 +128,13 @@ class CatalogTests(unittest.TestCase):
         public=public_feed(state)
         self.assertEqual(public["questionnaire"]["criteria"][0]["description"],"Findet das statt?")
         self.assertEqual(len(public["questionnaire"]["revision"]),64)
+
+    def test_publish_questions_replaces_previous_revision(self):
+        from src.rc_catalog import public_feed
+        state={"schema_version":1,"events":{}}
+        first={"criteria":[{"id":"a","label":"Alt","weight":1}]}
+        second={"criteria":[{"id":"b","label":"Neu","weight":0}]}
+        old_revision=publish_questions(state,first)
+        new_revision=publish_questions(state,second)
+        self.assertNotEqual(old_revision,new_revision)
+        self.assertEqual(public_feed(state)["questionnaire"]["criteria"][0]["label"],"Neu")
