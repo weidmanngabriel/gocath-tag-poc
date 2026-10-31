@@ -89,7 +89,7 @@ def event_dates(text):
             start=date(year,int(m1),int(d1))
         if start>end:raise ValueError("RC event starts after end date")
         return start.isoformat(),end.isoformat()
-    match=re.search(r"(?<!\\d)(\\d{1,2})\\.(\\d{1,2})\\.(20\\d{2})(?!\\d)",text)
+    match=re.search(r"(?<!\d)(\d{1,2})\.(\d{1,2})\.(20\d{2})(?!\d)",text)
     if not match:return "",""
     day,month,year=map(int,match.groups())
     return date(year,month,day).isoformat(),""
