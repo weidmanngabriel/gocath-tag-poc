@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T09:18:21.703010+00:00",
+  "generated_at": "2026-10-31T11:06:51.000491+00:00",
   "questionnaire": {
     "revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
     "criteria": [
@@ -38359,6 +38359,341 @@
           "total_tokens": 5589
         },
         "estimated_cost_usd": 0.0005589
+      },
+      "inactive": false,
+      "stale": false
+    },
+    {
+      "id": "rc-38275",
+      "event": {
+        "title": "Young Adults Ratingen",
+        "description": "27.11. - 29.11.2026 Junge Erwachsene Ratingen Deutschland Ratingen (DE) anmelden Beginn: 18:00 Ende: 12:00 Preis: 30 EUR Verpflegung & Programm Verwendungszweck bei Überweisungen: RWRA26YAWENOV Direktlink Termin speichern Kontakt Cornelia Mrutzek Geistliche Leitung Pater Ignacio María Rubio LC Tel: +49 176 87919898 E-Mail: Young Adults Wochenende: Unplugged & Reconnected – Ankommen im Advent. Zwischen To-do-Listen, Terminen und dem Trubel des Alltags bleibt manchmal wenig Zeit, um wirklich anzukommen, bei uns selbst, bei anderen und bei Gott. Genau dafür wollen wir uns ein Wochenende Zeit nehmen! Unter dem Motto „Deep Connections – Unplugged & Reconnected“ laden wir dich ein, den Alltag für einen Moment auf Pause zu stellen, neue Kraft zu tanken und dich auf das Wesentliche zu besinnen. Freu dich auf ein Wochenende voller echter Begegnungen, guter Gespräche, Gemeinschaft, Glauben und jeder Menge Spaß! Ob bei gemütlichen Abenden, gemeinsamen Aktivitäten, geistlichen Impulsen, Momenten der Stille oder unserem Weihnachtsmarkt-Special, hier ist Raum, um aufzutanken, neue Menschen kennenzulernen und Gott (neu) zu begegnen. Ganz egal, ob du schon öfter dabei warst oder zum ersten Mal vorbeischaust: Du bist herzlich willkommen! Wann: 27.–29. November 2026 Start: Freitag, 18:00 Uhr Ende: Sonntag, ca. 12 Uhr Wo: Apostelhaus Ratingen Für junge Erwachsene von 21–25 Jahren Geistliche Leitung: P. Ignacio & Camila Team: Christoph, Maja, Sophia, Kathi & Conni Preis: 30 € (inkl. Verpflegung & Programm) Übernachtung separat buchbar auf Anfrage: Special: Gemeinsamer Weihnachtsmarktbesuch (bitte Taschengeld für ein Abendessen mitbringen) Wir freuen uns auf Dich! Adresse ApostelHaus Ratingen, Sohlstättenstraße 66 40880 Ratingen Deutschland anmelden",
+        "organizer": "",
+        "target_groups": [],
+        "categories": [],
+        "location": "ApostelHaus Ratingen, Sohlstättenstraße 66 40880 Ratingen",
+        "starts_at": "2026-11-27",
+        "ends_at": "2026-11-29",
+        "url": "https://www.regnumchristi.eu/demnaechst/?vid=38275"
+      },
+      "classification": {
+        "scores": [
+          {
+            "id": "format_mass",
+            "category": "Format",
+            "label": "Gottesdienst / Heilige Messe",
+            "type": "predicate",
+            "score": 0.07,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.07
+            }
+          },
+          {
+            "id": "format_adoration",
+            "category": "Format",
+            "label": "Anbetung",
+            "type": "predicate",
+            "score": 0.05,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.05
+            }
+          },
+          {
+            "id": "format_prayer",
+            "category": "Format",
+            "label": "Gebetsveranstaltung",
+            "type": "predicate",
+            "score": 0.15,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.15
+            }
+          },
+          {
+            "id": "format_talk",
+            "category": "Format",
+            "label": "Vortrag",
+            "type": "predicate",
+            "score": 0.95,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.95
+            }
+          },
+          {
+            "id": "format_workshop",
+            "category": "Format",
+            "label": "Workshop / Seminar",
+            "type": "predicate",
+            "score": 0.2,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.2
+            }
+          },
+          {
+            "id": "format_pilgrimage",
+            "category": "Format",
+            "label": "Wallfahrt",
+            "type": "predicate",
+            "score": 0.01,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.01
+            }
+          },
+          {
+            "id": "format_retreat",
+            "category": "Format",
+            "label": "Exerzitien / Einkehr",
+            "type": "predicate",
+            "score": 0.12,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.12
+            }
+          },
+          {
+            "id": "format_social",
+            "category": "Format",
+            "label": "Gemeinschaftstreffen",
+            "type": "predicate",
+            "score": 0.96,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.96
+            }
+          },
+          {
+            "id": "topic_liturgy",
+            "category": "Thema",
+            "label": "Liturgie und Sakramente",
+            "type": "predicate",
+            "score": 0.19,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.19
+            }
+          },
+          {
+            "id": "topic_prayer",
+            "category": "Thema",
+            "label": "Gebet und Spiritualität",
+            "type": "predicate",
+            "score": 1.0,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 1.0
+            }
+          },
+          {
+            "id": "topic_faith",
+            "category": "Thema",
+            "label": "Glaubensbildung",
+            "type": "predicate",
+            "score": 0.89,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.89
+            }
+          },
+          {
+            "id": "topic_church",
+            "category": "Thema",
+            "label": "Kirche und Mission",
+            "type": "predicate",
+            "score": 0.93,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.93
+            }
+          },
+          {
+            "id": "topic_community",
+            "category": "Thema",
+            "label": "Christliche Gemeinschaft",
+            "type": "predicate",
+            "score": 0.98,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.98
+            }
+          },
+          {
+            "id": "aud_children",
+            "category": "Zielgruppe",
+            "label": "Kinder",
+            "type": "predicate",
+            "score": 0.01,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.01
+            }
+          },
+          {
+            "id": "aud_youth",
+            "category": "Zielgruppe",
+            "label": "Jugendliche",
+            "type": "predicate",
+            "score": 0.05,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.05
+            }
+          },
+          {
+            "id": "aud_young_adults",
+            "category": "Zielgruppe",
+            "label": "Junge Erwachsene",
+            "type": "predicate",
+            "score": 1.0,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 1.0
+            }
+          },
+          {
+            "id": "aud_adults",
+            "category": "Zielgruppe",
+            "label": "Erwachsene",
+            "type": "predicate",
+            "score": 0.74,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.74
+            }
+          },
+          {
+            "id": "aud_seniors",
+            "category": "Zielgruppe",
+            "label": "Senioren",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "aud_families",
+            "category": "Zielgruppe",
+            "label": "Familien",
+            "type": "predicate",
+            "score": 0.03,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.03
+            }
+          },
+          {
+            "id": "aud_women",
+            "category": "Zielgruppe",
+            "label": "Speziell Frauen / Mädchen",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "aud_men",
+            "category": "Zielgruppe",
+            "label": "Speziell Männer / Jungen",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "context_catholic",
+            "category": "Kontext",
+            "label": "Katholischer Veranstalter",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "context_church",
+            "category": "Kontext",
+            "label": "Kirchlicher Kontext",
+            "type": "predicate",
+            "score": 0.99,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.99
+            }
+          },
+          {
+            "id": "q_speziell_paare_oder_ehepaare",
+            "category": "Zielgruppe",
+            "label": "Speziell Paare oder Ehepaare",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "format_freizeit_sport",
+            "category": "Format",
+            "label": "Freizeit und Sport",
+            "type": "predicate",
+            "score": 0.66,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.66
+            }
+          }
+        ],
+        "relevance": {
+          "score": 1,
+          "status": "likely_relevant"
+        },
+        "model": "gpt-6-luna",
+        "classified_at": "2026-10-31T11:06:51.000491+00:00",
+        "questionnaire_revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
+        "usage": {
+          "input_tokens": 5707,
+          "output_tokens": 0,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 5707
+        },
+        "estimated_cost_usd": 0.0005707
       },
       "inactive": false,
       "stale": false
