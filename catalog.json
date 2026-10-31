@@ -32553,7 +32553,13 @@
       "display_hash": "268eb52d5e7710e7c55ac12cabde187cda8d3199fa2fd3b3b88607d19f64ff92",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
       "missing_checks": 0,
-      "inactive": false
+      "inactive": false,
+      "last_attempt_hash": "a0f2d5192ff9e5b6ed315b66eb8e465e2db8f895d69763193a889b3b31117af2",
+      "classification_status": "failed",
+      "classification_error": {
+        "type": "ValueError",
+        "reason": "Decisions answer type mismatch for context_catholic: expected predicate, got 'refusal'"
+      }
     },
     "rc-38127": {
       "event": {
@@ -43674,7 +43680,7 @@
     "published_at": "2026-10-31T11:05:00.528163+00:00"
   },
   "campaign": null,
-  "last_sync_at": "2026-10-31T12:13:54.598373+00:00",
+  "last_sync_at": "2026-10-31T12:27:13.604933+00:00",
   "last_run": {
     "mode": "delta",
     "source_count": 129,
@@ -43684,7 +43690,8 @@
       {
         "id": "rc-38107",
         "type": "ValueError",
-        "reason": "Decisions answer type mismatch for context_catholic: expected predicate, got 'refusal'"
+        "reason": "Decisions answer type mismatch for context_catholic: expected predicate, got 'refusal'",
+        "retry_on_change_only": true
       }
     ],
     "remaining_campaign": 0
