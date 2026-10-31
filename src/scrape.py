@@ -41,7 +41,7 @@ def fetch_events(limit=20):
         res = session.get(url, timeout=30, headers=HEADERS)
         print(f"[timing] source_get duration={time.perf_counter()-t0:.3f}s http_status={res.status_code}",flush=True)
         res.raise_for_status()
-        return res.text
+        return res.content.decode("utf-8-sig")
     try:
         links = event_links(html(LIST_URL), limit)
         if not links:
