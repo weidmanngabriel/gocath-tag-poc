@@ -40,7 +40,6 @@ def main():
     p.add_argument("--state",default="state/catalog.json")
     p.add_argument("--public",default="public/catalog.json")
     p.add_argument("--max-paid",type=int,default=25)
-    p.add_argument("--confirm",default="")
     a=p.parse_args()
     state=read(a.state)
     before=copy.deepcopy(state)
@@ -58,7 +57,6 @@ def main():
         events=fetch_all_events()
         mode=a.mode
         if a.mode=="reclassify":
-            if a.confirm!="YES":raise ValueError("Full reclassification requires YES")
             for ev in events:state["events"].setdefault(event_id(ev),{"event":ev})
             print("Queued:",start_campaign(state))
             mode="continue"
