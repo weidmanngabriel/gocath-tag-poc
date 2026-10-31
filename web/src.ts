@@ -161,6 +161,29 @@ function renderEventCard(r:string[]):string{
  }).join("");
  return `<article class="event-card"><div class="event-card-main"><div class="event-card-title"><h3>${safe(r[2]||"Ohne Titel")}</h3><span class="relevance-tag ${info.kind}">${info.label}${score!==undefined&&score!==""?" · "+percent(score):""}</span></div><div class="event-chips">${choices.map(d=>`<span class="choice-chip">${safe(d[7]||"Auswahl")}: <strong>${safe(choiceName(d)||"–")}</strong> · ${percent(d[8])} Modellanteil</span>`).join("")}${top.map(d=>`<span class="result-chip">${safe(d[7]||"")}: ${percent(d[8])}</span>`).join("")}</div><div class="event-card-meta"><span>${ds.length} Fragen</span><span>${ds.filter(isPositiveMatch).length} Treffer</span>${r[12]?`<span>${safe(r[12])} Tokens</span>`:""}</div></div><details class="event-expand"><summary>Alle Bewertungen ansehen</summary><div class="event-expanded"><p><a href="${safe(r[1]||"")}" target="_blank" rel="noopener noreferrer">Veranstaltungsseite öffnen ↗</a></p>${r[3]||r[4]?`<p><strong>Tags:</strong> ${safe([r[3],r[4]].filter(Boolean).join(", "))}</p>`:""}${r[5]?`<p><strong>Begründung:</strong> ${safe(r[5])}</p>`:""}${ds.length?body:'<p class="hint">Für diesen Lauf liegen keine Einzelbewertungen vor.</p>'}</div></details></article>`;
 }
+
+type RcStat={run_id:string;started_at:string;source_count:number;queued:number;attempted:number;classified:number;failed:number;usage:Record<string,number>;cost_usd_estimated:number};
+function rcBars(rows:RcStat[],measure:(r:RcStat)=>number,title:string){
+ const vals=rows.map(measure),max=Math.max(1,...vals),w=680,base=130,space=650/Math.max(1,rows.length),bw=Math.min(20,space*.7);
+ return `<svg viewBox="0 0 680 155" role="img" aria-label="${safe(title)} nach Lauf" class="rc-history-chart"><line x1="20" y1="130" x2="670" y2="130" stroke="#cbd9d1"/>${rows.map((r,i)=>{const h=Math.max(0,measure(r))/max*114;return `<rect x="${20+i*space+(space-bw)/2}" y="${base-h}" width="${bw}" height="${h}" rx="2" fill="#397a61"><title>${safe(new Date(r.started_at).toLocaleString("de-DE"))}: ${measure(r)}</title></rect>`}).join("")}<text x="20" y="150" font-size="11" fill="#61756b">${rows.length?safe(new Date(rows[0].started_at).toLocaleDateString("de-DE")):""}</text><text x="670" y="150" text-anchor="end" font-size="11" fill="#61756b">${rows.length?safe(new Date(rows[rows.length-1].started_at).toLocaleDateString("de-DE")):""}</text><text x="20" y="12" font-size="11" fill="#61756b">${max.toLocaleString("de-DE")}</text></svg>`;
+}
+async function loadRcHistory(){
+ const host=document.querySelector<HTMLElement>("#rcRunHistory");if(!host)return;
+ try{
+  const response=await fetch("https://raw.githubusercontent.com/weidmanngabriel/gocath-tag-poc/rc-data/runs.json",{cache:"no-store"});
+  if(response.status===404){host.textContent="Die Historie beginnt nach dem nächsten RC-Catalog-Lauf.";return;}
+  if(!response.ok)throw new Error("HTTP "+response.status);
+  const payload=await response.json() as {runs?:RcStat[]};
+  const all=(payload.runs||[]).filter(r=>r.started_at).sort((a,b)=>a.started_at.localeCompare(b.started_at));
+  if(!all.length){host.textContent="Noch keine Statistikdaten vorhanden.";return;}
+  const recent=all.slice(-30),sum=(f:(r:RcStat)=>number)=>all.reduce((v,r)=>v+(f(r)||0),0),fmt=(n:number)=>n.toLocaleString("de-DE");
+  const charts:[string,(r:RcStat)=>number][]=[
+   ["Klassifizierungen",r=>r.classified||0],["Fehler",r=>r.failed||0],
+   ["Tokens",r=>r.usage?.total_tokens||0],["Input-Kosten (USD)",r=>r.cost_usd_estimated||0]];
+  host.innerHTML=`<div class="rc-kpis"><div><small>Läufe</small><b>${fmt(all.length)}</b></div><div><small>Klassifiziert</small><b>${fmt(sum(r=>r.classified))}</b></div><div><small>Fehler</small><b>${fmt(sum(r=>r.failed))}</b></div><div><small>Tokens</small><b>${fmt(sum(r=>r.usage?.total_tokens||0))}</b></div><div><small>Input-Kosten (USD)*</small><b>${sum(r=>r.cost_usd_estimated).toFixed(4)}</b></div></div><p class="hint">Verlauf der letzten ${recent.length} Läufe. Gesamtzahlen für alle gespeicherten Läufe. *Kosten sind nur geschätzte Input-Kosten, keine vollständige Rechnung.</p><div class="rc-charts">${charts.map(([label,fn])=>`<div><h3>${label}</h3>${rcBars(recent,fn,label)}</div>`).join("")}</div><h3>Letzte Läufe</h3><div class="table-scroll"><table><thead><tr><th>Datum</th><th>Lauf</th><th>Geprüft</th><th>Klassifiziert</th><th>Fehler</th><th>Input / Output / Thinking</th><th>USD*</th></tr></thead><tbody>${[...all].reverse().slice(0,30).map(r=>`<tr><td>${safe(new Date(r.started_at).toLocaleString("de-DE"))}</td><td><a target="_blank" rel="noopener noreferrer" href="https://github.com/weidmanngabriel/gocath-tag-poc/actions/runs/${encodeURIComponent(r.run_id)}">${safe(r.run_id)}</a></td><td>${fmt(r.source_count||0)}</td><td>${fmt(r.classified||0)}</td><td>${fmt(r.failed||0)}</td><td>${fmt(r.usage?.input_tokens||0)} / ${fmt(r.usage?.output_tokens||0)} / ${fmt(r.usage?.thinking_tokens||0)}</td><td>${(r.cost_usd_estimated||0).toFixed(5)}</td></tr>`).join("")}</tbody></table></div>`;
+ }catch(err){host.textContent="Laufhistorie nicht verfügbar: "+String(err);}
+}
+
 function render(){
  const c=config.slice(1).filter(x=>x[0]); const t=tags.slice(1).filter(x=>x[0]);
  app.innerHTML=`<header><div class="brand"><span class="mark">✝</span><div><b>GoCath Tagging</b><small>Konfiguration & Ergebnisse · POC</small></div></div><span class="muted">${token?"Google Sheets verbunden":"Nicht verbunden"}</span></header>
