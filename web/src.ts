@@ -105,7 +105,7 @@ function answerDistribution(raw:string,type:string):string {
    const answer=JSON.parse(raw) as {choice?:string,score?:number,confidence?:number,probabilities?:{value:string|number,label?:string,probability:number}[]};
    if(!Array.isArray(answer.probabilities))return "";
    const items=answer.probabilities;
-   return `<div class="answer-distribution"><div class="answer-heading">${type==="choice"?"Auswahl: "+safe(answer.choice||"–"):"Score: "+safe(String(answer.score??"–"))}</div>${items.map(o=>`<div class="answer-item"><div class="answer-item-label"><span>${safe(String(o.label??o.value))}</span><strong>${Math.round(o.probability*100)} %</strong></div><div class="answer-track"><div class="answer-fill" style="width:${Math.max(0,Math.min(100,o.probability*100))}%"></div></div></div>`).join("")}<small class="muted">Modellverteilung; keine kalibrierten Wahrscheinlichkeiten. Konfidenz: ${Math.round((answer.confidence||0)*100)} %</small></div>`;
+   return `<div class="answer-distribution"><div class="answer-heading">${type==="choice"?"Ausgewählt: "+safe(answer.choice||"–"):"Score: "+safe(String(answer.score??"–"))}</div>${items.map(o=>`<div class="answer-item"><div class="answer-item-label"><span>${safe(String(o.label??o.value))}</span><strong>${Math.round(o.probability*100)} %</strong></div><div class="answer-track"><div class="answer-fill" style="width:${Math.max(0,Math.min(100,o.probability*100))}%"></div></div></div>`).join("")}<small class="muted">Verteilung über alle Optionen (nicht katholische Relevanz). Modellschätzung; Konfidenz: ${Math.round((answer.confidence||0)*100)} %</small></div>`;
  }catch{return "";}
 }
 const germanSort=new Intl.Collator("de",{sensitivity:"base",numeric:true});
@@ -124,19 +124,37 @@ function relevanceInfo(value:string):{label:string,kind:string}{
  return {label:"Nicht bewertet",kind:"unknown"};
 }
 function matchingDetails(run:string,url:string):string[][] {return details.slice(1).filter(d=>d[0]===run&&d[1]===url);}
+function isPositiveMatch(d:string[]):boolean {
+ return (d[13]||"predicate")==="predicate"&&d[9]==="true";
+}
+function choiceName(d:string[]):string {
+ if(d[13]!=="choice")return "";
+ try{
+  const answer=JSON.parse(d[14]||"{}") as {choice?:string};
+  const selected=String(answer.choice||"");
+  const configured=criteria.slice(1).find(r=>r[0]===d[5]);
+  const opts=JSON.parse(configured?.[8]||"[]") as {value:string,description?:string}[];
+  return opts.find(x=>x.value===selected)?.value||selected;
+ }catch{return "";}
+}
 function renderCriterionDetail(d:string[]):string{
  const type=d[13]||"predicate",value=sheetNumber(d[8]);
- return `<div class="criterion-result"><div class="criterion-result-head"><strong>${safe(d[7]||d[5]||"")}</strong><span>${percent(String(value))}</span></div><div class="answer-track"><div class="answer-fill" style="width:${Math.max(0,Math.min(100,value*100))}%"></div></div>${answerDistribution(d[14]||"",type)}${d[12]?`<p class="hint">${safe(d[12])}</p>`:""}</div>`;
+ const label=safe(d[7]||d[5]||"");
+ if(type==="choice")return `<div class="criterion-result criterion-choice"><div class="criterion-result-head"><strong>${label}</strong><span class="criterion-type">Einzelauswahl</span></div>${answerDistribution(d[14]||"",type)}</div>`;
+ if(type==="score")return `<div class="criterion-result criterion-choice"><div class="criterion-result-head"><strong>${label}</strong><span class="criterion-type">Bewertungsskala</span></div>${answerDistribution(d[14]||"",type)}</div>`;
+ return `<div class="criterion-result"><div class="criterion-result-head"><strong>${label}</strong><span>${percent(String(value))}</span></div><div class="answer-track"><div class="answer-fill" style="width:${Math.max(0,Math.min(100,value*100))}%"></div></div>${d[12]?`<p class="hint">${safe(d[12])}</p>`:""}</div>`;
 }
 function renderEventCard(r:string[]):string{
  const ds=matchingDetails(r[0],r[1]),info=relevanceInfo(ds[0]?.[11]||""),score=ds[0]?.[10];
- const top=ds.filter(d=>d[9]==="true").sort((a,b)=>sheetNumber(b[8])-sheetNumber(a[8])).slice(0,4);
+ const positives=ds.filter(isPositiveMatch);
+ const top=positives.sort((a,b)=>sheetNumber(b[8])-sheetNumber(a[8])).slice(0,4);
+ const choices=ds.filter(d=>d[13]==="choice");
  const groups=[...new Set(ds.map(d=>d[6]||"Sonstiges"))].sort(germanSort.compare);
  const body=groups.map(group=>{
    const items=ds.filter(d=>(d[6]||"Sonstiges")===group).sort((a,b)=>sheetNumber(b[8])-sheetNumber(a[8]));
-   return `<details class="detail-group"><summary>${safe(group)} <span>${items.filter(d=>d[9]==="true").length} Treffer · ${items.length} Fragen</span></summary><div class="detail-questions">${items.map(renderCriterionDetail).join("")}</div></details>`;
+   return `<details class="detail-group"><summary>${safe(group)} <span>${items.filter(isPositiveMatch).length} Treffer · ${items.length} Fragen</span></summary><div class="detail-questions">${items.map(renderCriterionDetail).join("")}</div></details>`;
  }).join("");
- return `<article class="event-card"><div class="event-card-main"><div class="event-card-title"><h3>${safe(r[2]||"Ohne Titel")}</h3><span class="relevance-tag ${info.kind}">${info.label}${score!==undefined&&score!==""?" · "+percent(score):""}</span></div><div class="event-chips">${top.map(d=>`<span class="result-chip">${safe(d[7]||"")}: ${percent(d[8])}</span>`).join("")}</div><div class="event-card-meta"><span>${ds.length} Fragen</span><span>${ds.filter(d=>d[9]==="true").length} Treffer</span>${r[12]?`<span>${safe(r[12])} Tokens</span>`:""}</div></div><details class="event-expand"><summary>Alle Bewertungen ansehen</summary><div class="event-expanded"><p><a href="${safe(r[1]||"")}" target="_blank" rel="noopener noreferrer">Veranstaltungsseite öffnen ↗</a></p>${r[3]||r[4]?`<p><strong>Tags:</strong> ${safe([r[3],r[4]].filter(Boolean).join(", "))}</p>`:""}${r[5]?`<p><strong>Begründung:</strong> ${safe(r[5])}</p>`:""}${ds.length?body:'<p class="hint">Für diesen Lauf liegen keine Einzelbewertungen vor.</p>'}</div></details></article>`;
+ return `<article class="event-card"><div class="event-card-main"><div class="event-card-title"><h3>${safe(r[2]||"Ohne Titel")}</h3><span class="relevance-tag ${info.kind}">${info.label}${score!==undefined&&score!==""?" · "+percent(score):""}</span></div><div class="event-chips">${choices.map(d=>`<span class="choice-chip">${safe(d[7]||"Auswahl")}: <strong>${safe(choiceName(d)||"–")}</strong> · ${percent(d[8])} Modellanteil</span>`).join("")}${top.map(d=>`<span class="result-chip">${safe(d[7]||"")}: ${percent(d[8])}</span>`).join("")}</div><div class="event-card-meta"><span>${ds.length} Fragen</span><span>${ds.filter(isPositiveMatch).length} Treffer</span>${r[12]?`<span>${safe(r[12])} Tokens</span>`:""}</div></div><details class="event-expand"><summary>Alle Bewertungen ansehen</summary><div class="event-expanded"><p><a href="${safe(r[1]||"")}" target="_blank" rel="noopener noreferrer">Veranstaltungsseite öffnen ↗</a></p>${r[3]||r[4]?`<p><strong>Tags:</strong> ${safe([r[3],r[4]].filter(Boolean).join(", "))}</p>`:""}${r[5]?`<p><strong>Begründung:</strong> ${safe(r[5])}</p>`:""}${ds.length?body:'<p class="hint">Für diesen Lauf liegen keine Einzelbewertungen vor.</p>'}</div></details></article>`;
 }
 function render(){
  const c=config.slice(1).filter(x=>x[0]); const t=tags.slice(1).filter(x=>x[0]);
@@ -213,7 +231,7 @@ function render(){
    const ds=matchingDetails(r[0],r[1]);
    const status=ds[0]?.[11]||"unknown";
    if(relevance!=="all"&&relevance!==status)return false;
-   return category==="all"||ds.some(d=>d[6]===category&&d[9]==="true");
+   return category==="all"||ds.some(d=>d[6]===category&&isPositiveMatch(d));
   }).sort((a,b)=>germanSort.compare(a[2]||"",b[2]||""));
   const count=document.querySelector("#matchCount");
   if(count)count.textContent=invalid?"Mindestens 3 Zeichen pro Suchwort eingeben":`${rows.length} von ${source.length} Veranstaltungen angezeigt`;
