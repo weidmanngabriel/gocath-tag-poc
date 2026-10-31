@@ -47,6 +47,9 @@ def main():
     run_usage={k:0 for k in ('input_tokens','output_tokens','thinking_tokens','cached_tokens','total_tokens')}
     attempts=0
     _,editable=settings(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"],os.environ["GOOGLE_SHEET_ID"])
+    prices={k:float(editable[k]) for k in ("rc_input_per_million_usd","rc_cached_input_per_million_usd","rc_output_per_million_usd")}
+    if any(not (0<=v<1000000) for v in prices.values()):raise ValueError("RC prices must be nonnegative finite values")
+    if editable["rc_model"]!="gpt-6-luna":raise ValueError("Unsupported RC Decisions model")
     if a.mode=="publish-questions":
         revision=publish_questions(state,editable)
         print("Published questionnaire revision:", revision,
@@ -70,13 +73,17 @@ def main():
                     run_usage[name]+=int(usage.get(name,0) or 0)
         result=sync(state,events,measured_classify,max_paid=a.max_paid,mode=mode)
         print(json.dumps(result,ensure_ascii=False))
+        paid_input=max(0,run_usage["input_tokens"]-run_usage["cached_tokens"])
+        cost=(paid_input*prices["rc_input_per_million_usd"]+run_usage["cached_tokens"]*prices["rc_cached_input_per_million_usd"]+run_usage["output_tokens"]*prices["rc_output_per_million_usd"])/1000000
         record={"run_id":os.environ.get("GITHUB_RUN_ID","manual"),"started_at":started_at,
                 "finished_at":datetime.now(timezone.utc).isoformat(),"mode":mode,
                 "source_count":result["source_count"],"queued":result["queued"],
                 "attempted":attempts,"classified":result["classified"],
                 "failed":len(result["failures"]),"usage":run_usage,
-                "cost_usd_estimated":round(run_usage["input_tokens"]*.10/1000000,8),
-                "cost_note":"Input-only estimate; output pricing not included"}
+                "cost_usd_estimated":round(cost,8),
+                "prices_per_million_usd":dict(prices),
+                "pricing_model":editable["rc_model"],
+                "cost_note":"Estimate based on configured per-million-token prices; not an API invoice"}
         Path("state/rc-run-record.json").write_text(json.dumps(record,ensure_ascii=False),encoding="utf-8")
     def material(data):
         return {key:value for key,value in data.items() if key not in ("last_run","last_sync_at")}
