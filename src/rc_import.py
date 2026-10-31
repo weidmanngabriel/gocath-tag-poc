@@ -74,10 +74,9 @@ def event_dates(text):
     """Extract the calendar's start and end dates, including shortened ranges."""
     from datetime import date
     pattern = re.compile(
-        r"(?<!\\d)(\\d{1,2})\\.(\\d{1,2})\\."
-        r"(?:(20\\d{2})\\s*[-–]\\s*)?"
-        r"(?:[-–]\\s*)?"
-        r"(\\d{1,2})\\.(\\d{1,2})\\.(20\\d{2})(?!\\d)"
+        r"(?<!\d)(\d{1,2})\.(\d{1,2})\.\s*"
+        r"(?:(20\d{2})\s*)?[-–]\s*"
+        r"(\d{1,2})\.(\d{1,2})\.(20\d{2})(?!\d)"
     )
     match = pattern.search(text)
     if match:
