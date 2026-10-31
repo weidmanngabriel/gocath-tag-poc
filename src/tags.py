@@ -1,1 +1,0 @@
-STANDARD_TAGS = ["Heilige Messe", "Anbetung", "Beichte", "Rosenkranz", "Lobpreis", "Gebet", "Stundengebet", "Exerzitien", "Wallfahrt", "Vortrag", "Bibel", "Jugend", "Familie", "Kinder", "Gemeinschaft", "Katechese", "Eucharistie", "Online", "Livestream", "Choral", "Lateinische Messe", "Konzert", "Einkehrtag", "Seelsorge", "Kloster", "Pilgern", "Segnung", "Andacht"]
