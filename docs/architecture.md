@@ -1,5 +1,7 @@
 # Architektur
 
+> **Legacy-Hinweis (31.10.2026):** Die nachfolgenden Abschnitte „Datenfluss“, „Dashboard“, „Decisions API“ und „Konfigurierbarer Decisions-Fragebogen“ dokumentieren den früheren manuellen Google-Sheet-Tagging-POC. Dessen `tag-events.yml`-Trigger ist stillgelegt; diese historischen Beschreibungen sind nicht der aktuelle RC-Produktionsablauf. Verbindlich ist der Abschnitt „RC-Katalog: Datenfluss und Versionsmodell“ unten. Das sieben Tabs umfassende Original-Sheet wurde vor der Stilllegung als separate vollständige Datei gesichert (siehe README); Originaldaten und Editor bleiben erhalten.
+
 ## Datenfluss
 Manuell gestarteter GitHub-Actions-Workflow (`workflow_dispatch`) → Python/requests/BeautifulSoup → öffentliche GoCath-Veranstaltungslinks und Detailseiten → gewählter KI-Anbieter (OpenAI, Gemini oder Groq) → kontrollierte Standard-Tags und optional zusätzliche freie Tags → Google Sheets API (Service Account) → Ergebnisartefakt.
 
