@@ -41,7 +41,11 @@ def main():
     state=read(a.state)
     _,editable=settings(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"],os.environ["GOOGLE_SHEET_ID"])
     if a.mode=="publish-questions":
-        print("Revision:",publish_questions(state,editable))
+        revision=publish_questions(state,editable)
+        print("Published questionnaire revision:", revision,
+              "active criteria:", len(state["active_questionnaire"]["criteria"]), flush=True)
+        if not state["active_questionnaire"]["criteria"]:
+            raise ValueError("No active Criteria in the configured Google Sheet; refusing empty questionnaire publication")
     else:
         events=fetch_all_events()
         mode=a.mode

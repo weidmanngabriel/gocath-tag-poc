@@ -91,13 +91,15 @@ def classify_decisions(event, api_key, config, usage_sink=None):
         return entries
 
     for a in answers:
-        if not isinstance(a, dict) or a.get("name") not in configured:
-            raise ValueError("Decisions answer has unexpected name or type")
+        if not isinstance(a, dict):
+            raise ValueError("Decisions answer is not an object")
+        if a.get("name") not in configured:
+            raise ValueError("Decisions answer has unexpected name: " + repr(a.get("name"))[:100])
         name = a["name"]
         c = configured[name]
         question_type = c.get("type", "predicate")
         if a.get("type") != question_type:
-            raise ValueError("Decisions answer has unexpected name or type")
+            raise ValueError("Decisions answer type mismatch for " + name + ": expected " + question_type + ", got " + repr(a.get("type"))[:60])
         if name in by_id:
             raise ValueError("Decisions answer duplicate: " + name)
         if question_type == "predicate":
