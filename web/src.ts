@@ -14,6 +14,25 @@ function restoreSession():string {
   return "";
 }
 function clearSession(){token="";sessionStorage.removeItem(SESSION_KEY);}
+let reconnecting:Promise<boolean>|null=null;
+function reconnect():Promise<boolean>{
+ if(reconnecting)return reconnecting;
+ reconnecting=new Promise<boolean>(resolve=>{
+  if(!CLIENT_ID||!window.google?.accounts?.oauth2){resolve(false);return;}
+  const client=window.google.accounts.oauth2.initTokenClient({
+   client_id:CLIENT_ID,scope:"https://www.googleapis.com/auth/spreadsheets",prompt:"",
+   callback:(r:{access_token?:string;expires_in?:number})=>{
+    if(!r.access_token){resolve(false);return;}
+    token=r.access_token;
+    sessionStorage.setItem(SESSION_KEY,JSON.stringify({accessToken:token,expiresAt:Date.now()+Math.max(0,Number(r.expires_in)||0)*1000}));
+    resolve(true);
+   },
+   error_callback:()=>resolve(false)
+  });
+  try{client.requestAccessToken({prompt:""});}catch{resolve(false);}
+ }).finally(()=>{reconnecting=null;});
+ return reconnecting;
+}
 let activeView="config";
 let token=restoreSession(), config: string[][]=[], tags: string[][]=[], runs:string[][]=[], history:string[][]=[];
 const app=document.querySelector<HTMLDivElement>("#app")!;
@@ -107,4 +126,11 @@ function login(){if(!CLIENT_ID){status("OAuth Client-ID fehlt. GitHub Variable V
  client.requestAccessToken();
 }
 render();
-if(token)load().catch(e=>status(String(e),true));
+async function start(){
+ if(token){await load();return;}
+ // GIS is loaded asynchronously from Google's script.
+ for(let attempt=0;attempt<30&&!window.google?.accounts?.oauth2;attempt++)
+  await new Promise(resolve=>setTimeout(resolve,100));
+ if(await reconnect()){render();await load();}
+}
+start().catch(e=>status(String(e),true));

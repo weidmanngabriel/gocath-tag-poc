@@ -53,7 +53,7 @@ def fetch_events(limit=20):
             response=session.get(url,headers=HEADERS,timeout=30)
             print(f"[timing] regnum_source_get duration={time.perf_counter()-started:.3f}s http_status={response.status_code}",flush=True)
             response.raise_for_status()
-            return response.text
+            return response.content.decode("utf-8-sig")
         listing=get(LIST_URL)
         links=event_links(listing, 1000)
         if not links:
