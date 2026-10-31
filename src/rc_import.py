@@ -3,7 +3,7 @@ import re
 import time
 from urllib.parse import urljoin, urlparse, parse_qs
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString, Tag
 from .regnum_scrape import LIST_URL
 from .rc_delta import event_id, canonical_text
 
@@ -28,20 +28,41 @@ def following_pages(html):
     return pages
 
 def event_container(anchor):
+    """Prefer an event-local DOM section, not the whole calendar."""
     node=anchor
     candidate=None
-    for _ in range(12):
+    for _ in range(15):
         node=node.parent
         if node is None:break
         if node.name not in ("div","article","li","section"):continue
         text=node.get_text(" ",strip=True)
-        if not 100<=len(text)<=14000:continue
-        count=sum(bool(url_id(urljoin(LIST_URL,a.get("href","")))) for a in node.select("a[href]"))
-        if count>1:continue
+        if not 60<=len(text)<=25000:continue
+        ids={url_id(urljoin(LIST_URL,a.get("href",""))) for a in node.select("a[href]")}
+        ids.discard(None)
+        if len(ids)>1:continue
         candidate=node
         if any(x in text for x in ("Adresse","Direktlink","Beginn:")):
             return node
     return candidate
+
+def following_event_text(anchor, key):
+    """Fallback for JS calendar markup without semantic card containers.
+
+    Read event-local text from the title link until the next distinct event.
+    Never use the full page as an event description.
+    """
+    chunks=[]
+    for node in anchor.next_elements:
+        if isinstance(node,Tag):
+            if node.name=="a" and url_id(urljoin(LIST_URL,node.get("href",""))) not in (None,key):
+                break
+            if node.name in ("script","style","footer","nav"):continue
+        if isinstance(node,NavigableString):
+            if node.parent and node.parent.name in ("script","style","nav","footer"):continue
+            piece=canonical_text(node)
+            if piece: chunks.append(piece)
+            if sum(map(len,chunks))>8000:break
+    return clean_text(" ".join(chunks))[:6500]
 
 def clean_text(text):
     text=re.sub(r"(?i)Sie haben einen Fehler entdeckt\?.*?Teilen Sie uns diesen bitte mit\.?"," ",text)
@@ -57,9 +78,10 @@ def parse_cards(html):
         if not key:continue
         title=canonical_text(a.get_text(" ",strip=True))
         container=event_container(a)
-        if not container or len(title)<3 or title.casefold() in ('direktlink','anmelden','termin speichern'):continue
+        if len(title)<3 or title.casefold() in ('direktlink','anmelden','termin speichern'):continue
         if key in events:continue
-        text=clean_text(container.get_text(" ",strip=True))
+        text=clean_text(container.get_text(" ",strip=True)) if container else following_event_text(a,key)
+        if len(text)<60:text=following_event_text(a,key)
         if len(text)<60:continue
         description=text.replace(title,"",1).strip()[:6500]
         audience=sorted(set(re.findall(r"Familien|Jugendliche[^,.;]{0,35}|Junge Männer[^,.;]{0,30}|Junge Frauen[^,.;]{0,30}|Paare & Ehepaare|Männer \(27\+\)|Frauen \(27\+\)|Kinder \(0-11\)|Jungen \(0-11\)|Mädchen \(0-11\)",text)))
