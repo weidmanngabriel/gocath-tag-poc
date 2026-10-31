@@ -128,3 +128,6 @@ Die öffentliche RC-Ansicht zeigt auf jeder Veranstaltungskarte **sämtliche** K
 
 ### RC-Treffergruppen und Farbgebung
 Treffer werden nach `category` in Format, Thema, Zielgruppe, Kontext und gegebenenfalls weitere Bereiche gegliedert. Pro Bereich erscheinen zunächst die zwei höchsten Treffer; weitere Treffer lassen sich mit „+ N weitere“ öffnen. Die Detailansicht zeigt weiterhin alle Kriterien. Grün markiert Treffer ab 80 %, Gelb Treffer von der individuellen Schwelle bis unter 80 %, Rot Werte unterhalb ihrer individuellen Schwelle und Grau fehlende Werte. Das ist keine neue Gesamtbewertung und ändert keine Klassifizierung oder Grenzwerte im Sheet.
+
+### Kompakte mobile RC-Trefferanzeige
+Die bisherigen separaten Gruppenkarten werden als kompakte Zeilen mit schmaler Bereichsbeschriftung und flexiblen Treffer-Chips dargestellt. Pro Bereich erscheinen die beiden stärksten Treffer; `+N` blendet die übrigen Treffer direkt in derselben Zeile ein. Die Farben und Schwellenwerte bleiben unverändert. Die vollständigen Einzelbewertungen bleiben separat aufklappbar.
