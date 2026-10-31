@@ -1,7 +1,8 @@
-"""Read-only, paired before/after token and classification comparison.
+"""Read-only factorial comparison of Decisions input changes.
 
-Run manually in GitHub Actions mode compare-input; never writes Sheets.
-Only numeric diagnostics are stored, no event text or API credentials.
+Four arms on identical event data:
+baseline, cleaning only, central instructions only, both.
+No writes to Google Sheets; source URLs and numerical diagnostics only.
 """
 import argparse
 import json
@@ -24,84 +25,132 @@ def relevant(scores, criteria):
             else "likely_not_relevant")
 
 
-def compare(limit=5, source='both'):
+VARIANTS = ("baseline", "clean_only", "rules_only", "combined")
+
+
+def event_variants(source, original):
+    """All variants use the same raw source snapshot; do not re-fetch a page."""
+    baseline = {**original, "description": original["description"][:5500]}
+    cleaned = ({**original, "description": clean_event_text(original["description"])[:5500]}
+               if source == "gocath" else baseline)
+    return {
+        "baseline": (baseline, False, False),
+        "clean_only": (cleaned, False, False),
+        "rules_only": (baseline, True, False),
+        "combined": (cleaned, True, True),
+    }
+
+
+def compare_scores(baseline, candidate):
+    before = {s["id"]: s for s in baseline}
+    after = {s["id"]: s for s in candidate}
+    if set(before) != set(after):
+        raise ValueError("Comparison answers differ in criterion IDs")
+    score_deltas = {key: round(abs(after[key]["score"]-before[key]["score"]), 4)
+                    for key in before}
+    choices = {
+        key: [before[key]["answer"].get("choice"), after[key]["answer"].get("choice")]
+        for key in before if before[key]["type"] == "choice"
+        and before[key]["answer"].get("choice") != after[key]["answer"].get("choice")
+    }
+    return {
+        "mean_abs_score_change": round(sum(score_deltas.values())/len(score_deltas), 4),
+        "max_score_change": max(score_deltas.values()),
+        "large_changes": {key: value for key, value in score_deltas.items() if value >= 0.2},
+        "choice_changed": choices,
+    }
+
+
+def summarize(results):
+    summary = {}
+    for variant in VARIANTS[1:]:
+        before = sum(item["variants"]["baseline"]["tokens"] for item in results)
+        after = sum(item["variants"][variant]["tokens"] for item in results)
+        summary[variant] = {
+            "input_tokens_before": before,
+            "input_tokens_after": after,
+            "saved_input_tokens": before-after,
+            "saved_percent": round(100*(1-after/before), 2) if before else None,
+            "relevance_changed_count": sum(
+                item["variants"][variant]["relevance"] != item["variants"]["baseline"]["relevance"]
+                for item in results),
+            "choice_changed_count": sum(bool(item["variants"][variant]["comparison"]["choice_changed"])
+                                        for item in results),
+            "avg_mean_abs_score_change": round(sum(
+                item["variants"][variant]["comparison"]["mean_abs_score_change"] for item in results
+            )/len(results), 4) if results else None,
+        }
+    return summary
+
+
+def compare(limit=5, source="both"):
     if limit < 1 or limit > 10:
         raise ValueError("Probe limit must be 1–10")
     doc, cfg = settings(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"],
                         os.environ["GOOGLE_SHEET_ID"])
-    del doc  # Only read settings; never write into Sheets.
+    del doc  # Read-only config. Never publish any results.
     if source == "configured":
         source = cfg["event_source"]
     if source not in ("both", "gocath", "regnum_christi"):
         raise ValueError("Invalid comparison source")
     pairs = []
     if source in ("both", "gocath"):
-        original = fetch_gocath(limit, clean=False, truncate=False)
-        pairs.extend(("gocath", {**before, "description": before["description"][:5500]},
-                      {**before, "description": clean_event_text(before["description"])[:5500]})
-                     for before in original)
+        pairs.extend(("gocath", e) for e in fetch_gocath(limit, clean=False, truncate=False))
     if source in ("both", "regnum_christi"):
-        original = fetch_regnum(limit)
-        pairs.extend(("regnum_christi", before, before) for before in original)
+        pairs.extend(("regnum_christi", e) for e in fetch_regnum(limit))
     api_key = os.environ["GOCATH_OPENAI"]
     results = []
-    for number, (event_source, before, after) in enumerate(pairs, start=1):
-        old_usage, new_usage = {}, {}
-        old = classify_decisions(before, api_key, cfg, usage_sink=old_usage, compact=False)
-        new = classify_decisions(after, api_key, cfg, usage_sink=new_usage)
-        by_old = {x["id"]: x for x in old["criteria_scores"]}
-        by_new = {x["id"]: x for x in new["criteria_scores"]}
-        if set(by_old) != set(by_new):
-            raise ValueError("A/B answers differ in criterion IDs")
-        changes = {key: round(abs(by_new[key]["score"] - by_old[key]["score"]), 4)
-                   for key in by_old}
-        selected_changes = {
-            key: [by_old[key]["answer"].get("choice"), by_new[key]["answer"].get("choice")]
-            for key in by_old if by_old[key]["type"] == "choice"
-            and by_old[key]["answer"].get("choice") != by_new[key]["answer"].get("choice")
-        }
+    for number, (event_source, original) in enumerate(pairs, start=1):
+        variants = event_variants(event_source, original)
+        evaluated = {}
+        # Alternate order to avoid always calling the baseline first.
+        order = VARIANTS if number % 2 else tuple(reversed(VARIANTS))
+        for variant in order:
+            event, compact, strip_url = variants[variant]
+            usage = {}
+            scores = classify_decisions(event, api_key, cfg, usage_sink=usage,
+                                        compact=compact, strip_url=strip_url)["criteria_scores"]
+            if not usage.get("input_tokens"):
+                raise ValueError("Provider did not return input_tokens: " + variant)
+            evaluated[variant] = {"scores": scores, "tokens": usage["input_tokens"],
+                                  "relevance": relevant(scores, cfg["criteria"])}
+        baseline = evaluated["baseline"]["scores"]
+        output_variants = {}
+        for variant in VARIANTS:
+            value = evaluated[variant]
+            output_variants[variant] = {
+                "tokens": value["tokens"],
+                "relevance": value["relevance"],
+                "comparison": compare_scores(baseline, value["scores"])
+            }
         results.append({
             "event_number": number,
             "event_source": event_source,
-            "source_url": before["url"],  # Stable public source reference, no event description.
-            "description_chars_before": len(before["description"]),
-            "description_chars_after": len(after["description"]),
-            "tokens_before": old_usage.get("input_tokens", 0),
-            "tokens_after": new_usage.get("input_tokens", 0),
-            "relevance_before": relevant(old["criteria_scores"], cfg["criteria"]),
-            "relevance_after": relevant(new["criteria_scores"], cfg["criteria"]),
-            "mean_abs_score_change": round(sum(changes.values()) / len(changes), 4),
-            "max_score_change": max(changes.values()),
-            "large_changes": {key: value for key, value in changes.items() if value >= 0.2},
-            "choice_changed": selected_changes,
+            "source_url": original["url"],
+            "description_chars_before": len(variants["baseline"][0]["description"]),
+            "description_chars_cleaned": len(variants["clean_only"][0]["description"]),
+            "variants": output_variants,
         })
-        print(f"[input-probe] event={number}/{len(pairs)} old_tokens={old_usage.get('input_tokens',0)} "
-              f"new_tokens={new_usage.get('input_tokens',0)} "
-              f"relevance_changed={results[-1]['relevance_before'] != results[-1]['relevance_after']}",
-              flush=True)
-    old_total = sum(x["tokens_before"] for x in results)
-    new_total = sum(x["tokens_after"] for x in results)
-    summary = {
-        "source": source, "events": len(results),
-        "input_tokens_before": old_total, "input_tokens_after": new_total,
-        "saved_input_tokens": old_total - new_total,
-        "saved_percent": round(100 * (1 - new_total / old_total), 2) if old_total else None,
-        "changed_relevance_count": sum(x["relevance_before"] != x["relevance_after"] for x in results),
-        "changed_choice_count": sum(bool(x["choice_changed"]) for x in results),
-        "avg_mean_abs_score_change": round(sum(x["mean_abs_score_change"] for x in results) / len(results), 4),
-        "events_detail": results,
-    }
+        print("[input-probe] event=" + str(number) + "/" + str(len(pairs))
+              + " tokens=" + json.dumps({k: v["tokens"] for k, v in output_variants.items()})
+              + " relevance_changed=" + json.dumps({
+                  k: v["relevance"] != output_variants["baseline"]["relevance"]
+                  for k, v in output_variants.items() if k != "baseline"
+              }), flush=True)
+    summary = {"source": source, "events": len(results),
+               "variants": summarize(results), "events_detail": results}
     Path("output").mkdir(exist_ok=True)
-    Path("output/input-probe.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2),
-                                               encoding="utf-8")
-    print("[input-probe] SUMMARY " + json.dumps({k:v for k,v in summary.items() if k!="events_detail"}),
-          flush=True)
+    Path("output/input-probe.json").write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    print("[input-probe] SUMMARY "
+          + json.dumps({k: v for k, v in summary.items() if k != "events_detail"}), flush=True)
     return summary
 
 
 if __name__ == "__main__":
-    p = argparse.ArgumentParser()
-    p.add_argument("--limit", type=int, default=5)
-    p.add_argument("--source", choices=("both","configured","gocath","regnum_christi"), default="both")
-    args = p.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--limit", type=int, default=5)
+    parser.add_argument("--source", choices=("both", "configured", "gocath", "regnum_christi"),
+                        default="both")
+    args = parser.parse_args()
     compare(args.limit, args.source)
