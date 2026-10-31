@@ -11,7 +11,7 @@ const statusKind=(s:string)=>s==="likely_relevant"?"relevant":s==="review"?"revi
 const status=(s:string)=>s==="likely_relevant"?"Wahrscheinlich relevant":s==="review"?"Prüfen":s==="likely_not_relevant"?"Eher nicht relevant":"Noch nicht klassifiziert";
 let records:Event[]=[];
 let questionnaire:Questionnaire|null=null;
-function scoreColor(s:Score):string {if(!Number.isFinite(s.score))return "unknown";if(s.matched)return "relevant";return s.score>=0.4?"review":"irrelevant";}
+function scoreColor(s:Score):string {if(!Number.isFinite(s.score))return "unknown";if(!s.matched)return "irrelevant";return s.score>=0.8?"relevant":"review";}
 function scoreRow(s:Score){const distribution=s.answer?.probabilities||[];return `<div class="score score-${scoreColor(s)}"><div class="score-head"><span>${esc(s.label)}</span><b>${pct(s.score)}</b></div><div class="track"><div style="width:${Math.max(0,Math.min(100,s.score*100))}%"></div></div>${distribution.map(p=>`<small>${esc(p.value)}: ${pct(p.probability)}</small>`).join("")}</div>`;}
 function card(item:Event){
  const c=item.classification;
@@ -26,7 +26,7 @@ function card(item:Event){
   const entries=hits.filter(s=>s.category===group);
   const visible=entries.slice(0,2);
   const more=entries.slice(2);
-  const chip=(s:Score)=>`<span class="match-chip match-relevant">${esc(s.label)} · ${pct(s.score)}</span>`;
+  const chip=(s:Score)=>`<span class="match-chip match-${scoreColor(s)}">${esc(s.label)} · ${pct(s.score)}</span>`;
   return `<section class="match-group" aria-label="${esc(group)}"><div class="match-group-heading"><strong>${esc(group)}</strong><small>${entries.length} Treffer</small></div><div class="match-list">${visible.map(chip).join("")}</div>${more.length?`<details class="match-more"><summary>+ ${more.length} weitere</summary><div class="match-list">${more.map(chip).join("")}</div></details>`:""}</section>`;
  }).join("");
  const tabs=[...groups,"Beschreibung"];
