@@ -1,3 +1,7 @@
+# Aktueller RC-Kriterieneditor
+
+Die Startseite enthält ausschließlich die Kriterienbearbeitung mit OAuth. Sie lädt und bearbeitet nur `Criteria!A:I`; die historische Ergebnis-, Tag- und Run-Oberfläche wurde entfernt. Fragen können im Editor aktualisiert oder direkt im Sheet neu angelegt werden. Das Original-Sheet wird erst bereinigt, nachdem der aktualisierte Code die CI bestanden hat. Die folgenden Abschnitte beschreiben den historischen POC.
+
 # GoCath Tagging Dashboard – einfacher POC
 
 - **Dashboard:** statisches TypeScript/Vite auf GitHub Pages, Google Identity Services OAuth im Browser.
