@@ -27,7 +27,7 @@ def classify_with_fallback(event, api_key, config, usage):
                 result=classify_decisions(event,api_key,part_config,part_usage)
                 combined.extend(result["criteria_scores"])
             finally:
-                for name in ("input_tokens","output_tokens","thinking_tokens","cached_tokens","total_tokens"):
+                for name in ("input_tokens","output_tokens","thinking_tokens","cached_tokens","cache_write_tokens","cache_write_12h_tokens","total_tokens"):
                     cumulative[name]=cumulative.get(name,0)+part_usage.get(name,0)
                 usage.update(cumulative)
         usage.update(cumulative)
@@ -44,10 +44,10 @@ def main():
     state=read(a.state)
     before=copy.deepcopy(state)
     started_at=datetime.now(timezone.utc).isoformat()
-    run_usage={k:0 for k in ('input_tokens','output_tokens','thinking_tokens','cached_tokens','total_tokens')}
+    run_usage={k:0 for k in ('input_tokens','output_tokens','thinking_tokens','cached_tokens','cache_write_tokens','cache_write_12h_tokens','total_tokens')}
     attempts=0
     _,editable=settings(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"],os.environ["GOOGLE_SHEET_ID"])
-    prices={k:float(editable[k]) for k in ("rc_input_per_million_usd","rc_cached_input_per_million_usd","rc_output_per_million_usd")}
+    prices={k:float(editable[k]) for k in ("rc_input_per_million_usd","rc_cached_input_per_million_usd","rc_cache_write_per_million_usd","rc_cache_write_12h_per_million_usd","rc_output_per_million_usd")}
     if any(not (0<=v<1000000) for v in prices.values()):raise ValueError("RC prices must be nonnegative finite values")
     if editable["rc_model"]!="gpt-6-luna":raise ValueError("Unsupported RC Decisions model")
     if a.mode=="publish-questions":
@@ -73,8 +73,17 @@ def main():
                     run_usage[name]+=int(usage.get(name,0) or 0)
         result=sync(state,events,measured_classify,max_paid=a.max_paid,mode=mode)
         print(json.dumps(result,ensure_ascii=False))
-        paid_input=max(0,run_usage["input_tokens"]-run_usage["cached_tokens"])
-        cost=(paid_input*prices["rc_input_per_million_usd"]+run_usage["cached_tokens"]*prices["rc_cached_input_per_million_usd"]+run_usage["output_tokens"]*prices["rc_output_per_million_usd"])/1000000
+        read_tokens=run_usage["cached_tokens"]
+        written_tokens=run_usage["cache_write_tokens"]
+        written_12h=min(written_tokens,run_usage["cache_write_12h_tokens"])
+        ordinary_tokens=run_usage["input_tokens"]-read_tokens-written_tokens
+        if ordinary_tokens<0:
+            raise ValueError("Invalid Decisions usage: cached and written tokens exceed input tokens")
+        cost=(ordinary_tokens*prices["rc_input_per_million_usd"]
+              +read_tokens*prices["rc_cached_input_per_million_usd"]
+              +(written_tokens-written_12h)*prices["rc_cache_write_per_million_usd"]
+              +written_12h*prices["rc_cache_write_12h_per_million_usd"]
+              +run_usage["output_tokens"]*prices["rc_output_per_million_usd"])/1000000
         record={"run_id":os.environ.get("GITHUB_RUN_ID","manual"),"started_at":started_at,
                 "finished_at":datetime.now(timezone.utc).isoformat(),"mode":mode,
                 "source_count":result["source_count"],"queued":result["queued"],
