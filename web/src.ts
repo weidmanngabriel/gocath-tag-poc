@@ -170,11 +170,15 @@ function rcBars(rows:RcStat[],measure:(r:RcStat)=>number,title:string){
 async function loadRcHistory(){
  const host=document.querySelector<HTMLElement>("#rcRunHistory");if(!host)return;
  try{
-  const response=await fetch("https://raw.githubusercontent.com/weidmanngabriel/gocath-tag-poc/rc-data/runs.json",{cache:"no-store"});
+  const response=await fetch("https://raw.githubusercontent.com/weidmanngabriel/gocath-tag-poc/rc-data/runs.json?v="+Date.now(),{cache:"no-store"});
   if(response.status===404){host.textContent="Die Historie beginnt nach dem nächsten RC-Catalog-Lauf.";return;}
   if(!response.ok)throw new Error("HTTP "+response.status);
-  const payload=await response.json() as {runs?:RcStat[]};
-  const all=(payload.runs||[]).filter(r=>r.started_at).sort((a,b)=>a.started_at.localeCompare(b.started_at));
+  const raw=await response.text();
+  let payload:{runs?:RcStat[]};
+  try{payload=JSON.parse(raw.trim()) as {runs?:RcStat[]};}
+  catch{throw new Error("Laufhistorie enthält ungültiges JSON.");}
+  if(!Array.isArray(payload?.runs))throw new Error("Laufhistorie hat kein gültiges runs-Feld.");
+  const all=payload.runs.filter(r=>r&&typeof r.started_at==="string"&&r.started_at).sort((a,b)=>a.started_at.localeCompare(b.started_at));
   if(!all.length){host.textContent="Noch keine Statistikdaten vorhanden.";return;}
   const recent=all.slice(-30),sum=(f:(r:RcStat)=>number)=>all.reduce((v,r)=>v+(f(r)||0),0),fmt=(n:number)=>n.toLocaleString("de-DE");
   const charts:[string,(r:RcStat)=>number][]=[
