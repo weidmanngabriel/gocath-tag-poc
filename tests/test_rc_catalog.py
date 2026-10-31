@@ -58,3 +58,17 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(set(cards), {"rc-33","rc-34"})
         self.assertIn("geistlichen",cards["rc-33"]["description"])
         self.assertNotIn("Sommerfreizeit",cards["rc-33"]["description"])
+
+    def test_multiday_event_start_and_end_dates(self):
+        from src.rc_import import event_dates
+        self.assertEqual(event_dates("03.11. - 07.11.2026 Jugendcamp"),("2026-11-03","2026-11-07"))
+        self.assertEqual(event_dates("26.11. - 29.11.2026"),("2026-11-26","2026-11-29"))
+        self.assertEqual(event_dates("29.12. - 03.01.2027"),("2026-12-29","2027-01-03"))
+        self.assertEqual(event_dates("31.10.2026"),("2026-10-31",""))
+        self.assertEqual(event_dates(""),("",""))
+    def test_multiday_date_on_parsed_card(self):
+        from src.rc_import import parse_cards
+        html='<section><a href="/demnaechst/?vid=42">Wintercamp</a><p>03.11. - 07.11.2026</p><p>Ein aufregendes Camp mit gemeinsamen Veranstaltungen, Ausflügen und Gesprächen für Jugendliche.</p><p>Adresse München Deutschland</p></section>'
+        event=parse_cards(html)["rc-42"]
+        self.assertEqual(event["starts_at"],"2026-11-03")
+        self.assertEqual(event["ends_at"],"2026-11-07")
