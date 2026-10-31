@@ -57,7 +57,8 @@ def parse_cards(html):
         if not key:continue
         title=canonical_text(a.get_text(" ",strip=True))
         container=event_container(a)
-        if not container or len(title)<3:continue
+        if not container or len(title)<3 or title.casefold() in ('direktlink','anmelden','termin speichern'):continue
+        if key in events:continue
         text=clean_text(container.get_text(" ",strip=True))
         if len(text)<60:continue
         description=text.replace(title,"",1).strip()[:6500]
