@@ -116,3 +116,6 @@ Die Relevanzbewertung beschreibt ausschließlich, wie eindeutig die Veranstaltun
 ## Klarstellung auf der öffentlichen RC-Seite
 
 Auf `/rc/` steht oberhalb der Veranstaltungsfilter ein sichtbarer Hinweis, dass hohe Relevanz- und Kriterienwerte nur Hinweise für automatische katholische Relevanzeinordnung und Klassifizierung widerspiegeln. Es handelt sich nicht um eine Bewertung der sprachlichen oder werblichen Textqualität oder eine Prognose tatsächlicher Teilnahme. Die ausführlichere Erklärung steht außerdem unter „Mehr dazu erfahren“.
+
+## Regnum-Christi-Katalog: Corporate Design
+Die öffentlich erreichbare RC-Ansicht unter `/rc/` verwendet ausschließlich die Regnum-Christi-Kennzeichnung in Kopfzeile und Dokumenttitel. Die Oberflächenfarben orientieren sich am [offiziellen Regnum-Christi-Handbuch](https://regnumchristi.org/wp-content/uploads/2023/08/Manual-Identidad-Visual-Regnum-Christi_-version-junio-2019.pdf): institutionelles dunkles Rot (`#910803`) als Akzent, Weiß und neutrale Grautöne als Hauptflächen. Die Darstellung der Daten sowie Suche, Filter und Klassifizierung sind davon unabhängig. Die GoCath-Quellnamen, technischen Schnittstellen und das Haupt-Dashboard bleiben unverändert.
