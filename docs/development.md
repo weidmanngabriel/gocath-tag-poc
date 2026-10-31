@@ -1,12 +1,14 @@
 # Entwicklung und CI
 
+> **Aktueller Betrieb:** Der alte `src.main`-Runner wurde nach der Stilllegung von `tag-events.yml` entfernt. Die nachfolgenden manuellen Gemini-/Groq-Anleitungen sind archivierte POC-Dokumentation, keine ausführbaren Betriebsanweisungen. Der aktuelle RC-Prozess verwendet `.github/workflows/rc-catalog.yml` und `src.rc_runtime` mit den Modi `delta`, `reclassify` und `refresh`. Der OAuth-Kriterieneditor bleibt im bestehenden Dashboard erhalten.
+
 ## Lokale Tests
 Python-Version und Abhängigkeiten siehe GitHub-Actions-Workflows und `requirements.txt`. Python-Tests: `python -m unittest discover -s tests -v`; Dashboard: im Ordner `web/` `npm install && npm run build`.
 
 ## Integration und Konfiguration
-Runner: `python -m src.main`; optional `--limit N`, begrenzt durch die im Google Sheet unter `Config` gesetzten Limits. Benötigte Umgebungsvariablen: `GOCATH_GEMINI_CLASSIFIER_KEY`, `GOOGLE_SERVICE_ACCOUNT_JSON`; optional `GEMINI_MODEL`, `GOOGLE_SHEET_ID`. Die verwendeten Werte für Eventzahl, Limits, Prompt, Tags und Preise werden **zur Laufzeit** aus `Config` und `Tags` gelesen. Keine festen Testmengen in der Dokumentation voraussetzen.
+Historischer (entfernter) Runner: `python -m src.main`; früher optional `--limit N`, begrenzt durch die im Google Sheet unter `Config` gesetzten Limits. Benötigte Umgebungsvariablen: `GOCATH_GEMINI_CLASSIFIER_KEY`, `GOOGLE_SERVICE_ACCOUNT_JSON`; optional `GEMINI_MODEL`, `GOOGLE_SHEET_ID`. Die verwendeten Werte für Eventzahl, Limits, Prompt, Tags und Preise werden **zur Laufzeit** aus `Config` und `Tags` gelesen. Keine festen Testmengen in der Dokumentation voraussetzen.
 
-Die Klassifizierung wird nur manuell über `.github/workflows/tag-events.yml` gestartet. `.github/workflows/check.yml` prüft Tests und Dashboard-Build auf relevanten Branches/PRs. Pages-Deployment läuft ausschließlich von `main`.
+Der historische manuelle Workflow `.github/workflows/tag-events.yml` wurde entfernt. Die aktive RC-Klassifizierung läuft über `.github/workflows/rc-catalog.yml`. `.github/workflows/check.yml` prüft Tests und Dashboard-Build auf relevanten Branches/PRs. Pages-Deployment läuft ausschließlich von `main`.
 
 Vor dem Squash-Merge die GitHub-Actions-Checks des PR prüfen. `.github/workflows/check.yml` startet automatisch bei Push auf `feature/**` sowie bei `pull_request`; ein passender grüner PR-Lauf muss nicht manuell wiederholt werden. Echte Google-Sheet-Schreibzugriffe sind bei Änderungen am Klassifizierungs- oder Datenfluss zu prüfen. Bei reinen UI-Änderungen ohne Änderung dieses Datenflusses genügen grüne CI-Tests, Dashboard-Build und Codeprüfung; ein Live-OAuth-/Sheets-End-to-End-Test ist keine Merge-Voraussetzung. Nicht jede Änderung benötigt einen neuen Gemini-Live-Lauf: Bei reinen Dokumentationsänderungen sind Faktenprüfung und relevante technische Checks ausreichend; für Änderungen am Klassifizierungs-/Datenfluss ist der Live-Test verbindlich. Den jeweils tatsächlichen Prüfumfang im PR offenlegen.
 
