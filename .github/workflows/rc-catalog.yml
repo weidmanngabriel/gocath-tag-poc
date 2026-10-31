@@ -45,6 +45,7 @@ jobs:
         run: |
           python -m src.rc_runtime --mode "$RC_MODE" --max-paid "$RC_LIMIT" --confirm "$RC_CONFIRM" --state state/catalog.json --public public/catalog.json
       - name: Publish durable RC branch
+        if: ${{ !hashFiles('state/rc-no-changes.flag') }}
         run: |
           cp state/catalog.json "$RUNNER_TEMP/rc-state.json"
           cp public/catalog.json "$RUNNER_TEMP/rc-public.json"
