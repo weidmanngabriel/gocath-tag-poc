@@ -4,6 +4,7 @@ type Event={id:string,event:{title:string,description:string,url:string,location
 const SOURCE="https://raw.githubusercontent.com/weidmanngabriel/gocath-tag-poc/rc-data/public.json";
 const root=document.querySelector<HTMLElement>("#app")!;
 const esc=(s:unknown)=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]||c));
+const parseDate=(v:string)=>{const m=/^(\\d{1,2})\\.(\\d{1,2})\\.(\\d{4})$/.exec(v||"");return m?`${m[3]}-${m[2].padStart(2,"0")}-${m[1].padStart(2,"0")}`:v||"9999";};
 const pct=(n:number)=>Math.round((n||0)*100)+" %";
 const status=(s:string)=>s==="likely_relevant"?"Wahrscheinlich relevant":s==="review"?"Prüfen":s==="likely_not_relevant"?"Eher nicht relevant":"Noch nicht klassifiziert";
 let records:Event[]=[];
@@ -20,7 +21,7 @@ function display(){
  const category=document.querySelector<HTMLSelectElement>("#category")?.value||"";
  const sort=document.querySelector<HTMLSelectElement>("#sort")?.value||"title";
  const filtered=records.filter(e=>!e.inactive&&(!q||[e.event.title,e.event.description,e.event.location].join(" ").toLocaleLowerCase("de").includes(q))&&(!relevance||e.classification?.relevance.status===relevance)&&(!category||e.classification?.scores.some(s=>s.category===category&&s.matched)));
- filtered.sort((a,b)=>sort==="score"?(b.classification?.relevance.score||0)-(a.classification?.relevance.score||0):sort==="date"?(a.event.starts_at||"").localeCompare(b.event.starts_at||""):(a.event.title||"").localeCompare(b.event.title||"","de"));
+ filtered.sort((a,b)=>sort==="score"?(b.classification?.relevance.score||0)-(a.classification?.relevance.score||0):sort==="date"?parseDate(a.event.starts_at||"").localeCompare(parseDate(b.event.starts_at||"")):(a.event.title||"").localeCompare(b.event.title||"","de"));
  document.querySelector<HTMLElement>("#count")!.textContent=`${filtered.length} von ${records.filter(e=>!e.inactive).length} Veranstaltungen`;
  document.querySelector<HTMLElement>("#results")!.innerHTML=filtered.map(card).join("")||"<p>Keine Veranstaltungen gefunden.</p>";
 }
