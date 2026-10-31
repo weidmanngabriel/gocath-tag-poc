@@ -36,3 +36,24 @@
 .purpose .purpose-meta{font-size:.88rem;color:#5e6e62;margin-top:16px}
 .purpose .purpose-contact{font-size:.9rem;color:#415b49;margin-bottom:0}
 .purpose a{overflow-wrap:anywhere}
+
+
+.catalog-nav{display:flex;gap:8px;margin:-4px 0 22px;border-bottom:1px solid #dbe7dd;padding-bottom:10px}
+.catalog-nav button{font:inherit;font-weight:650;border:1px solid #bdd5c4;border-radius:9px;padding:11px 16px;background:white;color:#276a47;cursor:pointer}
+.catalog-nav button[aria-pressed="true"]{background:#2b754d;color:white;border-color:#2b754d}
+.catalog-nav button:focus-visible{outline:3px solid #9dccad;outline-offset:2px}
+#questionnaire-view[hidden],#events-view[hidden]{display:none}
+#questionnaire-view>h2{font-size:1.35rem;margin:0 0 10px}
+#questionnaire-content>p{line-height:1.55}
+.questionnaire-meta{color:#617467;font-size:.9rem}
+.questionnaire-group{margin:24px 0}
+.questionnaire-group h3{font-size:1.12rem;padding-bottom:9px;border-bottom:1px solid #dbe7dd}
+.questionnaire-item{background:white;border:1px solid #dbe7dd;border-radius:12px;margin:11px 0;padding:14px 17px}
+.questionnaire-item h4{margin:0 0 8px;font-size:1rem}
+.questionnaire-item p{margin:0 0 9px;white-space:pre-wrap;line-height:1.5}
+.questionnaire-item small{color:#607369}
+.questionnaire-options{font-size:.9rem}
+.questionnaire-options ul{margin:7px 0;padding-left:20px}
+.questionnaire-options li{margin:5px 0}
+.questionnaire-contact{margin-top:25px}
+@media(max-width:460px){.catalog-nav button{padding:10px 12px;font-size:.89rem}}
