@@ -1,5 +1,7 @@
 # GoCath Tagging POC — Coding-Agent-Einstieg
 
+- Die allgemeinen Bewertungsregeln der RC-Decisions-Klassifizierung stehen zentral im gemeinsamen Anfrage-Input (`src/decisions_classify.py`). Einzelne `Criteria.description`-Felder im Test-Google-Sheet enthalten nur kriterienspezifische Definitionen; globale Regeln nicht in jeder Zeile duplizieren. Veränderungen an Fragebeschreibungen erfordern die erneute Veröffentlichung des Fragebogens, auch wenn nur redundanter Text entfernt wird.
+
 ## Grenzen
 - Öffentliche GoCath-Veranstaltungen lesen; keine produktiven GoCath-Schreibzugriffe.
 - Nur das vereinbarte Test-Google-Sheet beschreiben.
