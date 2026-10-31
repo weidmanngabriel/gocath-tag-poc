@@ -72,3 +72,22 @@ class CatalogTests(unittest.TestCase):
         event=parse_cards(html)["rc-42"]
         self.assertEqual(event["starts_at"],"2026-11-03")
         self.assertEqual(event["ends_at"],"2026-11-07")
+
+    def test_refresh_updates_dates_without_ai(self):
+        from src.rc_catalog import sync,public_feed
+        state={"schema_version":1,"events":{}}
+        publish_questions(state,{"criteria":[{"id":"prayer","weight":1}]})
+        ev={"url":"https://www.regnumchristi.eu/demnaechst/?vid=52","title":"RC-Camp",
+            "description":"Camp für Jugendliche","starts_at":"07.11.2026"}
+        calls=[]
+        def classify(e,c,u):
+            calls.append(1)
+            return {"criteria_scores":[{"id":"prayer","score":.7,"matched":True}]}
+        sync(state,[ev],classify)
+        before=state["events"]["rc-52"]["classification"]
+        corrected=dict(ev,starts_at="2026-11-03",ends_at="2026-11-07")
+        summary=sync(state,[corrected],classify,mode="refresh")
+        self.assertEqual(summary["classified"],0)
+        self.assertEqual(len(calls),1)
+        self.assertEqual(state["events"]["rc-52"]["classification"],before)
+        self.assertEqual(public_feed(state)["events"][0]["event"]["starts_at"],"2026-11-03")
