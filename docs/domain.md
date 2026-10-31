@@ -13,3 +13,8 @@
 - Relevanz entsteht ausschließlich aus Kriterien mit positivem Gewicht: ein starkes Signal (`score × weight ≥ 0,7`) oder mindestens zwei mittlere (`≥ 0,45`) ergeben `likely_relevant`; mindestens ein schwächeres Signal (`≥ 0,25`) ergibt `review`; sonst `likely_not_relevant`. Die Anzeigezahl ist das größte gewichtete Signal, begrenzt auf 1. Diese Schwellen stehen aktuell im Code und müssen vor produktiver Filterung empirisch geprüft werden.
 - Zielgruppenmerkmale dürfen nicht automatisch geschlechtsspezifische Eignung voraussetzen. Kontext ist unabhängig von Inhalt; ein Sportangebot einer katholischen Jugendgruppe kann relevant sein.
 - Die alten `Tags` bleiben vorerst für Abwärtskompatibilität bestehen. Bei Gemini und Groq lautet der neue Bewertungsstatus mangels Kriterienausgabe `not_evaluated`.
+
+## Kalibrierung aus Live-Lauf 26
+- Der echte Live-Lauf 26 hat zehn Events mit je 23 Einzelbewertungen erfolgreich in `ClassificationDetails` gespeichert. Er hat auch gezeigt, dass ein Fußballturnier trotz kaum religiöser Inhalte durch ein übergewichtiges Herkunftssignal als `likely_relevant` erschien.
+- Deshalb wurden die Gewichte für `context_catholic` und `context_church` im Sheet `Criteria` auf jeweils `0.5` gesenkt und die Beschreibungen präzisiert: Der Quellen-Domainname allein ist kein Beleg für einen ausdrücklich kirchlichen Veranstalter. Diese Werte bleiben im Sheet frei editierbar.
+- Historische Bewertungen aus Lauf 26 bleiben als damalige Entscheidungen unverändert; die geänderten Gewichte wirken erst auf folgende Klassifizierungsläufe. Ohne weitere Evaluation ist der Score keine belastbare Entscheidung über Aufnahme oder Ausschluss.
