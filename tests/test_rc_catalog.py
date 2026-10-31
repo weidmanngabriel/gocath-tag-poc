@@ -117,3 +117,14 @@ class CatalogTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"Criteria"):
                 rc_runtime.classify_with_fallback({}, "secret", {"criteria":[{"id":"a"},{"id":"b"}]}, {})
         mock.assert_called_once()
+
+    def test_public_feed_contains_published_questionnaire_snapshot(self):
+        from src.rc_catalog import public_feed
+        state={"schema_version":1,"events":{}}
+        config={"criteria":[{"id":"format_test","label":"Testformat","category":"Format",
+                    "description":"Findet das statt?","type":"predicate","threshold":0.6,"weight":1}]}
+        publish_questions(state,config)
+        config["criteria"][0]["description"]="Unpublished edit"
+        public=public_feed(state)
+        self.assertEqual(public["questionnaire"]["criteria"][0]["description"],"Findet das statt?")
+        self.assertEqual(len(public["questionnaire"]["revision"]),64)
