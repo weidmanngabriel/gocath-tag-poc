@@ -1,5 +1,5 @@
 import "./style.css";
-type Score={id:string,category:string,label:string,score:number,matched:boolean,answer?:{probabilities?:{value:string,probability:number}[]}};
+type Score={id:string,category:string,label:string,score:number,matched:boolean,type?:string,answer?:{choice?:string,confidence?:number,score?:number,probabilities?:{value:string|number,label?:string,probability:number}[]}};
 type Criterion={id:string,label:string,category:string,description?:string,type?:string,threshold?:number,weight?:number,options?:{value?:string,label?:string,description?:string}[]};
 type Questionnaire={revision:string,published_at:string,criteria:Criterion[]};
 type Event={id:string,event:{title:string,description:string,url:string,location?:string,starts_at?:string},inactive?:boolean,stale?:boolean,classification?:{scores:Score[],pending_criteria?:string[],questionnaire_revision?:string,relevance:{status:string,score:number}}};
@@ -16,17 +16,31 @@ function scoreRow(s:Score){const distribution=s.answer?.probabilities||[];return
 function card(item:Event){
  const c=item.classification;
  const groups=[...new Set((c?.scores||[]).map(s=>s.category))].sort((a,b)=>a.localeCompare(b,"de"));
- const hits=(c?.scores||[]).filter(s=>s.matched).sort((a,b)=>b.score-a.score);
+ const hits=(c?.scores||[]).filter(s=>s.type!=="choice"&&s.type!=="score"&&s.matched).sort((a,b)=>b.score-a.score);
+ const nonPredicates=(c?.scores||[]).filter(s=>s.type==="choice"||s.type==="score");
  const groupOrder=questionnaire?[...new Set(questionnaire.criteria.map(c=>c.category))]:[];
- const matchedGroups=[...new Set(hits.map(s=>s.category))].sort((a,b)=>{
+ const matchedGroups=[...new Set([...hits,...nonPredicates].map(s=>s.category))].sort((a,b)=>{
   const ai=groupOrder.indexOf(a),bi=groupOrder.indexOf(b);
   return (ai<0?99:ai)-(bi<0?99:bi)||a.localeCompare(b,"de");
  });
  const groupedHits=matchedGroups.map(group=>{
-  const entries=hits.filter(s=>s.category===group);
+  const entries=[...hits,...nonPredicates].filter(s=>s.category===group);
   const visible=entries.slice(0,2);
   const more=entries.slice(2);
-  const chip=(s:Score)=>`<span class="match-chip match-${scoreColor(s)}">${esc(s.label)} · ${pct(s.score)}</span>`;
+  const chip=(s:Score)=>{
+   if(s.type==="choice"){
+    const choice=s.answer?.choice||"Nicht erkennbar";
+    return `<span class="match-chip match-unknown">${esc(s.label)}: ${esc(choice)}</span>`;
+   }
+   if(s.type==="score"){
+    const levels=questionnaire?.criteria.find(c=>c.id===s.id)?.options||[];
+    const value=s.answer?.score;
+    const index=typeof value==="number"?Math.max(0,Math.min(levels.length-1,Math.round(value))):-1;
+    const selected=index>=0?levels[index]?.label:"Unbekannt";
+    return `<span class="match-chip match-unknown">${esc(s.label)}: ${esc(selected)}</span>`;
+   }
+   return `<span class="match-chip match-${scoreColor(s)}">${esc(s.label)} · ${pct(s.score)}</span>`;
+  };
   return `<section class="match-group" aria-label="${esc(group)}"><div class="match-group-heading"><strong>${esc(group)}</strong></div><div class="match-list">${visible.map(chip).join("")}${more.length?`<button type="button" class="match-expand" aria-label="${more.length} weitere Treffer in ${esc(group)} anzeigen">+${more.length}</button><span class="match-extra" hidden>${more.map(chip).join("")}</span>`:""}</div></section>`;
  }).join("");
  const pending=(questionnaire?.criteria||[]).filter(q=>(c?.pending_criteria||[]).includes(q.id));
@@ -35,7 +49,7 @@ function card(item:Event){
  const panels=tabs.map((g,i)=>`<div role="tabpanel" id="panel-${esc(item.id)}-${i}" aria-labelledby="tab-${esc(item.id)}-${i}" ${i!==0?"hidden":""}>${g==="Beschreibung"?`<p class="description">${esc(item.event.description||"Keine Beschreibung verfügbar.")}</p><a href="${esc(item.event.url)}" target="_blank" rel="noopener noreferrer">Originalveranstaltung öffnen</a>`:((c?.scores.filter(s=>s.category===g).sort((a,b)=>b.score-a.score).map(scoreRow).join("")||"")+
  pending.filter(q=>q.category===g).map(q=>`<div class="score score-unknown"><div class="score-head"><span>${esc(q.label)}</span><small>Noch nicht bewertet</small></div></div>`).join("")+
  (!c?.scores.some(s=>s.category===g)&&!pending.some(q=>q.category===g)?"<p>Keine Bewertung verfügbar.</p>":""))}</div>`).join("");
- return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div></div><div class="matched-groups" aria-label="Erkannte Merkmale">${hits.length?groupedHits:`<p class="no-hits">${c?"Keine Kriterien oberhalb ihrer Trefferschwelle":"Noch keine Bewertung vorhanden"}</p>`}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}${pending.length?`<p class="pending-note">${pending.length} Kriterien noch nicht mit der aktuellen Konfiguration bewertet.</p>`:""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
+ return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div></div><div class="matched-groups" aria-label="Erkannte Merkmale">${matchedGroups.length?groupedHits:`<p class="no-hits">${c?"Keine Kriterien oberhalb ihrer Trefferschwelle":"Noch keine Bewertung vorhanden"}</p>`}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}${pending.length?`<p class="pending-note">${pending.length} Kriterien noch nicht mit der aktuellen Konfiguration bewertet.</p>`:""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
 }
 function switchItemTab(button:HTMLButtonElement,focus=false){
  const tabs=button.closest<HTMLElement>(".item-tabs");
