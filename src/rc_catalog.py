@@ -86,7 +86,7 @@ def permanent_classification_failure(exc):
     return isinstance(exc, ValueError) and (str(exc).startswith("Decisions ") or str(exc) == "Incomplete score set")
 
 def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
-    if not 1<=max_paid<=100: raise ValueError("max_paid must be 1..100")
+    if not 1<=max_paid<=200: raise ValueError("max_paid must be 1..200")
     config=active_config(state)
     source={}
     for event in events:

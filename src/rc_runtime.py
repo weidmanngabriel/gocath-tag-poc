@@ -39,7 +39,7 @@ def main():
     p.add_argument("--mode",choices=("delta","publish-questions","reclassify","continue","refresh"),required=True)
     p.add_argument("--state",default="state/catalog.json")
     p.add_argument("--public",default="public/catalog.json")
-    p.add_argument("--max-paid",type=int,default=25)
+    p.add_argument("--max-paid",type=int,default=200)
     a=p.parse_args()
     state=read(a.state)
     before=copy.deepcopy(state)
