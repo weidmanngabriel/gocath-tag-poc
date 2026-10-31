@@ -137,7 +137,7 @@ def classify_decisions(event, api_key, config, usage_sink=None):
         {"id": c["id"], "category": c["category"], "label": c["label"],
          "type": c.get("type", "predicate"),
          "score": round(by_id[c["id"]]["score"], 4),
-         "matched": by_id[c["id"]]["score"] >= c["threshold"],
+         "matched": c.get("type", "predicate") == "predicate" and by_id[c["id"]]["score"] >= c["threshold"],
          "evidence": "", "answer": by_id[c["id"]]["answer"]}
         for c in criteria
     ]
