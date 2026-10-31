@@ -74,6 +74,22 @@ def classify_decisions(event, api_key, config, usage_sink=None):
         return (not isinstance(x, bool) and isinstance(x, (int, float))
                 and math.isfinite(x) and 0 <= x <= 1)
 
+    def validate_distribution(entries, expected, key):
+        if not isinstance(entries, list) or len(entries) != len(expected):
+            raise ValueError("Decisions answer must include all option probabilities: " + key)
+        seen = {}
+        for entry in entries:
+            if not isinstance(entry, dict) or entry.get("value") not in expected:
+                raise ValueError("Unexpected option probability: " + key)
+            value = entry["value"]
+            probability = entry.get("probability")
+            if value in seen or not valid_unit(probability):
+                raise ValueError("Invalid option probability: " + key)
+            seen[value] = float(probability)
+        if set(seen) != set(expected) or abs(sum(seen.values()) - 1.0) > 0.03:
+            raise ValueError("Incomplete option distribution: " + key)
+        return entries
+
     for a in answers:
         if not isinstance(a, dict) or a.get("name") not in configured:
             raise ValueError("Decisions answer has unexpected name or type")
@@ -97,8 +113,10 @@ def classify_decisions(event, api_key, config, usage_sink=None):
             confidence = a.get("confidence")
             if not valid_unit(confidence):
                 raise ValueError("Decisions answer has invalid confidence: " + name)
-            result = {"score": float(confidence), "answer": {"choice": value, "confidence": confidence,
-                      "probabilities": a.get("probabilities", [])}}
+            distribution = validate_distribution(a.get("probabilities"), options, name)
+            selected_probability = next(x["probability"] for x in distribution if x["value"] == value)
+            result = {"score": float(selected_probability), "answer": {"choice": value, "confidence": confidence,
+                      "probabilities": distribution}}
         else:
             value = a.get("score")
             length = len(c["options"])
@@ -108,8 +126,9 @@ def classify_decisions(event, api_key, config, usage_sink=None):
             confidence = a.get("confidence")
             if not valid_unit(confidence):
                 raise ValueError("Decisions answer has invalid confidence: " + name)
+            distribution = validate_distribution(a.get("probabilities"), list(range(length)), name)
             result = {"score": float(value) / (length - 1), "answer": {
-                      "score": value, "confidence": confidence, "probabilities": a.get("probabilities", [])}}
+                      "score": value, "confidence": confidence, "probabilities": distribution}}
         by_id[name] = result
     if set(by_id) != set(ids):
         raise ValueError("Decisions response missing criterion answers")
