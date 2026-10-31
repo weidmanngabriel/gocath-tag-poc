@@ -18,3 +18,9 @@
 - Der echte Live-Lauf 26 hat zehn Events mit je 23 Einzelbewertungen erfolgreich in `ClassificationDetails` gespeichert. Er hat auch gezeigt, dass ein Fußballturnier trotz kaum religiöser Inhalte durch ein übergewichtiges Herkunftssignal als `likely_relevant` erschien.
 - Deshalb wurden die Gewichte für `context_catholic` und `context_church` im Sheet `Criteria` auf jeweils `0.5` gesenkt und die Beschreibungen präzisiert: Der Quellen-Domainname allein ist kein Beleg für einen ausdrücklich kirchlichen Veranstalter. Diese Werte bleiben im Sheet frei editierbar.
 - Historische Bewertungen aus Lauf 26 bleiben als damalige Entscheidungen unverändert; die geänderten Gewichte wirken erst auf folgende Klassifizierungsläufe. Ohne weitere Evaluation ist der Score keine belastbare Entscheidung über Aufnahme oder Ausschluss.
+
+## OpenAI Decisions API (neuer Anbieterpfad)
+- `classifier_provider=openai` nutzt `src/decisions_classify.py`: eine gemeinsame JSON-Eingabe und eine benannte `predicate`-Frage je aktiviertem Kriterium. Die API liefert `probability` im Bereich 0 bis 1 pro Merkmal; die Werte sind Schätzungen, vor automatischer Aussortierung anhand markierter Beispiele zu kalibrieren. Die andere Relevanzregel im Python-Runner bleibt unverändert.
+- Fehlen Antworten, kommen doppelte IDs, ungültige Werte oder Verweigerungen zurück, schlägt der Lauf ausdrücklich fehl, statt fehlende Merkmale als Nullbewertungen zu speichern.
+- Kein freier Text und keine belegenden Zitate aus der Decisions API. `evidence` bleibt daher leer, `additional_tags` bleibt leer, `reason` ist ein fester Hinweis. Legacy-Tags werden aus expliziten Format-Aliasnamen abgeleitet, sofern sie in `Tags` erlaubt sind. Keine zusätzlichen Responses-Aufrufe für Text.
+- Scores aller Veranstaltungen, auch bei geringer Relevanz, landen unverändert in `ClassificationDetails`; ältere Läufe bleiben unverändert.
