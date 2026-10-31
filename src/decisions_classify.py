@@ -73,6 +73,8 @@ def classify_decisions(event, api_key, config, usage_sink=None):
             "output_tokens": int(usage.get("output_tokens", 0)),
             "thinking_tokens": int((usage.get("output_tokens_details") or {}).get("reasoning_tokens", 0)),
             "cached_tokens": int(details.get("cached_tokens", 0)),
+            "cache_write_tokens": int(details.get("cache_write_tokens", 0)),
+            "cache_write_12h_tokens": int((details.get("cache_write_tokens_details") or {}).get("ttl_12h_tokens", 0)),
             "total_tokens": int(usage.get("total_tokens", 0))
         })
     answers = body.get("answers")
