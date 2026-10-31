@@ -14,3 +14,7 @@
 9. **Konfigurierbare Werte nicht als feststehende Projektzahlen wiedergeben.** Auf `Config`, `Tags` oder den jeweiligen Code als Quelle verweisen, statt Beispielwerte zu kanonisieren. Beispiele ausdrücklich als Beispiele kennzeichnen.
 10. Vor Abschluss prüfen, dass Einstiegspunkte (`README.md`, `AGENTS.md`) und vertiefende Dokumente konsistent sind. Im PR knapp angeben, welche Dokumentation aktualisiert wurde; falls nichts betroffen ist, begründen.
 11. Nur verifizierte Zustände als erledigt dokumentieren. Fehlende Live-Tests, ausstehende Deployments und externe Blocker klar festhalten.
+
+
+## Spezielle RC-Betriebsregel
+Der RC-Runner lädt bei jedem Workflowbeginn einen eingefrorenen Google-Sheet-Snapshot. Für reguläre neue/geänderte Events `delta`, für veraltete semantische Bewertungen `reclassify` verwenden. Niemals automatischen Reclassify-Run allein aufgrund einer geänderten Fragebogenversion starten. Nach jeweils höchstens zehn Versuchen auf `rc-data` checkpointen und pro GitHub-Run aggregierte Metriken erhalten. Eine unterbrochene Verarbeitung durch erneuten Aufruf desselben Modus fortsetzen; keine Kampagnenwarteschlange und kein `continue` erforderlich. Reine Anzeigeänderungen dürfen keine bezahlten Neubewertungen auslösen.
