@@ -100,6 +100,7 @@ class DecisionsClassifierTests(unittest.TestCase):
         score = result["criteria_scores"][0]
         self.assertEqual(score["type"], "choice")
         self.assertEqual(score["score"], 0.72)
+        self.assertFalse(score["matched"])
         self.assertEqual(len(score["answer"]["probabilities"]), 3)
         self.assertEqual(score["answer"]["probabilities"][1]["probability"], 0.18)
         self.assertEqual(post.call_args.kwargs["json"]["questions"][0]["choices"][0]["value"], "workshop")
@@ -143,6 +144,7 @@ class DecisionsClassifierTests(unittest.TestCase):
         score = result["criteria_scores"][0]
         self.assertEqual(score["type"], "score")
         self.assertEqual(score["score"], 0.7)
+        self.assertFalse(score["matched"])
         self.assertEqual(len(score["answer"]["probabilities"]), 3)
 
     def test_missing_configuration_rejected(self):
