@@ -21,3 +21,8 @@ Eine minimale TypeScript-Oberfläche für **manuelle** GoCath-Klassifizierungen.
 **Aktueller Zustand:** Standard-Tag-Aktivierung und Synonyme sind im Sheet `Tags` pflegbar; Run-Historie, Token- und Kostenschätzung sowie Contains-/Fuzzy-Suche stehen im Dashboard bereit. Der Runner wird ausschließlich manuell gestartet. Die maßgeblichen aktuellen Einstellungen stehen im Google Sheet, nicht in dieser README.
 
 **KI-Anbieter:** Der aktive Klassifizierungsanbieter ist im Dashboard unter `classifier_provider` zwischen OpenAI, Groq und Gemini auswählbar. Der aktuelle Wert steht ausschließlich im Sheet. Beide API-Keys liegen ausschließlich in GitHub Secrets; die Klassifizierung bleibt manuell und schreibt nur ins Test-Sheet.
+
+## OpenAI Decisions API
+Für `classifier_provider=openai` verwendet der Runner nun `POST /v1/decisions` mit `gpt-6-luna` und genau einer `predicate`-Frage je aktivem Kriterium aus `Criteria`. Alle Wahrscheinlichkeiten werden auch bei niedrigen Werten in `ClassificationDetails` gespeichert; die katholische Relevanz bleibt eine separate nachvollziehbare Code-Regel, ohne automatische Ausschlüsse. `gemini` und `groq` nutzen weiterhin ihren bisherigen Ablauf.
+
+Die Decisions API erzeugt **keinen Freitext**: `additional_tags` ist bei neuen OpenAI-Läufen leer, die Legacy-Standard-Tags werden nur noch über definierte Format-Aliase aus erfolgreichen Kriterienzuordnungen abgeleitet; `reason` erklärt dies allgemein statt einer KI-Begründung. Historische Daten bleiben erhalten. Die Preise für OpenAI-Decisions werden als ungekürzte Eingabetokens mit 0,10 USD pro Million und ohne Outputkosten geschätzt; mögliche Cache-Abschläge sind nicht berücksichtigt. Eine echte Live-API-Ausführung muss nach grüner CI mit dem manuellen Workflow validiert werden.
