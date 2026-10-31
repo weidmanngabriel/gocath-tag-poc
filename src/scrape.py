@@ -44,7 +44,7 @@ def clean_event_text(text):
     text = re.sub(r"\\s+", " ", text).strip()
     return text
 
-def parse_event(html, url):
+def parse_event(html, url, *, clean=True):
     soup = BeautifulSoup(html, "html.parser")
     main = soup.select_one("main") or soup
     title = main.find("h1")
@@ -55,10 +55,11 @@ def parse_event(html, url):
         name = title.get_text(" ", strip=True)
     for node in main.select("script,style,nav,footer"):
         node.decompose()
-    description = clean_event_text(main.get_text(" ", strip=True))[:5500]
+    text = main.get_text(" ", strip=True)
+    description = (clean_event_text(text) if clean else text)[:5500]
     return {"url": url, "title": name, "description": description}
 
-def fetch_events(limit=20):
+def fetch_events(limit=20, *, clean=True):
     session = requests.Session()
     def html(url):
         t0 = time.perf_counter()
@@ -73,7 +74,7 @@ def fetch_events(limit=20):
         out = []
         for url in links:
             try:
-                event = parse_event(html(url), url)
+                event = parse_event(html(url), url, clean=clean)
                 if event["title"]:
                     out.append(event)
             except requests.RequestException as exc:
