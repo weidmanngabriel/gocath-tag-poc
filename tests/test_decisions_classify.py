@@ -77,6 +77,20 @@ class DecisionsClassifierTests(unittest.TestCase):
         self.assertLess(new_bytes, old_bytes * 0.8)
         self.assertIn(event["description"], json.dumps(after, ensure_ascii=False))
 
+    def test_factorial_input_flags_are_independent(self):
+        event = {"url": "https://example.org/sport", "title": "Sport",
+                 "description": "Turnier mit Familien"}
+        rules = self.config["criteria"]
+        baseline = build_decisions_payload(event, rules, compact=False, strip_url=False)
+        rules_only = build_decisions_payload(event, rules, compact=True, strip_url=False)
+        compact = build_decisions_payload(event, rules, compact=True, strip_url=True)
+        assert baseline["questions"] != rules_only["questions"]
+        self.assertEqual(rules_only["questions"], compact["questions"])
+        self.assertEqual(baseline["input"][0]["content"][1]["data"], event)
+        self.assertEqual(rules_only["input"][0]["content"][1]["data"], event)
+        self.assertEqual(compact["input"][0]["content"][1]["data"],
+                         {"title": event["title"], "description": event["description"]})
+
     @patch("src.decisions_classify.requests.post")
     def test_missing_scores_rejected_not_misclassified(self, post):
         response = Mock(ok=True)
