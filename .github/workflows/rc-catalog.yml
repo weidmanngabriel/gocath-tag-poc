@@ -1,5 +1,7 @@
 name: RC Catalog
 on:
+  schedule:
+    - cron: '17 * * * *'
   workflow_dispatch:
     inputs:
       mode:
@@ -39,8 +41,8 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_SHEET_ID: '1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w'
           GOCATH_OPENAI: ${{ secrets.GOCATH_OPENAI }}
-          RC_MODE: ${{ inputs.mode }}
-          RC_LIMIT: ${{ inputs.max_paid }}
+          RC_MODE: ${{ github.event_name == 'schedule' && 'delta' || inputs.mode }}
+          RC_LIMIT: ${{ github.event_name == 'schedule' && '10' || inputs.max_paid }}
           RC_CONFIRM: ${{ inputs.confirm }}
         run: |
           python -m src.rc_runtime --mode "$RC_MODE" --max-paid "$RC_LIMIT" --confirm "$RC_CONFIRM" --state state/catalog.json --public public/catalog.json
