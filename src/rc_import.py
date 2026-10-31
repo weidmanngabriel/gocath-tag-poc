@@ -70,6 +70,31 @@ def clean_text(text):
     text=re.sub(r"[\w.+-]+@[\w.-]+\.[a-zA-Z]{2,}"," ",text)
     return canonical_text(text)
 
+def event_dates(text):
+    """Extract the calendar's start and end dates, including shortened ranges."""
+    from datetime import date
+    pattern = re.compile(
+        r"(?<!\\d)(\\d{1,2})\\.(\\d{1,2})\\."
+        r"(?:(20\\d{2})\\s*[-–]\\s*)?"
+        r"(?:[-–]\\s*)?"
+        r"(\\d{1,2})\\.(\\d{1,2})\\.(20\\d{2})(?!\\d)"
+    )
+    match = pattern.search(text)
+    if match:
+        d1,m1,y1,d2,m2,y2=match.groups()
+        end=date(int(y2),int(m2),int(d2))
+        if y1 is not None:
+            start=date(int(y1),int(m1),int(d1))
+        else:
+            year=int(y2) - (int(m1)>int(m2))
+            start=date(year,int(m1),int(d1))
+        if start>end:raise ValueError("RC event starts after end date")
+        return start.isoformat(),end.isoformat()
+    match=re.search(r"(?<!\\d)(\\d{1,2})\\.(\\d{1,2})\\.(20\\d{2})(?!\\d)",text)
+    if not match:return "",""
+    day,month,year=map(int,match.groups())
+    return date(year,month,day).isoformat(),""
+
 def parse_cards(html):
     soup=BeautifulSoup(html,"html.parser")
     events={}
@@ -85,14 +110,14 @@ def parse_cards(html):
         if len(text)<60:continue
         description=text.replace(title,"",1).strip()[:6500]
         audience=sorted(set(re.findall(r"Familien|Jugendliche[^,.;]{0,35}|Junge Männer[^,.;]{0,30}|Junge Frauen[^,.;]{0,30}|Paare & Ehepaare|Männer \(27\+\)|Frauen \(27\+\)|Kinder \(0-11\)|Jungen \(0-11\)|Mädchen \(0-11\)",text)))
-        date=re.search(r"\b\d{1,2}\.\d{1,2}\.20\d{2}\b",text)
+        start_date,end_date=event_dates(text)
         address=re.search(r"\bAdresse\b\s+(.{1,100}?)(?:\b(?:Deutschland|Österreich|Sie haben|anmelden)\b|$)",text)
         events[key]={
             "url":"https://www.regnumchristi.eu/demnaechst/?vid="+key[3:],
             "title":title,"description":description,"target_groups":audience,
             "categories":[],"organizer":"",
             "location":canonical_text(address.group(1)) if address else "",
-            "starts_at":date.group(0) if date else "", "ends_at":""}
+            "starts_at":start_date, "ends_at":end_date}
     return events
 
 def fetch_all_events(max_pages=30):
