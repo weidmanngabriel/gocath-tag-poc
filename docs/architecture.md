@@ -1,5 +1,8 @@
 # Architektur
 
+**RC-Backend:** `src/config.py:settings` liest für den aktiven Katalog ausschließlich `Criteria` und `Config`; das frühere Blatt `Tags` wird nicht mehr benötigt. Historische Daten und Tags sind im Legacy-Backup gesichert. Eine spätere Umstellung auf nur `Criteria` erfordert eine gesonderte Migration der Modell- und Preisparameter.
+
+
 > **Legacy-Hinweis (31.10.2026):** Die nachfolgenden Abschnitte „Datenfluss“, „Dashboard“, „Decisions API“ und „Konfigurierbarer Decisions-Fragebogen“ dokumentieren den früheren manuellen Google-Sheet-Tagging-POC. Dessen `tag-events.yml`-Trigger ist stillgelegt; diese historischen Beschreibungen sind nicht der aktuelle RC-Produktionsablauf. Verbindlich ist der Abschnitt „RC-Katalog: Datenfluss und Versionsmodell“ unten. Das sieben Tabs umfassende Original-Sheet wurde vor der Stilllegung als separate vollständige Datei gesichert (siehe README); Originaldaten und Editor bleiben erhalten.
 
 ## Datenfluss
