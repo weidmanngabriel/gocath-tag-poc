@@ -6,6 +6,10 @@ on:
         type: choice
         options: [publish-questions, delta, reclassify, continue]
         default: delta
+      max_paid:
+        default: '25'
+      confirm:
+        default: ''
 permissions:
   contents: write
 concurrency:
