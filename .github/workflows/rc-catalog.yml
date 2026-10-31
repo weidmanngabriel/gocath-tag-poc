@@ -4,7 +4,7 @@ on:
     inputs:
       mode:
         type: choice
-        options: [publish-questions, delta, reclassify, continue]
+        options: [publish-questions, delta, refresh, reclassify, continue]
         default: delta
       max_paid:
         default: '25'
