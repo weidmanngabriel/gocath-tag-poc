@@ -25,3 +25,14 @@
 .criterion-options input{width:17px;height:17px;flex:0 0 auto;accent-color:#2b754d}
 #clear-criteria{margin:8px 10px 10px;border:1px solid #9ebba7;background:#f4f8f5;padding:8px 12px;border-radius:7px;cursor:pointer}
 @media(max-width:460px){.criterion-options{width:min(88vw,370px)}}
+
+
+.purpose{background:#fff;border:1px solid #dbe7dd;border-radius:14px;padding:20px;margin:0 0 22px}
+.purpose h2{font-size:1.16rem;margin:0 0 8px;color:#203b2b}
+.purpose p{line-height:1.5;margin:8px 0}
+.purpose details{margin-top:10px}
+.purpose summary{cursor:pointer;color:#23704b;font-weight:650;padding:7px 0}
+.purpose details p{margin:10px 0}
+.purpose .purpose-meta{font-size:.88rem;color:#5e6e62;margin-top:16px}
+.purpose .purpose-contact{font-size:.9rem;color:#415b49;margin-bottom:0}
+.purpose a{overflow-wrap:anywhere}
