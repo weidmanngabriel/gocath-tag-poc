@@ -16,10 +16,22 @@ function card(item:Event){
  const c=item.classification;
  const groups=[...new Set((c?.scores||[]).map(s=>s.category))].sort((a,b)=>a.localeCompare(b,"de"));
  const hits=(c?.scores||[]).filter(s=>s.matched).sort((a,b)=>b.score-a.score);
+ const groupOrder=["Format","Thema","Zielgruppe","Kontext"];
+ const matchedGroups=[...new Set(hits.map(s=>s.category))].sort((a,b)=>{
+  const ai=groupOrder.indexOf(a),bi=groupOrder.indexOf(b);
+  return (ai<0?99:ai)-(bi<0?99:bi)||a.localeCompare(b,"de");
+ });
+ const groupedHits=matchedGroups.map(group=>{
+  const entries=hits.filter(s=>s.category===group);
+  const visible=entries.slice(0,2);
+  const more=entries.slice(2);
+  const chip=(s:Score)=>`<span class="match-chip">${esc(s.label)} · ${pct(s.score)}</span>`;
+  return `<section class="match-group" aria-label="${esc(group)}"><div class="match-group-heading"><strong>${esc(group)}</strong><small>${entries.length} Treffer</small></div><div class="match-list">${visible.map(chip).join("")}</div>${more.length?`<details class="match-more"><summary>+ ${more.length} weitere</summary><div class="match-list">${more.map(chip).join("")}</div></details>`:""}</section>`;
+ }).join("");
  const tabs=[...groups,"Beschreibung"];
  const buttons=tabs.map((g,i)=>`<button type="button" role="tab" id="tab-${esc(item.id)}-${i}" aria-controls="panel-${esc(item.id)}-${i}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-tab="${i}">${esc(g)}</button>`).join("");
  const panels=tabs.map((g,i)=>`<div role="tabpanel" id="panel-${esc(item.id)}-${i}" aria-labelledby="tab-${esc(item.id)}-${i}" ${i!==0?"hidden":""}>${g==="Beschreibung"?`<p class="description">${esc(item.event.description||"Keine Beschreibung verfügbar.")}</p><a href="${esc(item.event.url)}" target="_blank" rel="noopener noreferrer">Originalveranstaltung öffnen</a>`:(c?.scores.filter(s=>s.category===g).sort((a,b)=>b.score-a.score).map(scoreRow).join("")||"<p>Keine Bewertung verfügbar.</p>")}</div>`).join("");
- return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div></div><div class="chips" aria-label="Erkannte Merkmale">${hits.length?hits.map(s=>`<span>${esc(s.label)} · ${pct(s.score)}</span>`).join(""):`<span class="no-hits">${c?"Keine Kriterien oberhalb ihrer Trefferschwelle":"Noch keine Bewertung vorhanden"}</span>`}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
+ return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div></div><div class="matched-groups" aria-label="Erkannte Merkmale">${hits.length?groupedHits:`<p class="no-hits">${c?"Keine Kriterien oberhalb ihrer Trefferschwelle":"Noch keine Bewertung vorhanden"}</p>`}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
 }
 function switchItemTab(button:HTMLButtonElement,focus=false){
  const tabs=button.closest<HTMLElement>(".item-tabs");
