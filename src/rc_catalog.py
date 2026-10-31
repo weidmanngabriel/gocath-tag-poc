@@ -1,4 +1,4 @@
-"""Persistent and resumable RC catalog; no automatic schedule."""
+"""Persistent event-centric RC catalog and versioned questionnaire."""
 import copy
 import json
 from datetime import datetime, timezone
@@ -23,11 +23,55 @@ def write(path,data):
     tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding="utf-8")
     tmp.replace(path)
 
-def publish_questions(state,config):
-    rev=digest(config["criteria"])
-    state["active_questionnaire"]={"revision":rev,"criteria":copy.deepcopy(config["criteria"]),
-                                  "tags":copy.deepcopy(config.get("tags",[])),"published_at":now()}
+def semantic_revision(criteria):
+    """Fingerprint only changes that affect AI classification, not labels or thresholds."""
+    return digest([{"id": c["id"], "signature": criterion_signature(c)} for c in sorted(criteria,key=lambda c:c["id"])])
+
+
+def publish_questions(state, config):
+    """Load validated Sheet configuration without resetting existing event classifications."""
+    criteria = config["criteria"]
+    if not criteria:
+        raise ValueError("No active Criteria in Google Sheets")
+    rev = digest(criteria)
+    semantic = semantic_revision(criteria)
+    previous = state.get("active_questionnaire") or {}
+    if previous.get("revision") == rev and previous.get("semantic_revision") == semantic:
+        return rev
+    at = now()
+    state["active_questionnaire"] = {
+        "revision": rev, "semantic_revision": semantic,
+        "updated_at": at if previous.get("revision") != rev else previous.get("updated_at", at),
+        "semantic_updated_at": at if previous.get("semantic_revision") != semantic else previous.get("semantic_updated_at", at),
+        "criteria": copy.deepcopy(criteria), "tags": copy.deepcopy(config.get("tags", [])),
+        "published_at": at,
+    }
+    # Upgrade legacy successful classifications only if their stored answers match
+    # the previous questionnaire's original semantic fingerprint.
+    if previous and previous.get("semantic_revision") is None:
+        old_semantic = semantic_revision(previous.get("criteria", []))
+        for row in state.get("events", {}).values():
+            cls = row.get("classification") or {}
+            if cls.get("questionnaire_revision") == previous.get("revision"):
+                cls.setdefault("classification_config_revision", old_semantic)
+                cls.setdefault("classification_config_updated_at", previous.get("published_at"))
+    # Historical per-question signatures included the display label. Convert
+    # only signatures which match the saved *previous* question definition.
+    # This preserves existing results across cosmetic label/threshold changes.
+    old_criteria={c["id"]:c for c in previous.get("criteria",[])}
+    for row in state.get("events",{}).values():
+        cls=row.get("classification") or {}
+        signatures=cls.get("criterion_signatures") or {}
+        for key, old in old_criteria.items():
+            legacy=digest({"type":old.get("type","predicate"),
+                           "label":old.get("label",""),
+                           "description":old.get("description",""),
+                           "options":old.get("options",[])})
+            if signatures.get(key)==legacy:
+                signatures[key]=criterion_signature(old)
+    state.pop("campaign", None)
     return rev
+
 
 def active_config(state):
     q=state.get("active_questionnaire")
@@ -37,7 +81,6 @@ def active_config(state):
 def criterion_signature(criterion):
     """Semantic fingerprint: display labels and thresholds do not invalidate AI answers."""
     return digest({"type":criterion.get("type","predicate"),
-                   "label":criterion.get("label",""),
                    "description":criterion.get("description",""),
                    "options":criterion.get("options",[])})
 
@@ -74,17 +117,6 @@ def relevance(scores,config):
     return {"score":round(min(1,max(signals,default=0)),4),
             "status":"likely_relevant" if strong else "review" if any(s>=.25 for s in signals) else "likely_not_relevant"}
 
-def start_campaign(state):
-    if not state.get("active_questionnaire"): raise RuntimeError("No active questionnaire")
-    if state.get("campaign") and state["campaign"]["pending"]:
-        if state["campaign"]["revision"] == state["active_questionnaire"]["revision"]:
-            raise RuntimeError("Full reclassification already in progress")
-        # Explicit reclassify replaces a campaign from an outdated questionnaire.
-        # Existing per-event classifications remain until successfully replaced.
-    state["campaign"]={"revision":state["active_questionnaire"]["revision"],"started_at":now(),
-                       "pending":sorted(state["events"])}
-    return len(state["campaign"]["pending"])
-
 def permanent_classification_failure(exc):
     return isinstance(exc, ValueError) and (str(exc).startswith("Decisions ") or str(exc) == "Incomplete score set")
 
@@ -111,18 +143,32 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
         row["missing_checks"]=0
         row["inactive"]=False
         state["events"][key]=row
-    if mode=="continue":
-        campaign=state.get("campaign")
-        if not campaign: raise RuntimeError("No active reclassification campaign")
-        if campaign["revision"]!=state["active_questionnaire"]["revision"]:
-            raise RuntimeError("Questionnaire revision changed during campaign; re-publish after finishing")
-        candidates=[key for key in campaign["pending"] if key in source]
-    elif mode=="refresh":
-        candidates=[]  # Correct display metadata without any API calls.
-    elif mode=="delta":
-        candidates=[key for key,event in source.items() if
-                    (state["events"][key].get("last_attempt_hash") or state["events"][key].get("classification_hash"))!=fingerprints(event)["classification_hash"]]
-    else: raise ValueError("Unknown mode")
+    if mode=="refresh":
+        candidates=[]
+    elif mode in ("delta", "reclassify"):
+        semantic = state["active_questionnaire"]["semantic_revision"]
+        candidates=[]
+        for key, event in source.items():
+            row=state["events"][key]
+            hashes=fingerprints(event)
+            changed=(row.get("last_attempt_hash") or row.get("classification_hash")) != hashes["classification_hash"]
+            if mode=="delta":
+                if changed: candidates.append(key)
+            else:
+                cls=row.get("classification") or {}
+                revision=cls.get("classification_config_revision")
+                # Account for older catalog states without a semantic version field.
+                if revision is None and cls.get("questionnaire_revision")==state["active_questionnaire"]["revision"]:
+                    revision=semantic
+                if changed or revision != semantic:
+                    # Permanent failures with unchanged content/config must not loop forever.
+                    if (row.get("classification_status")=="failed"
+                        and row.get("last_attempt_hash")==hashes["classification_hash"]
+                        and row.get("last_attempt_config_revision")==semantic):
+                        continue
+                    candidates.append(key)
+    else:
+        raise ValueError("Unknown mode")
     successes=0
     failures=[]
     for key in candidates[:max_paid]:
@@ -137,24 +183,23 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
             if permanent:
                 record["last_attempt_hash"]=fingerprints(source[key])["classification_hash"]
                 record["classification_status"]="failed"
+                record["last_attempt_config_revision"]=state["active_questionnaire"]["semantic_revision"]
                 record["classification_error"]={"type":type(exc).__name__,"reason":str(exc)[:240]}
             failures.append({"id":key,"type":type(exc).__name__, "reason":str(exc)[:240], "retry_on_change_only":permanent})
-            if mode=="continue" and permanent:
-                state["campaign"]["pending"].remove(key)
             continue
         record=state["events"][key]
         record["classification"]={"scores":scores,"relevance":relevance(scores,config),
             "model":MODEL,"classified_at":at,"questionnaire_revision":state["active_questionnaire"]["revision"],
+            "classification_config_revision":state["active_questionnaire"]["semantic_revision"],
+            "classification_config_updated_at":state["active_questionnaire"]["semantic_updated_at"],
             "criterion_signatures":{c["id"]:criterion_signature(c) for c in config["criteria"]},
             "usage":usage,"estimated_cost_usd":round(usage.get("input_tokens",0)*.10/1000000,8)}
         record["classification_hash"]=fingerprints(source[key])["classification_hash"]
         record["last_attempt_hash"]=record["classification_hash"]
         record["classification_status"]="success"
+        record.pop("last_attempt_config_revision",None)
         record.pop("classification_error",None)
         successes+=1
-        if mode=="continue": state["campaign"]["pending"].remove(key)
-    if mode=="continue" and not state["campaign"]["pending"]:
-        state["campaign"]=None
     for key,row in state["events"].items():
         if key not in source:
             row["missing_checks"]=row.get("missing_checks",0)+1
@@ -162,7 +207,7 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
     state["last_sync_at"]=at
     state["last_run"]={"mode":mode,"source_count":len(source),"queued":len(candidates),
                        "classified":successes,"failures":failures,
-                       "remaining_campaign":len(state["campaign"]["pending"]) if state.get("campaign") else 0}
+                       "remaining":max(0,len(candidates)-min(max_paid,len(candidates)))}
     return state["last_run"]
 
 def public_feed(state):

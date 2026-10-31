@@ -40,3 +40,11 @@ Die feste technische JSON-Ausgabevorgabe liegt in `src/classify.py` als `OUTPUT_
 ## OpenAI als dritter Anbieter
 
 `classifier_provider=openai` nutzt das GitHub Secret `GOCATH_OPENAI` und das Responses-API-Modell `gpt-6-luna`. `Config.openai_reasoning_effort` unterstützt `none`, `low`, `medium`, `high` (Standard `low`). Der gemeinsame `gemini_prompt` ist trotz des historischen Schlüsselnamens der bearbeitbare Prompt für alle Anbieter. Der technische JSON-Vertrag wird im Code ergänzt. `openai_reasoning_effort` und `gemini_model` sind getrennte anbieterbezogene Einstellungen; `gemini_temperature` gilt nur bei Gemini und Groq. In der Dashboard-UI werden nicht anwendbare Felder ausgeblendet. Die Kostenangaben im Config-Sheet sind noch gemeinsame Preiswerte; bei Anbieterwechsel müssen sie an das gewählte Modell angepasst werden. OpenAI-Ausgabetokens enthalten bereits Reasoning-Tokens; bei der Kostenschätzung werden sie nicht doppelt gezählt. Der neue Anbieter benötigt eine echte Integrationserprobung, bevor der PR gemergt wird.
+
+
+## RC-Katalog starten und überprüfen
+Workflow: `.github/workflows/rc-catalog.yml`, Quelle `Criteria` im Test-Google-Sheet. Erlaubte Modi: `delta`, `reclassify`, `refresh`. `publish-questions` und `continue` sind keine erforderlichen Betriebsaktionen mehr. `max_paid` begrenzt die pro Workflow gestarteten Klassifizierungsversuche (technisch höchstens 200). Der Workflow lädt einen Fragebogen-Snapshot zu Beginn und verwendet ihn für alle zehnteiligen Checkpoint-Chargen. Die einzelnen Chargen werden in `rc-data` dauerhaft veröffentlicht; Token- und Kostenwerte werden nach GitHub-Run-ID aggregiert.
+
+Nach einer Änderung im Google Sheet genügt für das Übernehmen von Anzeigenamen/Schwellen oder den Fragebogen-Snapshot `refresh` beziehungsweise der nächste reguläre Lauf. Die Änderung allein verursacht bei `delta` keine erneute Klassifizierung. Für semantisch neue KI-Bewertungen `reclassify` manuell starten; wiederholt aufrufen, bis `queued` und `remaining` keine alten Kandidaten mehr zeigen. Kein manuelles Reset und keine Kampagne erforderlich.
+
+Vor produktiver Freigabe von Änderungen am Datenfluss müssen erfolgreiche CI-Tests und ein begrenzter echter Workflow-Test mit anschließender Prüfung der Datensätze auf `rc-data` vorliegen. Ein grüner Mock-Test allein ist kein End-to-End-Nachweis.

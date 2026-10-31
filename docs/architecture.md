@@ -15,3 +15,11 @@ Bei OpenAI ruft der Runner die Decisions API `POST /v1/decisions` (Modell `gpt-6
 
 ## Konfigurierbarer Decisions-Fragebogen
 Der Sheet-Tab `Criteria` speichert die editierbare Fragedefinition einschließlich Fragetyp und JSON-Optionen. Die statische Web-App bearbeitet diese Werte direkt über die Sheets-API. `src/config.py` lädt sie vor jedem manuellen Runner-Lauf, `src/decisions_classify.py` erzeugt typisierte Fragen und prüft vollständig die gelieferten Verteilungen. Das Append-only-Log `ClassificationDetails` ergänzt die bislang 13 Felder um den Fragetyp und die typisierte Antwort als JSON. Nur `predicate` wirkt auf die bestehende Relevanzheuristik.
+
+
+## RC-Katalog: Datenfluss und Versionsmodell
+`.github/workflows/rc-catalog.yml` unterstützt `delta`, `reclassify` und `refresh`. Beim Start wird `Criteria` aus dem Test-Google-Sheet genau einmal als validierter Konfigurations-Snapshot geladen. Der Python-RC-Runner berechnet einen Fingerprint aller Fragen (`revision`) sowie einen **semantischen** Fingerprint (`semantic_revision`) für IDs, Fragetypen, Beschreibungen und Antwortoptionen. Anzeigenamen, Kategorien, Gewichte und Trefferschwellen lösen keine Neubewertung durch die API aus; die Darstellung benutzt die jeweils aktuellen Werte. `updated_at` und `semantic_updated_at` kennzeichnen erkannte Konfigurationsänderungen.
+
+Jeder Datensatz in `rc-data/catalog.json` enthält den Fingerprint des bewerteten Veranstaltungstexts sowie `classification.classification_config_revision`, `classification.classification_config_updated_at` und `classified_at`. Der öffentliche Ausschnitt `rc-data/public.json` enthält nur kompatible Ergebnisse und markiert fehlende Kriterien als ausstehend. Bei fehlgeschlagenen API-Aufrufen werden zuvor erfolgreiche Ergebnisse nicht überschrieben.
+
+Ein Workflow verarbeitet bis zu `max_paid` Kandidaten in Chargen von maximal zehn. Nach jeder Charge werden Zustand, öffentliche Darstellung und pro GitHub-Run aggregierte Token-/Kostenmetriken nach `rc-data` gepusht; bei Job-Abbruch bleibt der vorherige Checkpoint erhalten. Bei erneutem Start erkennt der Runner den verbleibenden Bedarf automatisch, ohne Kampagnenwarteschlange.

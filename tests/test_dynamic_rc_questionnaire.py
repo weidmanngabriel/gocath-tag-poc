@@ -1,5 +1,5 @@
 import unittest
-from src.rc_catalog import criterion_signature, presentation_scores, start_campaign
+from src.rc_catalog import criterion_signature, presentation_scores, publish_questions
 
 class DynamicQuestionnaireTests(unittest.TestCase):
     def setUp(self):
@@ -7,20 +7,6 @@ class DynamicQuestionnaireTests(unittest.TestCase):
         self.revision = {"revision":"new", "criteria":[self.question]}
         self.classification = {"questionnaire_revision":"old","criterion_signatures":{"target_youth":criterion_signature(self.question)},
             "scores":[{"id":"target_youth","category":"Frühere Kategorie","label":"Alter Titel","score":0.72,"matched":False}]}
-
-    def test_new_revision_replaces_old_pending_campaign(self):
-        state={"active_questionnaire":{"revision":"new"},"campaign":{"revision":"old","pending":["past"]},
-               "events":{"event-a":{"classification":{"scores":[{"score":0.8}]}}}}
-        self.assertEqual(start_campaign(state),1)
-        self.assertEqual(state["campaign"]["revision"],"new")
-        self.assertEqual(state["campaign"]["pending"],["event-a"])
-        self.assertEqual(state["events"]["event-a"]["classification"]["scores"][0]["score"],0.8)
-
-    def test_same_revision_still_blocks_second_campaign(self):
-        state={"active_questionnaire":{"revision":"new"},"campaign":{"revision":"new","pending":["event-a"]},
-               "events":{"event-a":{}}}
-        with self.assertRaisesRegex(RuntimeError,"already in progress"):
-            start_campaign(state)
 
     def test_current_labels_and_thresholds_apply_without_rerun(self):
         result = presentation_scores(self.classification,self.revision)

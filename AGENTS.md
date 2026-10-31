@@ -1,6 +1,6 @@
 # GoCath Tagging POC — Coding-Agent-Einstieg
 
-- Die allgemeinen Bewertungsregeln der RC-Decisions-Klassifizierung stehen zentral im gemeinsamen Anfrage-Input (`src/decisions_classify.py`). Einzelne `Criteria.description`-Felder im Test-Google-Sheet enthalten nur kriterienspezifische Definitionen; globale Regeln nicht in jeder Zeile duplizieren. Veränderungen an Fragebeschreibungen erfordern die erneute Veröffentlichung des Fragebogens, auch wenn nur redundanter Text entfernt wird.
+- Die allgemeinen Bewertungsregeln der RC-Decisions-Klassifizierung stehen zentral im gemeinsamen Anfrage-Input (`src/decisions_classify.py`). Einzelne `Criteria.description`-Felder im Test-Google-Sheet enthalten nur kriterienspezifische Definitionen; globale Regeln nicht in jeder Zeile duplizieren. Änderungen werden beim nächsten RC-Workflow-Start automatisch geladen und versioniert; nur semantische Änderungen verlangen einen bewusst gestarteten `reclassify`-Lauf.
 
 ## Grenzen
 - Öffentliche GoCath-Veranstaltungen lesen; keine produktiven GoCath-Schreibzugriffe.
@@ -40,3 +40,9 @@
 - **Bei echten Blockern exakt sagen, was der Nutzer tun muss:** konkrete Oberfläche/URL, präzise Aktion, warum nur der Nutzer sie ausführen kann und welches Ergebnis anschließend vorliegen soll. Keine vagen Anweisungen wie „bitte prüfen“ oder „Testlauf machen“.
 - **Nicht auf Verdacht abschließen oder mergen:** fehlende Zugriffsrechte, Secrets, kostenpflichtige API-Aktionen, externe Limits oder nicht durchführbare Browser-/Live-Tests offen als Blocker benennen. CI-Erfolg nicht als bestandenen End-to-End-Test darstellen.
 - **Keine asynchronen Versprechen:** Arbeit innerhalb der aktiven Bearbeitung durchführen; falls eine externe Prüfung noch läuft und nicht abgeschlossen werden kann, den genauen offenen Zustand und die nächste erforderliche Aktion nennen, statt spätere eigenständige Nachlieferung zu versprechen.
+
+## RC-Laufarten
+- `delta` übernimmt neue oder geänderte Veranstaltungen, nicht bloße Konfigurationsänderungen.
+- `reclassify` bearbeitet nur Veranstaltungen mit veralteter semantischer Konfigurationsversion oder geändertem Inhalt; erneute Runs arbeiten ohne Kampagnenwarteschlange weiter.
+- `refresh` aktualisiert Konfiguration und Darstellungsdaten ohne KI. `continue` und `publish-questions` sind abgeschafft.
+- Anzeigeänderungen (Label, Kategorie, Schwelle) lösen keine kostenpflichtige Neuklassifizierung aus. Konfigurations-Snapshot und Checkpoints je zehn Veranstaltungen im Workflow schützen vor Versionsmischung und Datenverlust.

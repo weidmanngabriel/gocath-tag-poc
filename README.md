@@ -33,3 +33,9 @@ In der Web-App unter **Kriterien** können Fragen als aufklappbare Karten mit Ti
 ## Google-Anmeldung bei neuen Deployments
 
 Der Google-Sheets-Token liegt normalerweise nur im aktuellen Browser-Tab. Optional kann der Nutzer auf dem Login-Bildschirm **„Für die Restlaufzeit des Google-Tokens auf diesem Gerät angemeldet bleiben“** aktivieren: Dann wird der kurzlebige Token über Tabs und GitHub-Pages-Deployments hinweg wiederverwendet, bis er abläuft. Der Button **„Auf diesem Gerät abmelden“** löscht die gespeicherten Token. Ohne Backend ist ein dauerhaftes Login wegen fehlender Refresh-Tokens nicht möglich; siehe [OAuth-Einrichtung](docs/setup.md) und [Dashboard-Sicherheit](docs/dashboard.md).
+
+
+## Regnum-Christi-Veranstaltungskatalog
+Die RC-Veranstaltungen werden getrennt vom alten Tagging-POC unter `.github/workflows/rc-catalog.yml` verarbeitet. Jeder Workflow lädt die aktuelle `Criteria`-Konfiguration aus Google Sheets, erkennt deren Anzeige- und semantische Version automatisch und veröffentlicht die aktuell kompatiblen Ergebnisse auf `rc-data/public.json`. Der Modus `delta` aktualisiert nur neue/geänderte Events, `reclassify` nur Events mit veralteter semantischer Bewertung, `refresh` ohne KI. `publish-questions` und `continue` werden nicht mehr benötigt. Ergebnisse werden nach je zehn Versuchen dauerhaft gespeichert. Das Veröffentlichen der Konfiguration allein löst keine kostenpflichtige Neuklassifizierung aus.
+
+Ein RC-Run wird im Actions-Workflow gestartet; der Maximalwert `max_paid` wird dort festgelegt. Wiederholtes `reclassify` überspringt bereits aktuell klassifizierte Veranstaltungen. Für Architektur und Regeln siehe [Architektur](docs/architecture.md), [Fachregeln](docs/domain.md) und [Entwicklung](docs/development.md).
