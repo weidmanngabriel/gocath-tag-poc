@@ -33,14 +33,14 @@ function card(item:Event){
   const chip=(s:Score)=>{
    if(s.type==="choice"){
     const choice=s.answer?.choice||"Nicht erkennbar";
-    return `<span class="match-chip match-unknown">${esc(s.label)}: ${esc(choice)}</span>`;
+    return `<span class="match-chip match-relevant">${esc(s.label)}: ${esc(choice)}</span>`;
    }
    if(s.type==="score"){
     const levels=questionnaire?.criteria.find(c=>c.id===s.id)?.options||[];
     const value=s.answer?.score;
     const index=typeof value==="number"?Math.max(0,Math.min(levels.length-1,Math.round(value))):-1;
     const selected=index>=0?levels[index]?.label:"Unbekannt";
-    return `<span class="match-chip match-unknown">${esc(s.label)}: ${esc(selected)}</span>`;
+    return `<span class="match-chip match-relevant">${esc(s.label)}: ${esc(selected)}</span>`;
    }
    return `<span class="match-chip match-${scoreColor(s)}">${esc(s.label)} · ${pct(s.score)}</span>`;
   };
