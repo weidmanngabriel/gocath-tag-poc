@@ -167,8 +167,8 @@ function render(){
    entry.remove();
    document.querySelector<HTMLButtonElement>("#saveTags")?.click();
  });
- const questionTabs=[...document.querySelectorAll<HTMLButtonElement>("[data-question-tab]")];
- const questionSections=[...document.querySelectorAll<HTMLElement>("[data-question-group]")];
+ const questionTabs=Array.from(document.querySelectorAll<HTMLButtonElement>("[data-question-tab]"));
+ const questionSections=Array.from(document.querySelectorAll<HTMLElement>("[data-question-group]"));
  questionTabs.forEach(button=>button.onclick=()=>{
   const selected=button.dataset.questionTab;
   questionTabs.forEach(b=>b.setAttribute("aria-selected",String(b===button)));
