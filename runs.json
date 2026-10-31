@@ -143,23 +143,23 @@
     {
       "run_id": "41219137647",
       "started_at": "2026-10-31T16:19:51.048387+00:00",
-      "finished_at": "2026-10-31T16:21:52.684760+00:00",
+      "finished_at": "2026-10-31T16:22:09.100307+00:00",
       "mode": "reclassify",
       "source_count": 129,
       "queued": 124,
-      "attempted": 80,
-      "classified": 74,
-      "failed": 6,
+      "attempted": 90,
+      "classified": 83,
+      "failed": 7,
       "usage": {
-        "input_tokens": 1124130,
+        "input_tokens": 1269860,
         "output_tokens": 0,
         "thinking_tokens": 0,
         "cached_tokens": 0,
         "cache_write_tokens": 0,
         "cache_write_12h_tokens": 0,
-        "total_tokens": 1124130
+        "total_tokens": 1269860
       },
-      "cost_usd_estimated": 0.112413,
+      "cost_usd_estimated": 0.126986,
       "prices_per_million_usd": {
         "rc_input_per_million_usd": 0.1,
         "rc_cached_input_per_million_usd": 0.01,
