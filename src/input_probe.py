@@ -24,25 +24,27 @@ def relevant(scores, criteria):
             else "likely_not_relevant")
 
 
-def compare(limit=10):
+def compare(limit=5, source='both'):
     if limit < 1 or limit > 10:
         raise ValueError("Probe limit must be 1–10")
     doc, cfg = settings(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"],
                         os.environ["GOOGLE_SHEET_ID"])
     del doc  # Only read settings; never write into Sheets.
-    provider = cfg["event_source"]
-    if provider == "gocath":
+    if source == "configured":
+        source = cfg["event_source"]
+    if source not in ("both", "gocath", "regnum_christi"):
+        raise ValueError("Invalid comparison source")
+    pairs = []
+    if source in ("both", "gocath"):
         original = fetch_gocath(limit, clean=False)
-        optimized = [{**event, "description": clean_event_text(event["description"])}
-                     for event in original]
-    elif provider == "regnum_christi":
+        pairs.extend(("gocath", before, {**before, "description": clean_event_text(before["description"])})
+                     for before in original)
+    if source in ("both", "regnum_christi"):
         original = fetch_regnum(limit)
-        optimized = original
-    else:
-        raise ValueError("Unknown event source")
+        pairs.extend(("regnum_christi", before, before) for before in original)
     api_key = os.environ["GOCATH_OPENAI"]
     results = []
-    for number, (before, after) in enumerate(zip(original, optimized), start=1):
+    for number, (event_source, before, after) in enumerate(pairs, start=1):
         old_usage, new_usage = {}, {}
         old = classify_decisions(before, api_key, cfg, usage_sink=old_usage, compact=False)
         new = classify_decisions(after, api_key, cfg, usage_sink=new_usage)
@@ -59,6 +61,7 @@ def compare(limit=10):
         }
         results.append({
             "event_number": number,
+            "event_source": event_source,
             "source_url": before["url"],  # Stable public source reference, no event description.
             "description_chars_before": len(before["description"]),
             "description_chars_after": len(after["description"]),
@@ -71,14 +74,14 @@ def compare(limit=10):
             "large_changes": {key: value for key, value in changes.items() if value >= 0.2},
             "choice_changed": selected_changes,
         })
-        print(f"[input-probe] event={number}/{len(original)} old_tokens={old_usage.get('input_tokens',0)} "
+        print(f"[input-probe] event={number}/{len(pairs)} old_tokens={old_usage.get('input_tokens',0)} "
               f"new_tokens={new_usage.get('input_tokens',0)} "
               f"relevance_changed={results[-1]['relevance_before'] != results[-1]['relevance_after']}",
               flush=True)
     old_total = sum(x["tokens_before"] for x in results)
     new_total = sum(x["tokens_after"] for x in results)
     summary = {
-        "source": provider, "events": len(results),
+        "source": source, "events": len(results),
         "input_tokens_before": old_total, "input_tokens_after": new_total,
         "saved_input_tokens": old_total - new_total,
         "saved_percent": round(100 * (1 - new_total / old_total), 2) if old_total else None,
@@ -97,6 +100,7 @@ def compare(limit=10):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("--limit", type=int, default=10)
+    p.add_argument("--limit", type=int, default=5)
+    p.add_argument("--source", choices=("both","configured","gocath","regnum_christi"), default="both")
     args = p.parse_args()
-    compare(args.limit)
+    compare(args.limit, args.source)
