@@ -4,34 +4,49 @@ const SHEET="1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w";
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined;
 const API="https://sheets.googleapis.com/v4/spreadsheets/"+SHEET;
 const SESSION_KEY="gocath_sheets_oauth_session";
-type SavedSession={accessToken:string; expiresAt:number};
-function restoreSession():string {
-  try{
-    const saved=JSON.parse(sessionStorage.getItem(SESSION_KEY)||"null") as SavedSession|null;
-    if(saved && typeof saved.accessToken==="string" && Number.isFinite(saved.expiresAt) && saved.expiresAt>Date.now()+30000) return saved.accessToken;
-  }catch{}
-  sessionStorage.removeItem(SESSION_KEY);
-  return "";
+const REMEMBERED_KEY="gocath_sheets_oauth_remembered_v1";
+type SavedSession={accessToken:string; expiresAt:number; clientId?:string; scope?:string};
+const SHEETS_SCOPE="https://www.googleapis.com/auth/spreadsheets";
+function validSession(value:unknown):value is SavedSession {
+ if(!value||typeof value!=="object")return false;
+ const x=value as SavedSession;
+ return typeof x.accessToken==="string"&&x.accessToken.length>0&&
+   Number.isFinite(x.expiresAt)&&x.expiresAt>Date.now()+30000&&
+   x.clientId===CLIENT_ID&&x.scope===SHEETS_SCOPE;
 }
-function clearSession(){token="";sessionStorage.removeItem(SESSION_KEY);}
-let reconnecting:Promise<boolean>|null=null;
-function reconnect():Promise<boolean>{
- if(reconnecting)return reconnecting;
- reconnecting=new Promise<boolean>(resolve=>{
-  if(!CLIENT_ID||!window.google?.accounts?.oauth2){resolve(false);return;}
-  const client=window.google.accounts.oauth2.initTokenClient({
-   client_id:CLIENT_ID,scope:"https://www.googleapis.com/auth/spreadsheets",prompt:"",
-   callback:(r:{access_token?:string;expires_in?:number})=>{
-    if(!r.access_token){resolve(false);return;}
-    token=r.access_token;
-    sessionStorage.setItem(SESSION_KEY,JSON.stringify({accessToken:token,expiresAt:Date.now()+Math.max(0,Number(r.expires_in)||0)*1000}));
-    resolve(true);
-   },
-   error_callback:()=>resolve(false)
-  });
-  try{client.requestAccessToken({prompt:""});}catch{resolve(false);}
- }).finally(()=>{reconnecting=null;});
- return reconnecting;
+function readSession(storage:Storage,key:string):SavedSession|null {
+ try{
+  const raw=storage.getItem(key);
+  if(!raw)return null;
+  const value:unknown=JSON.parse(raw);
+  if(validSession(value))return value;
+  storage.removeItem(key);
+ }catch{try{storage.removeItem(key);}catch{}}
+ return null;
+}
+function restoreSession():string {
+ const tab=readSession(sessionStorage,SESSION_KEY);
+ if(tab)return tab.accessToken;
+ const remembered=readSession(localStorage,REMEMBERED_KEY);
+ if(!remembered)return "";
+ try{sessionStorage.setItem(SESSION_KEY,JSON.stringify(remembered));}catch{}
+ return remembered.accessToken;
+}
+function saveSession(accessToken:string,expiresIn:number,remember:boolean):void {
+ const validSeconds=Number.isFinite(expiresIn)&&expiresIn>0?expiresIn:0;
+ // Never persist tokens without a known, unexpired expiry time.
+ const expiresAt=Date.now()+validSeconds*1000;
+ const session:SavedSession={accessToken,expiresAt,clientId:CLIENT_ID,scope:SHEETS_SCOPE};
+ try{if(validSeconds>0)sessionStorage.setItem(SESSION_KEY,JSON.stringify(session));}catch{}
+ try{
+  if(remember&&validSeconds>0)localStorage.setItem(REMEMBERED_KEY,JSON.stringify(session));
+  else localStorage.removeItem(REMEMBERED_KEY);
+ }catch{}
+}
+function clearSession():void {
+ token="";
+ try{sessionStorage.removeItem(SESSION_KEY);}catch{}
+ try{localStorage.removeItem(REMEMBERED_KEY);}catch{}
 }
 let activeView="results";
 let token=restoreSession(), config: string[][]=[], tags: string[][]=[], runs:string[][]=[], history:string[][]=[], criteria:string[][]=[], details:string[][]=[];
@@ -127,7 +142,7 @@ function render(){
  const c=config.slice(1).filter(x=>x[0]); const t=tags.slice(1).filter(x=>x[0]);
  app.innerHTML=`<header><div class="brand"><span class="mark">✝</span><div><b>GoCath Tagging</b><small>Konfiguration & Ergebnisse · POC</small></div></div><span class="muted">${token?"Google Sheets verbunden":"Nicht verbunden"}</span></header>
  <main><section class="hero"><h1>Event-Klassifizierung</h1><p>Verwalte die Einstellungen für den manuell gestarteten GitHub-Actions-Runner. Alle Werte werden im Google Sheet gespeichert.</p>
- <div class="actions"><button id="login">${token?"Erneut autorisieren":"Mit Google anmelden"}</button><a href="https://github.com/weidmanngabriel/gocath-tag-poc/actions" target="_blank" rel="noopener">GitHub Actions öffnen ↗</a><a href="https://docs.google.com/spreadsheets/d/${SHEET}/edit" target="_blank" rel="noopener">Google Sheet öffnen ↗</a></div><p id="status" aria-live="polite"></p></section>
+ <div class="actions"><button id="login">${token?"Erneut autorisieren":"Mit Google anmelden"}</button><a href="https://github.com/weidmanngabriel/gocath-tag-poc/actions" target="_blank" rel="noopener">GitHub Actions öffnen ↗</a><a href="https://docs.google.com/spreadsheets/d/${SHEET}/edit" target="_blank" rel="noopener">Google Sheet öffnen ↗</a></div>${!token?`<label class="remember-device"><input id="rememberDevice" type="checkbox"/><span>Für die Restlaufzeit des Google-Tokens auf diesem Gerät angemeldet bleiben (maximal etwa 1 Stunde; nur auf einem eigenen Gerät aktivieren)</span></label>`:""}<p id="status" aria-live="polite"></p></section>
  ${token?`<nav class="section-tabs" aria-label="Dashboard-Bereiche">${[["results","Ergebnisse"],["criteria","Kriterien"],["config","Konfiguration"],["tags","Alte Tags"],["metrics","Metriken"],["runs","Läufe"]].map(([id,label])=>`<button type="button" data-switch-view="${id}" aria-pressed="${activeView===id}">${label}</button>`).join("")}</nav><div class="columns"><section class="panel" data-view="config"><h2>Konfiguration</h2><p class="hint">Änderungen werden beim Verlassen eines Feldes automatisch gespeichert.</p><div id="settings">${c.map((r,i)=>`<label data-config-key="${safe(r[0])}"><span>${safe(r[0]==="gemini_prompt"?"Klassifizierungs-Prompt (alle Anbieter)":r[0]==="gemini_temperature"?"Temperatur (Gemini / Groq)":r[0]==="openai_reasoning_effort"?"OpenAI Reasoning-Stufe":r[0]==="cost_input_per_million_usd"?"Input-Preis in USD / 1 Mio. Tokens":r[0]==="cost_output_per_million_usd"?"Output-Preis in USD / 1 Mio. Tokens":r[2]||r[0])}<small>${safe(r[0])}</small></span>${r[0]==="event_source"?`<select data-setting="${i}"><option value="gocath" ${r[1]==="gocath"?"selected":""}>GoCath – gocath.org/de/finde</option><option value="regnum_christi" ${r[1]==="regnum_christi"?"selected":""}>Regnum Christi – demnächst</option></select>`:r[0]==="classifier_provider"?`<select data-setting="${i}"><option value="groq" ${r[1]==="groq"?"selected":""}>Groq · GPT-OSS 20B</option><option value="gemini" ${r[1]==="gemini"?"selected":""}>Google Gemini</option><option value="openai" ${r[1]==="openai"?"selected":""}>OpenAI · GPT-6 Luna</option></select>`:r[0]==="openai_reasoning_effort"?`<select data-setting="${i}">${["none","low","medium","high"].map(v=>`<option value="${v}" ${r[1]===v?"selected":""}>${v}</option>`).join("")}</select>`:r[0]==="changed_only"||r[0]==="additional_tags_enabled"?`<select data-setting="${i}"><option value="true" ${r[1]==="true"?"selected":""}>Ja</option><option value="false" ${r[1]==="false"?"selected":""}>Nein</option></select>`:r[0]==="max_additional_tags"?`<select data-setting="${i}">${[0,1,2,3,4,5,6,7,8].map(v=>`<option value="${v}" ${r[1]===String(v)?"selected":""}>${v}</option>`).join("")}</select>`:r[0]==="gemini_temperature"?`<select data-setting="${i}">${["0","0.1","0.2","0.3","0.5","0.7","1"].map(v=>`<option value="${v}" ${r[1]===v?"selected":""}>${v}</option>`).join("")}</select>`:r[0]==="gemini_prompt"?`<textarea data-setting="${i}" rows="9">${safe(r[1]||"")}</textarea>`:`<input data-setting="${i}" value="${safe(r[1]||"")}" />`}</label>`).join("")}</div><button id="saveConfig" hidden>Konfiguration speichern</button></section>
  <section class="panel" data-view="tags"><h2>Standard-Tags</h2><p class="hint">Nur aktivierte Tags werden der ausgewählten KI zur Auswahl angeboten.</p><div class="tag-grid">${t.map((r,i)=>`<div class="tag-entry" data-tag-entry="${i}"><div class="tag-entry-header"><label class="tag"><input type="checkbox" data-tag="${i}" ${r[1]?.toLowerCase()==="true"?"checked":""}/><span>${safe(r[0])}</span></label><button type="button" class="remove-tag" data-remove-tag="${i}" aria-label="Standard-Tag ${safe(r[0])} löschen" title="Standard-Tag löschen">Löschen</button></div><input class="synonyms" data-synonyms="${i}" placeholder="Synonyme, mit Kommas getrennt" value="${safe(r[2]||"")}" aria-label="Synonyme für ${safe(r[0])}"/></div>`).join("")}</div><label class="add"><span>Neuen Tag ergänzen</span><input id="newTag" placeholder="z. B. Kirchenmusik"/></label><button id="saveTags">Neuen Tag hinzufügen</button></section></div>
 <section class="panel questionnaire" data-view="criteria"><h2>Decisions-Fragebogen</h2><p class="hint">Titel, Beschreibung und Entscheidungsregeln direkt pflegen. Änderungen werden automatisch gespeichert. Bei Einzelauswahl werden die Wahrscheinlichkeiten <strong>aller</strong> Antworten gespeichert.</p>
@@ -325,17 +340,30 @@ function render(){
  document.querySelector<HTMLButtonElement>("#saveTags")!.onclick=async()=>{try{const rows=Array.from(document.querySelectorAll<HTMLElement>(".tag-entry")).map(entry=>{const i=Number(entry.dataset.tagEntry);return [t[i][0],entry.querySelector<HTMLInputElement>(`[data-tag="${i}"]`)!.checked?"true":"false",entry.querySelector<HTMLInputElement>(`[data-synonyms="${i}"]`)!.value.trim()];});const name=document.querySelector<HTMLInputElement>("#newTag")!.value.trim();if(name&&!rows.some(x=>x[0].toLowerCase()===name.toLowerCase()))rows.push([name,"true",""]);if(!rows.length)throw new Error("Mindestens ein Standard-Tag ist erforderlich.");const oldCount=tags.slice(1).filter(x=>x[0]).length;const end=Math.max(rows.length,oldCount)+1;const padded=[...rows,...Array.from({length:Math.max(0,oldCount-rows.length)},()=>["","",""])];await api(API+"/values/"+encodeURIComponent("Tags!A2:C"+end)+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({range:"Tags!A2:C"+end,majorDimension:"ROWS",values:padded})});status("Tags gespeichert");await load();}catch(e){status(String(e),true)}};
  }
 }
-function login(){if(!CLIENT_ID){status("OAuth Client-ID fehlt. GitHub Variable VITE_GOOGLE_CLIENT_ID konfigurieren.",true);return;}
+function login(){
+ if(!CLIENT_ID){status("OAuth Client-ID fehlt. GitHub Variable VITE_GOOGLE_CLIENT_ID konfigurieren.",true);return;}
  if(!window.google?.accounts?.oauth2){status("Google Identity Services lädt noch; Seite neu laden.",true);return;}
- const client=window.google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:"https://www.googleapis.com/auth/spreadsheets",prompt:"",callback:async(r:{access_token?:string,expires_in?:number,error?:string})=>{if(!r.access_token){status("Anmeldung fehlgeschlagen: "+(r.error||"unbekannt"),true);return;}token=r.access_token;sessionStorage.setItem(SESSION_KEY,JSON.stringify({accessToken:token,expiresAt:Date.now()+Math.max(0,Number(r.expires_in)||0)*1000}));try{await load();status("Google Sheets verbunden")}catch(e){status(String(e),true)}}});
+ const remember=Boolean(document.querySelector<HTMLInputElement>("#rememberDevice")?.checked);
+ const client=window.google.accounts.oauth2.initTokenClient({
+  client_id:CLIENT_ID,scope:SHEETS_SCOPE,prompt:"",
+  callback:async(r:{access_token?:string,expires_in?:number,error?:string})=>{
+   if(!r.access_token){status("Anmeldung fehlgeschlagen: "+(r.error||"unbekannt"),true);return;}
+   token=r.access_token;
+   saveSession(token,Number(r.expires_in),remember);
+   try{await load();status("Google Sheets verbunden");}
+   catch(e){status(String(e),true);}
+  },
+  error_callback:()=>status("Google-Anmeldung wurde abgebrochen oder blockiert.",true)
+ });
  client.requestAccessToken();
 }
 render();
 async function start(){
- if(token){await load();return;}
- // GIS is loaded asynchronously from Google's script.
- for(let attempt=0;attempt<30&&!window.google?.accounts?.oauth2;attempt++)
-  await new Promise(resolve=>setTimeout(resolve,100));
- if(await reconnect()){render();await load();}
+ if(token){
+  try{await load();return;}
+  catch(e){status(String(e),true);return;}
+ }
+ // A new Google token requires a user gesture. Do not open a silent popup on page load.
+ render();
 }
 start().catch(e=>status(String(e),true));
