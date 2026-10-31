@@ -91,3 +91,29 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(len(calls),1)
         self.assertEqual(state["events"]["rc-52"]["classification"],before)
         self.assertEqual(public_feed(state)["events"][0]["event"]["starts_at"],"2026-11-03")
+
+    def test_decisions_invalid_response_fallback(self):
+        from src import rc_runtime
+        from unittest.mock import patch
+        criteria=[{"id":str(i)} for i in range(5)]
+        calls=[]
+        def mock(event,key,config,usage):
+            calls.append(len(config["criteria"]))
+            if len(config["criteria"])==5:
+                raise ValueError("Decisions response missing criterion answers")
+            usage["input_tokens"]=100
+            return {"criteria_scores":[{"id":c["id"],"score":.8,"matched":True} for c in config["criteria"]]}
+        usage={}
+        with patch.object(rc_runtime,"classify_decisions",side_effect=mock):
+            result=rc_runtime.classify_with_fallback({}, "secret", {"criteria":criteria}, usage)
+        self.assertEqual(calls,[5,3,2])
+        self.assertEqual(len(result["criteria_scores"]),5)
+        self.assertEqual(usage["input_tokens"],200)
+
+    def test_decisions_configuration_error_is_not_retried(self):
+        from src import rc_runtime
+        from unittest.mock import patch
+        with patch.object(rc_runtime,"classify_decisions",side_effect=ValueError("Criteria must have unique IDs")) as mock:
+            with self.assertRaisesRegex(ValueError,"Criteria"):
+                rc_runtime.classify_with_fallback({}, "secret", {"criteria":[{"id":"a"},{"id":"b"}]}, {})
+        mock.assert_called_once()
