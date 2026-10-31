@@ -59,6 +59,31 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(sync(state,events,classify,mode="reclassify")["classified"],0)
         self.assertEqual(len(calls),6)
 
+    def test_display_order_does_not_change_semantic_version(self):
+        state={"schema_version":1,"events":{}}
+        a={"id":"a","label":"A","description":"Text A","weight":0}
+        b={"id":"b","label":"B","description":"Text B","weight":0}
+        publish_questions(state,{"criteria":[a,b]})
+        version=state["active_questionnaire"]["semantic_revision"]
+        publish_questions(state,{"criteria":[b,a]})
+        self.assertEqual(state["active_questionnaire"]["semantic_revision"],version)
+
+    def test_legacy_label_signatures_migrate_safely(self):
+        from src.rc_delta import digest
+        from src.rc_catalog import criterion_signature, presentation_scores
+        state={"schema_version":1,"events":{}}
+        old={"id":"prayer","label":"Gebet","description":"Gemeinsames Gebet","type":"predicate","weight":1,"threshold":0.65}
+        first=publish_questions(state,{"criteria":[old]})
+        previous_signature=digest({"type":"predicate","label":"Gebet","description":"Gemeinsames Gebet","options":[]})
+        state["events"]["rc-9"]={"classification":{"questionnaire_revision":first,
+            "criterion_signatures":{"prayer":previous_signature},
+            "scores":[{"id":"prayer","category":"Alt","label":"Gebet","score":0.9,"matched":True}]}}
+        updated={**old,"label":"Gemeinsames Gebet","threshold":0.8}
+        publish_questions(state,{"criteria":[updated]})
+        cls=state["events"]["rc-9"]["classification"]
+        self.assertEqual(cls["criterion_signatures"]["prayer"],criterion_signature(updated))
+        self.assertEqual(len(presentation_scores(cls,state["active_questionnaire"])),1)
+
     def test_failed_update_keeps_previous_classification(self):
         from src.rc_catalog import sync
         event={"url":"https://www.regnumchristi.eu/demnaechst/?vid=13","title":"Gebet","description":"Gebet"}
