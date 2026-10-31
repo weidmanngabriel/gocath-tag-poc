@@ -36,6 +36,10 @@ class DecisionsClassifierTests(unittest.TestCase):
         self.assertEqual([q["name"] for q in payload["questions"]],
                          ["format_mass", "topic_faith"])
         self.assertTrue(all(q["type"] == "predicate" for q in payload["questions"]))
+        shared = payload["input"][0]["content"][0]["text"]
+        self.assertIn("Fehlende Angaben bedeuten unbekannt", shared)
+        self.assertEqual(shared.count("Nutze nur ausdrücklich belegte"), 1)
+        self.assertTrue(all("Nutze ausschließlich belegte" not in q["instructions"] for q in payload["questions"]))
         self.assertEqual([s["score"] for s in tags["criteria_scores"]], [0.94, 0.02])
         self.assertEqual(tags["standard_tags"], ["Heilige Messe"])
         self.assertEqual(tags["additional_tags"], [])
