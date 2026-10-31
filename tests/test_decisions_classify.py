@@ -1,7 +1,8 @@
 import unittest
+import json
 from unittest.mock import Mock, patch
 
-from src.decisions_classify import classify_decisions, URL
+from src.decisions_classify import classify_decisions, build_decisions_payload, URL
 
 
 class DecisionsClassifierTests(unittest.TestCase):
@@ -61,6 +62,20 @@ class DecisionsClassifierTests(unittest.TestCase):
         self.assertTrue(all("Zielgruppen" not in q["instructions"] for q in payload["questions"]))
         self.assertEqual(payload["questions"][0]["instructions"], "Heilige Messe. Eine Messe findet statt")
         self.assertIn("url", e, "Source event must remain intact for Sheets and history")
+
+    def test_compact_payload_reduces_static_request_without_omitting_questions(self):
+        criteria = [{**self.config["criteria"][0], "id": f"rule_{i}"} for i in range(25)]
+        event = {"url": "https://gocath.org/event/sample", "title": "Heilige Messe",
+                 "description": "Eine katholische Messe für Jugendliche"}
+        before = build_decisions_payload(event, criteria, compact=False)
+        after = build_decisions_payload(event, criteria)
+        old_bytes = len(json.dumps(before, ensure_ascii=False).encode("utf-8"))
+        new_bytes = len(json.dumps(after, ensure_ascii=False).encode("utf-8"))
+        self.assertEqual(len(before["questions"]), len(after["questions"]))
+        self.assertEqual([q["name"] for q in before["questions"]],
+                         [q["name"] for q in after["questions"]])
+        self.assertLess(new_bytes, old_bytes * 0.8)
+        self.assertIn(event["description"], json.dumps(after, ensure_ascii=False))
 
     @patch("src.decisions_classify.requests.post")
     def test_missing_scores_rejected_not_misclassified(self, post):
