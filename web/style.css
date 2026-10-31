@@ -198,3 +198,15 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
 .choice-chip strong{font-weight:700}
 .criterion-type{font-size:11px;padding:3px 7px;background:#eef3f8;color:#526476;border-radius:7px;white-space:nowrap}
 .criterion-choice .answer-distribution{border:0;padding:0;margin:9px 0 0;max-width:none}
+
+/* RC catalog operational analytics. */
+[data-view="rc-history"].panel{grid-column:1/-1}
+.rc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px;margin:14px 0}
+.rc-kpis>div{background:#f2f7f4;border:1px solid #dbe8df;border-radius:10px;padding:12px}
+.rc-kpis small{display:block;color:#61756b;font-size:12px}
+.rc-kpis b{display:block;font-size:22px;margin-top:6px;overflow-wrap:anywhere}
+.rc-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:20px 0}
+.rc-charts>div{min-width:0;border:1px solid #e0e8e3;border-radius:12px;padding:14px}
+.rc-charts h3{margin:0 0 9px;font-size:14px}
+.rc-history-chart{display:block;width:100%;height:auto}
+@media(max-width:700px){.rc-charts{grid-template-columns:1fr}}
