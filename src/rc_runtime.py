@@ -23,10 +23,13 @@ def classify_with_fallback(event, api_key, config, usage):
         for part in (criteria[:split],criteria[split:]):
             part_config=dict(config,criteria=part)
             part_usage={}
-            result=classify_decisions(event,api_key,part_config,part_usage)
-            combined.extend(result["criteria_scores"])
-            for name in ("input_tokens","output_tokens","thinking_tokens","cached_tokens","total_tokens"):
-                cumulative[name]=cumulative.get(name,0)+part_usage.get(name,0)
+            try:
+                result=classify_decisions(event,api_key,part_config,part_usage)
+                combined.extend(result["criteria_scores"])
+            finally:
+                for name in ("input_tokens","output_tokens","thinking_tokens","cached_tokens","total_tokens"):
+                    cumulative[name]=cumulative.get(name,0)+part_usage.get(name,0)
+                usage.update(cumulative)
         usage.update(cumulative)
         return {"criteria_scores":combined}
 
