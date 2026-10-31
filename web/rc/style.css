@@ -107,3 +107,18 @@ a:hover{color:var(--rc-red-deep)}
 .score-review .score-head b{color:#876000}
 .score-irrelevant .score-head b{color:#a43b3b}
 .score-unknown .score-head b{color:#696969}
+
+/* Compact grouped match display, with top two items per group visible. */
+.matched-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0 4px}
+.match-group{min-width:0;background:#fbf9f9;border:1px solid #e8dddd;border-radius:12px;padding:12px}
+.match-group-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:9px;color:#4b3437}
+.match-group-heading strong{font-size:.9rem}
+.match-group-heading small{color:#786b6c;font-size:.75rem;white-space:nowrap}
+.match-list{display:flex;flex-wrap:wrap;gap:6px}
+.match-chip{font-size:.82rem;line-height:1.4;border:1px solid #b7dec4;border-radius:7px;background:#e7f4eb;color:#17613a;padding:6px 9px;overflow-wrap:anywhere}
+.match-more{margin-top:8px}
+.match-more summary{color:#910803;font-size:.85rem;font-weight:600;cursor:pointer;padding:5px 0}
+.match-more[open] summary{margin-bottom:6px}
+.match-more summary:focus-visible{outline:2px solid #c78282;outline-offset:2px}
+.matched-groups .no-hits{grid-column:1/-1;color:#666;font-size:.9rem;margin:0}
+@media(max-width:680px){.matched-groups{grid-template-columns:1fr;gap:9px}.match-group{padding:11px}}
