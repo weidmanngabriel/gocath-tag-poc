@@ -210,3 +210,14 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
 .rc-charts h3{margin:0 0 9px;font-size:14px}
 .rc-history-chart{display:block;width:100%;height:auto}
 @media(max-width:700px){.rc-charts{grid-template-columns:1fr}}
+
+
+.criterion-filter-panel{margin:16px 0 18px;padding:16px;border:1px solid #dbe7df;border-radius:12px;background:#f8faf8}
+.criterion-filter-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.criterion-filter-heading button{font-size:13px}
+#criterionFilterGroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:12px}
+.criterion-filter-group{min-width:0;border:1px solid #dbe7df;border-radius:10px;background:white;padding:12px}
+.criterion-filter-group legend{font-weight:600;padding:0 4px}
+.criterion-filter-options{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto}
+.criterion-filter-options label{display:flex;align-items:flex-start;gap:8px;font-size:13px;cursor:pointer}
+.criterion-filter-options input{width:auto;flex:none;margin-top:2px}
