@@ -9,7 +9,7 @@ from datetime import date
 from urllib.parse import urljoin, urlparse, parse_qs
 import requests
 from bs4 import BeautifulSoup
-from .scrape import HEADERS
+HEADERS = {"User-Agent": "GoCathTagPOC/1.0"}
 
 LIST_URL = "https://www.regnumchristi.eu/demnaechst/"
 
