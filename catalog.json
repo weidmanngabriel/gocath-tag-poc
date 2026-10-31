@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "events": {},
+  "active_questionnaire": {
+    "revision": "e5ce79a4b7a0b08d19135b7418fce874986ca72d1ff2c00c5d66c37b9846bf48",
+    "criteria": [
+      {
+        "id": "format_mass",
+        "category": "Format",
+        "label": "Gottesdienst / Heilige Messe",
+        "description": "Liturgische Feier oder Heilige Messe",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "format_adoration",
+        "category": "Format",
+        "label": "Anbetung",
+        "description": "Eucharistische Anbetung",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "format_prayer",
+        "category": "Format",
+        "label": "Gebetsveranstaltung",
+        "description": "Gemeinsames Gebet, Rosenkranz, Lobpreis",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "format_talk",
+        "category": "Format",
+        "label": "Vortrag",
+        "description": "Vortrag oder Impuls",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "format_workshop",
+        "category": "Format",
+        "label": "Workshop / Seminar",
+        "description": "Seminar, Kurs oder Workshop",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "format_pilgrimage",
+        "category": "Format",
+        "label": "Wallfahrt",
+        "description": "Pilgerreise oder Wallfahrt",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "format_retreat",
+        "category": "Format",
+        "label": "Exerzitien / Einkehr",
+        "description": "Geistliche Einkehr oder Exerzitien",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "format_social",
+        "category": "Format",
+        "label": "Gemeinschaftstreffen",
+        "description": "Treffen mit Gemeinschaftsschwerpunkt",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "topic_liturgy",
+        "category": "Thema",
+        "label": "Liturgie und Sakramente",
+        "description": "Katholische Liturgie, Eucharistie, Beichte oder Sakramente",
+        "weight": 2.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "topic_prayer",
+        "category": "Thema",
+        "label": "Gebet und Spiritualität",
+        "description": "Gebet, geistliches Leben oder Spiritualität",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "topic_faith",
+        "category": "Thema",
+        "label": "Glaubensbildung",
+        "description": "Christliche Glaubensinhalte, Bibel oder Katechese",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "topic_church",
+        "category": "Thema",
+        "label": "Kirche und Mission",
+        "description": "Katholische Kirche, Berufung, Mission oder Evangelisierung",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "topic_community",
+        "category": "Thema",
+        "label": "Christliche Gemeinschaft",
+        "description": "Christlich geprägte Gemeinschaft und Begegnung",
+        "weight": 0.7,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "aud_children",
+        "category": "Zielgruppe",
+        "label": "Kinder",
+        "description": "Für Kinder geeignet",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "aud_youth",
+        "category": "Zielgruppe",
+        "label": "Jugendliche",
+        "description": "Für Jugendliche geeignet",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "aud_young_adults",
+        "category": "Zielgruppe",
+        "label": "Junge Erwachsene",
+        "description": "Für junge Erwachsene geeignet",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "aud_adults",
+        "category": "Zielgruppe",
+        "label": "Erwachsene",
+        "description": "Für Erwachsene geeignet",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "aud_seniors",
+        "category": "Zielgruppe",
+        "label": "Senioren",
+        "description": "Für Senioren geeignet",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "aud_families",
+        "category": "Zielgruppe",
+        "label": "Familien",
+        "description": "Für Familien mit Kindern geeignet",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "aud_women",
+        "category": "Zielgruppe",
+        "label": "Speziell Frauen / Mädchen",
+        "description": "Ausdrücklich an Frauen oder Mädchen gerichtet",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "aud_men",
+        "category": "Zielgruppe",
+        "label": "Speziell Männer / Jungen",
+        "description": "Ausdrücklich an Männer oder Jungen gerichtet",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "context_catholic",
+        "category": "Kontext",
+        "label": "Katholischer Veranstalter",
+        "description": "Katholische Organisation oder Gruppe ist ausdrücklich als Veranstalter genannt; der bloße Domainname genügt nicht.",
+        "weight": 0.5,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "context_church",
+        "category": "Kontext",
+        "label": "Kirchlicher Kontext",
+        "description": "Kirchliche Einbindung oder konkrete Zusammenarbeit wird im Veranstaltungstext erkennbar, nicht allein durch die Quellseite.",
+        "weight": 0.5,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "q_speziell_paare_oder_ehepaare",
+        "category": "Zielgruppe",
+        "label": "Speziell Paare oder Ehepaare",
+        "description": "Angebote, die sich explizit an Paare und Ehepaare richten",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "format_freizeit_sport",
+        "category": "Format",
+        "label": "Freizeit und Sport",
+        "description": "Die Veranstaltung beinhaltet tatsächlich Sport, Spiel oder Freizeitaktivitäten als wesentlichen Bestandteil. Bewerte unabhängig von religiösen Inhalten und anderen Veranstaltungsformaten. Niedriger Wert, wenn keine sportliche oder freizeitbezogene Aktivität beschrieben ist.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      }
+    ],
+    "tags": [
+      "Alte Messe",
+      "Anbetung",
+      "Beichte",
+      "Einkehrtage & Exerzitien",
+      "Engagement & Wertezeugnisse",
+      "Gebet & Lobpreis",
+      "Heilige Messe",
+      "Kurse & Vorträge",
+      "Lager, Festivals & Kongresse",
+      "Livestream",
+      "Wallfahrten & Reisen",
+      "Sonstiges"
+    ],
+    "published_at": "2026-10-31T08:39:59.815306+00:00"
+  },
+  "campaign": null
+}
