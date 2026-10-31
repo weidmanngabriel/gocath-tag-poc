@@ -42,6 +42,27 @@ class DecisionsClassifierTests(unittest.TestCase):
         self.assertEqual(usage["cached_tokens"], 12)
 
     @patch("src.decisions_classify.requests.post")
+    def test_global_rules_only_once_and_event_url_not_sent(self, post):
+        response = Mock(ok=True)
+        response.json.return_value = {"answers": [
+            {"type": "predicate", "name": "format_mass", "probability": 0.7},
+            {"type": "predicate", "name": "topic_faith", "probability": 0.4},
+        ]}
+        post.return_value = response
+        e = {"url": "https://example.org/event/7", "title": "Messe", "description": "Kirche"}
+        classify_decisions(e, "secret", self.config)
+        payload = post.call_args.kwargs["json"]
+        self.assertEqual(payload["input"][0]["content"][1]["data"],
+                         {"title": "Messe", "description": "Kirche"})
+        global_rules = payload["input"][0]["content"][0]["text"]
+        self.assertIn("Domainname", global_rules)
+        self.assertIn("Zielgruppen", global_rules)
+        self.assertTrue(all("Domainname" not in q["instructions"] for q in payload["questions"]))
+        self.assertTrue(all("Zielgruppen" not in q["instructions"] for q in payload["questions"]))
+        self.assertEqual(payload["questions"][0]["instructions"], "Heilige Messe. Eine Messe findet statt")
+        self.assertIn("url", e, "Source event must remain intact for Sheets and history")
+
+    @patch("src.decisions_classify.requests.post")
     def test_missing_scores_rejected_not_misclassified(self, post):
         response = Mock(ok=True)
         response.json.return_value = {"answers": [
