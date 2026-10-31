@@ -112,3 +112,7 @@ Die Ergebnisansicht ersetzt die breite Tabelle durch Veranstaltungskarten mit St
 ## Bedeutung der Relevanzbewertung
 
 Die Relevanzbewertung beschreibt ausschließlich, wie eindeutig die Veranstaltung aus ihrem Beschreibungstext als katholisch relevant eingeordnet und automatisch klassifiziert werden kann. Hohe Werte belegen keine hohe sprachliche oder werbliche Textqualität und erlauben keine Aussage über Attraktivität oder tatsächliche Teilnahme. Eine Bewertung der Textqualität wäre eine unabhängige Kennzahl.
+
+## Klarstellung auf der öffentlichen RC-Seite
+
+Auf `/rc/` steht oberhalb der Veranstaltungsfilter ein sichtbarer Hinweis, dass hohe Relevanz- und Kriterienwerte nur Hinweise für automatische katholische Relevanzeinordnung und Klassifizierung widerspiegeln. Es handelt sich nicht um eine Bewertung der sprachlichen oder werblichen Textqualität oder eine Prognose tatsächlicher Teilnahme. Die ausführlichere Erklärung steht außerdem unter „Mehr dazu erfahren“.
