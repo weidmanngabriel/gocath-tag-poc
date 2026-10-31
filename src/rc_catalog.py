@@ -79,6 +79,8 @@ def sync(state,events,classify,max_paid=25,mode="delta",missing_grace=3):
         if campaign["revision"]!=state["active_questionnaire"]["revision"]:
             raise RuntimeError("Questionnaire revision changed during campaign; re-publish after finishing")
         candidates=[key for key in campaign["pending"] if key in source]
+    elif mode=="refresh":
+        candidates=[]  # Correct display metadata without any API calls.
     elif mode=="delta":
         candidates=[key for key,event in source.items() if
                     state["events"][key].get("classification_hash")!=fingerprints(event)["classification_hash"]
