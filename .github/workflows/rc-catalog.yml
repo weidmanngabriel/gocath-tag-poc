@@ -1,5 +1,13 @@
 name: RC Catalog
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [publish-questions, delta, reclassify, continue]
+        default: delta
 permissions:
   contents: write
+concurrency:
+  group: rc-catalog
+  cancel-in-progress: false
