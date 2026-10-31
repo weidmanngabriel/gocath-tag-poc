@@ -12,8 +12,27 @@ function card(item:Event){
  const c=item.classification;
  const groups=[...new Set((c?.scores||[]).map(s=>s.category))].sort((a,b)=>a.localeCompare(b,"de"));
  const hits=(c?.scores||[]).filter(s=>s.matched).sort((a,b)=>b.score-a.score).slice(0,4);
- return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div><span class="status">${status(c?.relevance.status||"")} ${c?pct(c.relevance.score):""}</span></div><div class="chips">${hits.map(s=>`<span>${esc(s.label)} · ${pct(s.score)}</span>`).join("")}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}<p>${esc(item.event.description)}</p><a href="${esc(item.event.url)}" target="_blank" rel="noopener noreferrer">Originalveranstaltung öffnen</a>${groups.map(g=>`<section><h3>${esc(g)}</h3>${c?.scores.filter(s=>s.category===g).sort((a,b)=>b.score-a.score).map(scoreRow).join("")||""}</section>`).join("")}</details></article>`;
+ const tabs=[...groups,"Beschreibung"];
+ const buttons=tabs.map((g,i)=>`<button type="button" role="tab" id="tab-${esc(item.id)}-${i}" aria-controls="panel-${esc(item.id)}-${i}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-tab="${i}">${esc(g)}</button>`).join("");
+ const panels=tabs.map((g,i)=>`<div role="tabpanel" id="panel-${esc(item.id)}-${i}" aria-labelledby="tab-${esc(item.id)}-${i}" ${i!==0?"hidden":""}>${g==="Beschreibung"?`<p class="description">${esc(item.event.description||"Keine Beschreibung verfügbar.")}</p><a href="${esc(item.event.url)}" target="_blank" rel="noopener noreferrer">Originalveranstaltung öffnen</a>`:(c?.scores.filter(s=>s.category===g).sort((a,b)=>b.score-a.score).map(scoreRow).join("")||"<p>Keine Bewertung verfügbar.</p>")}</div>`).join("");
+ return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div><span class="status">${status(c?.relevance.status||"")} ${c?pct(c.relevance.score):""}</span></div><div class="chips">${hits.map(s=>`<span>${esc(s.label)} · ${pct(s.score)}</span>`).join("")}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
 }
+function switchItemTab(button:HTMLButtonElement,focus=false){
+ const tabs=button.closest<HTMLElement>(".item-tabs");
+ const card=button.closest<HTMLElement>(".card");
+ if(!tabs||!card)return;
+ const selected=button.dataset.tab;
+ tabs.querySelectorAll<HTMLButtonElement>('[role="tab"]').forEach(tab=>{
+   const active=tab===button;
+   tab.setAttribute("aria-selected",String(active));
+   tab.tabIndex=active?0:-1;
+ });
+ card.querySelectorAll<HTMLElement>('[role="tabpanel"]').forEach(panel=>{
+   panel.hidden=panel.id!==button.getAttribute("aria-controls");
+ });
+ if(focus)button.focus();
+}
+
 function display(){
  const q=(document.querySelector<HTMLInputElement>("#q")?.value||"").toLocaleLowerCase("de");
  const relevance=document.querySelector<HTMLSelectElement>("#relevance")?.value||"";
@@ -35,6 +54,20 @@ async function init(){
  const categories=[...new Set(records.flatMap(e=>e.classification?.scores.map(s=>s.category)||[]))].sort((a,b)=>a.localeCompare(b,"de"));
  document.querySelector<HTMLSelectElement>("#category")!.innerHTML+=categories.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
  document.querySelectorAll<HTMLInputElement|HTMLSelectElement>(".filters input,.filters select").forEach(el=>el.addEventListener("input",display));
+ document.querySelector<HTMLElement>("#results")!.addEventListener("click",event=>{
+   const button=(event.target as HTMLElement).closest<HTMLButtonElement>('[role="tab"]');
+   if(button)switchItemTab(button);
+ });
+ document.querySelector<HTMLElement>("#results")!.addEventListener("keydown",event=>{
+   if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
+   const button=(event.target as HTMLElement).closest<HTMLButtonElement>('[role="tab"]');
+   if(!button)return;
+   const tabs=[...button.closest<HTMLElement>(".item-tabs")!.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+   const index=tabs.indexOf(button);
+   const next=event.key==="Home"?0:event.key==="End"?tabs.length-1:(index+(event.key==="ArrowLeft"?-1:1)+tabs.length)%tabs.length;
+   event.preventDefault();
+   switchItemTab(tabs[next],true);
+ });
  display();
  }catch(error){document.querySelector<HTMLElement>("#results")!.textContent="Katalog noch nicht verfügbar: "+String(error);}
 }
