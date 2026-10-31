@@ -25,16 +25,16 @@ async function load(){const response=await api("Criteria!A1:I1500");rows=respons
 function logout(){token="";sessionStorage.removeItem(STORE);localStorage.removeItem(REMEMBER);render();}
 function formatOptions(raw:string){try{return (JSON.parse(raw||"[]") as Array<{value?:string,label?:string,description?:string}>).map(o=>(o.value||o.label||"")+" | "+(o.description||"")).join("\n");}catch{return raw;}}
 function encodeOptions(raw:string,type:string){const result=raw.split("\n").map(s=>s.trim()).filter(Boolean).map(line=>{const [head,...parts]=line.split("|");const key=head.trim();return type==="score"?{label:key,description:parts.join("|").trim()}:{value:key,description:parts.join("|").trim()};});const max=type==="choice"?255:10;if(result.length<2||result.length>max)throw Error("Erwartet 2 bis "+max+" Antwortoptionen.");const keys=result.map(x=>("value" in x?x.value:x.label));if(keys.some(x=>!x)||new Set(keys).size!==keys.length)throw Error("Antwortoptionen müssen eindeutige Namen haben.");return JSON.stringify(result);}
-function editor(row:string[],idx:number){const n=idx+1,type=row[7]||"predicate";return `<details class="question-card"><summary><span class="question-category">${esc(row[1]||"Sonstiges")}</span><strong>${esc(row[2]||row[0])}</strong><span class="question-type">${esc(type==="predicate"?"Wahrscheinlichkeit":type==="choice"?"Einzelauswahl":"Bewertungsskala")}</span><span class="question-state">${row[4]==="true"?"Aktiv":"Inaktiv"}</span></summary><div class="question-fields">
-<label>Bereich<input data-row="${n}" data-col="B" value="${esc(row[1])}"></label>
+function editor(row:string[],idx:number){const n=idx+1,type=row[7]||"predicate";return `<details class="question-card"><summary><strong>${esc(row[2]||row[0])}</strong><span class="question-type">${esc(type==="predicate"?"Wahrscheinlichkeit":type==="choice"?"Einzelauswahl":"Bewertungsskala")}</span></summary><div class="question-fields">
+
 <label>Titel<input data-row="${n}" data-col="C" value="${esc(row[2])}"></label>
 <label>Entscheidungsregel<textarea rows="3" data-row="${n}" data-col="D">${esc(row[3])}</textarea></label>
-<label>Aktiv <input type="checkbox" data-row="${n}" data-col="E" ${row[4]==="true"?"checked":""}></label>
+
 <label>Relevanzgewicht<input type="number" min="0" max="3" step="0.1" data-row="${n}" data-col="F" value="${esc(row[5]||"0")}" ${type!=="predicate"?"disabled":""}></label>
 <label>Trefferschwelle<input type="number" min="0" max="1" step="0.05" data-row="${n}" data-col="G" value="${esc(row[6]||"0.65")}"></label>
 <label>Fragetyp<select data-row="${n}" data-col="H">${["predicate","choice","score"].map(t=>`<option value="${t}" ${t===type?"selected":""}>${t}</option>`).join("")}</select></label>
 <label>Antwortoptionen (Name | Beschreibung)<textarea rows="4" data-row="${n}" data-col="I">${esc(formatOptions(row[8]||""))}</textarea></label>
-<small class="muted">ID: ${esc(row[0])}</small></div></details>`;}
+<div class="criterion-delete"><button type="button" class="delete-question" data-delete-row="${n}" data-delete-id="${esc(row[0])}">Frage löschen</button></div></div></details>`;}
 function groupedQuestions(items:Array<{r:string[],i:number}>):string {
  const groups=new Map<string,Array<{r:string[],i:number}>>();
  for(const item of items){const name=item.r[1]?.trim()||"Sonstiges";if(!groups.has(name))groups.set(name,[]);groups.get(name)!.push(item);}
@@ -44,11 +44,11 @@ function groupedQuestions(items:Array<{r:string[],i:number}>):string {
  <div class="question-groups">${names.map(name=>`<section class="question-group" data-panel="${esc(name)}" role="tabpanel" ${name!==activeGroup?"hidden":""}><div class="question-group-heading"><h3>${esc(name)}</h3><p>${groups.get(name)!.length} Fragen · alphabetisch sortiert</p></div><div class="question-list">${groups.get(name)!.sort((a,b)=>(a.r[2]||"").localeCompare(b.r[2]||"","de")).map(x=>editor(x.r,x.i)).join("")}</div></section>`).join("")}</div>`;
 }
 function bindGroups(){
- document.querySelectorAll<HTMLButtonElement>("[data-group]").forEach(button=>button.addEventListener("click",()=>{activeGroup=button.dataset.group||"";document.querySelectorAll<HTMLElement>("[data-panel]").forEach(panel=>panel.hidden=panel.dataset.panel!==activeGroup);document.querySelectorAll<HTMLButtonElement>("[data-group]").forEach(tab=>tab.setAttribute("aria-selected",String(tab.dataset.group===activeGroup)));}));
+ document.querySelectorAll<HTMLButtonElement>("[data-group]").forEach(button=>button.addEventListener("click",()=>{activeGroup=button.dataset.group||"";document.querySelectorAll<HTMLElement>("[data-panel]").forEach(panel=>panel.hidden=panel.dataset.panel!==activeGroup);document.querySelectorAll<HTMLButtonElement>("[data-group]").forEach(tab=>tab.setAttribute("aria-selected",String(tab.dataset.group===activeGroup)));const selected=document.querySelector("#selectedCategory");if(selected)selected.textContent=activeGroup;}));
 }
 function render(){
  const matches=rows.slice(1).map((r,i)=>({r,i:i+1})).filter(x=>x.r[0]&&[x.r[0],x.r[1],x.r[2],x.r[3]].join(" ").toLowerCase().includes(search.toLowerCase()));
- root.innerHTML=`<header><div class="brand"><span class="mark">✝</span><div><b>GoCath · Criteria</b><small>RC-Fragebogen bearbeiten</small></div></div><span class="muted">${token?"Google Sheets verbunden":"Nicht verbunden"}</span></header><main><section class="hero"><h1>RC-Kriterieneditor</h1><p>Fragen werden direkt im Google Sheet gespeichert. Semantische Änderungen erfordern einen bewusst gestarteten reclassify-Lauf.</p><div class="actions"><button id="login">${token?"Erneut anmelden":"Mit Google anmelden"}</button>${token?'<button id="logout">Abmelden</button>':""}<a href="/rc/">RC-Katalog</a><a href="https://docs.google.com/spreadsheets/d/${SHEET}/edit" target="_blank" rel="noopener">Google Sheet</a></div>${!token?'<label><input type="checkbox" id="remember"> Auf diesem Gerät bis zum Token-Ablauf angemeldet bleiben</label>':""}<p id="status" aria-live="polite"></p></section>${token?`<section class="panel"><h2>Kriterien (${matches.length})</h2><input id="search" type="search" placeholder="Kriterien suchen" value="${esc(search)}"><p class="hint">Bestehende Fragen ändern und bei Verlassen des Feldes speichern. Neue Fragen direkt hier hinzufügen; IDs bleiben unverändert.</p><div id="questions">${groupedQuestions(matches)}</div><details class="question-card"><summary><strong>+ Neue Frage hinzufügen</strong></summary><div class="question-fields"><label>Titel<input id="newTitle" placeholder="Titel der Frage"></label><label>Bereich<input id="newCategory" placeholder="Format"></label><label>Entscheidungsregel<textarea id="newDescription" rows="3"></textarea></label><label>Fragetyp<select id="newType"><option value="predicate">Wahrscheinlichkeit</option><option value="choice">Einzelauswahl</option><option value="score">Bewertungsskala</option></select></label><label>Antwortoptionen (Name | Beschreibung)<textarea id="newOptions" rows="4"></textarea></label><label>Relevanzgewicht<input id="newWeight" type="number" min="0" max="3" step="0.1" value="0"></label><label>Trefferschwelle<input id="newThreshold" type="number" min="0" max="1" step="0.05" value="0.65"></label><button id="addQuestion" type="button">Frage hinzufügen</button></div></details></section>`:""}</main>`;
+ root.innerHTML=`<header><div class="brand"><span class="mark">✝</span><div><b>GoCath · Criteria</b><small>RC-Fragebogen bearbeiten</small></div></div><span class="muted">${token?"Google Sheets verbunden":"Nicht verbunden"}</span></header><main><section class="hero"><h1>RC-Kriterieneditor</h1><p>Fragen werden direkt im Google Sheet gespeichert. Semantische Änderungen erfordern einen bewusst gestarteten reclassify-Lauf.</p><div class="actions"><button id="login">${token?"Erneut anmelden":"Mit Google anmelden"}</button>${token?'<button id="logout">Abmelden</button>':""}<a href="/rc/">RC-Katalog</a><a href="https://docs.google.com/spreadsheets/d/${SHEET}/edit" target="_blank" rel="noopener">Google Sheet</a></div>${!token?'<label><input type="checkbox" id="remember"> Auf diesem Gerät bis zum Token-Ablauf angemeldet bleiben</label>':""}<p id="status" aria-live="polite"></p></section>${token?`<section class="panel"><h2>Kriterien (${matches.length})</h2><input id="search" type="search" placeholder="Kriterien suchen" value="${esc(search)}"><p class="hint">Bestehende Fragen ändern und bei Verlassen des Feldes speichern. Neue Fragen direkt hier hinzufügen; IDs bleiben unverändert.</p><div id="questions">${groupedQuestions(matches)}</div><details class="question-card"><summary><strong>+ Neue Frage hinzufügen</strong></summary><div class="question-fields"><label>Titel<input id="newTitle" placeholder="Titel der Frage"></label><p class="hint">Bereich: <strong id="selectedCategory">${esc(activeGroup||"Bitte zuerst einen Bereich auswählen")}</strong></p><label>Entscheidungsregel<textarea id="newDescription" rows="3"></textarea></label><label>Fragetyp<select id="newType"><option value="predicate">Wahrscheinlichkeit</option><option value="choice">Einzelauswahl</option><option value="score">Bewertungsskala</option></select></label><label>Antwortoptionen (Name | Beschreibung)<textarea id="newOptions" rows="4"></textarea></label><label>Relevanzgewicht<input id="newWeight" type="number" min="0" max="3" step="0.1" value="0"></label><label>Trefferschwelle<input id="newThreshold" type="number" min="0" max="1" step="0.05" value="0.65"></label><button id="addQuestion" type="button">Frage hinzufügen</button></div></details></section>`:""}</main>`;
  document.querySelector<HTMLButtonElement>("#login")?.addEventListener("click",login);
  document.querySelector<HTMLButtonElement>("#logout")?.addEventListener("click",logout);
  document.querySelector<HTMLInputElement>("#search")?.addEventListener("input",e=>{
@@ -61,6 +61,21 @@ function render(){
  bindFields();
 }
 function bindFields(){
+ document.querySelectorAll<HTMLButtonElement>("[data-delete-row]").forEach(button=>button.addEventListener("click",async()=>{
+  const row=Number(button.dataset.deleteRow),id=button.dataset.deleteId||"";
+  if(!row||rows[row-1]?.[0]!==id){notify("Frage konnte nicht eindeutig zugeordnet werden. Neu laden.",true);return;}
+  if(!window.confirm(`Frage „${rows[row-1][2]||id}“ wirklich dauerhaft löschen? Diese Aktion kann nicht rückgängig gemacht werden.`))return;
+  button.disabled=true;
+  try{
+   const meta=await fetch(API+"?fields=sheets(properties(sheetId,title))",{headers:{Authorization:"Bearer "+token}});
+   if(!meta.ok)throw Error("Tabelleninformationen nicht verfügbar ("+meta.status+")");
+   const info=await meta.json();const sheet=info.sheets?.find((x:{properties:{title:string,sheetId:number}})=>x.properties.title==="Criteria");
+   if(!sheet)throw Error("Criteria-Tabelle fehlt");
+   const url=API+":batchUpdate";const response=await fetch(url,{method:"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:JSON.stringify({requests:[{deleteDimension:{range:{sheetId:sheet.properties.sheetId,dimension:"ROWS",startIndex:row-1,endIndex:row}}}]})});
+   if(!response.ok)throw Error("Google Sheets HTTP "+response.status);
+   await load();notify("Frage gelöscht.");
+  }catch(e){button.disabled=false;notify("Löschen fehlgeschlagen: "+String(e),true);}
+ }));
  document.querySelectorAll<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>("[data-row]").forEach(el=>el.addEventListener("change",async()=>{
  const row=Number(el.dataset.row),col=el.dataset.col!,pos=col.charCodeAt(0)-65,current=rows[row-1]?.[pos]||"";
  let value=el instanceof HTMLInputElement&&el.type==="checkbox"?(el.checked?"true":"false"):el.value.trim();
@@ -75,7 +90,7 @@ function bindFields(){
 }
 async function addQuestion(){
  const value=(id:string)=>(document.querySelector<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>("#"+id)?.value||"").trim();
- const title=value("newTitle"),category=value("newCategory"),description=value("newDescription");
+ const title=value("newTitle"),category=activeGroup,description=value("newDescription");
  const type=value("newType")||"predicate",weight=Number(value("newWeight")),threshold=Number(value("newThreshold"));
  if(!title||!category||!description){notify("Titel, Bereich und Entscheidungsregel sind erforderlich.",true);return;}
  if(!Number.isFinite(weight)||weight<0||weight>3||!Number.isFinite(threshold)||threshold<0||threshold>1){notify("Gewicht oder Trefferschwelle ungültig.",true);return;}

@@ -221,3 +221,17 @@ textarea{font:inherit;line-height:1.5;min-height:160px;resize:vertical;width:100
 .criterion-filter-options{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto}
 .criterion-filter-options label{display:flex;align-items:flex-start;gap:8px;font-size:13px;cursor:pointer}
 .criterion-filter-options input{width:auto;flex:none;margin-top:2px}
+
+
+/* Compact RC criterion cards: reduce excess space between headings and inputs. */
+.question-card>summary{gap:8px;padding:12px 14px}
+.question-fields{gap:9px 12px;padding:12px 14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.question-fields label{gap:3px;line-height:1.25;font-size:.85rem}
+.panel .question-fields label:not(.tag){display:flex;align-items:stretch;justify-content:flex-start;gap:4px;padding:0;border-bottom:0}
+.question-fields input:not([type=checkbox]),.question-fields textarea,.question-fields select{padding:7px 9px;margin:0;min-height:36px}
+.question-fields textarea{line-height:1.4}
+.question-fields>.hint{margin:0;grid-column:1/-1}
+.criterion-delete{grid-column:1/-1;display:flex;justify-content:flex-end;border-top:1px solid #e1e8e5;padding-top:9px}
+.criterion-delete .delete-question{background:#fdf4f3;border:1px solid #e8c6c2;color:#9b312a;margin:0;padding:8px 12px}
+.criterion-delete .delete-question:hover{background:#f9e4e2}
+.criterion-delete .delete-question:disabled{opacity:.5;cursor:wait}
