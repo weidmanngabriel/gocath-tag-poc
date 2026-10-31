@@ -36,8 +36,9 @@ def compare(limit=5, source='both'):
         raise ValueError("Invalid comparison source")
     pairs = []
     if source in ("both", "gocath"):
-        original = fetch_gocath(limit, clean=False)
-        pairs.extend(("gocath", before, {**before, "description": clean_event_text(before["description"])})
+        original = fetch_gocath(limit, clean=False, truncate=False)
+        pairs.extend(("gocath", {**before, "description": before["description"][:5500]},
+                      {**before, "description": clean_event_text(before["description"])[:5500]})
                      for before in original)
     if source in ("both", "regnum_christi"):
         original = fetch_regnum(limit)
