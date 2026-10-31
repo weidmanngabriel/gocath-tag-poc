@@ -59,6 +59,7 @@ def parse_cards(html):
         container=event_container(a)
         if not container or len(title)<3 or title.casefold() in ('direktlink','anmelden','termin speichern'):continue
         if key in events:continue
+        if title.casefold() in ("mehr erfahren", "details", "detailinformationen", "weitere informationen"):continue
         text=clean_text(container.get_text(" ",strip=True))
         if len(text)<60:continue
         description=text.replace(title,"",1).strip()[:6500]
@@ -88,9 +89,10 @@ def fetch_all_events(max_pages=30):
             response.raise_for_status()
             html=response.content.decode("utf-8-sig")
             found=parse_cards(html)
-            if not found and not events:
-                raise RuntimeError("RC listing returned no parseable event cards")
-            events.update(found)
+            if not found:
+                raise RuntimeError("RC listing page returned no parseable event cards: "+url)
+            for key, value in found.items():
+                events.setdefault(key, value)
             visited.add(url)
             pending.extend(sorted(following_pages(html)-visited-set(pending)))
             time.sleep(0.12)
