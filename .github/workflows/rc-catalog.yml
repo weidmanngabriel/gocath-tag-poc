@@ -40,3 +40,19 @@ jobs:
           RC_CONFIRM: ${{ inputs.confirm }}
         run: |
           python -m src.rc_runtime --mode "$RC_MODE" --max-paid "$RC_LIMIT" --confirm "$RC_CONFIRM" --state state/catalog.json --public public/catalog.json
+      - name: Publish durable RC branch
+        run: |
+          cp state/catalog.json "$RUNNER_TEMP/rc-state.json"
+          cp public/catalog.json "$RUNNER_TEMP/rc-public.json"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git show-ref --quiet refs/remotes/origin/rc-data; then
+            git switch -C rc-data origin/rc-data
+          else
+            git switch --orphan rc-data
+            git rm -rf --ignore-unmatch .
+          fi
+          cp "$RUNNER_TEMP/rc-state.json" catalog.json
+          cp "$RUNNER_TEMP/rc-public.json" public.json
+          git add catalog.json public.json
+          git diff --cached --quiet || (git commit -m 'Update RC catalog' && git push origin HEAD:rc-data)
