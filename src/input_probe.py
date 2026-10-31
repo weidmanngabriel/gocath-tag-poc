@@ -1,7 +1,7 @@
 """Read-only factorial comparison of Decisions input changes.
 
-Four arms on identical event data:
-baseline, cleaning only, central instructions only, both.
+Five arms on identical event data:
+baseline, cleaning only, central instructions only, both, and URL omission.
 No writes to Google Sheets; source URLs and numerical diagnostics only.
 """
 import argparse
@@ -25,7 +25,7 @@ def relevant(scores, criteria):
             else "likely_not_relevant")
 
 
-VARIANTS = ("baseline", "clean_only", "rules_only", "combined")
+VARIANTS = ("baseline", "clean_only", "rules_only", "combined", "optimized")
 
 
 def event_variants(source, original):
@@ -37,7 +37,8 @@ def event_variants(source, original):
         "baseline": (baseline, False, False),
         "clean_only": (cleaned, False, False),
         "rules_only": (baseline, True, False),
-        "combined": (cleaned, True, True),
+        "combined": (cleaned, True, False),
+        "optimized": (cleaned, True, True),
     }
 
 
