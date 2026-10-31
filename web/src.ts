@@ -362,7 +362,7 @@ function render(){
   const description=document.querySelector<HTMLTextAreaElement>("#multiDescription")?.value.trim()||"";
   const raw=document.querySelector<HTMLTextAreaElement>("#multiOptions")?.value||"";
   const threshold=Number(document.querySelector<HTMLInputElement>("#multiThreshold")?.value||"0.65");
-  const options=raw.split(/\\r?\\n/).map(v=>v.trim()).filter(Boolean).map(line=>{
+  const options=raw.split(/\r?\n/).map(v=>v.trim()).filter(Boolean).map(line=>{
     const idx=line.indexOf("|");
     return {label:(idx<0?line:line.slice(0,idx)).trim(),description:(idx<0?"":line.slice(idx+1)).trim()};
   });
@@ -370,7 +370,7 @@ function render(){
   if(!Number.isFinite(threshold)||threshold<0||threshold>1){status("Ungültige Trefferschwelle",true);return;}
   if(criteria.slice(1).filter(r=>r[0]).length+options.length>400){status("Maximal 400 Kriterien möglich",true);return;}
   const ids=new Set(criteria.slice(1).map(r=>r[0]));
-  const slug=(value:string)=>value.toLocaleLowerCase("de").normalize("NFKD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,35);
+  const slug=(value:string)=>value.toLocaleLowerCase("de").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,35);
   const values=options.map(o=>{
     const stem="q_"+slug(category+"_"+o.label);
     let id=stem||"q_new",n=2;while(ids.has(id))id=stem+"_"+n++;
