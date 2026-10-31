@@ -44,3 +44,8 @@ class CatalogTests(unittest.TestCase):
         html='<section><a href="/demnaechst/?vid=123">Jugendgebetsabend</a><p>Gemeinsames Gebet und geistliches Leben mit Austausch in der Gemeinde und einer Feier für Jugendliche.</p><p>Adresse Wien Österreich</p></section>'
         result=parse_cards(html)
         self.assertIn("rc-123",result)
+
+    def test_duplicate_links_in_same_card(self):
+        from src.rc_import import parse_cards
+        html='<section><a href="/demnaechst/?vid=42">Jugendgebetsabend</a><p>Gemeinsames Gebet und geistliches Leben mit Austausch in der Gemeinde und einer Feier für Jugendliche.</p><a href="/demnaechst/?vid=42">Direktlink</a></section>'
+        self.assertEqual(parse_cards(html)['rc-42']['title'], 'Jugendgebetsabend')
