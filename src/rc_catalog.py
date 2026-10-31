@@ -218,6 +218,7 @@ def public_feed(state):
                        "pending_criteria":[c["id"] for c in (state.get("active_questionnaire") or {}).get("criteria",[])
                           if c["id"] not in {s["id"] for s in presentation_scores(item["classification"],state.get("active_questionnaire"))}]}
                           if item.get("classification") else None),
+                       "tagging":copy.deepcopy(item.get("tagging")),
                        "inactive":item.get("inactive",False),
                        "stale":bool(item.get("classification") and item.get("classification_hash")!=
                                     fingerprints(item["event"])["classification_hash"])}

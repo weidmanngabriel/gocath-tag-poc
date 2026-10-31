@@ -2,7 +2,7 @@
 set -euo pipefail
 mode="${RC_MODE:-delta}"
 limit="${RC_LIMIT:-25}"
-if [[ "$mode" != "delta" && "$mode" != "reclassify" && "$mode" != "refresh" ]]; then
+if [[ "$mode" != "delta" && "$mode" != "reclassify" && "$mode" != "refresh" && "$mode" != "tag-delta" && "$mode" != "retag" && "$mode" != "tag-refresh" ]]; then
   echo "Unsupported RC_MODE: $mode" >&2; exit 2
 fi
 if ! [[ "$limit" =~ ^[0-9]+$ ]] || ((limit<1 || limit>200)); then
@@ -25,11 +25,16 @@ git worktree add --detach "$worktree" origin/rc-data
 for ((offset=0;offset<limit;offset+=10)); do
   batch=10
   if ((limit-offset<batch)); then batch=$((limit-offset)); fi
-  if [[ "$mode" == "refresh" ]]; then batch=1; fi
+  if [[ "$mode" == "refresh" || "$mode" == "tag-refresh" ]]; then batch=1; fi
   cp "$worktree/catalog.json" state/catalog.json
   rm -f state/rc-no-changes.flag state/rc-run-record.json
   echo "Classifying batch of at most $batch at offset $offset"
-  python -m src.rc_runtime --mode "$mode" --max-paid "$batch" --config-snapshot state/config-snapshot.json --state state/catalog.json --public public/catalog.json
+  if [[ "$mode" == "tag-delta" || "$mode" == "retag" || "$mode" == "tag-refresh" ]]; then
+    case "$mode" in tag-delta) tag_mode=delta;; retag) tag_mode=retag;; tag-refresh) tag_mode=refresh;; esac
+    python -m src.rc_tag_runtime --mode "$tag_mode" --max-paid "$batch" --config-snapshot state/config-snapshot.json --state state/catalog.json --public public/catalog.json
+  else
+    python -m src.rc_runtime --mode "$mode" --max-paid "$batch" --config-snapshot state/config-snapshot.json --state state/catalog.json --public public/catalog.json
+  fi
   if [[ ! -f state/rc-no-changes.flag ]]; then
     cp state/catalog.json "$worktree/catalog.json"
     cp public/catalog.json "$worktree/public.json"
@@ -63,12 +68,15 @@ PY
     git -C "$worktree" push origin HEAD:rc-data
   fi
   # Nothing remains from this batch, or metadata-only refresh.
-  if [[ "$mode" == "refresh" ]]; then break; fi
+  if [[ "$mode" == "refresh" || "$mode" == "tag-refresh" ]]; then break; fi
   pending=$(python - <<'PY'
 import json
 from pathlib import Path
 state=json.loads(Path("state/catalog.json").read_text(encoding="utf-8"))
-print((state.get("last_run") or {}).get("queued",0))
+import os
+mode=os.environ.get("RC_MODE","delta")
+run=state.get("last_tag_run") if mode in ("tag-delta","retag","tag-refresh") else state.get("last_run")
+print((run or {}).get("queued",0))
 PY
 )
   if ((pending<=batch)); then break; fi
