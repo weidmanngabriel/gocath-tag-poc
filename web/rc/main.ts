@@ -2,7 +2,7 @@ import "./style.css";
 type Score={id:string,category:string,label:string,score:number,matched:boolean,answer?:{probabilities?:{value:string,probability:number}[]}};
 type Criterion={id:string,label:string,category:string,description?:string,type?:string,threshold?:number,weight?:number,options?:{value?:string,label?:string,description?:string}[]};
 type Questionnaire={revision:string,published_at:string,criteria:Criterion[]};
-type Event={id:string,event:{title:string,description:string,url:string,location?:string,starts_at?:string},inactive?:boolean,stale?:boolean,classification?:{scores:Score[],relevance:{status:string,score:number}}};
+type Event={id:string,event:{title:string,description:string,url:string,location?:string,starts_at?:string},inactive?:boolean,stale?:boolean,classification?:{scores:Score[],pending_criteria?:string[],questionnaire_revision?:string,relevance:{status:string,score:number}}};
 const SOURCE="https://raw.githubusercontent.com/weidmanngabriel/gocath-tag-poc/rc-data/public.json";
 const root=document.querySelector<HTMLElement>("#app")!;
 const esc=(s:unknown)=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]||c));
@@ -17,7 +17,7 @@ function card(item:Event){
  const c=item.classification;
  const groups=[...new Set((c?.scores||[]).map(s=>s.category))].sort((a,b)=>a.localeCompare(b,"de"));
  const hits=(c?.scores||[]).filter(s=>s.matched).sort((a,b)=>b.score-a.score);
- const groupOrder=["Format","Thema","Zielgruppe","Kontext"];
+ const groupOrder=questionnaire?[...new Set(questionnaire.criteria.map(c=>c.category))]:[];
  const matchedGroups=[...new Set(hits.map(s=>s.category))].sort((a,b)=>{
   const ai=groupOrder.indexOf(a),bi=groupOrder.indexOf(b);
   return (ai<0?99:ai)-(bi<0?99:bi)||a.localeCompare(b,"de");
@@ -29,10 +29,13 @@ function card(item:Event){
   const chip=(s:Score)=>`<span class="match-chip match-${scoreColor(s)}">${esc(s.label)} · ${pct(s.score)}</span>`;
   return `<section class="match-group" aria-label="${esc(group)}"><div class="match-group-heading"><strong>${esc(group)}</strong></div><div class="match-list">${visible.map(chip).join("")}${more.length?`<button type="button" class="match-expand" aria-label="${more.length} weitere Treffer in ${esc(group)} anzeigen">+${more.length}</button><span class="match-extra" hidden>${more.map(chip).join("")}</span>`:""}</div></section>`;
  }).join("");
- const tabs=[...groups,"Beschreibung"];
+ const pending=(questionnaire?.criteria||[]).filter(q=>(c?.pending_criteria||[]).includes(q.id));
+ const tabs=[...new Set([...(questionnaire?.criteria.map(q=>q.category)||[]),...groups]),"Beschreibung"];
  const buttons=tabs.map((g,i)=>`<button type="button" role="tab" id="tab-${esc(item.id)}-${i}" aria-controls="panel-${esc(item.id)}-${i}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-tab="${i}">${esc(g)}</button>`).join("");
- const panels=tabs.map((g,i)=>`<div role="tabpanel" id="panel-${esc(item.id)}-${i}" aria-labelledby="tab-${esc(item.id)}-${i}" ${i!==0?"hidden":""}>${g==="Beschreibung"?`<p class="description">${esc(item.event.description||"Keine Beschreibung verfügbar.")}</p><a href="${esc(item.event.url)}" target="_blank" rel="noopener noreferrer">Originalveranstaltung öffnen</a>`:(c?.scores.filter(s=>s.category===g).sort((a,b)=>b.score-a.score).map(scoreRow).join("")||"<p>Keine Bewertung verfügbar.</p>")}</div>`).join("");
- return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div></div><div class="matched-groups" aria-label="Erkannte Merkmale">${hits.length?groupedHits:`<p class="no-hits">${c?"Keine Kriterien oberhalb ihrer Trefferschwelle":"Noch keine Bewertung vorhanden"}</p>`}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
+ const panels=tabs.map((g,i)=>`<div role="tabpanel" id="panel-${esc(item.id)}-${i}" aria-labelledby="tab-${esc(item.id)}-${i}" ${i!==0?"hidden":""}>${g==="Beschreibung"?`<p class="description">${esc(item.event.description||"Keine Beschreibung verfügbar.")}</p><a href="${esc(item.event.url)}" target="_blank" rel="noopener noreferrer">Originalveranstaltung öffnen</a>`:((c?.scores.filter(s=>s.category===g).sort((a,b)=>b.score-a.score).map(scoreRow).join("")||"")+
+ pending.filter(q=>q.category===g).map(q=>`<div class="score score-unknown"><div class="score-head"><span>${esc(q.label)}</span><small>Noch nicht bewertet</small></div></div>`).join("")+
+ (!c?.scores.some(s=>s.category===g)&&!pending.some(q=>q.category===g)?"<p>Keine Bewertung verfügbar.</p>":""))}</div>`).join("");
+ return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div></div><div class="matched-groups" aria-label="Erkannte Merkmale">${hits.length?groupedHits:`<p class="no-hits">${c?"Keine Kriterien oberhalb ihrer Trefferschwelle":"Noch keine Bewertung vorhanden"}</p>`}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}${pending.length?`<p class="pending-note">${pending.length} Kriterien noch nicht mit der aktuellen Konfiguration bewertet.</p>`:""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
 }
 function switchItemTab(button:HTMLButtonElement,focus=false){
  const tabs=button.closest<HTMLElement>(".item-tabs");
@@ -80,6 +83,7 @@ async function init(){
  document.querySelector<HTMLButtonElement>("#show-events")!.addEventListener("click",()=>toggle(false));
  document.querySelector<HTMLButtonElement>("#show-questionnaire")!.addEventListener("click",()=>toggle(true));
  const criteria=new Map<string,{category:string,label:string}>();
+ (questionnaire?.criteria||[]).forEach(c=>criteria.set(c.id,{category:c.category,label:c.label}));
  records.forEach(e=>e.classification?.scores.forEach(score=>criteria.set(score.id,{category:score.category,label:score.label})));
  const groups=new Map<string,Array<[string,string]>>();
  criteria.forEach((c,id)=>{if(!groups.has(c.category))groups.set(c.category,[]);groups.get(c.category)!.push([id,c.label]);});
