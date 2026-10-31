@@ -62,6 +62,7 @@ def main():
         return {key:value for key,value in data.items() if key not in ("last_run","last_sync_at")}
     if material(before)==material(state):
         print("No catalog changes; skipping rc-data publication",flush=True)
+        Path("state/rc-no-changes.flag").write_text("unchanged",encoding="utf-8")
         return
     write(a.state,state)
     dest=Path(a.public)
