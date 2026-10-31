@@ -93,6 +93,36 @@ function answerDistribution(raw:string,type:string):string {
    return `<div class="answer-distribution"><div class="answer-heading">${type==="choice"?"Auswahl: "+safe(answer.choice||"–"):"Score: "+safe(String(answer.score??"–"))}</div>${items.map(o=>`<div class="answer-item"><div class="answer-item-label"><span>${safe(String(o.label??o.value))}</span><strong>${Math.round(o.probability*100)} %</strong></div><div class="answer-track"><div class="answer-fill" style="width:${Math.max(0,Math.min(100,o.probability*100))}%"></div></div></div>`).join("")}<small class="muted">Modellverteilung; keine kalibrierten Wahrscheinlichkeiten. Konfidenz: ${Math.round((answer.confidence||0)*100)} %</small></div>`;
  }catch{return "";}
 }
+const germanSort=new Intl.Collator("de",{sensitivity:"base",numeric:true});
+function questionGroups(rows:string[][]){
+ const groups=new Map<string,{row:number,data:string[]}[]>();
+ rows.slice(1).forEach((data,i)=>{if(!data[0])return;const name=data[1]?.trim()||"Sonstiges";if(!groups.has(name))groups.set(name,[]);groups.get(name)!.push({row:i+2,data});});
+ return [...groups.entries()].sort((a,b)=>germanSort.compare(a[0],b[0])).map(([name,items])=>({name,items:items.sort((a,b)=>germanSort.compare(a.data[2]||a.data[0],b.data[2]||b.data[0]))}));
+}
+function sheetNumber(input:string):number {const n=Number(String(input||"0").replace(",","."));return Number.isFinite(n)?n:0;}
+function percent(input:string):string{return Math.round(sheetNumber(input)*100)+" %";}
+function criteriaTypeLabel(type:string):string{return type==="choice"?"Einzelauswahl":type==="score"?"Bewertungsskala":"Wahrscheinlichkeit";}
+function relevanceInfo(value:string):{label:string,kind:string}{
+ if(value==="likely_relevant")return {label:"Wahrscheinlich relevant",kind:"relevant"};
+ if(value==="review")return {label:"Prüfen",kind:"review"};
+ if(value==="likely_not_relevant")return {label:"Eher nicht relevant",kind:"unlikely"};
+ return {label:"Nicht bewertet",kind:"unknown"};
+}
+function matchingDetails(run:string,url:string):string[][] {return details.slice(1).filter(d=>d[0]===run&&d[1]===url);}
+function renderCriterionDetail(d:string[]):string{
+ const type=d[13]||"predicate",value=sheetNumber(d[8]);
+ return `<div class="criterion-result"><div class="criterion-result-head"><strong>${safe(d[7]||d[5]||"")}</strong><span>${percent(String(value))}</span></div><div class="answer-track"><div class="answer-fill" style="width:${Math.max(0,Math.min(100,value*100))}%"></div></div>${answerDistribution(d[14]||"",type)}${d[12]?`<p class="hint">${safe(d[12])}</p>`:""}</div>`;
+}
+function renderEventCard(r:string[]):string{
+ const ds=matchingDetails(r[0],r[1]),info=relevanceInfo(ds[0]?.[11]||""),score=ds[0]?.[10];
+ const top=ds.filter(d=>d[9]==="true").sort((a,b)=>sheetNumber(b[8])-sheetNumber(a[8])).slice(0,4);
+ const groups=[...new Set(ds.map(d=>d[6]||"Sonstiges"))].sort(germanSort.compare);
+ const body=groups.map(group=>{
+   const items=ds.filter(d=>(d[6]||"Sonstiges")===group).sort((a,b)=>sheetNumber(b[8])-sheetNumber(a[8]));
+   return `<details class="detail-group"><summary>${safe(group)} <span>${items.filter(d=>d[9]==="true").length} Treffer · ${items.length} Fragen</span></summary><div class="detail-questions">${items.map(renderCriterionDetail).join("")}</div></details>`;
+ }).join("");
+ return `<article class="event-card"><div class="event-card-main"><div class="event-card-title"><h3>${safe(r[2]||"Ohne Titel")}</h3><span class="relevance-tag ${info.kind}">${info.label}${score!==undefined&&score!==""?" · "+percent(score):""}</span></div><div class="event-chips">${top.map(d=>`<span class="result-chip">${safe(d[7]||"")}: ${percent(d[8])}</span>`).join("")}</div><div class="event-card-meta"><span>${ds.length} Fragen</span><span>${ds.filter(d=>d[9]==="true").length} Treffer</span>${r[12]?`<span>${safe(r[12])} Tokens</span>`:""}</div></div><details class="event-expand"><summary>Alle Bewertungen ansehen</summary><div class="event-expanded"><p><a href="${safe(r[1]||"")}" target="_blank" rel="noopener noreferrer">Veranstaltungsseite öffnen ↗</a></p>${r[3]||r[4]?`<p><strong>Tags:</strong> ${safe([r[3],r[4]].filter(Boolean).join(", "))}</p>`:""}${r[5]?`<p><strong>Begründung:</strong> ${safe(r[5])}</p>`:""}${ds.length?body:'<p class="hint">Für diesen Lauf liegen keine Einzelbewertungen vor.</p>'}</div></details></article>`;
+}
 function render(){
  const c=config.slice(1).filter(x=>x[0]); const t=tags.slice(1).filter(x=>x[0]);
  app.innerHTML=`<header><div class="brand"><span class="mark">✝</span><div><b>GoCath Tagging</b><small>Konfiguration & Ergebnisse · POC</small></div></div><span class="muted">${token?"Google Sheets verbunden":"Nicht verbunden"}</span></header>
@@ -101,16 +131,17 @@ function render(){
  ${token?`<nav class="section-tabs" aria-label="Dashboard-Bereiche">${[["results","Ergebnisse"],["criteria","Kriterien"],["config","Konfiguration"],["tags","Alte Tags"],["metrics","Metriken"],["runs","Läufe"]].map(([id,label])=>`<button type="button" data-switch-view="${id}" aria-pressed="${activeView===id}">${label}</button>`).join("")}</nav><div class="columns"><section class="panel" data-view="config"><h2>Konfiguration</h2><p class="hint">Änderungen werden beim Verlassen eines Feldes automatisch gespeichert.</p><div id="settings">${c.map((r,i)=>`<label data-config-key="${safe(r[0])}"><span>${safe(r[0]==="gemini_prompt"?"Klassifizierungs-Prompt (alle Anbieter)":r[0]==="gemini_temperature"?"Temperatur (Gemini / Groq)":r[0]==="openai_reasoning_effort"?"OpenAI Reasoning-Stufe":r[0]==="cost_input_per_million_usd"?"Input-Preis in USD / 1 Mio. Tokens":r[0]==="cost_output_per_million_usd"?"Output-Preis in USD / 1 Mio. Tokens":r[2]||r[0])}<small>${safe(r[0])}</small></span>${r[0]==="event_source"?`<select data-setting="${i}"><option value="gocath" ${r[1]==="gocath"?"selected":""}>GoCath – gocath.org/de/finde</option><option value="regnum_christi" ${r[1]==="regnum_christi"?"selected":""}>Regnum Christi – demnächst</option></select>`:r[0]==="classifier_provider"?`<select data-setting="${i}"><option value="groq" ${r[1]==="groq"?"selected":""}>Groq · GPT-OSS 20B</option><option value="gemini" ${r[1]==="gemini"?"selected":""}>Google Gemini</option><option value="openai" ${r[1]==="openai"?"selected":""}>OpenAI · GPT-6 Luna</option></select>`:r[0]==="openai_reasoning_effort"?`<select data-setting="${i}">${["none","low","medium","high"].map(v=>`<option value="${v}" ${r[1]===v?"selected":""}>${v}</option>`).join("")}</select>`:r[0]==="changed_only"||r[0]==="additional_tags_enabled"?`<select data-setting="${i}"><option value="true" ${r[1]==="true"?"selected":""}>Ja</option><option value="false" ${r[1]==="false"?"selected":""}>Nein</option></select>`:r[0]==="max_additional_tags"?`<select data-setting="${i}">${[0,1,2,3,4,5,6,7,8].map(v=>`<option value="${v}" ${r[1]===String(v)?"selected":""}>${v}</option>`).join("")}</select>`:r[0]==="gemini_temperature"?`<select data-setting="${i}">${["0","0.1","0.2","0.3","0.5","0.7","1"].map(v=>`<option value="${v}" ${r[1]===v?"selected":""}>${v}</option>`).join("")}</select>`:r[0]==="gemini_prompt"?`<textarea data-setting="${i}" rows="9">${safe(r[1]||"")}</textarea>`:`<input data-setting="${i}" value="${safe(r[1]||"")}" />`}</label>`).join("")}</div><button id="saveConfig" hidden>Konfiguration speichern</button></section>
  <section class="panel" data-view="tags"><h2>Standard-Tags</h2><p class="hint">Nur aktivierte Tags werden der ausgewählten KI zur Auswahl angeboten.</p><div class="tag-grid">${t.map((r,i)=>`<div class="tag-entry" data-tag-entry="${i}"><div class="tag-entry-header"><label class="tag"><input type="checkbox" data-tag="${i}" ${r[1]?.toLowerCase()==="true"?"checked":""}/><span>${safe(r[0])}</span></label><button type="button" class="remove-tag" data-remove-tag="${i}" aria-label="Standard-Tag ${safe(r[0])} löschen" title="Standard-Tag löschen">Löschen</button></div><input class="synonyms" data-synonyms="${i}" placeholder="Synonyme, mit Kommas getrennt" value="${safe(r[2]||"")}" aria-label="Synonyme für ${safe(r[0])}"/></div>`).join("")}</div><label class="add"><span>Neuen Tag ergänzen</span><input id="newTag" placeholder="z. B. Kirchenmusik"/></label><button id="saveTags">Neuen Tag hinzufügen</button></section></div>
 <section class="panel questionnaire" data-view="criteria"><h2>Decisions-Fragebogen</h2><p class="hint">Titel, Beschreibung und Entscheidungsregeln direkt pflegen. Änderungen werden automatisch gespeichert. Bei Einzelauswahl werden die Wahrscheinlichkeiten <strong>aller</strong> Antworten gespeichert.</p>
-<div class="question-list">${criteria.slice(1).filter(r=>r[0]).map((r,i)=>`<details class="question-card"><summary><span class="question-category">${safe(r[1]||"Sonstiges")}</span><strong>${safe(r[2]||r[0])}</strong><span class="question-type">${safe(r[7]||"predicate")}</span><span class="question-state">${r[4]==="true"?"Aktiv":"Inaktiv"}</span></summary>
+<div class="question-tabs" role="tablist" aria-label="Fragebogenbereiche">${questionGroups(criteria).map((group,i)=>`<button type="button" role="tab" data-question-tab="${i}" aria-selected="${i===0}">${safe(group.name)} <span>${group.items.length}</span></button>`).join("")}</div>
+<div class="question-groups">${questionGroups(criteria).map((group,i)=>`<section class="question-group" data-question-group="${i}" role="tabpanel" ${i!==0?"hidden":""}><div class="question-group-heading"><h3>${safe(group.name)}</h3><p>${group.items.length} Fragen · alphabetisch sortiert</p></div><div class="question-list">${group.items.map(({row,data:r})=>`<details class="question-card"><summary><span class="question-category">${safe(r[1]||"Sonstiges")}</span><strong>${safe(r[2]||r[0])}</strong><span class="question-type">${safe(criteriaTypeLabel(r[7]||"predicate"))}</span><span class="question-state">${r[4]==="true"?"Aktiv":"Inaktiv"}</span></summary>
 <div class="question-fields">
-<label>Fragetitel<input data-criterion-row="${i+2}" data-criterion-col="C" value="${safe(r[2]||"")}"/></label>
-<label>Bereich<input data-criterion-row="${i+2}" data-criterion-col="B" value="${safe(r[1]||"")}"/></label>
-<label>Beschreibung / Entscheidungsregel<textarea rows="3" data-criterion-row="${i+2}" data-criterion-col="D">${safe(r[3]||"")}</textarea></label>
-<label>Fragetyp<select data-criterion-row="${i+2}" data-criterion-col="H">${["predicate","choice","score"].map(type=>`<option value="${type}" ${(r[7]||"predicate")===type?"selected":""}>${type==="predicate"?"Wahrscheinlichkeit (0–1)":type==="choice"?"Einzelauswahl mit Verteilung":"Bewertungsskala mit Verteilung"}</option>`).join("")}</select></label>
-<label>Aktiv<input type="checkbox" data-criterion-row="${i+2}" data-criterion-col="E" ${r[4]==="true"?"checked":""}/></label>
-<div class="option-editor" ${!["choice","score"].includes(r[7])?"hidden":""}><label>Antwortmöglichkeiten und Regeln<textarea rows="5" data-criterion-row="${i+2}" data-criterion-col="I" placeholder="Antwort | Wähle diese Antwort, wenn …">${safe(optionsLines(r[8]||""))}</textarea></label><small>Eine Option pro Zeile. Einzelauswahl: 2–255 Antworten; Skala: 2–10 geordnete Stufen. Zuerst die Optionen eintragen, dann den Fragetyp umstellen.</small></div>
-<label>Relevanzgewicht (nur Wahrscheinlichkeit)<input type="number" min="0" max="3" step="0.1" data-criterion-row="${i+2}" data-criterion-col="F" ${["choice","score"].includes(r[7])?"disabled":""} value="${safe(r[5]||"0")}"/></label>
-<label>Trefferschwelle<input type="number" min="0" max="1" step="0.05" data-criterion-row="${i+2}" data-criterion-col="G" value="${safe(r[6]||"0.65")}"/></label><small class="muted">ID: ${safe(r[0])}</small></div></details>`).join("")}</div>
+<label>Fragetitel<input data-criterion-row="${row}" data-criterion-col="C" value="${safe(r[2]||"")}"/></label>
+<label>Bereich<input data-criterion-row="${row}" data-criterion-col="B" value="${safe(r[1]||"")}"/></label>
+<label>Beschreibung / Entscheidungsregel<textarea rows="3" data-criterion-row="${row}" data-criterion-col="D">${safe(r[3]||"")}</textarea></label>
+<label>Fragetyp<select data-criterion-row="${row}" data-criterion-col="H">${["predicate","choice","score"].map(type=>`<option value="${type}" ${(r[7]||"predicate")===type?"selected":""}>${type==="predicate"?"Wahrscheinlichkeit (0–1)":type==="choice"?"Einzelauswahl mit Verteilung":"Bewertungsskala mit Verteilung"}</option>`).join("")}</select></label>
+<label>Aktiv<input type="checkbox" data-criterion-row="${row}" data-criterion-col="E" ${r[4]==="true"?"checked":""}/></label>
+<div class="option-editor" ${!["choice","score"].includes(r[7])?"hidden":""}><label>Antwortmöglichkeiten und Regeln<textarea rows="5" data-criterion-row="${row}" data-criterion-col="I" placeholder="Antwort | Wähle diese Antwort, wenn …">${safe(optionsLines(r[8]||""))}</textarea></label><small>Eine Option pro Zeile. Einzelauswahl: 2–255 Antworten; Skala: 2–10 geordnete Stufen. Zuerst die Optionen eintragen, dann den Fragetyp umstellen.</small></div>
+<label>Relevanzgewicht (nur Wahrscheinlichkeit)<input type="number" min="0" max="3" step="0.1" data-criterion-row="${row}" data-criterion-col="F" ${["choice","score"].includes(r[7])?"disabled":""} value="${safe(r[5]||"0")}"/></label>
+<label>Trefferschwelle<input type="number" min="0" max="1" step="0.05" data-criterion-row="${row}" data-criterion-col="G" value="${safe(r[6]||"0.65")}"/></label><small class="muted">ID: ${safe(r[0])}</small></div></details>`).join("")}</div></section>`).join("")}</div>
 <details class="question-card"><summary><strong>+ Neue Frage hinzufügen</strong></summary><div class="question-fields">
 <label>Titel<input id="questionTitle" placeholder="z. B. Veranstaltungsformat"/></label>
 <label>Bereich<input id="questionCategory" value="Format"/></label>
@@ -135,6 +166,13 @@ function render(){
    if(!confirm('Standard-Tag „'+name+'“ löschen? Die Änderung wird sofort gespeichert.'))return;
    entry.remove();
    document.querySelector<HTMLButtonElement>("#saveTags")?.click();
+ });
+ const questionTabs=[...document.querySelectorAll<HTMLButtonElement>("[data-question-tab]")];
+ const questionSections=[...document.querySelectorAll<HTMLElement>("[data-question-group]")];
+ questionTabs.forEach(button=>button.onclick=()=>{
+  const selected=button.dataset.questionTab;
+  questionTabs.forEach(b=>b.setAttribute("aria-selected",String(b===button)));
+  questionSections.forEach(section=>{section.hidden=section.dataset.questionGroup!==selected;});
  });
  const filter=document.querySelector<HTMLSelectElement>("#runFilter"); const view=document.querySelector<HTMLDivElement>("#historyView"); 
  const search=document.querySelector<HTMLInputElement>("#historySearch");
