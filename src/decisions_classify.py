@@ -65,6 +65,16 @@ def classify_decisions(event, api_key, config, usage_sink=None):
     if not response.ok:
         raise RuntimeError("OpenAI Decisions API HTTP " + str(response.status_code))
     body = response.json()
+    usage = body.get("usage") or {}
+    if usage_sink is not None:
+        details = usage.get("input_tokens_details") or {}
+        usage_sink.update({
+            "input_tokens": int(usage.get("input_tokens", 0)),
+            "output_tokens": int(usage.get("output_tokens", 0)),
+            "thinking_tokens": int((usage.get("output_tokens_details") or {}).get("reasoning_tokens", 0)),
+            "cached_tokens": int(details.get("cached_tokens", 0)),
+            "total_tokens": int(usage.get("total_tokens", 0))
+        })
     answers = body.get("answers")
     if not isinstance(answers, list):
         raise ValueError("Decisions response missing answers")
@@ -152,16 +162,6 @@ def classify_decisions(event, api_key, config, usage_sink=None):
             for tag in LEGACY_ALIASES.get(row["id"], ()):
                 if tag in allowed and tag not in legacy:
                     legacy.append(tag)
-    usage = body.get("usage") or {}
-    if usage_sink is not None:
-        details = usage.get("input_tokens_details") or {}
-        usage_sink.update({
-            "input_tokens": int(usage.get("input_tokens", 0)),
-            "output_tokens": int(usage.get("output_tokens", 0)),
-            "thinking_tokens": int((usage.get("output_tokens_details") or {}).get("reasoning_tokens", 0)),
-            "cached_tokens": int(details.get("cached_tokens", 0)),
-            "total_tokens": int(usage.get("total_tokens", 0))
-        })
     return {
         "standard_tags": legacy,
         "additional_tags": [],
