@@ -1,474 +1,88 @@
 import "./style.css";
-declare global { interface Window { google?: { accounts: { oauth2: { initTokenClient: (settings: Record<string, unknown>) => { requestAccessToken: (opts?: Record<string,unknown>) => void } } } } } }
+declare global {interface Window {google?:{accounts:{oauth2:{initTokenClient:(options:Record<string,unknown>)=>{requestAccessToken:()=>void}}}}}}
 const SHEET="1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w";
-const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined;
 const API="https://sheets.googleapis.com/v4/spreadsheets/"+SHEET;
-const SESSION_KEY="gocath_sheets_oauth_session";
-const REMEMBERED_KEY="gocath_sheets_oauth_remembered_v1";
-type SavedSession={accessToken:string; expiresAt:number; clientId?:string; scope?:string};
-const SHEETS_SCOPE="https://www.googleapis.com/auth/spreadsheets";
-function validSession(value:unknown):value is SavedSession {
- if(!value||typeof value!=="object")return false;
- const x=value as SavedSession;
- return typeof x.accessToken==="string"&&x.accessToken.length>0&&
-   Number.isFinite(x.expiresAt)&&x.expiresAt>Date.now()+30000&&
-   x.clientId===CLIENT_ID&&x.scope===SHEETS_SCOPE;
+const CLIENT_ID=import.meta.env.VITE_GOOGLE_CLIENT_ID as string|undefined;
+const SCOPE="https://www.googleapis.com/auth/spreadsheets";
+const STORE="gocath_sheets_oauth_session", REMEMBER="gocath_sheets_oauth_remembered_v1";
+type Session={accessToken:string,expiresAt:number,clientId?:string,scope?:string};
+function readSession(storage:Storage,key:string):Session|null{
+ try{const value=JSON.parse(storage.getItem(key)||"null") as Session|null;
+ if(value&&value.accessToken&&value.expiresAt>Date.now()+30000&&value.clientId===CLIENT_ID&&value.scope===SCOPE)return value;
+ storage.removeItem(key);}catch{}return null;
 }
-function readSession(storage:Storage,key:string):SavedSession|null {
- try{
-  const raw=storage.getItem(key);
-  if(!raw)return null;
-  const value:unknown=JSON.parse(raw);
-  if(validSession(value))return value;
-  storage.removeItem(key);
- }catch{try{storage.removeItem(key);}catch{}}
- return null;
+const session=readSession(sessionStorage,STORE)||readSession(localStorage,REMEMBER);
+let token=session?.accessToken||"", rows:string[][]=[], search="";
+const root=document.querySelector<HTMLDivElement>("#app")!;
+const esc=(s:unknown)=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]||c));
+function notify(message:string,error=false){const el=document.querySelector<HTMLElement>("#status");if(el){el.textContent=message;el.className=error?"error":"";}}
+async function api(range:string,body?:unknown){
+ const response=await fetch(API+"/values/"+encodeURIComponent(range)+(body?"?valueInputOption=RAW":""),{method:body?"PUT":"GET",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:body?JSON.stringify(body):undefined});
+ if(response.status===401){logout();throw Error("Google-Sitzung abgelaufen. Bitte erneut anmelden.");}
+ if(!response.ok)throw Error("Google Sheets HTTP "+response.status);return response.json();
 }
-function restoreSession():string {
- const tab=readSession(sessionStorage,SESSION_KEY);
- if(tab)return tab.accessToken;
- const remembered=readSession(localStorage,REMEMBERED_KEY);
- if(!remembered)return "";
- try{sessionStorage.setItem(SESSION_KEY,JSON.stringify(remembered));}catch{}
- return remembered.accessToken;
-}
-function saveSession(accessToken:string,expiresIn:number,remember:boolean):void {
- const validSeconds=Number.isFinite(expiresIn)&&expiresIn>0?expiresIn:0;
- // Never persist tokens without a known, unexpired expiry time.
- const expiresAt=Date.now()+validSeconds*1000;
- const session:SavedSession={accessToken,expiresAt,clientId:CLIENT_ID,scope:SHEETS_SCOPE};
- try{if(validSeconds>0)sessionStorage.setItem(SESSION_KEY,JSON.stringify(session));}catch{}
- try{
-  if(remember&&validSeconds>0)localStorage.setItem(REMEMBERED_KEY,JSON.stringify(session));
-  else localStorage.removeItem(REMEMBERED_KEY);
- }catch{}
-}
-function clearSession():void {
- token="";
- try{sessionStorage.removeItem(SESSION_KEY);}catch{}
- try{localStorage.removeItem(REMEMBERED_KEY);}catch{}
-}
-let activeView="results";
-let token=restoreSession(), config: string[][]=[], tags: string[][]=[], runs:string[][]=[], history:string[][]=[], criteria:string[][]=[], details:string[][]=[];
-const app=document.querySelector<HTMLDivElement>("#app")!;
-function safe(s:string):string {return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");}
-async function api(url:string,opts:RequestInit={}) {const r=await fetch(url,{...opts,headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json",...(opts.headers||{})}});if(r.status===401){clearSession();render();throw new Error("Google-Sitzung abgelaufen. Bitte erneut mit Google anmelden.");}if(!r.ok)throw new Error("Google Sheets HTTP "+r.status+"; Zugriff und OAuth-Freigabe prüfen");return r.json();}
-const read=async(range:string):Promise<string[][]>=>{const x=await api(API+"/values/"+encodeURIComponent(range));return x.values||[]};
-async function load(){[config,tags,runs,history,criteria,details]=await Promise.all([read("Config!A1:C100"),read("Tags!A1:C300"),read("Runs!A1:L100"),read("ResultsHistory!A1:N1000"),read("Criteria!A1:I450"),read("ClassificationDetails!A1:O5000")]);render();}
-function status(s:string,isError=false){const e=document.querySelector("#status");if(e){e.textContent=s;e.className=isError?"error":"";}}
-
-function norm(value:string):string{return value.normalize("NFKC").toLocaleLowerCase("de").replace(/[.,;:!?()]/g," ").replace(/\s+/g," ").trim();}
-function oneEdit(a:string,b:string):boolean{
- if(Math.abs(a.length-b.length)>1)return false;
- let i=0,j=0,errors=0;
- while(i<a.length&&j<b.length){
-  if(a[i]===b[j]){i++;j++;continue;}
-  if(++errors>1)return false;
-  if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++;}
- }
- return errors+(a.length-i)+(b.length-j)<=1;
-}
-function containsFuzzy(term:string,word:string):boolean{
- if(term.length<3)return false;
- if(word.includes(term))return true;
- // Short search terms cause too many false positives with one-edit matching.
- if(term.length<5)return false;
- for(let length=Math.max(1,term.length-1);length<=Math.min(word.length,term.length+1);length++){
-  for(let start=0;start+length<=word.length;start++){
-   if(oneEdit(term,word.slice(start,start+length)))return true;
-  }
- }
- return false;
-}
-function matchesHistory(row:string[],query:string,configuredTags:string[][]):boolean{
- const q=norm(query).split(" ").filter(Boolean);if(!q.length)return true;if(q.some(part=>part.length<3))return false;
- const chosen=(row[3]||"").split(",").map(x=>x.trim());
- const synonyms=configuredTags.filter(t=>chosen.some(c=>norm(c)===norm(t[0]))).flatMap(t=>(t[2]||"").split(",").map(x=>x.trim()));
- const words=norm([row[2],row[3],row[4],row[5],...synonyms].join(" ")).split(" ").filter(Boolean);
- return q.every(part=>words.some(word=>containsFuzzy(part,word)));
-}
-function optionsLines(value:string):string {try{const a=JSON.parse(value) as {value?:string,label?:string,description?:string}[];return Array.isArray(a)?a.map(x=>String(x.value??x.label??"")+" | "+String(x.description??"")).join("\n"):"";}catch{return value;}}
-function encodeOptions(raw:string,type:string):string {
- const options=raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).map(line=>{
-  const split=line.indexOf("|"),name=(split<0?line:line.slice(0,split)).trim(),description=(split<0?"":line.slice(split+1)).trim();
-  if(!name)throw new Error("Jede Option braucht eine Bezeichnung");
-  return type==="score"?{label:name,description}:{value:name,description};
- });
- const max=type==="score"?10:255;
- if(options.length<2||options.length>max)throw new Error("Bitte 2 bis "+max+" Optionen eingeben");
- if(new Set(options.map(o=>"label" in o?o.label:o.value)).size!==options.length)throw new Error("Doppelte Antwortoption");
- return JSON.stringify(options);
-}
-function answerDistribution(raw:string,type:string):string {
- if(type!=="choice"&&type!=="score")return "";
- try{
-   const answer=JSON.parse(raw) as {choice?:string,score?:number,confidence?:number,probabilities?:{value:string|number,label?:string,probability:number}[]};
-   if(!Array.isArray(answer.probabilities))return "";
-   const items=answer.probabilities;
-   return `<div class="answer-distribution"><div class="answer-heading">${type==="choice"?"Ausgewählt: "+safe(answer.choice||"–"):"Score: "+safe(String(answer.score??"–"))}</div>${items.map(o=>`<div class="answer-item"><div class="answer-item-label"><span>${safe(String(o.label??o.value))}</span><strong>${Math.round(o.probability*100)} %</strong></div><div class="answer-track"><div class="answer-fill" style="width:${Math.max(0,Math.min(100,o.probability*100))}%"></div></div></div>`).join("")}<small class="muted">Verteilung über alle Optionen (nicht katholische Relevanz). Modellschätzung; Konfidenz: ${Math.round((answer.confidence||0)*100)} %</small></div>`;
- }catch{return "";}
-}
-const germanSort=new Intl.Collator("de",{sensitivity:"base",numeric:true});
-function questionGroups(rows:string[][]){
- const groups=new Map<string,{row:number,data:string[]}[]>();
- rows.slice(1).forEach((data,i)=>{if(!data[0])return;const name=data[1]?.trim()||"Sonstiges";if(!groups.has(name))groups.set(name,[]);groups.get(name)!.push({row:i+2,data});});
- return [...groups.entries()].sort((a,b)=>germanSort.compare(a[0],b[0])).map(([name,items])=>({name,items:items.sort((a,b)=>germanSort.compare(a.data[2]||a.data[0],b.data[2]||b.data[0]))}));
-}
-function sheetNumber(input:string):number {const n=Number(String(input||"0").replace(",","."));return Number.isFinite(n)?n:0;}
-function percent(input:string):string{return Math.round(sheetNumber(input)*100)+" %";}
-function criteriaTypeLabel(type:string):string{return type==="choice"?"Einzelauswahl":type==="score"?"Bewertungsskala":"Wahrscheinlichkeit";}
-function relevanceInfo(value:string):{label:string,kind:string}{
- if(value==="likely_relevant")return {label:"Wahrscheinlich relevant",kind:"relevant"};
- if(value==="review")return {label:"Prüfen",kind:"review"};
- if(value==="likely_not_relevant")return {label:"Eher nicht relevant",kind:"unlikely"};
- return {label:"Nicht bewertet",kind:"unknown"};
-}
-function matchingDetails(run:string,url:string):string[][] {return details.slice(1).filter(d=>d[0]===run&&d[1]===url);}
-function isPositiveMatch(d:string[]):boolean {
- return (d[13]||"predicate")==="predicate"&&d[9]==="true";
-}
-function choiceName(d:string[]):string {
- if(d[13]!=="choice")return "";
- try{
-  const answer=JSON.parse(d[14]||"{}") as {choice?:string};
-  const selected=String(answer.choice||"");
-  const configured=criteria.slice(1).find(r=>r[0]===d[5]);
-  const opts=JSON.parse(configured?.[8]||"[]") as {value:string,description?:string}[];
-  return opts.find(x=>x.value===selected)?.value||selected;
- }catch{return "";}
-}
-function isRetiredQuestion(id:string):boolean {
- const row=criteria.slice(1).find(r=>r[0]===id);
- return Boolean(row&&row[4]?.toLowerCase()!=="true");
-}
-function renderCriterionDetail(d:string[]):string{
- const type=d[13]||"predicate",value=sheetNumber(d[8]);
- const label=safe(d[7]||d[5]||"");
- if(type==="choice")return `<div class="criterion-result criterion-choice"><div class="criterion-result-head"><strong>${label}</strong><span class="criterion-type">${isRetiredQuestion(d[5])?"Historische Auswahl · deaktiviert":"Einzelauswahl"}</span></div>${isRetiredQuestion(d[5])?'<p class="hint">Frühere Einzelauswahl: Die relative Verteilung kann nicht zeigen, dass keines der Formate zutrifft.</p>':""}${answerDistribution(d[14]||"",type)}</div>`;
- if(type==="score")return `<div class="criterion-result criterion-choice"><div class="criterion-result-head"><strong>${label}</strong><span class="criterion-type">Bewertungsskala</span></div>${answerDistribution(d[14]||"",type)}</div>`;
- return `<div class="criterion-result"><div class="criterion-result-head"><strong>${label}</strong><span>${percent(String(value))}</span></div><div class="answer-track"><div class="answer-fill" style="width:${Math.max(0,Math.min(100,value*100))}%"></div></div>${d[12]?`<p class="hint">${safe(d[12])}</p>`:""}</div>`;
-}
-function renderEventCard(r:string[]):string{
- const ds=matchingDetails(r[0],r[1]),info=relevanceInfo(ds[0]?.[11]||""),score=ds[0]?.[10];
- const positives=ds.filter(isPositiveMatch);
- const top=positives.sort((a,b)=>sheetNumber(b[8])-sheetNumber(a[8])).slice(0,4);
- // Do not promote retired forced-choice answers as current event characteristics.
- const choices=ds.filter(d=>d[13]==="choice"&&!isRetiredQuestion(d[5]));
- const groups=[...new Set(ds.map(d=>d[6]||"Sonstiges"))].sort(germanSort.compare);
- const body=groups.map(group=>{
-   const items=ds.filter(d=>(d[6]||"Sonstiges")===group).sort((a,b)=>sheetNumber(b[8])-sheetNumber(a[8]));
-   return `<details class="detail-group"><summary>${safe(group)} <span>${items.filter(isPositiveMatch).length} Treffer · ${items.length} Fragen</span></summary><div class="detail-questions">${items.map(renderCriterionDetail).join("")}</div></details>`;
- }).join("");
- return `<article class="event-card"><div class="event-card-main"><div class="event-card-title"><h3>${safe(r[2]||"Ohne Titel")}</h3><span class="relevance-tag ${info.kind}">${info.label}${score!==undefined&&score!==""?" · "+percent(score):""}</span></div><div class="event-chips">${choices.map(d=>`<span class="choice-chip">${safe(d[7]||"Auswahl")}: <strong>${safe(choiceName(d)||"–")}</strong> · ${percent(d[8])} Modellanteil</span>`).join("")}${top.map(d=>`<span class="result-chip">${safe(d[7]||"")}: ${percent(d[8])}</span>`).join("")}</div><div class="event-card-meta"><span>${ds.length} Fragen</span><span>${ds.filter(isPositiveMatch).length} Treffer</span>${r[12]?`<span>${safe(r[12])} Tokens</span>`:""}</div></div><details class="event-expand"><summary>Alle Bewertungen ansehen</summary><div class="event-expanded"><p><a href="${safe(r[1]||"")}" target="_blank" rel="noopener noreferrer">Veranstaltungsseite öffnen ↗</a></p>${r[3]||r[4]?`<p><strong>Tags:</strong> ${safe([r[3],r[4]].filter(Boolean).join(", "))}</p>`:""}${r[5]?`<p><strong>Begründung:</strong> ${safe(r[5])}</p>`:""}${ds.length?body:'<p class="hint">Für diesen Lauf liegen keine Einzelbewertungen vor.</p>'}</div></details></article>`;
-}
-
-type RcStat={run_id:string;started_at:string;source_count:number;queued:number;attempted:number;classified:number;failed:number;usage:Record<string,number>;cost_usd_estimated:number};
-function rcBars(rows:RcStat[],measure:(r:RcStat)=>number,title:string){
- const vals=rows.map(measure),max=Math.max(1,...vals),w=680,base=130,space=650/Math.max(1,rows.length),bw=Math.min(20,space*.7);
- return `<svg viewBox="0 0 680 155" role="img" aria-label="${safe(title)} nach Lauf" class="rc-history-chart"><line x1="20" y1="130" x2="670" y2="130" stroke="#cbd9d1"/>${rows.map((r,i)=>{const h=Math.max(0,measure(r))/max*114;return `<rect x="${20+i*space+(space-bw)/2}" y="${base-h}" width="${bw}" height="${h}" rx="2" fill="#397a61"><title>${safe(new Date(r.started_at).toLocaleString("de-DE"))}: ${measure(r)}</title></rect>`}).join("")}<text x="20" y="150" font-size="11" fill="#61756b">${rows.length?safe(new Date(rows[0].started_at).toLocaleDateString("de-DE")):""}</text><text x="670" y="150" text-anchor="end" font-size="11" fill="#61756b">${rows.length?safe(new Date(rows[rows.length-1].started_at).toLocaleDateString("de-DE")):""}</text><text x="20" y="12" font-size="11" fill="#61756b">${max.toLocaleString("de-DE")}</text></svg>`;
-}
-async function loadRcHistory(){
- const host=document.querySelector<HTMLElement>("#rcRunHistory");if(!host)return;
- try{
-  const response=await fetch("https://raw.githubusercontent.com/weidmanngabriel/gocath-tag-poc/rc-data/runs.json?v="+Date.now(),{cache:"no-store"});
-  if(response.status===404){host.textContent="Die Historie beginnt nach dem nächsten RC-Catalog-Lauf.";return;}
-  if(!response.ok)throw new Error("HTTP "+response.status);
-  const raw=await response.text();
-  let payload:{runs?:RcStat[]};
-  try{payload=JSON.parse(raw.trim()) as {runs?:RcStat[]};}
-  catch{throw new Error("Laufhistorie enthält ungültiges JSON.");}
-  if(!Array.isArray(payload?.runs))throw new Error("Laufhistorie hat kein gültiges runs-Feld.");
-  const all=payload.runs.filter(r=>r&&typeof r.started_at==="string"&&r.started_at).sort((a,b)=>a.started_at.localeCompare(b.started_at));
-  if(!all.length){host.textContent="Noch keine Statistikdaten vorhanden.";return;}
-  const recent=all.slice(-30),sum=(f:(r:RcStat)=>number)=>all.reduce((v,r)=>v+(f(r)||0),0),fmt=(n:number)=>n.toLocaleString("de-DE");
-  const charts:[string,(r:RcStat)=>number][]=[
-   ["Klassifizierungen",r=>r.classified||0],["Fehler",r=>r.failed||0],
-   ["Tokens",r=>r.usage?.total_tokens||0],["Kosten (USD)",r=>r.cost_usd_estimated||0]];
-  host.innerHTML=`<div class="rc-kpis"><div><small>Läufe</small><b>${fmt(all.length)}</b></div><div><small>Klassifiziert</small><b>${fmt(sum(r=>r.classified))}</b></div><div><small>Fehler</small><b>${fmt(sum(r=>r.failed))}</b></div><div><small>Tokens</small><b>${fmt(sum(r=>r.usage?.total_tokens||0))}</b></div><div><small>Kosten (USD)*</small><b>${sum(r=>r.cost_usd_estimated).toFixed(4)}</b></div></div><p class="hint">Verlauf der letzten ${recent.length} Läufe. Gesamtzahlen für alle gespeicherten Läufe. *Schätzung mit den pro Lauf gespeicherten Preisannahmen; keine Anbieterrechnung.</p><div class="rc-charts">${charts.map(([label,fn])=>`<div><h3>${label}</h3>${rcBars(recent,fn,label)}</div>`).join("")}</div><h3>Letzte Läufe</h3><div class="table-scroll"><table><thead><tr><th>Datum</th><th>Lauf</th><th>Geprüft</th><th>Klassifiziert</th><th>Fehler</th><th>Input / Output / Thinking</th><th>USD*</th></tr></thead><tbody>${[...all].reverse().slice(0,30).map(r=>`<tr><td>${safe(new Date(r.started_at).toLocaleString("de-DE"))}</td><td><a target="_blank" rel="noopener noreferrer" href="https://github.com/weidmanngabriel/gocath-tag-poc/actions/runs/${encodeURIComponent(r.run_id)}">${safe(r.run_id)}</a></td><td>${fmt(r.source_count||0)}</td><td>${fmt(r.classified||0)}</td><td>${fmt(r.failed||0)}</td><td>${fmt(r.usage?.input_tokens||0)} / ${fmt(r.usage?.output_tokens||0)} / ${fmt(r.usage?.thinking_tokens||0)}</td><td>${(r.cost_usd_estimated||0).toFixed(5)}</td></tr>`).join("")}</tbody></table></div>`;
- }catch(err){host.textContent="Laufhistorie nicht verfügbar: "+String(err);}
-}
-
+async function load(){const response=await api("Criteria!A1:I1500");rows=response.values||[];render();notify("Kriterien geladen.");}
+function logout(){token="";sessionStorage.removeItem(STORE);localStorage.removeItem(REMEMBER);render();}
+function formatOptions(raw:string){try{return (JSON.parse(raw||"[]") as Array<{value?:string,label?:string,description?:string}>).map(o=>(o.value||o.label||"")+" | "+(o.description||"")).join("\n");}catch{return raw;}}
+function encodeOptions(raw:string,type:string){const result=raw.split("\n").map(s=>s.trim()).filter(Boolean).map(line=>{const [head,...parts]=line.split("|");const key=head.trim();return type==="score"?{label:key,description:parts.join("|").trim()}:{value:key,description:parts.join("|").trim()};});const max=type==="choice"?255:10;if(result.length<2||result.length>max)throw Error("Erwartet 2 bis "+max+" Antwortoptionen.");const keys=result.map(x=>("value" in x?x.value:x.label));if(keys.some(x=>!x)||new Set(keys).size!==keys.length)throw Error("Antwortoptionen müssen eindeutige Namen haben.");return JSON.stringify(result);}
+function editor(row:string[],idx:number){const n=idx+1,type=row[7]||"predicate";return `<details class="question-card"><summary><strong>${esc(row[2]||row[0])}</strong> · ${esc(row[1]||"Sonstiges")} · ${esc(type)} · ${row[4]==="true"?"aktiv":"inaktiv"}</summary><div class="question-fields">
+<label>Bereich<input data-row="${n}" data-col="B" value="${esc(row[1])}"></label>
+<label>Titel<input data-row="${n}" data-col="C" value="${esc(row[2])}"></label>
+<label>Entscheidungsregel<textarea rows="3" data-row="${n}" data-col="D">${esc(row[3])}</textarea></label>
+<label>Aktiv <input type="checkbox" data-row="${n}" data-col="E" ${row[4]==="true"?"checked":""}></label>
+<label>Relevanzgewicht<input type="number" min="0" max="3" step="0.1" data-row="${n}" data-col="F" value="${esc(row[5]||"0")}" ${type!=="predicate"?"disabled":""}></label>
+<label>Trefferschwelle<input type="number" min="0" max="1" step="0.05" data-row="${n}" data-col="G" value="${esc(row[6]||"0.65")}"></label>
+<label>Fragetyp<select data-row="${n}" data-col="H">${["predicate","choice","score"].map(t=>`<option value="${t}" ${t===type?"selected":""}>${t}</option>`).join("")}</select></label>
+<label>Antwortoptionen (Name | Beschreibung)<textarea rows="4" data-row="${n}" data-col="I">${esc(formatOptions(row[8]||""))}</textarea></label>
+<small class="muted">ID: ${esc(row[0])}</small></div></details>`;}
 function render(){
- const c=config.slice(1).filter(x=>x[0]); const t=tags.slice(1).filter(x=>x[0]);
- app.innerHTML=`<header><div class="brand"><span class="mark">✝</span><div><b>GoCath Tagging</b><small>Konfiguration & Ergebnisse · POC</small></div></div><span class="muted">${token?"Google Sheets verbunden":"Nicht verbunden"}</span></header>
- <main><section class="hero"><h1>Event-Klassifizierung</h1><p>Verwalte die Einstellungen für den manuell gestarteten GitHub-Actions-Runner. Alle Werte werden im Google Sheet gespeichert.</p>
- <div class="actions"><button id="login">${token?"Erneut autorisieren":"Mit Google anmelden"}</button><a href="https://github.com/weidmanngabriel/gocath-tag-poc/actions" target="_blank" rel="noopener">GitHub Actions öffnen ↗</a><a href="https://docs.google.com/spreadsheets/d/${SHEET}/edit" target="_blank" rel="noopener">Google Sheet öffnen ↗</a>${token?`<button id="logout" type="button">Auf diesem Gerät abmelden</button>`:""}</div>${!token?`<label class="remember-device"><input id="rememberDevice" type="checkbox"/><span>Für die Restlaufzeit des Google-Tokens auf diesem Gerät angemeldet bleiben (maximal etwa 1 Stunde; nur auf einem eigenen Gerät aktivieren)</span></label>`:""}<p id="status" aria-live="polite"></p></section>
- ${token?`<nav class="section-tabs" aria-label="Dashboard-Bereiche">${[["results","Ergebnisse"],["criteria","Kriterien"],["config","Konfiguration"],["tags","Alte Tags"],["metrics","Metriken"],["runs","Läufe"],["rc-history","RC-Statistik"]].map(([id,label])=>`<button type="button" data-switch-view="${id}" aria-pressed="${activeView===id}">${label}</button>`).join("")}</nav><div class="columns"><section class="panel" data-view="config"><h2>Konfiguration</h2><p class="hint">Änderungen werden beim Verlassen eines Feldes automatisch gespeichert.</p><div id="settings">${c.map((r,i)=>`<label data-config-key="${safe(r[0])}"><span>${safe(r[0]==="gemini_prompt"?"Klassifizierungs-Prompt (alle Anbieter)":r[0]==="gemini_temperature"?"Temperatur (Gemini / Groq)":r[0]==="openai_reasoning_effort"?"OpenAI Reasoning-Stufe":r[0]==="cost_input_per_million_usd"?"Input-Preis in USD / 1 Mio. Tokens":r[0]==="cost_output_per_million_usd"?"Output-Preis in USD / 1 Mio. Tokens":r[2]||r[0])}<small>${safe(r[0])}</small></span>${r[0]==="event_source"?`<select data-setting="${i}"><option value="gocath" ${r[1]==="gocath"?"selected":""}>GoCath – gocath.org/de/finde</option><option value="regnum_christi" ${r[1]==="regnum_christi"?"selected":""}>Regnum Christi – demnächst</option></select>`:r[0]==="classifier_provider"?`<select data-setting="${i}"><option value="groq" ${r[1]==="groq"?"selected":""}>Groq · GPT-OSS 20B</option><option value="gemini" ${r[1]==="gemini"?"selected":""}>Google Gemini</option><option value="openai" ${r[1]==="openai"?"selected":""}>OpenAI · GPT-6 Luna</option></select>`:r[0]==="openai_reasoning_effort"?`<select data-setting="${i}">${["none","low","medium","high"].map(v=>`<option value="${v}" ${r[1]===v?"selected":""}>${v}</option>`).join("")}</select>`:r[0]==="changed_only"||r[0]==="additional_tags_enabled"?`<select data-setting="${i}"><option value="true" ${r[1]==="true"?"selected":""}>Ja</option><option value="false" ${r[1]==="false"?"selected":""}>Nein</option></select>`:r[0]==="max_additional_tags"?`<select data-setting="${i}">${[0,1,2,3,4,5,6,7,8].map(v=>`<option value="${v}" ${r[1]===String(v)?"selected":""}>${v}</option>`).join("")}</select>`:r[0]==="gemini_temperature"?`<select data-setting="${i}">${["0","0.1","0.2","0.3","0.5","0.7","1"].map(v=>`<option value="${v}" ${r[1]===v?"selected":""}>${v}</option>`).join("")}</select>`:r[0]==="rc_model"?`<select data-setting="${i}"><option value="gpt-6-luna" selected>GPT-6 Luna (Decisions)</option></select>`:r[0]==="gemini_prompt"?`<textarea data-setting="${i}" rows="9">${safe(r[1]||"")}</textarea>`:["max_events_per_run","monthly_limit","cost_input_per_million_usd","cost_output_per_million_usd","cost_cached_input_per_million_usd","rc_input_per_million_usd","rc_cached_input_per_million_usd","rc_cache_write_per_million_usd","rc_cache_write_12h_per_million_usd","rc_output_per_million_usd"].includes(r[0])?`<input type="number" min="0" ${r[0]==="max_events_per_run"?"max=\"50\"":""} step="${["max_events_per_run","monthly_limit"].includes(r[0])?"1":"0.0001"}" data-setting="${i}" value="${safe(r[1]||"")}" />`:`<input data-setting="${i}" value="${safe(r[1]||"")}" />`}</label>`).join("")}</div><button id="saveConfig" hidden>Konfiguration speichern</button></section>
- <section class="panel" data-view="tags"><h2>Standard-Tags</h2><p class="hint">Nur aktivierte Tags werden der ausgewählten KI zur Auswahl angeboten.</p><div class="tag-grid">${t.map((r,i)=>`<div class="tag-entry" data-tag-entry="${i}"><div class="tag-entry-header"><label class="tag"><input type="checkbox" data-tag="${i}" ${r[1]?.toLowerCase()==="true"?"checked":""}/><span>${safe(r[0])}</span></label><button type="button" class="remove-tag" data-remove-tag="${i}" aria-label="Standard-Tag ${safe(r[0])} löschen" title="Standard-Tag löschen">Löschen</button></div><input class="synonyms" data-synonyms="${i}" placeholder="Synonyme, mit Kommas getrennt" value="${safe(r[2]||"")}" aria-label="Synonyme für ${safe(r[0])}"/></div>`).join("")}</div><label class="add"><span>Neuen Tag ergänzen</span><input id="newTag" placeholder="z. B. Kirchenmusik"/></label><button id="saveTags">Neuen Tag hinzufügen</button></section></div>
-<section class="panel questionnaire" data-view="criteria"><h2>Decisions-Fragebogen</h2><p class="hint">Titel, Beschreibung und Entscheidungsregeln direkt pflegen. Änderungen werden automatisch gespeichert. Bei Einzelauswahl werden die Wahrscheinlichkeiten <strong>aller</strong> Antworten gespeichert.</p>
-<div class="question-tabs" role="tablist" aria-label="Fragebogenbereiche">${questionGroups(criteria).map((group,i)=>`<button type="button" role="tab" data-question-tab="${i}" aria-selected="${i===0}">${safe(group.name)} <span>${group.items.length}</span></button>`).join("")}</div>
-<div class="question-groups">${questionGroups(criteria).map((group,i)=>`<section class="question-group" data-question-group="${i}" role="tabpanel" ${i!==0?"hidden":""}><div class="question-group-heading"><h3>${safe(group.name)}</h3><p>${group.items.length} Fragen · alphabetisch sortiert</p></div><div class="question-list">${group.items.map(({row,data:r})=>`<details class="question-card"><summary><span class="question-category">${safe(r[1]||"Sonstiges")}</span><strong>${safe(r[2]||r[0])}</strong><span class="question-type">${safe(criteriaTypeLabel(r[7]||"predicate"))}</span><span class="question-state">${r[4]==="true"?"Aktiv":"Inaktiv"}</span></summary>
-<div class="question-fields">
-<label>Fragetitel<input data-criterion-row="${row}" data-criterion-col="C" value="${safe(r[2]||"")}"/></label>
-<label>Bereich<input data-criterion-row="${row}" data-criterion-col="B" value="${safe(r[1]||"")}"/></label>
-<label>Beschreibung / Entscheidungsregel<textarea rows="3" data-criterion-row="${row}" data-criterion-col="D">${safe(r[3]||"")}</textarea></label>
-<label>Fragetyp<select data-criterion-row="${row}" data-criterion-col="H">${["predicate","choice","score"].map(type=>`<option value="${type}" ${(r[7]||"predicate")===type?"selected":""}>${type==="predicate"?"Wahrscheinlichkeit (0–1)":type==="choice"?"Einzelauswahl mit Verteilung":"Bewertungsskala mit Verteilung"}</option>`).join("")}</select></label>
-<label>Aktiv<input type="checkbox" data-criterion-row="${row}" data-criterion-col="E" ${r[4]==="true"?"checked":""}/></label>
-<div class="option-editor" ${!["choice","score"].includes(r[7])?"hidden":""}><label>Antwortmöglichkeiten und Regeln<textarea rows="5" data-criterion-row="${row}" data-criterion-col="I" placeholder="Antwort | Wähle diese Antwort, wenn …">${safe(optionsLines(r[8]||""))}</textarea></label><small>Eine Option pro Zeile. Einzelauswahl: 2–255 Antworten; Skala: 2–10 geordnete Stufen. Zuerst die Optionen eintragen, dann den Fragetyp umstellen.</small></div>
-<label>Relevanzgewicht (nur Wahrscheinlichkeit)<input type="number" min="0" max="3" step="0.1" data-criterion-row="${row}" data-criterion-col="F" ${["choice","score"].includes(r[7])?"disabled":""} value="${safe(r[5]||"0")}"/></label>
-<label>Trefferschwelle<input type="number" min="0" max="1" step="0.05" data-criterion-row="${row}" data-criterion-col="G" value="${safe(r[6]||"0.65")}"/></label><small class="muted">ID: ${safe(r[0])}</small></div></details>`).join("")}</div></section>`).join("")}</div>
-<details class="question-card"><summary><strong>+ Mehrfachfrage (Predicates) hinzufügen</strong></summary>
-<div class="question-fields"><p class="hint">Eine gemeinsame Frage mit mehreren unabhängig bewerteten Antworten. Für jede Antwort wird automatisch ein Predicate erzeugt.</p>
-<label>Dimension<input id="multiCategory" value="Zielgruppe" placeholder="z. B. Zielgruppe"/></label>
-<label>Übergeordnete Frage<input id="multiTitle" placeholder="An wen richtet sich die Veranstaltung speziell?"/></label>
-<label>Gemeinsame KI-Anweisung<textarea id="multiDescription" rows="3" placeholder="Bewerte ausschließlich ausdrücklich angesprochene Zielgruppen."></textarea></label>
-<label>Antwortmöglichkeiten und jeweilige Beschreibung<textarea id="multiOptions" rows="8" placeholder="Ehepaare | Die Veranstaltung richtet sich ausdrücklich an verheiratete Paare.&#10;Einzelpersonen | Angebot richtet sich gezielt an einzelne Teilnehmer."></textarea></label>
-<label>Trefferschwelle<input id="multiThreshold" type="number" min="0" max="1" step="0.05" value="0.65"/></label>
-<button id="addMultiQuestion" type="button">Alle Predicates hinzufügen</button></div></details>
-<details class="question-card"><summary><strong>+ Neue Frage hinzufügen</strong></summary><div class="question-fields">
-<label>Titel<input id="questionTitle" placeholder="z. B. Veranstaltungsformat"/></label>
-<label>Bereich<input id="questionCategory" value="Format"/></label>
-<label>Beschreibung<textarea id="questionDescription" rows="3"></textarea></label>
-<label>Fragetyp<select id="questionType"><option value="predicate">Wahrscheinlichkeit</option><option value="choice">Einzelauswahl mit Verteilung</option><option value="score">Bewertungsskala mit Verteilung</option></select></label>
-<label id="newQuestionOptionsWrap" hidden>Antworten und Regeln<textarea id="questionOptions" rows="5" placeholder="Option | Wähle diese Antwort, wenn …"></textarea></label>
-<label>Relevanzgewicht (nur Wahrscheinlichkeit)<input id="questionWeight" type="number" min="0" max="3" step="0.1" value="0"/></label>
-<label>Trefferschwelle<input id="questionThreshold" type="number" min="0" max="1" step="0.05" value="0.65"/></label><button id="addQuestion" type="button">Frage hinzufügen</button></div></details></section>
- <section class="panel" data-view="metrics"><h2>KI-Metriken</h2><p class="hint">Vom jeweiligen KI-Anbieter gemeldete Tokens je Lauf. Kosten sind Schätzungen auf Basis der hinterlegten Preise, keine Anbieterrechnung.</p><div class="table-scroll"><table><thead><tr><th>Run</th><th>Input</th><th>Output</th><th>Thinking</th><th>Gesamt</th><th>Kosten (USD, geschätzt)</th></tr></thead><tbody>${runs.slice(1).filter(x=>x[0]).reverse().slice(0,20).map(r=>`<tr><td>${safe(r[0]||"")}</td><td>${safe(r[6]||"–")}</td><td>${safe(r[7]||"–")}</td><td>${safe(r[8]||"–")}</td><td>${safe(r[9]||"–")}</td><td>${safe(r[10]||"nicht konfiguriert")}</td></tr>`).join("")}</tbody></table></div></section><section class="panel results-panel" data-view="results"><div class="results-heading"><h2>Veranstaltungen</h2><p class="hint">Alle Events bleiben sichtbar, unabhängig von ihrer Relevanz. Filter betreffen nur die Anzeige. Die Relevanzbewertung misst nur, ob der Text genügend Hinweise für die automatische katholische Einordnung und Klassifizierung enthält. Sie bewertet nicht die sprachliche Qualität, Attraktivität oder die Wahrscheinlichkeit einer Teilnahme.</p></div><div class="result-filters"><label><span>Klassifizierungslauf</span><select id="runFilter">${[...new Set(history.slice(1).map(r=>r[0]).filter(Boolean))].reverse().map(id=>`<option value="${safe(id)}">Run ${safe(id)}</option>`).join("")}</select></label><label><span>Relevanz</span><select id="relevanceFilter"><option value="all">Alle Bewertungen</option><option value="likely_relevant">Wahrscheinlich relevant</option><option value="review">Prüfen</option><option value="likely_not_relevant">Eher nicht relevant</option><option value="unknown">Nicht bewertet</option></select></label><label class="result-search"><span>Suche</span><input id="historySearch" type="search" placeholder="Titel, Tag oder Begründung (ab 3 Zeichen)" autocomplete="off"/></label></div><div class="criterion-filter-panel"><div class="criterion-filter-heading"><strong>Kriterienfilter</strong><button type="button" id="clearCriterionFilters">Auswahl zurücksetzen</button></div><p class="hint">Alle ausgewählten Kriterien müssen zutreffen (UND), auch innerhalb einer Gruppe.</p><div id="criterionFilterGroups"></div></div><p class="hint" id="matchCount" aria-live="polite"></p><div id="historyView" class="event-list"></div></section>
- <section class="panel" data-view="rc-history"><h2>RC-Laufstatistik</h2><p class="hint">Stündliche RC-Katalogläufe, getrennt von den Google-Sheet-Läufen.</p><div id="rcRunHistory">Laufhistorie wird geladen …</div></section><section class="panel" data-view="runs"><h2>Letzte Läufe</h2><div class="table-scroll"><table><thead><tr><th>Run-ID</th><th>Beginn</th><th>Ende</th><th>Status</th><th>Klassifiziert</th></tr></thead><tbody>${runs.slice(1).filter(x=>x[0]).reverse().slice(0,15).map(r=>`<tr>${r.slice(0,5).map(v=>`<td>${safe(v||"")}</td>`).join("")}</tr>`).join("")}</tbody></table></div></section>`:`<section class="panel"><h2>Google-Anmeldung erforderlich</h2><p>Der Google-Account benötigt Bearbeiterzugriff auf das Sheet. Es werden keine API-Schlüssel im Browser gespeichert.</p>${!CLIENT_ID?"<p class='error'>VITE_GOOGLE_CLIENT_ID ist noch nicht für den GitHub-Pages-Build konfiguriert.</p>":""}</section>`}
- <dialog id="reasonDialog" class="reason-dialog" aria-labelledby="reasonDialogTitle"><div class="reason-dialog-head"><h2 id="reasonDialogTitle">Begründung</h2><form method="dialog"><button type="submit">Schließen</button></form></div><p id="reasonDialogText"></p></dialog><footer>GoCath Proof of Concept · Keine automatische Ausführung</footer></main>`;
- loadRcHistory();
- document.querySelector<HTMLButtonElement>("#login")!.onclick=login;
- document.querySelector<HTMLButtonElement>("#logout")?.addEventListener("click",()=>{clearSession();render();status("Lokale Anmeldung entfernt. Google-Zugriff erfordert eine neue Autorisierung.");});
- if(token){
- const setView=(view:string)=>{activeView=view;document.querySelectorAll<HTMLElement>("[data-view]").forEach(el=>el.classList.toggle("active",el.dataset.view===view));document.querySelectorAll<HTMLButtonElement>("[data-switch-view]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.switchView===view)));};
- document.querySelectorAll<HTMLButtonElement>("[data-switch-view]").forEach(button=>button.onclick=()=>setView(button.dataset.switchView||"config"));
- setView(activeView);
- document.querySelectorAll<HTMLButtonElement>("[data-remove-tag]").forEach(button=>button.onclick=()=>{
-   const entry=button.closest<HTMLElement>(".tag-entry");
-   if(!entry)return;
-   if(document.querySelectorAll(".tag-entry").length<=1){status("Mindestens ein Standard-Tag muss erhalten bleiben.",true);return;}
-   const name=entry.querySelector(".tag span")?.textContent||"";
-   if(!confirm('Standard-Tag „'+name+'“ löschen? Die Änderung wird sofort gespeichert.'))return;
-   entry.remove();
-   document.querySelector<HTMLButtonElement>("#saveTags")?.click();
- });
- const questionTabs=Array.from(document.querySelectorAll<HTMLButtonElement>("[data-question-tab]"));
- const questionSections=Array.from(document.querySelectorAll<HTMLElement>("[data-question-group]"));
- questionTabs.forEach(button=>button.onclick=()=>{
-  const selected=button.dataset.questionTab;
-  questionTabs.forEach(b=>b.setAttribute("aria-selected",String(b===button)));
-  questionSections.forEach(section=>{section.hidden=section.dataset.questionGroup!==selected;});
- });
- const filter=document.querySelector<HTMLSelectElement>("#runFilter");
- const view=document.querySelector<HTMLDivElement>("#historyView");
- const search=document.querySelector<HTMLInputElement>("#historySearch");
- const relevanceFilter=document.querySelector<HTMLSelectElement>("#relevanceFilter");
- const criterionHost=document.querySelector<HTMLElement>("#criterionFilterGroups");
- const chosenCriteria=new Set<string>();
- let criteriaForRun="";
- const showHistory=()=>{
-  if(!filter||!view)return;
-  const source=history.slice(1).filter(r=>r[0]===filter.value);
-  const term=search?.value.trim()||"";
-  const relevance=relevanceFilter?.value||"all";
-  if(criterionHost&&criteriaForRun!==filter.value){
-   criteriaForRun=filter.value;
-   chosenCriteria.clear();
-   const available=new Map<string,Map<string,string>>();
-   for(const r of source)for(const d of matchingDetails(r[0],r[1])){
-    if((d[13]||"predicate")!=="predicate")continue;
-    const group=d[6]||"Sonstiges",id=d[5],title=d[7]||id;
-    if(!id)continue;
-    if(!available.has(group))available.set(group,new Map());
-    available.get(group)!.set(id,title);
-   }
-   criterionHost.innerHTML=[...available.entries()].sort((a,b)=>germanSort.compare(a[0],b[0])).map(([group,items])=>`<fieldset class="criterion-filter-group"><legend>${safe(group)}</legend><div class="criterion-filter-options">${[...items.entries()].sort((a,b)=>germanSort.compare(a[1],b[1])).map(([id,title])=>`<label><input type="checkbox" data-filter-criterion="${safe(id)}"/><span>${safe(title)}</span></label>`).join("")}</div></fieldset>`).join("")||'<p class="hint">Für diesen Lauf sind keine Kriterien vorhanden.</p>';
-  }
-  const invalid=Boolean(term&&norm(term).split(" ").some(part=>part.length<3));
-  const rows=source.filter(r=>{
-   if(invalid||(term&&!matchesHistory(r,term,t)))return false;
-   const ds=matchingDetails(r[0],r[1]);
-   const status=ds[0]?.[11]||"unknown";
-   if(relevance!=="all"&&relevance!==status)return false;
-   return [...chosenCriteria].every(id=>ds.some(d=>d[5]===id&&isPositiveMatch(d)));
-  }).sort((a,b)=>germanSort.compare(a[2]||"",b[2]||""));
-  const count=document.querySelector("#matchCount");
-  if(count)count.textContent=invalid?"Mindestens 3 Zeichen pro Suchwort eingeben":`${rows.length} von ${source.length} Veranstaltungen angezeigt`;
-  view.innerHTML=rows.length?rows.map(renderEventCard).join(""):'<p class="empty-results">Keine Veranstaltungen für diese Filter gefunden.</p>';
- };
- if(filter){filter.onchange=showHistory;if(search)search.oninput=showHistory;if(relevanceFilter)relevanceFilter.onchange=showHistory;if(criterionHost)criterionHost.addEventListener("change",event=>{const input=event.target as HTMLInputElement;if(!input.matches("[data-filter-criterion]"))return;const id=input.dataset.filterCriterion||"";if(input.checked)chosenCriteria.add(id);else chosenCriteria.delete(id);showHistory();});
-  document.querySelector<HTMLButtonElement>("#clearCriterionFilters")?.addEventListener("click",()=>{chosenCriteria.clear();criterionHost?.querySelectorAll<HTMLInputElement>("input[data-filter-criterion]").forEach(input=>input.checked=false);showHistory();});showHistory();}
- const cols:Record<string,number>={B:1,C:2,D:3,E:4,F:5,G:6,H:7,I:8};
- const pending=new Set<string>();
- const writeQuestion=async(row:number,col:string,value:string)=>{
-   const i=row-1,j=cols[col],address=col+row;
-   if(criteria[i]?.[j]===value)return;
-   if(pending.has(address))return;
-   pending.add(address);status("Speichert …");
-   try{await api(API+"/values/"+encodeURIComponent("Criteria!"+address)+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({values:[[value]]})});
-     if(criteria[i])criteria[i][j]=value;status("Gespeichert");
-   }catch(e){status("Nicht gespeichert: "+String(e),true);throw e;}
-   finally{pending.delete(address);}
- };
- document.querySelectorAll<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>("[data-criterion-row]").forEach(input=>{
-   const save=async()=>{
-     const row=Number(input.dataset.criterionRow),col=input.dataset.criterionCol||"D";
-     const select=document.querySelector<HTMLSelectElement>(`[data-criterion-row="${row}"][data-criterion-col="H"]`);
-     const type=select?.value||"predicate";
-     let value=input.type==="checkbox"?(input as HTMLInputElement).checked?"true":"false":input.value.trim();
-     try{
-       if(col==="I"){if(type==="predicate")return;value=encodeOptions(value,type);}
-       if(col==="H"){
-         if(value!=="predicate"){
-           const editor=document.querySelector<HTMLTextAreaElement>(`[data-criterion-row="${row}"][data-criterion-col="I"]`);
-           if(!editor)throw new Error("Antwortmöglichkeiten fehlen");
-           const options=encodeOptions(editor.value,value);
-           await writeQuestion(row,"I",options);
-           await writeQuestion(row,"F","0");
-         }
-       }
-       if(col==="F"&&type!=="predicate"&&Number(value)!==0)throw new Error("Für Auswahlfragen ist das Relevanzgewicht 0");
-       if((col==="F"||col==="G")&&(!Number.isFinite(Number(value))||Number(value)<0||(col==="G"&&Number(value)>1)||(col==="F"&&Number(value)>3)))throw new Error("Ungültiger Zahlenwert");
-       await writeQuestion(row,col,value);
-       if(col==="H"){const parent=input.closest(".question-fields");const opt=parent?.querySelector<HTMLElement>(".option-editor");if(opt)opt.hidden=value==="predicate";
-         const weight=parent?.querySelector<HTMLInputElement>('[data-criterion-col="F"]');if(weight){weight.disabled=value!=="predicate";if(value!=="predicate")weight.value="0";}}
-     }catch(e){status(String(e),true);}
-   };
-   input.addEventListener(input.type==="checkbox"||input.tagName==="SELECT"?"change":"blur",save);
- });
- const newType=document.querySelector<HTMLSelectElement>("#questionType");
- newType?.addEventListener("change",()=>{
-  const wrap=document.querySelector<HTMLElement>("#newQuestionOptionsWrap");
-  if(wrap)wrap.hidden=newType.value==="predicate";
-  const weight=document.querySelector<HTMLInputElement>("#questionWeight");
-  if(weight){weight.disabled=newType.value!=="predicate";if(weight.disabled)weight.value="0";}
- });
- document.querySelector<HTMLButtonElement>("#addQuestion")?.addEventListener("click",async()=>{
-   const title=document.querySelector<HTMLInputElement>("#questionTitle")?.value.trim()||"";
-   const category=document.querySelector<HTMLInputElement>("#questionCategory")?.value.trim()||"Sonstiges";
-   const description=document.querySelector<HTMLTextAreaElement>("#questionDescription")?.value.trim()||"";
-   const type=newType?.value||"predicate";
-   const weight=document.querySelector<HTMLInputElement>("#questionWeight")?.value||"0";
-   const threshold=document.querySelector<HTMLInputElement>("#questionThreshold")?.value||"0.65";
-   if(!title||!description){status("Titel und Beschreibung sind erforderlich",true);return;}
-   if(criteria.slice(1).filter(r=>r[0]).length>=400){status("Maximal 400 Fragen möglich",true);return;}
-   if(!Number.isFinite(Number(weight))||Number(weight)<0||Number(weight)>3||!Number.isFinite(Number(threshold))||Number(threshold)<0||Number(threshold)>1){status("Ungültiges Gewicht oder Schwelle",true);return;}
-   try{
-     const options=type==="predicate"?"":encodeOptions(document.querySelector<HTMLTextAreaElement>("#questionOptions")?.value||"",type);
-     const ids=new Set(criteria.slice(1).map(r=>r[0]));
-     let id="q_"+title.toLocaleLowerCase("de").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,35);
-     if(id==="q_")id="q_new";
-     const base=id;let suffix=2;while(ids.has(id))id=base+"_"+suffix++;
-     const row=Math.max(2,criteria.length+1);
-     const values=[[id,category,title,description,"true",type==="predicate"?weight:"0",threshold,type,options]];
-     status("Speichert neue Frage …");
-     await api(API+"/values/"+encodeURIComponent("Criteria!A"+row+":I"+row)+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({values})});
-     await load();status("Frage hinzugefügt");
-   }catch(e){status("Nicht gespeichert: "+String(e),true);}
- });
- document.querySelector<HTMLButtonElement>("#addMultiQuestion")?.addEventListener("click",async()=>{
-  const category=document.querySelector<HTMLInputElement>("#multiCategory")?.value.trim()||"Sonstiges";
-  const title=document.querySelector<HTMLInputElement>("#multiTitle")?.value.trim()||"";
-  const description=document.querySelector<HTMLTextAreaElement>("#multiDescription")?.value.trim()||"";
-  const raw=document.querySelector<HTMLTextAreaElement>("#multiOptions")?.value||"";
-  const threshold=Number(document.querySelector<HTMLInputElement>("#multiThreshold")?.value||"0.65");
-  const options=raw.split(/\r?\n/).map(v=>v.trim()).filter(Boolean).map(line=>{
-    const idx=line.indexOf("|");
-    return {label:(idx<0?line:line.slice(0,idx)).trim(),description:(idx<0?"":line.slice(idx+1)).trim()};
-  });
-  if(!title||!description||!options.length||options.some(o=>!o.label||!o.description)){status("Frage, Beschreibung und alle Antwortbeschreibungen sind erforderlich.",true);return;}
-  if(!Number.isFinite(threshold)||threshold<0||threshold>1){status("Ungültige Trefferschwelle",true);return;}
-  if(criteria.slice(1).filter(r=>r[0]).length+options.length>400){status("Maximal 400 Kriterien möglich",true);return;}
-  const ids=new Set(criteria.slice(1).map(r=>r[0]));
-  const slug=(value:string)=>value.toLocaleLowerCase("de").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,35);
-  const values=options.map(o=>{
-    const stem="q_"+slug(category+"_"+o.label);
-    let id=stem||"q_new",n=2;while(ids.has(id))id=stem+"_"+n++;
-    ids.add(id);
-    return [id,category,o.label,title+". "+description+" "+o.description,"true","0",String(threshold),"predicate",""];
-  });
-  try{
-    status("Speichert "+values.length+" Predicate-Fragen …");
-    const start=Math.max(2,criteria.length+1);
-    const end=start+values.length-1;
-    await api(API+"/values/"+encodeURIComponent("Criteria!A"+start+":I"+end)+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({values})});
-    await load();status(values.length+" Predicate-Fragen hinzugefügt");
-  }catch(e){status("Nicht gespeichert: "+String(e),true);}
- });
- // Save ordinary settings and legacy tag fields on blur/change.
- document.querySelectorAll<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>("[data-setting]").forEach(input=>{
-   const save=async()=>{
-     const index=Number(input.dataset.setting),row=index+2;
-     const value=input.value;
-     if(c[index]?.[1]===value)return;
-     try{
-       status("Speichert …");
-       await api(API+"/values/"+encodeURIComponent("Config!B"+row)+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({values:[[value]]})});
-       c[index][1]=value;
-       status("Gespeichert");
-     }catch(e){status("Nicht gespeichert: "+String(e),true);}
-   };
-   input.addEventListener(input.tagName==="SELECT"?"change":"blur",save);
- });
- document.querySelectorAll<HTMLInputElement>("[data-tag],[data-synonyms]").forEach(input=>{
-   const save=async()=>{
-     const isTag=input.hasAttribute("data-tag"),index=Number(isTag?input.dataset.tag:input.dataset.synonyms);
-     const row=index+2,col=isTag?"B":"C",value=isTag?(input.checked?"true":"false"):input.value.trim();
-     if(t[index]?.[isTag?1:2]===value)return;
-     try{
-       status("Speichert …");
-       await api(API+"/values/"+encodeURIComponent("Tags!"+col+row)+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({values:[[value]]})});
-       t[index][isTag?1:2]=value;
-       status("Gespeichert");
-     }catch(e){status("Nicht gespeichert: "+String(e),true);}
-   };
-   input.addEventListener(input.type==="checkbox"?"change":"blur",save);
- });
- document.querySelector<HTMLInputElement>("#newTag")?.addEventListener("keydown",e=>{
-   if(e.key==="Enter"){e.preventDefault();document.querySelector<HTMLButtonElement>("#saveTags")?.click();}
- });
- const providerSelect=document.querySelector<HTMLSelectElement>('[data-config-key="classifier_provider"] select');
- const updateProviderFields=()=>{
-   const provider=providerSelect?.value||"groq";
-   const visibility:Record<string,string[]>={
-     gemini_model:["gemini"],
-     last_successful_run:[],
-     max_additional_tags:["gemini","groq","openai"],
-     gemini_temperature:["gemini","groq"],
-     openai_reasoning_effort:["openai"],
-     cost_input_per_million_usd:["gemini","openai"],
-     cost_output_per_million_usd:["gemini","openai"],
-     cost_cached_input_per_million_usd:["gemini","openai"]
-   };
-   Object.entries(visibility).forEach(([key,providers])=>{
-     const label=document.querySelector<HTMLElement>('[data-config-key="'+key+'"]');
-     if(label)label.hidden=!providers.includes(provider);
-   });
-   const extras=document.querySelector<HTMLSelectElement>('[data-config-key="additional_tags_enabled"] select')?.value;
-   const maxTags=document.querySelector<HTMLElement>('[data-config-key="max_additional_tags"]');
-   if(maxTags)maxTags.hidden=extras==="false";
- };
- const extrasSelect=document.querySelector<HTMLSelectElement>('[data-config-key="additional_tags_enabled"] select');
- if(extrasSelect)extrasSelect.addEventListener("change",updateProviderFields);
- if(providerSelect){providerSelect.onchange=updateProviderFields;updateProviderFields();}
- document.querySelector<HTMLButtonElement>("#saveConfig")!.onclick=async()=>{try{const rows=c.map((r,i)=>[r[0],(document.querySelector<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>(`[data-setting="${i}"]`)!.value),r[2]||""]);await api(API+"/values/"+encodeURIComponent("Config!A2:C"+(rows.length+1))+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({range:"Config!A2:C"+(rows.length+1),majorDimension:"ROWS",values:rows})});status("Konfiguration gespeichert");await load();}catch(e){status(String(e),true)}};
- document.querySelector<HTMLButtonElement>("#saveTags")!.onclick=async()=>{try{const rows=Array.from(document.querySelectorAll<HTMLElement>(".tag-entry")).map(entry=>{const i=Number(entry.dataset.tagEntry);return [t[i][0],entry.querySelector<HTMLInputElement>(`[data-tag="${i}"]`)!.checked?"true":"false",entry.querySelector<HTMLInputElement>(`[data-synonyms="${i}"]`)!.value.trim()];});const name=document.querySelector<HTMLInputElement>("#newTag")!.value.trim();if(name&&!rows.some(x=>x[0].toLowerCase()===name.toLowerCase()))rows.push([name,"true",""]);if(!rows.length)throw new Error("Mindestens ein Standard-Tag ist erforderlich.");const oldCount=tags.slice(1).filter(x=>x[0]).length;const end=Math.max(rows.length,oldCount)+1;const padded=[...rows,...Array.from({length:Math.max(0,oldCount-rows.length)},()=>["","",""])];await api(API+"/values/"+encodeURIComponent("Tags!A2:C"+end)+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({range:"Tags!A2:C"+end,majorDimension:"ROWS",values:padded})});status("Tags gespeichert");await load();}catch(e){status(String(e),true)}};
- }
+ const matches=rows.slice(1).map((r,i)=>({r,i:i+1})).filter(x=>x.r[0]&&[x.r[0],x.r[1],x.r[2],x.r[3]].join(" ").toLowerCase().includes(search.toLowerCase()));
+ root.innerHTML=`<header><div class="brand"><span class="mark">✝</span><div><b>GoCath · Criteria</b><small>RC-Fragebogen bearbeiten</small></div></div><span class="muted">${token?"Google Sheets verbunden":"Nicht verbunden"}</span></header><main><section class="hero"><h1>RC-Kriterieneditor</h1><p>Fragen werden direkt im Google Sheet gespeichert. Semantische Änderungen erfordern einen bewusst gestarteten reclassify-Lauf.</p><div class="actions"><button id="login">${token?"Erneut anmelden":"Mit Google anmelden"}</button>${token?'<button id="logout">Abmelden</button>':""}<a href="/rc/">RC-Katalog</a><a href="https://docs.google.com/spreadsheets/d/${SHEET}/edit" target="_blank" rel="noopener">Google Sheet</a></div>${!token?'<label><input type="checkbox" id="remember"> Auf diesem Gerät bis zum Token-Ablauf angemeldet bleiben</label>':""}<p id="status" aria-live="polite"></p></section>${token?`<section class="panel"><h2>Kriterien (${matches.length})</h2><input id="search" type="search" placeholder="Kriterien suchen" value="${esc(search)}"><p class="hint">Bestehende Fragen ändern und bei Verlassen des Feldes speichern. Neue Fragen im Google Sheet hinzufügen; IDs bleiben unverändert.</p><div id="questions">${matches.map(({r,i})=>editor(r,i)).join("")}</div><details class="question-card"><summary><strong>+ Neue Frage hinzufügen</strong></summary><div class="question-fields"><label>Titel<input id="newTitle" placeholder="Titel der Frage"></label><label>Bereich<input id="newCategory" placeholder="Format"></label><label>Entscheidungsregel<textarea id="newDescription" rows="3"></textarea></label><label>Fragetyp<select id="newType"><option value="predicate">Wahrscheinlichkeit</option><option value="choice">Einzelauswahl</option><option value="score">Bewertungsskala</option></select></label><label>Antwortoptionen (Name | Beschreibung)<textarea id="newOptions" rows="4"></textarea></label><label>Relevanzgewicht<input id="newWeight" type="number" min="0" max="3" step="0.1" value="0"></label><label>Trefferschwelle<input id="newThreshold" type="number" min="0" max="1" step="0.05" value="0.65"></label><button id="addQuestion" type="button">Frage hinzufügen</button></div></details></section>`:""}</main>`;
+ document.querySelector<HTMLButtonElement>("#login")?.addEventListener("click",login);
+ document.querySelector<HTMLButtonElement>("#logout")?.addEventListener("click",logout);
+ document.querySelector<HTMLInputElement>("#search")?.addEventListener("input",e=>{search=(e.target as HTMLInputElement).value;const container=document.querySelector("#questions");if(container)container.innerHTML=rows.slice(1).map((r,i)=>({r,i:i+1})).filter(x=>x.r[0]&&[x.r[0],x.r[1],x.r[2],x.r[3]].join(" ").toLowerCase().includes(search.toLowerCase())).map(x=>editor(x.r,x.i)).join("");bindFields();});
+ document.querySelector<HTMLButtonElement>("#addQuestion")?.addEventListener("click",addQuestion);
+ bindFields();
+}
+function bindFields(){
+ document.querySelectorAll<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>("[data-row]").forEach(el=>el.addEventListener("change",async()=>{
+ const row=Number(el.dataset.row),col=el.dataset.col!,pos=col.charCodeAt(0)-65,current=rows[row-1]?.[pos]||"";
+ let value=el instanceof HTMLInputElement&&el.type==="checkbox"?(el.checked?"true":"false"):el.value.trim();
+ try{const type=col==="H"?value:rows[row-1]?.[7]||"predicate";
+ if(col==="I"){if(type==="predicate")return;value=encodeOptions(value,type);}
+ if(col==="F"||col==="G"){const n=Number(value);if(!Number.isFinite(n)||n<0||(col==="G"&&n>1)||(col==="F"&&n>3)||(col==="F"&&type!=="predicate"&&n!==0))throw Error("Ungültiger Zahlenwert.");}
+ if(col==="H"&&type!=="predicate"){const optionEl=document.querySelector<HTMLTextAreaElement>(`[data-row="${row}"][data-col="I"]`);const options=encodeOptions(optionEl?.value||"",type);await api("Criteria!I"+row,{values:[[options]]});rows[row-1][8]=options;await api("Criteria!F"+row,{values:[["0"]]});rows[row-1][5]="0";}
+ if(value===current)return;
+ notify("Speichert …");await api("Criteria!"+col+row,{values:[[value]]});rows[row-1][pos]=value;notify("Gespeichert.");if(col==="H")render();
+ }catch(e){notify("Nicht gespeichert: "+String(e),true);el.value=col==="I"?formatOptions(current):current;}
+ }));
+}
+async function addQuestion(){
+ const value=(id:string)=>(document.querySelector<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>("#"+id)?.value||"").trim();
+ const title=value("newTitle"),category=value("newCategory"),description=value("newDescription");
+ const type=value("newType")||"predicate",weight=Number(value("newWeight")),threshold=Number(value("newThreshold"));
+ if(!title||!category||!description){notify("Titel, Bereich und Entscheidungsregel sind erforderlich.",true);return;}
+ if(!Number.isFinite(weight)||weight<0||weight>3||!Number.isFinite(threshold)||threshold<0||threshold>1){notify("Gewicht oder Trefferschwelle ungültig.",true);return;}
+ let options="[]";
+ try{if(type!=="predicate")options=encodeOptions(value("newOptions"),type);}catch(e){notify(String(e),true);return;}
+ const slug=title.toLowerCase().normalize("NFKD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,55);
+ const ids=new Set(rows.slice(1).map(r=>r[0]));
+ let newId="rc_"+slug,index=2;while(ids.has(newId)){newId="rc_"+slug+"_"+index++;}
+ const newRow=[newId,category,title,description,"true",type==="predicate"?String(weight):"0",String(threshold),type,options];
+ try{
+  notify("Speichert neue Frage …");
+  const response=await fetch(API+"/values/"+encodeURIComponent("Criteria!A:I")+":append?valueInputOption=RAW&insertDataOption=INSERT_ROWS",{method:"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:JSON.stringify({values:[newRow]})});
+  if(!response.ok)throw Error("Google Sheets HTTP "+response.status);
+  await load();notify("Frage hinzugefügt: "+newId);
+ }catch(e){notify("Nicht gespeichert: "+String(e),true);}
 }
 function login(){
- if(!CLIENT_ID){status("OAuth Client-ID fehlt. GitHub Variable VITE_GOOGLE_CLIENT_ID konfigurieren.",true);return;}
- if(!window.google?.accounts?.oauth2){status("Google Identity Services lädt noch; Seite neu laden.",true);return;}
- const remember=Boolean(document.querySelector<HTMLInputElement>("#rememberDevice")?.checked);
- const client=window.google.accounts.oauth2.initTokenClient({
-  client_id:CLIENT_ID,scope:SHEETS_SCOPE,prompt:"",
-  callback:async(r:{access_token?:string,expires_in?:number,error?:string})=>{
-   if(!r.access_token){status("Anmeldung fehlgeschlagen: "+(r.error||"unbekannt"),true);return;}
-   token=r.access_token;
-   saveSession(token,Number(r.expires_in),remember);
-   try{await load();status("Google Sheets verbunden");}
-   catch(e){status(String(e),true);}
-  },
-  error_callback:()=>status("Google-Anmeldung wurde abgebrochen oder blockiert.",true)
- });
- client.requestAccessToken();
+ if(!CLIENT_ID||!window.google?.accounts?.oauth2){notify("Google OAuth nicht verfügbar. Client-ID oder Google-Skript prüfen.",true);return;}
+ const remember=Boolean(document.querySelector<HTMLInputElement>("#remember")?.checked);
+ window.google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:SCOPE,prompt:"",callback:async(r:{access_token?:string,expires_in?:number,error?:string})=>{
+ if(!r.access_token){notify("Anmeldung fehlgeschlagen: "+(r.error||"unbekannt"),true);return;}
+ token=r.access_token;const entry:Session={accessToken:token,expiresAt:Date.now()+Number(r.expires_in||0)*1000,clientId:CLIENT_ID,scope:SCOPE};if(r.expires_in){sessionStorage.setItem(STORE,JSON.stringify(entry));if(remember)localStorage.setItem(REMEMBER,JSON.stringify(entry));else localStorage.removeItem(REMEMBER);}
+ try{await load();}catch(e){notify(String(e),true);}
+ }}).requestAccessToken();
 }
-render();
-async function start(){
- if(token){
-  try{await load();return;}
-  catch(e){status(String(e),true);return;}
- }
- // A new Google token requires a user gesture. Do not open a silent popup on page load.
- render();
-}
-start().catch(e=>status(String(e),true));
+render();if(token)load().catch(e=>notify(String(e),true));
