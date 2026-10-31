@@ -1,4 +1,4 @@
-"""Minimal Google Sheets configuration reader for the manually triggered POC."""
+"""Google Sheets RC configuration reader; legacy functions retained for archived tests."""
 import json
 import gspread
 from google.oauth2.service_account import Credentials
@@ -10,8 +10,6 @@ def settings(credentials_json, sheet_id):
     doc=gspread.authorize(creds).open_by_key(sheet_id)
     rows=doc.worksheet("Config").get_all_values()
     config={r[0]:r[1] for r in rows[1:] if len(r)>1 and r[0]}
-    tag_rows=doc.worksheet("Tags").get_all_values()
-    tags=[r[0] for r in tag_rows[1:] if len(r)>1 and r[1].lower()=="true" and r[0]]
     try:
         criteria_rows = doc.worksheet("Criteria").get_all_values()
     except gspread.WorksheetNotFound:
@@ -61,9 +59,9 @@ def settings(credentials_json, sheet_id):
         "rc_output_per_million_usd":config.get("rc_output_per_million_usd","0"),
         "cost_input_per_million_usd": config.get("cost_input_per_million_usd", ""),
         "cost_output_per_million_usd": config.get("cost_output_per_million_usd", ""),
-        "tags":tags or STANDARD_TAGS,
+        "tags":STANDARD_TAGS,
         "criteria": criteria,
-        "tag_synonyms": {r[0]: [v.strip() for v in r[2].split(",") if v.strip()] for r in tag_rows[1:] if len(r)>2 and len(r)>1 and r[1].lower()=="true" and r[0]}
+        "tag_synonyms": {}
     }
 
 def run_count(doc):

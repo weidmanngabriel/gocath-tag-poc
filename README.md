@@ -1,5 +1,8 @@
 Die Startseite des Dashboards ist nun ausschließlich ein OAuth-basierter Editor für den RC-Fragebogen in `Criteria`; alte Run-/Tag-/Konfigurationsansichten wurden aus der Oberfläche entfernt. Bestehende Fragen lassen sich bearbeiten. Neue Fragen können direkt im Editor hinzugefügt werden. Historische POC-Texte weiter unten dienen der Dokumentation, nicht als aktuelle Betriebsanleitung.
 
+**Konfiguration nach Legacy-Bereinigung:** Die RC-Pipeline lädt Kriterien und Modell-/Preisparameter aus `Criteria` und `Config`. `Tags` wird vom aktuellen Konfigurationsleser nicht mehr gelesen und kann aus dem Original-Sheet entfernt werden; die historischen Werte bleiben im vollständigen Backup. `Config` bleibt für RC-Modell und Kostensätze bestehen.
+
+
 # GoCath RC-Kriterieneditor
 
 > **Aktueller Betrieb (31.10.2026):** Der aktive RC-Veranstaltungskatalog läuft über `.github/workflows/rc-catalog.yml` (stündlich zur Minute 17 UTC und manuell) mit `delta`, `reclassify` und `refresh`, speichert den Katalog auf `rc-data` und veröffentlicht `/rc/`. Der frühere manuelle Tagging-Workflow `tag-events.yml` wurde außer Betrieb genommen. Die im Folgenden beschriebene Gemini-/Groq-Tagging-Strecke mit früherem (inzwischen entferntem) `src/main.py`, `Config`, `Tags`, `ResultsHistory` und `ClassificationDetails` ist **Legacy** und kein unterstützter Produktionsweg. Der Google-Sheets-OAuth-Editor bleibt vorerst verfügbar, insbesondere für `Criteria`. Historische Tabellen bleiben unberührt. Gesichertes vollständiges Sheet: [Legacy Backup 2026-10-31](https://docs.google.com/spreadsheets/d/18kEBFk6DWStx9q6CHay3jHWZ09_ku2S77k1nXLMlTJ0/edit).
