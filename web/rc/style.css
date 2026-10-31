@@ -122,3 +122,8 @@ a:hover{color:var(--rc-red-deep)}
 .match-more summary:focus-visible{outline:2px solid #c78282;outline-offset:2px}
 .matched-groups .no-hits{grid-column:1/-1;color:#666;font-size:.9rem;margin:0}
 @media(max-width:680px){.matched-groups{grid-template-columns:1fr;gap:9px}.match-group{padding:11px}}
+
+/* Match badges use the same threshold-based palette as detail bars. */
+.match-chip.match-review{background:#fff3d6;color:#805600;border-color:#f0dda5}
+.match-chip.match-irrelevant{background:#fbe8e8;color:#962b2b;border-color:#eac0c0}
+.match-chip.match-unknown{background:#f1f1f1;color:#5d5d5d;border-color:#dedede}
