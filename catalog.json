@@ -43460,257 +43460,761 @@
     }
   },
   "active_questionnaire": {
-    "revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
+    "revision": "779c4f744c7db9980a1bcf69b227afd23c8265fca03151730bb1dae7d826b241",
     "criteria": [
       {
-        "id": "format_mass",
-        "category": "Format",
-        "label": "Gottesdienst / Heilige Messe",
-        "description": "Liturgische Feier oder Heilige Messe",
-        "weight": 1.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "format_adoration",
-        "category": "Format",
-        "label": "Anbetung",
-        "description": "Eucharistische Anbetung",
-        "weight": 1.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "format_prayer",
-        "category": "Format",
-        "label": "Gebetsveranstaltung",
-        "description": "Gemeinsames Gebet, Rosenkranz, Lobpreis",
-        "weight": 1.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "format_talk",
-        "category": "Format",
-        "label": "Vortrag",
-        "description": "Vortrag oder Impuls",
-        "weight": 0.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "format_workshop",
-        "category": "Format",
-        "label": "Workshop / Seminar",
-        "description": "Seminar, Kurs oder Workshop",
-        "weight": 0.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "format_pilgrimage",
-        "category": "Format",
-        "label": "Wallfahrt",
-        "description": "Pilgerreise oder Wallfahrt",
-        "weight": 1.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "format_retreat",
-        "category": "Format",
-        "label": "Exerzitien / Einkehr",
-        "description": "Geistliche Einkehr oder Exerzitien",
-        "weight": 1.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "format_social",
-        "category": "Format",
-        "label": "Gemeinschaftstreffen",
-        "description": "Treffen mit Gemeinschaftsschwerpunkt",
-        "weight": 0.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "topic_liturgy",
-        "category": "Thema",
-        "label": "Liturgie und Sakramente",
-        "description": "Katholische Liturgie, Eucharistie, Beichte oder Sakramente",
-        "weight": 2.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "topic_prayer",
-        "category": "Thema",
-        "label": "Gebet und Spiritualität",
-        "description": "Gebet, geistliches Leben oder Spiritualität",
-        "weight": 1.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "topic_faith",
-        "category": "Thema",
-        "label": "Glaubensbildung",
-        "description": "Christliche Glaubensinhalte, Bibel oder Katechese",
-        "weight": 1.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "topic_church",
-        "category": "Thema",
-        "label": "Kirche und Mission",
-        "description": "Katholische Kirche, Berufung, Mission oder Evangelisierung",
-        "weight": 1.0,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "topic_community",
-        "category": "Thema",
-        "label": "Christliche Gemeinschaft",
-        "description": "Christlich geprägte Gemeinschaft und Begegnung",
-        "weight": 0.7,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "aud_children",
+        "id": "v2_zielgruppe_kinder",
         "category": "Zielgruppe",
         "label": "Kinder",
-        "description": "Für Kinder geeignet",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung ausdrücklich Kinder als primäre Zielgruppe anspricht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "aud_youth",
+        "id": "v2_zielgruppe_jugendliche",
         "category": "Zielgruppe",
         "label": "Jugendliche",
-        "description": "Für Jugendliche geeignet",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung ausdrücklich Jugendliche als primäre Zielgruppe anspricht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "aud_young_adults",
+        "id": "v2_zielgruppe_junge_erwachsene",
         "category": "Zielgruppe",
         "label": "Junge Erwachsene",
-        "description": "Für junge Erwachsene geeignet",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung ausdrücklich junge Erwachsene als primäre Zielgruppe anspricht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "aud_adults",
+        "id": "v2_zielgruppe_erwachsene",
         "category": "Zielgruppe",
         "label": "Erwachsene",
-        "description": "Für Erwachsene geeignet",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung ausdrücklich Erwachsene als eigene Zielgruppe benennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "aud_seniors",
+        "id": "v2_zielgruppe_senioren",
         "category": "Zielgruppe",
         "label": "Senioren",
-        "description": "Für Senioren geeignet",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung ausdrücklich Senioren als Zielgruppe anspricht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "aud_families",
+        "id": "v2_zielgruppe_ehepaare",
+        "category": "Zielgruppe",
+        "label": "Ehepaare",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung sich ausdrücklich an verheiratete Paare richtet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zielgruppe_paare",
+        "category": "Zielgruppe",
+        "label": "Paare",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung sich ausdrücklich an Paare richtet, unabhängig vom Familienstand. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zielgruppe_singles",
+        "category": "Zielgruppe",
+        "label": "Singles",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung sich ausdrücklich an Singles richtet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zielgruppe_einzelpersonen",
+        "category": "Zielgruppe",
+        "label": "Einzelpersonen",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung gezielt Einzelpersonen statt Paare oder Gruppen anspricht; bloße Einzelanmeldung genügt nicht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zielgruppe_familien",
         "category": "Zielgruppe",
         "label": "Familien",
-        "description": "Für Familien mit Kindern geeignet",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung sich ausdrücklich an Familien richtet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "aud_women",
+        "id": "v2_zielgruppe_eltern",
         "category": "Zielgruppe",
-        "label": "Speziell Frauen / Mädchen",
-        "description": "Ausdrücklich an Frauen oder Mädchen gerichtet",
+        "label": "Eltern",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung gezielt Eltern anspricht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "aud_men",
+        "id": "v2_zielgruppe_priester",
         "category": "Zielgruppe",
-        "label": "Speziell Männer / Jungen",
-        "description": "Ausdrücklich an Männer oder Jungen gerichtet",
+        "label": "Priester",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung sich ausdrücklich an Priester richtet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "context_catholic",
-        "category": "Kontext",
+        "id": "v2_zielgruppe_ordensleute",
+        "category": "Zielgruppe",
+        "label": "Ordensleute",
+        "description": "An wen richtet sich die Veranstaltung speziell? Prüfe, ob die Veranstaltung sich ausdrücklich an Mitglieder von Orden richtet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_geschlecht_speziell_fur_manner",
+        "category": "Geschlecht",
+        "label": "Speziell für Männer",
+        "description": "An wen richtet sich die Veranstaltung hinsichtlich des Geschlechts? Prüfe, ob die Veranstaltung ausdrücklich Männer oder Jungen als besondere Zielgruppe benennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_geschlecht_speziell_fur_frauen",
+        "category": "Geschlecht",
+        "label": "Speziell für Frauen",
+        "description": "An wen richtet sich die Veranstaltung hinsichtlich des Geschlechts? Prüfe, ob die Veranstaltung ausdrücklich Frauen oder Mädchen als besondere Zielgruppe benennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_geschlecht_fur_manner_und_frauen_gleicherma_en",
+        "category": "Geschlecht",
+        "label": "Für Männer und Frauen gleichermaßen",
+        "description": "An wen richtet sich die Veranstaltung hinsichtlich des Geschlechts? Prüfe, ob die Veranstaltung ausdrücklich beide Geschlechter gleichermaßen anspricht; eine fehlende Beschränkung ist kein Beweis. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_heilige_messe",
+        "category": "Veranstaltungsformat",
+        "label": "Heilige Messe",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung ausdrücklich eine Eucharistiefeier oder Heilige Messe beinhaltet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_anbetung",
+        "category": "Veranstaltungsformat",
+        "label": "Anbetung",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung eucharistische Anbetung ausdrücklich anbietet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_beichte",
+        "category": "Veranstaltungsformat",
+        "label": "Beichte",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung eine Beichtgelegenheit ausdrücklich nennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_gebetsabend",
+        "category": "Veranstaltungsformat",
+        "label": "Gebetsabend",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung gemeinschaftliches Gebet als wesentliches Format hat. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_vortrag",
+        "category": "Veranstaltungsformat",
+        "label": "Vortrag",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung einen Vortrag oder geistlichen Impuls beinhaltet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_workshop",
+        "category": "Veranstaltungsformat",
+        "label": "Workshop",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung aktive gemeinsame Übungen oder Workshop-Arbeit beinhaltet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_bibelkreis",
+        "category": "Veranstaltungsformat",
+        "label": "Bibelkreis",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung gemeinsames Bibellesen oder Bibelgespräch im Kreis beinhaltet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_exerzitien",
+        "category": "Veranstaltungsformat",
+        "label": "Exerzitien",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung ausdrücklich geistliche Exerzitien oder Einkehrtage anbietet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_wallfahrt",
+        "category": "Veranstaltungsformat",
+        "label": "Wallfahrt",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung eine Wallfahrt zu einem religiösen Ziel beinhaltet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_pilgerreise",
+        "category": "Veranstaltungsformat",
+        "label": "Pilgerreise",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung eine organisierte mehrstationige oder mehrtägige Pilgerreise beinhaltet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_gemeinschaftstreffen",
+        "category": "Veranstaltungsformat",
+        "label": "Gemeinschaftstreffen",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung ein Treffen mit Schwerpunkt Begegnung und Gemeinschaft beinhaltet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_freizeit",
+        "category": "Veranstaltungsformat",
+        "label": "Freizeit",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung Freizeit, Spiel oder Sport als wesentlichen Programmpunkt anbietet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_sozialaktion",
+        "category": "Veranstaltungsformat",
+        "label": "Sozialaktion",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung eine konkrete gemeinnützige oder soziale Aktion durchführt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_katechese",
+        "category": "Veranstaltungsformat",
+        "label": "Katechese",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung strukturierte Unterweisung im Glauben beinhaltet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_veranstaltungsformat_konzert",
+        "category": "Veranstaltungsformat",
+        "label": "Konzert",
+        "description": "Welche Aktivitäten werden tatsächlich angeboten? Prüfe, ob die Veranstaltung eine musikalische Aufführung oder ein Konzert beinhaltet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_glaube_und_spiritualitat",
+        "category": "Thema und Inhalt",
+        "label": "Glaube und Spiritualität",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung christlichen Glauben oder das geistliche Leben ausdrücklich thematisiert. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_bibel",
+        "category": "Thema und Inhalt",
+        "label": "Bibel",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung biblische Texte oder deren Auslegung ausdrücklich thematisiert. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_gebet",
+        "category": "Thema und Inhalt",
+        "label": "Gebet",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung Gebet als inhaltliches Thema behandelt, nicht nur ein Eingangsgebet erwähnt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_berufung",
+        "category": "Thema und Inhalt",
+        "label": "Berufung",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung geistliche oder persönliche Berufung ausdrücklich thematisiert. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_ehe_und_beziehung",
+        "category": "Thema und Inhalt",
+        "label": "Ehe und Beziehung",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung Ehe, Partnerschaft oder Beziehungen ausdrücklich thematisiert. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_familie_und_erziehung",
+        "category": "Thema und Inhalt",
+        "label": "Familie und Erziehung",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung Familienleben oder Erziehung ausdrücklich behandelt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_kirchenlehre",
+        "category": "Thema und Inhalt",
+        "label": "Kirchenlehre",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung katholische Lehre, Dogmatik oder Sakramententheologie ausdrücklich behandelt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 1.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_personlichkeitsentwicklung",
+        "category": "Thema und Inhalt",
+        "label": "Persönlichkeitsentwicklung",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung persönliche Entwicklung, Lebensgestaltung oder Selbstreflexion als Thema nennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_gesellschaft_und_ethik",
+        "category": "Thema und Inhalt",
+        "label": "Gesellschaft und Ethik",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung gesellschaftliche oder ethische Fragen thematisiert. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_mission_und_evangelisierung",
+        "category": "Thema und Inhalt",
+        "label": "Mission und Evangelisierung",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung Mission, Glaubensweitergabe oder Evangelisierung ausdrücklich behandelt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_lebensfragen",
+        "category": "Thema und Inhalt",
+        "label": "Lebensfragen",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung Sinn, Leid, Entscheidungen oder grundlegende Lebensfragen behandelt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_gemeinschaft",
+        "category": "Thema und Inhalt",
+        "label": "Gemeinschaft",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung Zusammenleben, Gemeinschaft oder Zugehörigkeit inhaltlich behandelt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_thema_und_inhalt_katholischer_veranstalter",
+        "category": "Thema und Inhalt",
         "label": "Katholischer Veranstalter",
-        "description": "Katholische Organisation oder Gruppe ist ausdrücklich als Veranstalter genannt; der bloße Domainname genügt nicht.",
+        "description": "Welche Themen stehen inhaltlich im Mittelpunkt? Prüfe, ob die Veranstaltung einen katholischen Verband, eine Pfarrei, Gemeinschaft oder Einrichtung ausdrücklich als Veranstalter benennt; Domainname allein genügt nicht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.5,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "context_church",
-        "category": "Kontext",
-        "label": "Kirchlicher Kontext",
-        "description": "Kirchliche Einbindung oder konkrete Zusammenarbeit wird im Veranstaltungstext erkennbar, nicht allein durch die Quellseite.",
-        "weight": 0.5,
-        "threshold": 0.65,
-        "type": "predicate",
-        "options": []
-      },
-      {
-        "id": "q_speziell_paare_oder_ehepaare",
-        "category": "Zielgruppe",
-        "label": "Speziell Paare oder Ehepaare",
-        "description": "Angebote, die sich explizit an Paare und Ehepaare richten, nicht an Einzelpersonen",
+        "id": "v2_vorkenntnisse_und_glaubensniveau_fur_glaubensinteressierte_ohne_kirchliche_bindung_",
+        "category": "Vorkenntnisse und Glaubensniveau",
+        "label": "Für Glaubensinteressierte ohne kirchliche Bindung geeignet",
+        "description": "Welche Vorkenntnisse sind für eine sinnvolle Teilnahme vorausgesetzt? Prüfe, ob die Veranstaltung ausdrücklich offen für Neugierige oder Glaubensinteressierte ohne kirchliche Bindung ist. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
       },
       {
-        "id": "format_freizeit_sport",
-        "category": "Format",
-        "label": "Freizeit und Sport",
-        "description": "Die Veranstaltung beinhaltet tatsächlich Sport, Spiel oder Freizeitaktivitäten als wesentlichen Bestandteil. Bewerte unabhängig von religiösen Inhalten und anderen Veranstaltungsformaten. Niedriger Wert, wenn keine sportliche oder freizeitbezogene Aktivität beschrieben ist.",
+        "id": "v2_zugang_und_teilnahmevoraussetzungen_offen_fur_alle",
+        "category": "Zugang und Teilnahmevoraussetzungen",
+        "label": "Offen für alle",
+        "description": "Welche Zugangsbedingungen werden ausdrücklich angegeben? Prüfe, ob die Veranstaltung ausdrücklich allen Interessierten offensteht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
         "weight": 0.0,
         "threshold": 0.65,
         "type": "predicate",
         "options": []
+      },
+      {
+        "id": "v2_zugang_und_teilnahmevoraussetzungen_nur_fur_mitglieder",
+        "category": "Zugang und Teilnahmevoraussetzungen",
+        "label": "Nur für Mitglieder",
+        "description": "Welche Zugangsbedingungen werden ausdrücklich angegeben? Prüfe, ob die Veranstaltung eine Mitgliedschaft als Voraussetzung verlangt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zugang_und_teilnahmevoraussetzungen_anmeldung_erforderlich",
+        "category": "Zugang und Teilnahmevoraussetzungen",
+        "label": "Anmeldung erforderlich",
+        "description": "Welche Zugangsbedingungen werden ausdrücklich angegeben? Prüfe, ob die Veranstaltung eine Anmeldung oder verbindliche Registrierung voraussetzt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zugang_und_teilnahmevoraussetzungen_kostenpflichtig",
+        "category": "Zugang und Teilnahmevoraussetzungen",
+        "label": "Kostenpflichtig",
+        "description": "Welche Zugangsbedingungen werden ausdrücklich angegeben? Prüfe, ob die Veranstaltung einen Teilnahmebeitrag oder Kosten nennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zugang_und_teilnahmevoraussetzungen_kostenlos",
+        "category": "Zugang und Teilnahmevoraussetzungen",
+        "label": "Kostenlos",
+        "description": "Welche Zugangsbedingungen werden ausdrücklich angegeben? Prüfe, ob die Veranstaltung ausdrücklich als kostenlos bezeichnet wird. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zugang_und_teilnahmevoraussetzungen_geschlossene_gruppe",
+        "category": "Zugang und Teilnahmevoraussetzungen",
+        "label": "Geschlossene Gruppe",
+        "description": "Welche Zugangsbedingungen werden ausdrücklich angegeben? Prüfe, ob die Veranstaltung nur einer geschlossenen oder eingeladenen Gruppe zugänglich ist. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zugang_und_teilnahmevoraussetzungen_begleitperson_erforderlich",
+        "category": "Zugang und Teilnahmevoraussetzungen",
+        "label": "Begleitperson erforderlich",
+        "description": "Welche Zugangsbedingungen werden ausdrücklich angegeben? Prüfe, ob die Veranstaltung ausdrücklich eine Begleitperson voraussetzt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zugang_und_teilnahmevoraussetzungen_kinderbetreuung_vorhanden",
+        "category": "Zugang und Teilnahmevoraussetzungen",
+        "label": "Kinderbetreuung vorhanden",
+        "description": "Welche Zugangsbedingungen werden ausdrücklich angegeben? Prüfe, ob die Veranstaltung ausdrücklich Kinderbetreuung anbietet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zugang_und_teilnahmevoraussetzungen_barrierefrei_zuganglich",
+        "category": "Zugang und Teilnahmevoraussetzungen",
+        "label": "Barrierefrei zugänglich",
+        "description": "Welche Zugangsbedingungen werden ausdrücklich angegeben? Prüfe, ob die Veranstaltung Barrierefreiheit ausdrücklich zusichert; nicht aus dem Ort ableiten. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zeitlicher_charakter_einzelveranstaltung",
+        "category": "Zeitlicher Charakter",
+        "label": "Einzelveranstaltung",
+        "description": "Wie ist die Veranstaltung zeitlich organisiert? Prüfe, ob die Veranstaltung als einmaliger einzelner Termin geplant ist. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zeitlicher_charakter_regelma_ige_veranstaltung",
+        "category": "Zeitlicher Charakter",
+        "label": "Regelmäßige Veranstaltung",
+        "description": "Wie ist die Veranstaltung zeitlich organisiert? Prüfe, ob die Veranstaltung wöchentlich, monatlich oder wiederkehrend stattfindet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zeitlicher_charakter_mehrteiliger_kurs",
+        "category": "Zeitlicher Charakter",
+        "label": "Mehrteiliger Kurs",
+        "description": "Wie ist die Veranstaltung zeitlich organisiert? Prüfe, ob die Veranstaltung aus mehreren aufeinander aufbauenden Einheiten besteht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zeitlicher_charakter_mehrtagige_veranstaltung",
+        "category": "Zeitlicher Charakter",
+        "label": "Mehrtägige Veranstaltung",
+        "description": "Wie ist die Veranstaltung zeitlich organisiert? Prüfe, ob die Veranstaltung ausdrücklich an mindestens zwei Tagen stattfindet. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zeitlicher_charakter_offener_einstieg_moglich",
+        "category": "Zeitlicher Charakter",
+        "label": "Offener Einstieg möglich",
+        "description": "Wie ist die Veranstaltung zeitlich organisiert? Prüfe, ob die Veranstaltung einen Einstieg zu beliebigen Terminen ausdrücklich ermöglicht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_zeitlicher_charakter_verbindliche_teilnahme_uber_mehrere_termine",
+        "category": "Zeitlicher Charakter",
+        "label": "Verbindliche Teilnahme über mehrere Termine",
+        "description": "Wie ist die Veranstaltung zeitlich organisiert? Prüfe, ob die Veranstaltung die Teilnahme an mehreren zusammengehörigen Terminen verlangt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_gemeinschaft_erleben",
+        "category": "Charakter und Ziel",
+        "label": "Gemeinschaft erleben",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung Gemeinschaft und gegenseitige Begegnung als ausdrückliches Ziel nennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_glauben_vertiefen",
+        "category": "Charakter und Ziel",
+        "label": "Glauben vertiefen",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung eine Vertiefung des christlichen Glaubens anstrebt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_wissen_erwerben",
+        "category": "Charakter und Ziel",
+        "label": "Wissen erwerben",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung Vermittlung neuer Inhalte oder Wissen als Ziel nennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_beten",
+        "category": "Charakter und Ziel",
+        "label": "Beten",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung gemeinsames oder persönliches Gebet als zentrales Ziel nennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_sakramente_empfangen",
+        "category": "Charakter und Ziel",
+        "label": "Sakramente empfangen",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung den Empfang von Eucharistie, Beichte oder anderen Sakramenten ermöglicht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_sich_austauschen",
+        "category": "Charakter und Ziel",
+        "label": "Sich austauschen",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung Gespräch, Diskussion oder Erfahrungsaustausch als Ziel nennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_praktisch_mitarbeiten",
+        "category": "Charakter und Ziel",
+        "label": "Praktisch mitarbeiten",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung praktische Beteiligung oder Mitarbeit an einer Aufgabe vorsieht. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_anderen_helfen",
+        "category": "Charakter und Ziel",
+        "label": "Anderen helfen",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung konkrete Hilfe für andere Menschen als Ziel nennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_zur_ruhe_kommen",
+        "category": "Charakter und Ziel",
+        "label": "Zur Ruhe kommen",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung Stille, Einkehr oder Entspannung als Ziel nennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_charakter_und_ziel_freizeit_gestalten",
+        "category": "Charakter und Ziel",
+        "label": "Freizeit gestalten",
+        "description": "Was sollen Teilnehmer durch die Veranstaltung hauptsächlich erleben oder erreichen? Prüfe, ob die Veranstaltung gemeinsame Freizeitgestaltung als Hauptzweck benennt. Nutze nur ausdrücklich belegte Veranstaltungsinformationen. Keine Angabe bedeutet unbekannt, nicht automatisch ausgeschlossen.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "predicate",
+        "options": []
+      },
+      {
+        "id": "v2_vorkenntnisse_stufe",
+        "category": "Vorkenntnisse und Glaubensniveau",
+        "label": "Erforderliche Vorkenntnisse",
+        "description": "Welche Vorkenntnisse werden für eine sinnvolle Teilnahme verlangt? Werte die ausdrücklich genannte Zielsetzung und Voraussetzungen aus; beurteile nicht die persönliche Glaubensstärke.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "score",
+        "options": [
+          {
+            "label": "Keine Vorkenntnisse",
+            "description": "Einführung ohne vorausgesetztes Glaubenswissen."
+          },
+          {
+            "label": "Grundwissen",
+            "description": "Elementares christliches Grundwissen hilft."
+          },
+          {
+            "label": "Vertiefte Kenntnisse",
+            "description": "Fundiertes Vorwissen ist für Inhalte sinnvoll."
+          },
+          {
+            "label": "Expertenwissen",
+            "description": "Fachliches oder theologisches Expertenwissen wird benötigt."
+          }
+        ]
+      },
+      {
+        "id": "v2_teilnahmeort_form",
+        "category": "Teilnahmeort und Durchführung",
+        "label": "Teilnahmeform",
+        "description": "Welche Teilnahmeform wird ausdrücklich angegeben? Wähle 'Nicht erkennbar', wenn die Information fehlt.",
+        "weight": 0.0,
+        "threshold": 0.65,
+        "type": "choice",
+        "options": [
+          {
+            "value": "Vor Ort",
+            "description": "Teilnahme an einem physischen Veranstaltungsort."
+          },
+          {
+            "value": "Online",
+            "description": "Teilnahme nur über digitale Verbindung."
+          },
+          {
+            "value": "Hybrid",
+            "description": "Teilnahme sowohl vor Ort als auch online möglich."
+          },
+          {
+            "value": "Nicht erkennbar",
+            "description": "Keine ausreichende Information zur Teilnahmeform."
+          }
+        ]
       }
     ],
     "tags": [
@@ -43727,7 +44231,7 @@
       "Wallfahrten & Reisen",
       "Sonstiges"
     ],
-    "published_at": "2026-10-31T11:05:00.528163+00:00"
+    "published_at": "2026-10-31T14:27:35.270828+00:00"
   },
   "campaign": {
     "revision": "35801aa9444daa75b6b4f9053799dde869f63cbcf96eac9a75553ec5bb3d02fe",
