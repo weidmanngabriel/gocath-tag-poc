@@ -62,7 +62,7 @@ async function init(){
    if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
    const button=(event.target as HTMLElement).closest<HTMLButtonElement>('[role="tab"]');
    if(!button)return;
-   const tabs=[...button.closest<HTMLElement>(".item-tabs")!.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+   const tabs=Array.from(button.closest<HTMLElement>(".item-tabs")!.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
    const index=tabs.indexOf(button);
    const next=event.key==="Home"?0:event.key==="End"?tabs.length-1:(index+(event.key==="ArrowLeft"?-1:1)+tabs.length)%tabs.length;
    event.preventDefault();
