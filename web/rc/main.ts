@@ -27,7 +27,7 @@ function card(item:Event){
   const visible=entries.slice(0,2);
   const more=entries.slice(2);
   const chip=(s:Score)=>`<span class="match-chip match-${scoreColor(s)}">${esc(s.label)} · ${pct(s.score)}</span>`;
-  return `<section class="match-group" aria-label="${esc(group)}"><div class="match-group-heading"><strong>${esc(group)}</strong></div><div class="match-list">${visible.map(chip).join("")}${more.length?`<details class="match-more"><summary>+${more.length}</summary><div class="match-more-items">${more.map(chip).join("")}</div></details>`:""}</div></section>`;
+  return `<section class="match-group" aria-label="${esc(group)}"><div class="match-group-heading"><strong>${esc(group)}</strong></div><div class="match-list">${visible.map(chip).join("")}${more.length?`<button type="button" class="match-expand" aria-label="${more.length} weitere Treffer in ${esc(group)} anzeigen">+${more.length}</button><span class="match-extra" hidden>${more.map(chip).join("")}</span>`:""}</div></section>`;
  }).join("");
  const tabs=[...groups,"Beschreibung"];
  const buttons=tabs.map((g,i)=>`<button type="button" role="tab" id="tab-${esc(item.id)}-${i}" aria-controls="panel-${esc(item.id)}-${i}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-tab="${i}">${esc(g)}</button>`).join("");
@@ -88,6 +88,8 @@ async function init(){
  document.querySelector<HTMLButtonElement>("#clear-criteria")!.addEventListener("click",()=>{document.querySelectorAll<HTMLInputElement>(".criterion-options input:checked").forEach(input=>input.checked=false);document.querySelector<HTMLElement>("#filter-count")!.textContent="";display();});
  document.querySelectorAll<HTMLInputElement|HTMLSelectElement>(".filters input,.filters select").forEach(el=>el.addEventListener("input",display));
  document.querySelector<HTMLElement>("#results")!.addEventListener("click",event=>{
+   const expand=(event.target as HTMLElement).closest<HTMLButtonElement>(".match-expand");
+   if(expand){const extras=expand.nextElementSibling as HTMLElement|null;if(extras){extras.hidden=false;expand.remove();}return;}
    const button=(event.target as HTMLElement).closest<HTMLButtonElement>('[role="tab"]');
    if(button)switchItemTab(button);
  });
