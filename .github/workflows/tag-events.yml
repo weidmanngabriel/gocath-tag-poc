@@ -4,11 +4,12 @@ on:
     inputs:
       mode:
         type: choice
-        description: Regular classification or read-only latency probe
+        description: Regular classification or read-only diagnostic probe
         options:
           - classify
           - latency
           - compare-groq
+          - compare-input
         default: classify
 permissions:
   contents: read
@@ -48,6 +49,13 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_SHEET_ID: 1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w
         run: python -m src.groq_compare --limit 10
+      - name: Compare old and compact Decisions inputs (read-only)
+        if: inputs.mode == 'compare-input'
+        env:
+          GOCATH_OPENAI: ${{ secrets.GOCATH_OPENAI }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SHEET_ID: 1HRyxPjLz2-WUEelplO1YAaO7gCYDyU_77DgUqEtGQ1w
+        run: python -m src.input_probe --limit 5 --source both
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -56,5 +64,6 @@ jobs:
             output/results.json
             output/latency-probe.json
             output/groq-comparison.json
+            output/input-probe.json
             output/failed-groq-request-response.json
           if-no-files-found: ignore

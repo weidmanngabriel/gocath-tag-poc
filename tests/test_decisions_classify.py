@@ -1,7 +1,8 @@
 import unittest
+import json
 from unittest.mock import Mock, patch
 
-from src.decisions_classify import classify_decisions, URL
+from src.decisions_classify import classify_decisions, build_decisions_payload, URL
 
 
 class DecisionsClassifierTests(unittest.TestCase):
@@ -40,6 +41,55 @@ class DecisionsClassifierTests(unittest.TestCase):
         self.assertEqual(tags["standard_tags"], ["Heilige Messe"])
         self.assertEqual(tags["additional_tags"], [])
         self.assertEqual(usage["cached_tokens"], 12)
+
+    @patch("src.decisions_classify.requests.post")
+    def test_global_rules_only_once_and_event_url_not_sent(self, post):
+        response = Mock(ok=True)
+        response.json.return_value = {"answers": [
+            {"type": "predicate", "name": "format_mass", "probability": 0.7},
+            {"type": "predicate", "name": "topic_faith", "probability": 0.4},
+        ]}
+        post.return_value = response
+        e = {"url": "https://example.org/event/7", "title": "Messe", "description": "Kirche"}
+        classify_decisions(e, "secret", self.config)
+        payload = post.call_args.kwargs["json"]
+        self.assertEqual(payload["input"][0]["content"][1]["data"],
+                         {"title": "Messe", "description": "Kirche"})
+        global_rules = payload["input"][0]["content"][0]["text"]
+        self.assertIn("Domainname", global_rules)
+        self.assertIn("Zielgruppen", global_rules)
+        self.assertTrue(all("Domainname" not in q["instructions"] for q in payload["questions"]))
+        self.assertTrue(all("Zielgruppen" not in q["instructions"] for q in payload["questions"]))
+        self.assertEqual(payload["questions"][0]["instructions"], "Heilige Messe. Eine Messe findet statt")
+        self.assertIn("url", e, "Source event must remain intact for Sheets and history")
+
+    def test_compact_payload_reduces_static_request_without_omitting_questions(self):
+        criteria = [{**self.config["criteria"][0], "id": f"rule_{i}"} for i in range(25)]
+        event = {"url": "https://gocath.org/event/sample", "title": "Heilige Messe",
+                 "description": "Eine katholische Messe für Jugendliche"}
+        before = build_decisions_payload(event, criteria, compact=False)
+        after = build_decisions_payload(event, criteria)
+        old_bytes = len(json.dumps(before, ensure_ascii=False).encode("utf-8"))
+        new_bytes = len(json.dumps(after, ensure_ascii=False).encode("utf-8"))
+        self.assertEqual(len(before["questions"]), len(after["questions"]))
+        self.assertEqual([q["name"] for q in before["questions"]],
+                         [q["name"] for q in after["questions"]])
+        self.assertLess(new_bytes, old_bytes * 0.8)
+        self.assertIn(event["description"], json.dumps(after, ensure_ascii=False))
+
+    def test_factorial_input_flags_are_independent(self):
+        event = {"url": "https://example.org/sport", "title": "Sport",
+                 "description": "Turnier mit Familien"}
+        rules = self.config["criteria"]
+        baseline = build_decisions_payload(event, rules, compact=False, strip_url=False)
+        rules_only = build_decisions_payload(event, rules, compact=True, strip_url=False)
+        compact = build_decisions_payload(event, rules, compact=True, strip_url=True)
+        assert baseline["questions"] != rules_only["questions"]
+        self.assertEqual(rules_only["questions"], compact["questions"])
+        self.assertEqual(baseline["input"][0]["content"][1]["data"], event)
+        self.assertEqual(rules_only["input"][0]["content"][1]["data"], event)
+        self.assertEqual(compact["input"][0]["content"][1]["data"],
+                         {"title": event["title"], "description": event["description"]})
 
     @patch("src.decisions_classify.requests.post")
     def test_missing_scores_rejected_not_misclassified(self, post):

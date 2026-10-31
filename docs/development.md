@@ -40,3 +40,16 @@ Die feste technische JSON-Ausgabevorgabe liegt in `src/classify.py` als `OUTPUT_
 ## OpenAI als dritter Anbieter
 
 `classifier_provider=openai` nutzt das GitHub Secret `GOCATH_OPENAI` und das Responses-API-Modell `gpt-6-luna`. `Config.openai_reasoning_effort` unterstützt `none`, `low`, `medium`, `high` (Standard `low`). Der gemeinsame `gemini_prompt` ist trotz des historischen Schlüsselnamens der bearbeitbare Prompt für alle Anbieter. Der technische JSON-Vertrag wird im Code ergänzt. `openai_reasoning_effort` und `gemini_model` sind getrennte anbieterbezogene Einstellungen; `gemini_temperature` gilt nur bei Gemini und Groq. In der Dashboard-UI werden nicht anwendbare Felder ausgeblendet. Die Kostenangaben im Config-Sheet sind noch gemeinsame Preiswerte; bei Anbieterwechsel müssen sie an das gewählte Modell angepasst werden. OpenAI-Ausgabetokens enthalten bereits Reasoning-Tokens; bei der Kostenschätzung werden sie nicht doppelt gezählt. Der neue Anbieter benötigt eine echte Integrationserprobung, bevor der PR gemergt wird.
+
+## Decisions-Inputoptimierung und paarweiser Qualitätsvergleich
+
+Die OpenAI-Decisions-Anfrage führt die allgemeinen Entscheidungsregeln nur noch einmal im gemeinsamen Input und nicht in jeder der konfigurierten Fragen. Jede Frage behält ihren vom Nutzer gepflegten Titel, ihre Beschreibung, den Typ und die Antwortoptionen. An das Modell werden Eventtitel und Beschreibung übermittelt, nicht die nur für Historie und Quelllink benötigte Event-URL. Die Originalveranstaltung bleibt für Google Sheets vollständig erhalten.
+
+Der manuelle Workflow `GoCath Tagging POC` bietet `mode=compare-input`: ein **lesender, fünffacher Vergleich** pro Veranstaltung. Er benutzt für alle Varianten dieselben geladenen Veranstaltungsdaten und dieselben Fragen:
+1. `baseline`: Originaltext, ursprüngliche wiederholte Regeln, URL im Input.
+2. `clean_only`: nur die GoCath-Textbereinigung; alte Regeln und URL bleiben.
+3. `rules_only`: nur gemeinsame Regeln statt wiederholter Regeln; Originaltext und URL bleiben.
+4. `combined`: Bereinigung und zentrale Regeln; URL bleibt.
+5. `optimized`: kombinierte Variante plus Weglassen der URL aus dem Modell-Input.
+
+Für Regnum Christi bleibt der Quelltext bei der Bereinigung identisch; dort misst `clean_only` nur die normale Schwankung wiederholter identischer Requests. Die Reihenfolge wird zwischen den Veranstaltungen umgekehrt, ist aber kein statistischer Test gegen Modellvarianz. Standardmäßig werden fünf GoCath- und fünf Regnum-Christi-Events genutzt. Pro Veranstaltung entstehen fünf kostenpflichtige Decisions-Anfragen (**50 insgesamt**). Die API-Tokens und Relevanzstatus werden pro Variante erfasst; die Ergebnisse werden gegen die Baseline bezüglich Relevanzänderungen, Hauptformatauswahl und absoluter Score-Differenzen ausgewertet. Der Lauf benötigt OpenAI- und Google-Service-Account-Secrets, schreibt **nichts** in Google Sheets und erstellt `output/input-probe.json` als privates Actions-Artefakt. Die Datei enthält Quell-URLs und numerische Bewertungen, aber keine Eventtexte oder Secrets. Ohne fachliche Referenzbewertungen kann der Vergleich nur Unterschiede, nicht die tatsächliche Korrektheit nachweisen.

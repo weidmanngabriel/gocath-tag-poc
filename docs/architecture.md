@@ -15,3 +15,7 @@ Bei OpenAI ruft der Runner die Decisions API `POST /v1/decisions` (Modell `gpt-6
 
 ## Konfigurierbarer Decisions-Fragebogen
 Der Sheet-Tab `Criteria` speichert die editierbare Fragedefinition einschließlich Fragetyp und JSON-Optionen. Die statische Web-App bearbeitet diese Werte direkt über die Sheets-API. `src/config.py` lädt sie vor jedem manuellen Runner-Lauf, `src/decisions_classify.py` erzeugt typisierte Fragen und prüft vollständig die gelieferten Verteilungen. Das Append-only-Log `ClassificationDetails` ergänzt die bislang 13 Felder um den Fragetyp und die typisierte Antwort als JSON. Nur `predicate` wirkt auf die bestehende Relevanzheuristik.
+
+## Optimierung der Modell-Eingabe
+
+Nur bei OpenAI Decisions: Der Request wird in `src/decisions_classify.py:build_decisions_payload` aus dem gemeinsamen Instruktionstext, `{title,description}` und den voll konfigurierten Fragen gebaut; die Quell-URL geht nicht an das Modell. `compact=False` stellt für den isolierten Vergleich die alte Request-Struktur wieder her. Die Bereinigung des öffentlichen GoCath-HTML erfolgt in `src/scrape.py:clean_event_text` vor der bisherigen maximalen Textlänge. Der manuelle read-only Vergleich `src/input_probe.py` nutzt pro Veranstaltung dasselbe Quellmaterial für beide Request-Varianten, erfasst die vom Anbieter gemeldeten Tokens und validiert Ergebnisabweichungen ohne Sheet-Schreibzugriff.
