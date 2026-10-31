@@ -130239,7 +130239,1013 @@
       },
       "display_hash": "60d1dc1576a03f1c251d892ec320b8cddb1c6b13d1fb1a512845144d858709b7",
       "missing_checks": 0,
-      "inactive": false
+      "inactive": false,
+      "classification": {
+        "scores": [
+          {
+            "id": "v2_zielgruppe_kinder",
+            "category": "Zielgruppe",
+            "label": "Kinder",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zielgruppe_jugendliche",
+            "category": "Zielgruppe",
+            "label": "Jugendliche",
+            "type": "predicate",
+            "score": 0.94,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.94
+            }
+          },
+          {
+            "id": "v2_zielgruppe_junge_erwachsene",
+            "category": "Zielgruppe",
+            "label": "Junge Erwachsene",
+            "type": "predicate",
+            "score": 0.82,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.82
+            }
+          },
+          {
+            "id": "v2_zielgruppe_erwachsene",
+            "category": "Zielgruppe",
+            "label": "Erwachsene",
+            "type": "predicate",
+            "score": 0.14,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.14
+            }
+          },
+          {
+            "id": "v2_zielgruppe_senioren",
+            "category": "Zielgruppe",
+            "label": "Senioren",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zielgruppe_ehepaare",
+            "category": "Zielgruppe",
+            "label": "Ehepaare",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zielgruppe_paare",
+            "category": "Zielgruppe",
+            "label": "Paare",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zielgruppe_singles",
+            "category": "Zielgruppe",
+            "label": "Singles",
+            "type": "predicate",
+            "score": 0.01,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.01
+            }
+          },
+          {
+            "id": "v2_zielgruppe_einzelpersonen",
+            "category": "Zielgruppe",
+            "label": "Einzelpersonen",
+            "type": "predicate",
+            "score": 0.64,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.64
+            }
+          },
+          {
+            "id": "v2_zielgruppe_familien",
+            "category": "Zielgruppe",
+            "label": "Familien",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zielgruppe_eltern",
+            "category": "Zielgruppe",
+            "label": "Eltern",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zielgruppe_priester",
+            "category": "Zielgruppe",
+            "label": "Priester",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zielgruppe_ordensleute",
+            "category": "Zielgruppe",
+            "label": "Ordensleute",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_geschlecht_speziell_fur_manner",
+            "category": "Geschlecht",
+            "label": "Speziell für Männer",
+            "type": "predicate",
+            "score": 0.05,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.05
+            }
+          },
+          {
+            "id": "v2_geschlecht_speziell_fur_frauen",
+            "category": "Geschlecht",
+            "label": "Speziell für Frauen",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_geschlecht_fur_manner_und_frauen_gleicherma_en",
+            "category": "Geschlecht",
+            "label": "Für Männer und Frauen gleichermaßen",
+            "type": "predicate",
+            "score": 0.97,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.97
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_heilige_messe",
+            "category": "Veranstaltungsformat",
+            "label": "Heilige Messe",
+            "type": "predicate",
+            "score": 1.0,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 1.0
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_anbetung",
+            "category": "Veranstaltungsformat",
+            "label": "Anbetung",
+            "type": "predicate",
+            "score": 0.05,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.05
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_beichte",
+            "category": "Veranstaltungsformat",
+            "label": "Beichte",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_gebetsabend",
+            "category": "Veranstaltungsformat",
+            "label": "Gebetsabend",
+            "type": "predicate",
+            "score": 0.53,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.53
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_vortrag",
+            "category": "Veranstaltungsformat",
+            "label": "Vortrag",
+            "type": "predicate",
+            "score": 0.17,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.17
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_workshop",
+            "category": "Veranstaltungsformat",
+            "label": "Workshop",
+            "type": "predicate",
+            "score": 0.86,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.86
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_bibelkreis",
+            "category": "Veranstaltungsformat",
+            "label": "Bibelkreis",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_exerzitien",
+            "category": "Veranstaltungsformat",
+            "label": "Exerzitien",
+            "type": "predicate",
+            "score": 0.01,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.01
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_wallfahrt",
+            "category": "Veranstaltungsformat",
+            "label": "Wallfahrt",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_pilgerreise",
+            "category": "Veranstaltungsformat",
+            "label": "Pilgerreise",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_gemeinschaftstreffen",
+            "category": "Veranstaltungsformat",
+            "label": "Gemeinschaftstreffen",
+            "type": "predicate",
+            "score": 0.92,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.92
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_freizeit",
+            "category": "Veranstaltungsformat",
+            "label": "Freizeit",
+            "type": "predicate",
+            "score": 0.38,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.38
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_sozialaktion",
+            "category": "Veranstaltungsformat",
+            "label": "Sozialaktion",
+            "type": "predicate",
+            "score": 1.0,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 1.0
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_katechese",
+            "category": "Veranstaltungsformat",
+            "label": "Katechese",
+            "type": "predicate",
+            "score": 0.23,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.23
+            }
+          },
+          {
+            "id": "v2_veranstaltungsformat_konzert",
+            "category": "Veranstaltungsformat",
+            "label": "Konzert",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_glaube_und_spiritualitat",
+            "category": "Thema und Inhalt",
+            "label": "Glaube und Spiritualität",
+            "type": "predicate",
+            "score": 1.0,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 1.0
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_bibel",
+            "category": "Thema und Inhalt",
+            "label": "Bibel",
+            "type": "predicate",
+            "score": 0.13,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.13
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_gebet",
+            "category": "Thema und Inhalt",
+            "label": "Gebet",
+            "type": "predicate",
+            "score": 0.1,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.1
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_berufung",
+            "category": "Thema und Inhalt",
+            "label": "Berufung",
+            "type": "predicate",
+            "score": 0.08,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.08
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_ehe_und_beziehung",
+            "category": "Thema und Inhalt",
+            "label": "Ehe und Beziehung",
+            "type": "predicate",
+            "score": 1.0,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 1.0
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_familie_und_erziehung",
+            "category": "Thema und Inhalt",
+            "label": "Familie und Erziehung",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_kirchenlehre",
+            "category": "Thema und Inhalt",
+            "label": "Kirchenlehre",
+            "type": "predicate",
+            "score": 0.16,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.16
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_personlichkeitsentwicklung",
+            "category": "Thema und Inhalt",
+            "label": "Persönlichkeitsentwicklung",
+            "type": "predicate",
+            "score": 0.88,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.88
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_gesellschaft_und_ethik",
+            "category": "Thema und Inhalt",
+            "label": "Gesellschaft und Ethik",
+            "type": "predicate",
+            "score": 0.95,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.95
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_mission_und_evangelisierung",
+            "category": "Thema und Inhalt",
+            "label": "Mission und Evangelisierung",
+            "type": "predicate",
+            "score": 0.18,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.18
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_lebensfragen",
+            "category": "Thema und Inhalt",
+            "label": "Lebensfragen",
+            "type": "predicate",
+            "score": 0.91,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.91
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_gemeinschaft",
+            "category": "Thema und Inhalt",
+            "label": "Gemeinschaft",
+            "type": "predicate",
+            "score": 0.81,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.81
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_katholischer_veranstalter",
+            "category": "Thema und Inhalt",
+            "label": "Katholischer Veranstalter",
+            "type": "predicate",
+            "score": 0.24,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.24
+            }
+          },
+          {
+            "id": "v2_vorkenntnisse_und_glaubensniveau_fur_glaubensinteressierte_ohne_kirchliche_bindung_",
+            "category": "Vorkenntnisse und Glaubensniveau",
+            "label": "Für Glaubensinteressierte ohne kirchliche Bindung geeignet",
+            "type": "predicate",
+            "score": 0.09,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.09
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_offen_fur_alle",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Offen für alle",
+            "type": "predicate",
+            "score": 0.02,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.02
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_nur_fur_mitglieder",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Nur für Mitglieder",
+            "type": "predicate",
+            "score": 0.06,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.06
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_anmeldung_erforderlich",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Anmeldung erforderlich",
+            "type": "predicate",
+            "score": 0.98,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.98
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_kostenpflichtig",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Kostenpflichtig",
+            "type": "predicate",
+            "score": 1.0,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 1.0
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_kostenlos",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Kostenlos",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_geschlossene_gruppe",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Geschlossene Gruppe",
+            "type": "predicate",
+            "score": 0.01,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.01
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_begleitperson_erforderlich",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Begleitperson erforderlich",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_kinderbetreuung_vorhanden",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Kinderbetreuung vorhanden",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_barrierefrei_zuganglich",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Barrierefrei zugänglich",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zeitlicher_charakter_einzelveranstaltung",
+            "category": "Zeitlicher Charakter",
+            "label": "Einzelveranstaltung",
+            "type": "predicate",
+            "score": 0.97,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.97
+            }
+          },
+          {
+            "id": "v2_zeitlicher_charakter_regelma_ige_veranstaltung",
+            "category": "Zeitlicher Charakter",
+            "label": "Regelmäßige Veranstaltung",
+            "type": "predicate",
+            "score": 0.06,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.06
+            }
+          },
+          {
+            "id": "v2_zeitlicher_charakter_mehrteiliger_kurs",
+            "category": "Zeitlicher Charakter",
+            "label": "Mehrteiliger Kurs",
+            "type": "predicate",
+            "score": 0.07,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.07
+            }
+          },
+          {
+            "id": "v2_zeitlicher_charakter_mehrtagige_veranstaltung",
+            "category": "Zeitlicher Charakter",
+            "label": "Mehrtägige Veranstaltung",
+            "type": "predicate",
+            "score": 1.0,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 1.0
+            }
+          },
+          {
+            "id": "v2_zeitlicher_charakter_offener_einstieg_moglich",
+            "category": "Zeitlicher Charakter",
+            "label": "Offener Einstieg möglich",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_zeitlicher_charakter_verbindliche_teilnahme_uber_mehrere_termine",
+            "category": "Zeitlicher Charakter",
+            "label": "Verbindliche Teilnahme über mehrere Termine",
+            "type": "predicate",
+            "score": 0.01,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.01
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_gemeinschaft_erleben",
+            "category": "Charakter und Ziel",
+            "label": "Gemeinschaft erleben",
+            "type": "predicate",
+            "score": 0.79,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.79
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_glauben_vertiefen",
+            "category": "Charakter und Ziel",
+            "label": "Glauben vertiefen",
+            "type": "predicate",
+            "score": 0.94,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.94
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_wissen_erwerben",
+            "category": "Charakter und Ziel",
+            "label": "Wissen erwerben",
+            "type": "predicate",
+            "score": 0.77,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.77
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_beten",
+            "category": "Charakter und Ziel",
+            "label": "Beten",
+            "type": "predicate",
+            "score": 0.48,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.48
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_sakramente_empfangen",
+            "category": "Charakter und Ziel",
+            "label": "Sakramente empfangen",
+            "type": "predicate",
+            "score": 0.86,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.86
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_sich_austauschen",
+            "category": "Charakter und Ziel",
+            "label": "Sich austauschen",
+            "type": "predicate",
+            "score": 0.2,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.2
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_praktisch_mitarbeiten",
+            "category": "Charakter und Ziel",
+            "label": "Praktisch mitarbeiten",
+            "type": "predicate",
+            "score": 0.99,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.99
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_anderen_helfen",
+            "category": "Charakter und Ziel",
+            "label": "Anderen helfen",
+            "type": "predicate",
+            "score": 0.98,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.98
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_zur_ruhe_kommen",
+            "category": "Charakter und Ziel",
+            "label": "Zur Ruhe kommen",
+            "type": "predicate",
+            "score": 0.07,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.07
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_freizeit_gestalten",
+            "category": "Charakter und Ziel",
+            "label": "Freizeit gestalten",
+            "type": "predicate",
+            "score": 0.13,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.13
+            }
+          },
+          {
+            "id": "v2_vorkenntnisse_stufe",
+            "category": "Vorkenntnisse und Glaubensniveau",
+            "label": "Erforderliche Vorkenntnisse",
+            "type": "score",
+            "score": 0.01,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "score": 0.03,
+              "confidence": 0.97,
+              "probabilities": [
+                {
+                  "value": 0,
+                  "label": "Keine Vorkenntnisse",
+                  "probability": 0.97
+                },
+                {
+                  "value": 1,
+                  "label": "Grundwissen",
+                  "probability": 0.03
+                },
+                {
+                  "value": 2,
+                  "label": "Vertiefte Kenntnisse",
+                  "probability": 0.0
+                },
+                {
+                  "value": 3,
+                  "label": "Expertenwissen",
+                  "probability": 0.0
+                }
+              ]
+            }
+          },
+          {
+            "id": "v2_teilnahmeort_form",
+            "category": "Teilnahmeort und Durchführung",
+            "label": "Teilnahmeform",
+            "type": "choice",
+            "score": 1.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "choice": "Vor Ort",
+              "confidence": 1.0,
+              "probabilities": [
+                {
+                  "value": "Vor Ort",
+                  "probability": 1.0
+                },
+                {
+                  "value": "Online",
+                  "probability": 0.0
+                },
+                {
+                  "value": "Hybrid",
+                  "probability": 0.0
+                },
+                {
+                  "value": "Nicht erkennbar",
+                  "probability": 0.0
+                }
+              ]
+            }
+          }
+        ],
+        "relevance": {
+          "score": 1,
+          "status": "likely_relevant"
+        },
+        "model": "gpt-6-luna",
+        "classified_at": "2026-10-31T19:57:55.677736+00:00",
+        "questionnaire_revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
+        "classification_config_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
+        "classification_config_updated_at": "2026-10-31T15:32:39.635006+00:00",
+        "criterion_signatures": {
+          "v2_zielgruppe_kinder": "6cd55429042bcbb4f5fc6c2529b59bc77f44bcdc7f2fd27940448090ba943fa7",
+          "v2_zielgruppe_jugendliche": "758b2744d71dfbec34ed1763baef18b47a906f2beb1a6e25bfedc81614739806",
+          "v2_zielgruppe_junge_erwachsene": "8e7817286ad59536bd918f9e45e6dca5d79ba98eb1bee985a51b197500afc2dd",
+          "v2_zielgruppe_erwachsene": "bc159f0b524151aa6d6c028f65f6b9ea23741ad4d29e9ed2f90e9977f9ee273a",
+          "v2_zielgruppe_senioren": "866ed27e0f29aa7f15e6872715a189b2769fb74bc4a013e41ee89a372cb9ef75",
+          "v2_zielgruppe_ehepaare": "2c49b70ba36c6235b684e70e751cf56bce754c58af3e7e613bac706a45c097cc",
+          "v2_zielgruppe_paare": "7f21e5eaed8e672db849125dc5559f7ef658efb9841d13c6c3c1a100d362e987",
+          "v2_zielgruppe_singles": "b01a8c6b90f24a472c3d6c6c8ac24f04ed51939cc41e584ba9bd6dadf3385bd4",
+          "v2_zielgruppe_einzelpersonen": "c77fa79d59d93c3ea296497ab5212f7f2d0ce9eb44c60601d71b925819add53e",
+          "v2_zielgruppe_familien": "001c12c972fd4967ad1b8a1771b6c14041e7c8368e358953079d9f5ced10da74",
+          "v2_zielgruppe_eltern": "1abe843760d0cce06d350f72f0144980aad071d3f6819367a8054b8e09c9d23b",
+          "v2_zielgruppe_priester": "f3623c43131908188a27fd39542ebe5fa654e59ee113c78eaea97b1f89ffe54c",
+          "v2_zielgruppe_ordensleute": "934b94967d016814603128744e760b3b1103ef3f785d4b99631300ca897fab40",
+          "v2_geschlecht_speziell_fur_manner": "90abb5ef309d1540b768a66fc074019567ba18b82eedbb467966968dd6391259",
+          "v2_geschlecht_speziell_fur_frauen": "e53f03c63303d4bb403dc3d7a0f3d4893efacf35d4c1bd183efe2759c7326ce7",
+          "v2_geschlecht_fur_manner_und_frauen_gleicherma_en": "9f6b3401e953a16ff1cb4c1d4570e9ed93d13184fa30e5ace9a5ae74cedff142",
+          "v2_veranstaltungsformat_heilige_messe": "d8e894741fce4e2ac16d035f63ac57b29e3c9ec4ca66c518dab6ceda2108ba8c",
+          "v2_veranstaltungsformat_anbetung": "373f2d229598d437b31701a4aa2ddbf8014bfb7c5557d554bf42e7d22e50588c",
+          "v2_veranstaltungsformat_beichte": "225b957d562a85aad92c2c95c7337aefd2becdcf0f7e91c4263f6c4bc630db13",
+          "v2_veranstaltungsformat_gebetsabend": "733a4ffe46f66b1324a730582bca8cc36fb4e02bab71f9bca4dfd55816b77239",
+          "v2_veranstaltungsformat_vortrag": "e67831f658e63460b3bf5d1231214d6660f06929661a8b2bdad628420fa210aa",
+          "v2_veranstaltungsformat_workshop": "1973a36ba325a80540012bf1e425281bd368c8658847c4cf277c222853f03573",
+          "v2_veranstaltungsformat_bibelkreis": "30250b61fc7e79092703832742d3065685475635d692e202d13fdcd562a2063c",
+          "v2_veranstaltungsformat_exerzitien": "f3d42158f44b5540e48e8fcf65eefa229db8e31dbc1a1a2ccb4fc4db36daeddd",
+          "v2_veranstaltungsformat_wallfahrt": "c28665339e20051bfb80278fdd9c1ed92d706b42b383aa85cb9db86a123312f9",
+          "v2_veranstaltungsformat_pilgerreise": "c2230dd65f0b09fecd3d5f1f51d230b5634a94b6391412d9c0da6f06e2f2de01",
+          "v2_veranstaltungsformat_gemeinschaftstreffen": "5b9eff7d9c9528b316539090b6d697e311dc8195e085667165e04a55e553bffe",
+          "v2_veranstaltungsformat_freizeit": "861e851f497d1e49f9de548633560ff28bcca400ecb06e6c37bd6db3b892f1c9",
+          "v2_veranstaltungsformat_sozialaktion": "e541c0784cd5ebb6d30c0af597d74460386f7a4bed8fae5900d7cd3080283f8c",
+          "v2_veranstaltungsformat_katechese": "a74603ecc0caee904ec2efac4d9e96ca4af085445f84751f3a76d87b990626cc",
+          "v2_veranstaltungsformat_konzert": "9a77d7a469fcf1bb4242ba109d3be1c9d2e6dba59c90fc4ee27c93fde7733881",
+          "v2_thema_und_inhalt_glaube_und_spiritualitat": "37e12c55218417c5dbc561612d74e7c96c4f5cc7774597ead3dd13b067040701",
+          "v2_thema_und_inhalt_bibel": "2d978a76aeea8072a7ba3f3471b879419692079aef5c569c06949a5a31d0e33b",
+          "v2_thema_und_inhalt_gebet": "8ac4fc77ba824b2d936962f48a8fc0fb1741025a931d1ada445de21122a27145",
+          "v2_thema_und_inhalt_berufung": "0ca287e161f5682f1bf15e3d6cd695869b07441d492fcc3e3093a9c898001b3a",
+          "v2_thema_und_inhalt_ehe_und_beziehung": "d679edac0849250f20ab935a24a19531841e52a44a9c7ff51753efd91fd8a346",
+          "v2_thema_und_inhalt_familie_und_erziehung": "5f3aaa8e0d286d0bd6230b3e67a3ec686ed812846e588d6d8d4884aaa9461b2e",
+          "v2_thema_und_inhalt_kirchenlehre": "cad73ebadddc6fce596a9f6add532a6365d18d3ff9511a4e7ff4bdabeeabdc8b",
+          "v2_thema_und_inhalt_personlichkeitsentwicklung": "dba72cd0720e0ea3d0ddfbb158b7cdf3fd51407feaf2ee7ac049a504f8f70761",
+          "v2_thema_und_inhalt_gesellschaft_und_ethik": "983db75b66f7477d9d45e159dde0146a87856850b757f42c712688fe083288de",
+          "v2_thema_und_inhalt_mission_und_evangelisierung": "a20188d04e355dce91cb3c643d4a6c7a46f60df9af3ee7f57a15865a3adb3479",
+          "v2_thema_und_inhalt_lebensfragen": "0a7338d7bacf2003887b50476d3307f5b2cc5ddd79ac045e4cd05d854fcb1405",
+          "v2_thema_und_inhalt_gemeinschaft": "09fcaab549422a6dc007efef561aeca125409eeb319549a8c809d9e88f5869b6",
+          "v2_thema_und_inhalt_katholischer_veranstalter": "bfc81d0adce84c45f655f0b478cf9c3b932a7b90e93c49359f89c18b7869e257",
+          "v2_vorkenntnisse_und_glaubensniveau_fur_glaubensinteressierte_ohne_kirchliche_bindung_": "0d2f7a053bceb2e5e78e094237458adee2c22de83b373f784a2c652ee2002b4e",
+          "v2_zugang_und_teilnahmevoraussetzungen_offen_fur_alle": "ffd92b23f7a27f5ba999da9fedcda041c15ebe7fbd0a96ab2e3db66c25202829",
+          "v2_zugang_und_teilnahmevoraussetzungen_nur_fur_mitglieder": "83446f768b8ed5c52ccff4a7150503892f59b5bb762e16ae0ba7c8600af8c9b2",
+          "v2_zugang_und_teilnahmevoraussetzungen_anmeldung_erforderlich": "09b7b76115ee9606fcac387f5754b3538b7c3ed53131a46c3ac9cea4a499ca5f",
+          "v2_zugang_und_teilnahmevoraussetzungen_kostenpflichtig": "5c6a4fb8b5a0dcc7393dd81fb7ffc599034d8b3dbd75508cb4f3ad5c1ab2dd08",
+          "v2_zugang_und_teilnahmevoraussetzungen_kostenlos": "26a118619eabcd41395570c59e4663a51111165f1a27d85bcf4bbc24d4f957fe",
+          "v2_zugang_und_teilnahmevoraussetzungen_geschlossene_gruppe": "bf83fc362ec7eaac96de941c925051d65c8c3460ba328f6f978a4f7d2ba4a0a2",
+          "v2_zugang_und_teilnahmevoraussetzungen_begleitperson_erforderlich": "158d4e46c1d57a16e460cb76a4ae7a5cc578d414018e05b06190c3eb1d6a73b1",
+          "v2_zugang_und_teilnahmevoraussetzungen_kinderbetreuung_vorhanden": "751d69651ea9e478e75c760ba891c6b20311bb153f703f025baa5971c3e5dc44",
+          "v2_zugang_und_teilnahmevoraussetzungen_barrierefrei_zuganglich": "ca0331933c66666e857a065707401e98fb8623173bb73b9857c0337030021ee3",
+          "v2_zeitlicher_charakter_einzelveranstaltung": "2b4aca92f6bf58ae90cf02bace3b8f7e100681db8018e153a87328cdb382b282",
+          "v2_zeitlicher_charakter_regelma_ige_veranstaltung": "7b3e1f72c3ae5bb3e12aeb5d2e5d1f013d6dd707d87aa649ef3db53564f2384e",
+          "v2_zeitlicher_charakter_mehrteiliger_kurs": "c4d138d8af47847ab2939dc5c302a50453fa3b6bf7f1dece025c2f4adae8be8f",
+          "v2_zeitlicher_charakter_mehrtagige_veranstaltung": "932f8d3b5d5860dd8d7b083fcd9355555978ad91e2ffc688689b52437734e334",
+          "v2_zeitlicher_charakter_offener_einstieg_moglich": "d93ee69271294f2ea43494ae766e28d7050ef4b1cef3be8e479eeea073d1617a",
+          "v2_zeitlicher_charakter_verbindliche_teilnahme_uber_mehrere_termine": "1f3c58f3e362f9a47f9fb27e0cecedb72c13ab5a6a44e4887d3ab3655e1b8f97",
+          "v2_charakter_und_ziel_gemeinschaft_erleben": "23fcc9da88c8221422c58d849a4bbd398d1fe7ad34483c3c4d1c6a7010b234c1",
+          "v2_charakter_und_ziel_glauben_vertiefen": "4b04a58024601381c22f54afe04f11b01aa22b8c33e8c22889c6e55a15b62b34",
+          "v2_charakter_und_ziel_wissen_erwerben": "5a7e4b3479f5b1129e99ad32354d33c03bc7031252ce0946f632720ee6ebe960",
+          "v2_charakter_und_ziel_beten": "9eb91d9b7f7d7ace34a6d72a1c0f292b2cbb2376b4f8c94e48b6efa5fffcadd3",
+          "v2_charakter_und_ziel_sakramente_empfangen": "854df0e054aeab43c5447fe004a936f22ee7c3f5d572c5ddc7ad9813bbfb30fd",
+          "v2_charakter_und_ziel_sich_austauschen": "b9b6e256113a568b20a17b4a57719952c70f34a3752ee9676f4a1a6fedc9a419",
+          "v2_charakter_und_ziel_praktisch_mitarbeiten": "c9ddfb86830676d5356562ba2af0b40ca6033a7d7909321da43c91b78af2feed",
+          "v2_charakter_und_ziel_anderen_helfen": "7816f8c4d1b34684bb5347a4c17ad3f4806b822d8a1284ce7b48e12cd8480cce",
+          "v2_charakter_und_ziel_zur_ruhe_kommen": "43d3993051edbf2dcbd829b0f9786041199cd60e7188431e25fa726cd23c6a4b",
+          "v2_charakter_und_ziel_freizeit_gestalten": "e41425632c13e9ca10d7889ebfdc3f1790d0ac0bc5e6fedb8527bcacc770ae87",
+          "v2_vorkenntnisse_stufe": "42ef243cdbef5085156a202b256dc968b1ac4e1113ed51cc00669a5b192492b1",
+          "v2_teilnahmeort_form": "c5e61b4fba7951bfc20b9d6c1ff932226fc6c39c1c49f0798fdebd266a7d9dc4"
+        },
+        "usage": {
+          "input_tokens": 13242,
+          "output_tokens": 0,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_write_12h_tokens": 0,
+          "total_tokens": 13242
+        },
+        "estimated_cost_usd": 0.0013242
+      },
+      "classification_hash": "b7e16ea442cb12247d8f4b8929fd5aa382cfcad276b2e384af3407c3453c82a9",
+      "last_attempt_hash": "b7e16ea442cb12247d8f4b8929fd5aa382cfcad276b2e384af3407c3453c82a9",
+      "classification_status": "success"
     }
   },
   "active_questionnaire": {
@@ -131019,12 +132025,12 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-10-31T18:50:23.043510+00:00",
+  "last_sync_at": "2026-10-31T19:57:55.677736+00:00",
   "last_run": {
-    "mode": "refresh",
+    "mode": "delta",
     "source_count": 130,
-    "queued": 0,
-    "classified": 0,
+    "queued": 1,
+    "classified": 1,
     "failures": [],
     "remaining": 0
   },
