@@ -9,7 +9,7 @@ from .scrape import fetch_events
 from .regnum_scrape import fetch_events as fetch_regnum_events
 from .classify import classify, choose_model
 from .groq_compare import invoke as invoke_groq
-from .openai_classify import classify_openai, MODEL as OPENAI_MODEL
+from .decisions_classify import classify_decisions, MODEL as OPENAI_MODEL
 from .config import settings, run_count, log_run, next_run_id, save_history, save_classification_details
 from .sheets import publish
 
@@ -91,7 +91,7 @@ def main():
                 usage.update({"input_tokens": response["input_tokens"], "output_tokens": response["output_tokens"], "thinking_tokens": 0,
                               "total_tokens": response["input_tokens"] + response["output_tokens"]})
             elif provider == "openai":
-                tags = classify_openai(event, provider_key, config, usage_sink=usage)
+                tags = classify_decisions(event, provider_key, config, usage_sink=usage)
             else:
                 tags = classify(event, provider_key, model, config["tags"], config["additional_tags_enabled"],
                                 config["gemini_prompt"], config["gemini_temperature"], config["max_additional_tags"], usage_sink=usage, synonyms=config["tag_synonyms"])
@@ -108,8 +108,8 @@ def main():
             print(f'[timing] classify_event={idx}/{len(events)} duration={time.perf_counter()-t0:.3f}s',flush=True)
             for name in usage_total:
                 usage_total[name] += usage.get(name, 0)
-            input_cost = price(usage.get("input_tokens",0), config["cost_input_per_million_usd"])
-            output_cost = price(usage.get("output_tokens",0)+(usage.get("thinking_tokens",0) if provider == "gemini" else 0), config["cost_output_per_million_usd"])
+            input_cost = price(usage.get("input_tokens",0), "0.10" if provider == "openai" else config["cost_input_per_million_usd"])
+            output_cost = price(usage.get("output_tokens",0)+(usage.get("thinking_tokens",0) if provider == "gemini" else 0), "0" if provider == "openai" else config["cost_output_per_million_usd"])
             cost = round(input_cost + output_cost, 8) if provider in ("gemini", "openai") and input_cost is not None and output_cost is not None else ""
             results.append({"event": event, "tags": tags, "usage": usage, "estimated_cost_usd": cost, "status": "ok", "criteria_scores": scores,
                             "relevance_score": relevance_score, "relevance_status": relevance_status})
