@@ -96,3 +96,14 @@ a:hover{color:var(--rc-red-deep)}
 .chips .no-hits{background:#f6f6f6;border-color:#e5e5e5;color:#666}
 @media(max-width:780px){.filters{grid-template-columns:1fr 1fr}}
 @media(max-width:460px){.filters{grid-template-columns:1fr}}
+
+/* Individual criterion relevance: matching, uncertain, low and unavailable. */
+.match-chip.match-relevant{background:#e7f4eb;color:#17613a;border-color:#b7dec4}
+.score-relevant .track div{background:#26834c}
+.score-review .track div{background:#cc920f}
+.score-irrelevant .track div{background:#c45353}
+.score-unknown .track div{background:#9a9a9a}
+.score-relevant .score-head b{color:#17613a}
+.score-review .score-head b{color:#876000}
+.score-irrelevant .score-head b{color:#a43b3b}
+.score-unknown .score-head b{color:#696969}
