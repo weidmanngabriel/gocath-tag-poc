@@ -68,13 +68,13 @@ Bei schmalen Ansichten (bis 760 px) erscheinen Eingaben und Dropdowns im Bereich
 
 ## Mobile Ergebnisdarstellung
 
-Die Ergebnisse eines ausgewählten Runs nutzen auf Smartphones die verfügbare Bildschirmbreite. Die Ergebnistabelle bleibt auch mobil eine Tabelle mit horizontaler Scrollmöglichkeit innerhalb der Karte. Die Tabellenzellen haben begrenzte Breiten und umbrechende Texte; Suchfeld und Tabellencontainer nutzen die volle verfügbare Kartenbreite. Die Suchfunktion und die Daten bleiben unverändert. Auf größeren Bildschirmen bleibt die Tabelle bestehen.
+Die Ergebnisansicht zeigt nun responsive Veranstaltungskarten statt einer breiten, horizontal scrollbar Tabelle. Filter für Run-ID, Relevanzstatus, nachgewiesene Treffer in einem Bereich sowie die bestehende Suche stehen oberhalb der Liste. Jede Veranstaltung hat eine aufklappbare Detailansicht; alle Einzelbewertungen werden alphabetisch nach Kategorie gruppiert und innerhalb der Kategorie nach Score absteigend sortiert. Niedrige Scores werden nicht versteckt; der Kategorie-Filter beeinflusst ausschließlich die Ergebnisliste und nicht den gespeicherten Datenbestand. Historische Läufe ohne Kriterienscores bleiben sichtbar und erscheinen als „Nicht bewertet“.
 
-Mobil sind die ersten beiden Ergebnisspalten schmaler als bisher (Veranstaltung und Standard-Tags); weitere Tags und Begründung erhalten relativ mehr Platz in der horizontal scrollbar Tabelle.
 
-## Begründungen im Dialog
+## Begründungen und Detailansicht
 
-In der Ergebnis-Tabelle zeigt die Spalte Begründung nur einen Button „Anzeigen“. Dieser öffnet einen Dialog mit der vollständigen KI-Begründung und einem Schließen-Button. Die zusätzlichen Tags erhalten dadurch mehr Tabellenbreite. Auf kleinen Displays bleibt die Tabelle horizontal scrollbar; Klassifizierung und gespeicherte Daten ändern sich nicht.
+Die historische Begründung befindet sich jetzt im aufklappbaren Veranstaltungsdetail statt in einem separaten Dialog. Dort sind außerdem Legacy-Tags, ein Link zur Originalveranstaltung und sämtliche Kriterienscores einschließlich aller Decisions-Antwortverteilungen sichtbar.
+
 
 ## Anbieterabhängige Konfigurationsfelder
 
@@ -96,3 +96,9 @@ OpenAI-Läufe verwenden jetzt die Decisions API. Der Ergebnis-Tab zeigt die Einz
 Im Tab **Kriterien** ersetzt ein Karteneditor die bisherige breite Kriterien-Tabelle. Fragen haben bearbeitbare Titel, Bereiche, Beschreibungen und die Typen `predicate`, `choice` und `score`. Für Auswahlfragen und Skalen wird je Antwort eine Regel über eine Zeile `Antwort | Wähle diese Antwort, wenn …` festgelegt. Neue Fragen lassen sich hinzufügen. Felder speichern auf Blur bzw. Change direkt in den bestehenden Sheet-Tab `Criteria`. `choice`/`score` verwenden Gewicht 0, da ihre Ergebnisse aktuell nicht direkt in den Relevanzstatus eingehen.
 
 Im Ergebnisdetail zeigt das Dashboard für `choice` und `score` die komplette Antwortverteilung als beschriftete Balken sowie den gewählten Wert beziehungsweise Mittelwert und die separat gemeldete Konfidenz. `ClassificationDetails!N:O` enthält `question_type` und `answer_json`; alte Zeilen ohne diese Werte bleiben sichtbar. Alle Antwortmöglichkeiten einschließlich niedriger Wahrscheinlichkeiten bleiben gespeichert. Fehlende Wahrscheinlichkeitsverteilungen sind ein Klassifizierungsfehler, keine Einladung zum Weglassen.
+
+## Gruppierter Fragebogen und Ergebnis-Karten
+
+Die Kategorien aus `Criteria.category` erzeugen dynamisch eigene Untertabs. Tabs und Fragen werden mit deutscher Sortierung alphabetisch sortiert. Es werden **keine Zeilen im Google Sheet umsortiert**: Jedes Eingabefeld behält seine ursprüngliche reale Zeilennummer, sodass Autosave immer die richtige Frage aktualisiert. Neu hinzugefügte Fragen erscheinen nach erneutem Laden in ihrem jeweiligen Kategorie-Tab. Die Fragetypen werden in lesbaren Namen angezeigt, nicht nur als technische Metadaten.
+
+Die Ergebnisansicht ersetzt die breite Tabelle durch Veranstaltungskarten mit Status, Relevanzwert und den wichtigsten nachgewiesenen Merkmalen. Eine zweite, aufklappbare Ebene zeigt alle Kriterien nach Kategorie und Score. Die Suche und Filter wirken nur auf die aktuelle Run-ID; alle Events bleiben im Sheet erhalten. Bei `choice` und `score` werden sämtliche Antwortwahrscheinlichkeiten weiterhin angezeigt.
