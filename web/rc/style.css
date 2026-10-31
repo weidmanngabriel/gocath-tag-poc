@@ -78,3 +78,10 @@ a:hover{color:var(--rc-red-deep)}
 /* Stable text wordmark until a verified, locally hosted official logo is available. */
 .rc-brand{display:inline-flex;align-items:center;min-height:42px}
 .rc-brand-name{display:inline-block;white-space:normal;line-height:1.15;font-size:clamp(1.4rem,4vw,1.8rem)}
+
+/* Semantic relevance states; red is reserved for low relevance, not every event. */
+.status{border:1px solid transparent}
+.status-relevant{background:#e6f4eb;color:#17613a;border-color:#bde2c9}
+.status-review{background:#fff4d8;color:#805600;border-color:#f0dda5}
+.status-irrelevant{background:#fbe8e8;color:#962b2b;border-color:#eac0c0}
+.status-unknown{background:#f1f1f1;color:#5d5d5d;border-color:#dedede}
