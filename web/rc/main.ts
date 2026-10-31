@@ -27,7 +27,7 @@ function card(item:Event){
   const visible=entries.slice(0,2);
   const more=entries.slice(2);
   const chip=(s:Score)=>`<span class="match-chip match-${scoreColor(s)}">${esc(s.label)} · ${pct(s.score)}</span>`;
-  return `<section class="match-group" aria-label="${esc(group)}"><div class="match-group-heading"><strong>${esc(group)}</strong></div><div class="match-list">${visible.map(chip).join("")}${more.length?`<details class="match-more"><summary>+${more.length}</summary><div class="match-list">${more.map(chip).join("")}</div></details>`:""}</div></section>`;
+  return `<section class="match-group" aria-label="${esc(group)}"><div class="match-group-heading"><strong>${esc(group)}</strong></div><div class="match-list">${visible.map(chip).join("")}${more.length?`<details class="match-more"><summary>+${more.length}</summary><div class="match-more-items">${more.map(chip).join("")}</div></details>`:""}</div></section>`;
  }).join("");
  const tabs=[...groups,"Beschreibung"];
  const buttons=tabs.map((g,i)=>`<button type="button" role="tab" id="tab-${esc(item.id)}-${i}" aria-controls="panel-${esc(item.id)}-${i}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-tab="${i}">${esc(g)}</button>`).join("");
