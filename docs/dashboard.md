@@ -108,3 +108,7 @@ Die Ergebnisansicht ersetzt die breite Tabelle durch Veranstaltungskarten mit St
 ## Auswahl ist kein positiver Treffer
 
 `choice` und `score` sind typisierte Ergebnisse, keine binären Merkmalsnachweise. Die bisherige Darstellung (z. B. „Hauptformat: 98 %“ als grüner Treffer) war irreführend: 98 % ist die Modellwahrscheinlichkeit der gewählten Alternative (auch wenn diese „Sonstiges“ lautet), **keine** Relevanz des Formats und kein katholischer Relevanzbeitrag. Die Ergebnis-Karten zeigen jetzt ausdrücklich „Hauptformat: Sonstiges · 98 % Modellanteil“ als neutrale Auswahl. Nur `predicate`-Fragen zählen als Treffer; auch alte gespeicherte Zeilen mit `choice.matched=true` werden bei der Anzeige korrigiert, ohne historische Daten zu überschreiben. Die vollständige Auswahlverteilung bleibt unter „Alle Bewertungen“ sichtbar. Das künftig gespeicherte `matched`-Feld wird nur für `predicate` gesetzt. Die abgeleitete katholische Relevanz bleibt davon unabhängig.
+
+## Bedeutung der Relevanzbewertung
+
+Die Relevanzbewertung beschreibt ausschließlich, wie eindeutig die Veranstaltung aus ihrem Beschreibungstext als katholisch relevant eingeordnet und automatisch klassifiziert werden kann. Hohe Werte belegen keine hohe sprachliche oder werbliche Textqualität und erlauben keine Aussage über Attraktivität oder tatsächliche Teilnahme. Eine Bewertung der Textqualität wäre eine unabhängige Kennzahl.
