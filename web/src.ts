@@ -207,6 +207,14 @@ function render(){
 <div class="option-editor" ${!["choice","score"].includes(r[7])?"hidden":""}><label>Antwortmöglichkeiten und Regeln<textarea rows="5" data-criterion-row="${row}" data-criterion-col="I" placeholder="Antwort | Wähle diese Antwort, wenn …">${safe(optionsLines(r[8]||""))}</textarea></label><small>Eine Option pro Zeile. Einzelauswahl: 2–255 Antworten; Skala: 2–10 geordnete Stufen. Zuerst die Optionen eintragen, dann den Fragetyp umstellen.</small></div>
 <label>Relevanzgewicht (nur Wahrscheinlichkeit)<input type="number" min="0" max="3" step="0.1" data-criterion-row="${row}" data-criterion-col="F" ${["choice","score"].includes(r[7])?"disabled":""} value="${safe(r[5]||"0")}"/></label>
 <label>Trefferschwelle<input type="number" min="0" max="1" step="0.05" data-criterion-row="${row}" data-criterion-col="G" value="${safe(r[6]||"0.65")}"/></label><small class="muted">ID: ${safe(r[0])}</small></div></details>`).join("")}</div></section>`).join("")}</div>
+<details class="question-card"><summary><strong>+ Mehrfachfrage (Predicates) hinzufügen</strong></summary>
+<div class="question-fields"><p class="hint">Eine gemeinsame Frage mit mehreren unabhängig bewerteten Antworten. Für jede Antwort wird automatisch ein Predicate erzeugt.</p>
+<label>Dimension<input id="multiCategory" value="Zielgruppe" placeholder="z. B. Zielgruppe"/></label>
+<label>Übergeordnete Frage<input id="multiTitle" placeholder="An wen richtet sich die Veranstaltung speziell?"/></label>
+<label>Gemeinsame KI-Anweisung<textarea id="multiDescription" rows="3" placeholder="Bewerte ausschließlich ausdrücklich angesprochene Zielgruppen."></textarea></label>
+<label>Antwortmöglichkeiten und jeweilige Beschreibung<textarea id="multiOptions" rows="8" placeholder="Ehepaare | Die Veranstaltung richtet sich ausdrücklich an verheiratete Paare.&#10;Einzelpersonen | Angebot richtet sich gezielt an einzelne Teilnehmer."></textarea></label>
+<label>Trefferschwelle<input id="multiThreshold" type="number" min="0" max="1" step="0.05" value="0.65"/></label>
+<button id="addMultiQuestion" type="button">Alle Predicates hinzufügen</button></div></details>
 <details class="question-card"><summary><strong>+ Neue Frage hinzufügen</strong></summary><div class="question-fields">
 <label>Titel<input id="questionTitle" placeholder="z. B. Veranstaltungsformat"/></label>
 <label>Bereich<input id="questionCategory" value="Format"/></label>
@@ -347,6 +355,35 @@ function render(){
      await api(API+"/values/"+encodeURIComponent("Criteria!A"+row+":I"+row)+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({values})});
      await load();status("Frage hinzugefügt");
    }catch(e){status("Nicht gespeichert: "+String(e),true);}
+ });
+ document.querySelector<HTMLButtonElement>("#addMultiQuestion")?.addEventListener("click",async()=>{
+  const category=document.querySelector<HTMLInputElement>("#multiCategory")?.value.trim()||"Sonstiges";
+  const title=document.querySelector<HTMLInputElement>("#multiTitle")?.value.trim()||"";
+  const description=document.querySelector<HTMLTextAreaElement>("#multiDescription")?.value.trim()||"";
+  const raw=document.querySelector<HTMLTextAreaElement>("#multiOptions")?.value||"";
+  const threshold=Number(document.querySelector<HTMLInputElement>("#multiThreshold")?.value||"0.65");
+  const options=raw.split(/\\r?\\n/).map(v=>v.trim()).filter(Boolean).map(line=>{
+    const idx=line.indexOf("|");
+    return {label:(idx<0?line:line.slice(0,idx)).trim(),description:(idx<0?"":line.slice(idx+1)).trim()};
+  });
+  if(!title||!description||!options.length||options.some(o=>!o.label||!o.description)){status("Frage, Beschreibung und alle Antwortbeschreibungen sind erforderlich.",true);return;}
+  if(!Number.isFinite(threshold)||threshold<0||threshold>1){status("Ungültige Trefferschwelle",true);return;}
+  if(criteria.slice(1).filter(r=>r[0]).length+options.length>400){status("Maximal 400 Kriterien möglich",true);return;}
+  const ids=new Set(criteria.slice(1).map(r=>r[0]));
+  const slug=(value:string)=>value.toLocaleLowerCase("de").normalize("NFKD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,35);
+  const values=options.map(o=>{
+    const stem="q_"+slug(category+"_"+o.label);
+    let id=stem||"q_new",n=2;while(ids.has(id))id=stem+"_"+n++;
+    ids.add(id);
+    return [id,category,o.label,title+". "+description+" "+o.description,"true","0",String(threshold),"predicate",""];
+  });
+  try{
+    status("Speichert "+values.length+" Predicate-Fragen …");
+    const start=Math.max(2,criteria.length+1);
+    const end=start+values.length-1;
+    await api(API+"/values/"+encodeURIComponent("Criteria!A"+start+":I"+end)+"?valueInputOption=RAW",{method:"PUT",body:JSON.stringify({values})});
+    await load();status(values.length+" Predicate-Fragen hinzugefügt");
+  }catch(e){status("Nicht gespeichert: "+String(e),true);}
  });
  // Save ordinary settings and legacy tag fields on blur/change.
  document.querySelectorAll<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>("[data-setting]").forEach(input=>{
