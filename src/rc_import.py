@@ -44,9 +44,9 @@ def event_container(anchor):
     return candidate
 
 def clean_text(text):
-    text=re.sub(r"(?i)Sie haben einen Fehler entdeckt\\?.*?Teilen Sie uns diesen bitte mit\\.?"," ",text)
-    text=re.sub(r"(?i)\\b(?:last updated|last viewed|seitenaufrufe)\\s*:?\\s*\\S+"," ",text)
-    text=re.sub(r"[\\w.+-]+@[\\w.-]+\\.[a-zA-Z]{2,}"," ",text)
+    text=re.sub(r"(?i)Sie haben einen Fehler entdeckt\?.*?Teilen Sie uns diesen bitte mit\.?"," ",text)
+    text=re.sub(r"(?i)\b(?:last updated|last viewed|seitenaufrufe)\s*:?\s*\S+"," ",text)
+    text=re.sub(r"[\w.+-]+@[\w.-]+\.[a-zA-Z]{2,}"," ",text)
     return canonical_text(text)
 
 def parse_cards(html):
@@ -61,9 +61,9 @@ def parse_cards(html):
         text=clean_text(container.get_text(" ",strip=True))
         if len(text)<60:continue
         description=text.replace(title,"",1).strip()[:6500]
-        audience=sorted(set(re.findall(r"Familien|Jugendliche[^,.;]{0,35}|Junge Männer[^,.;]{0,30}|Junge Frauen[^,.;]{0,30}|Paare & Ehepaare|Männer \\(27\\+\\)|Frauen \\(27\\+\\)|Kinder \\(0-11\\)|Jungen \\(0-11\\)|Mädchen \\(0-11\\)",text)))
-        date=re.search(r"\\b\\d{1,2}\\.\\d{1,2}\\.20\\d{2}\\b",text)
-        address=re.search(r"\\bAdresse\\b\\s+(.{1,100}?)(?:\\b(?:Deutschland|Österreich|Sie haben|anmelden)\\b|$)",text)
+        audience=sorted(set(re.findall(r"Familien|Jugendliche[^,.;]{0,35}|Junge Männer[^,.;]{0,30}|Junge Frauen[^,.;]{0,30}|Paare & Ehepaare|Männer \(27\+\)|Frauen \(27\+\)|Kinder \(0-11\)|Jungen \(0-11\)|Mädchen \(0-11\)",text)))
+        date=re.search(r"\b\d{1,2}\.\d{1,2}\.20\d{2}\b",text)
+        address=re.search(r"\bAdresse\b\s+(.{1,100}?)(?:\b(?:Deutschland|Österreich|Sie haben|anmelden)\b|$)",text)
         events[key]={
             "url":"https://www.regnumchristi.eu/demnaechst/?vid="+key[3:],
             "title":title,"description":description,"target_groups":audience,
