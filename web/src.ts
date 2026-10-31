@@ -137,10 +137,14 @@ function choiceName(d:string[]):string {
   return opts.find(x=>x.value===selected)?.value||selected;
  }catch{return "";}
 }
+function isRetiredQuestion(id:string):boolean {
+ const row=criteria.slice(1).find(r=>r[0]===id);
+ return Boolean(row&&row[4]?.toLowerCase()!=="true");
+}
 function renderCriterionDetail(d:string[]):string{
  const type=d[13]||"predicate",value=sheetNumber(d[8]);
  const label=safe(d[7]||d[5]||"");
- if(type==="choice")return `<div class="criterion-result criterion-choice"><div class="criterion-result-head"><strong>${label}</strong><span class="criterion-type">Einzelauswahl</span></div>${answerDistribution(d[14]||"",type)}</div>`;
+ if(type==="choice")return `<div class="criterion-result criterion-choice"><div class="criterion-result-head"><strong>${label}</strong><span class="criterion-type">${isRetiredQuestion(d[5])?"Historische Auswahl · deaktiviert":"Einzelauswahl"}</span></div>${isRetiredQuestion(d[5])?'<p class="hint">Frühere Einzelauswahl: Die relative Verteilung kann nicht zeigen, dass keines der Formate zutrifft.</p>':""}${answerDistribution(d[14]||"",type)}</div>`;
  if(type==="score")return `<div class="criterion-result criterion-choice"><div class="criterion-result-head"><strong>${label}</strong><span class="criterion-type">Bewertungsskala</span></div>${answerDistribution(d[14]||"",type)}</div>`;
  return `<div class="criterion-result"><div class="criterion-result-head"><strong>${label}</strong><span>${percent(String(value))}</span></div><div class="answer-track"><div class="answer-fill" style="width:${Math.max(0,Math.min(100,value*100))}%"></div></div>${d[12]?`<p class="hint">${safe(d[12])}</p>`:""}</div>`;
 }
@@ -148,7 +152,8 @@ function renderEventCard(r:string[]):string{
  const ds=matchingDetails(r[0],r[1]),info=relevanceInfo(ds[0]?.[11]||""),score=ds[0]?.[10];
  const positives=ds.filter(isPositiveMatch);
  const top=positives.sort((a,b)=>sheetNumber(b[8])-sheetNumber(a[8])).slice(0,4);
- const choices=ds.filter(d=>d[13]==="choice");
+ // Do not promote retired forced-choice answers as current event characteristics.
+ const choices=ds.filter(d=>d[13]==="choice"&&!isRetiredQuestion(d[5]));
  const groups=[...new Set(ds.map(d=>d[6]||"Sonstiges"))].sort(germanSort.compare);
  const body=groups.map(group=>{
    const items=ds.filter(d=>(d[6]||"Sonstiges")===group).sort((a,b)=>sheetNumber(b[8])-sheetNumber(a[8]));
