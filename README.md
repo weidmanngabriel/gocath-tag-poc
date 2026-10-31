@@ -1,4 +1,4 @@
-Die Startseite des Dashboards ist nun ausschließlich ein OAuth-basierter Editor für den RC-Fragebogen in `Criteria`; alte Run-/Tag-/Konfigurationsansichten wurden aus der Oberfläche entfernt. Bestehende Fragen lassen sich bearbeiten. Neue Fragen können direkt im Google Sheet hinzugefügt werden. Historische POC-Texte weiter unten dienen der Dokumentation, nicht als aktuelle Betriebsanleitung.
+Die Startseite des Dashboards ist nun ausschließlich ein OAuth-basierter Editor für den RC-Fragebogen in `Criteria`; alte Run-/Tag-/Konfigurationsansichten wurden aus der Oberfläche entfernt. Bestehende Fragen lassen sich bearbeiten. Neue Fragen können direkt im Editor hinzugefügt werden. Historische POC-Texte weiter unten dienen der Dokumentation, nicht als aktuelle Betriebsanleitung.
 
 # GoCath RC-Kriterieneditor
 
