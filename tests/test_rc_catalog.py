@@ -44,3 +44,17 @@ class CatalogTests(unittest.TestCase):
         html='<section><a href="/demnaechst/?vid=123">Jugendgebetsabend</a><p>Gemeinsames Gebet und geistliches Leben mit Austausch in der Gemeinde und einer Feier für Jugendliche.</p><p>Adresse Wien Österreich</p></section>'
         result=parse_cards(html)
         self.assertIn("rc-123",result)
+
+    def test_calendar_without_semantic_card_wrapper(self):
+        from src.rc_import import parse_cards
+        html = ('<div><a href="/demnaechst/?vid=33">Gebetsabend</a></div>'
+                '<p>Gemeinsames Gebet am Freitag mit anschließendem geistlichen '
+                'Austausch für Familien und Jugendliche.</p>'
+                '<p>Adresse Kirche Berlin Deutschland</p>'
+                '<div><a href="/demnaechst/?vid=34">Sommerfreizeit</a></div>'
+                '<p>Eine Freizeit für Jugendliche mit Ausflügen und gemeinsamen '
+                'Aktivitäten und Spielen.</p><p>Adresse Wien Österreich</p>')
+        cards=parse_cards(html)
+        self.assertEqual(set(cards), {"rc-33","rc-34"})
+        self.assertIn("geistlichen",cards["rc-33"]["description"])
+        self.assertNotIn("Sommerfreizeit",cards["rc-33"]["description"])
