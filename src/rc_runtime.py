@@ -1,5 +1,5 @@
 """Manual RC catalog workflow."""
-import argparse,json,os
+import argparse,copy,json,os
 from pathlib import Path
 from .rc_catalog import read,write,publish_questions,start_campaign,sync,public_feed
 from .config import settings
@@ -39,6 +39,7 @@ def main():
     p.add_argument("--confirm",default="")
     a=p.parse_args()
     state=read(a.state)
+    before=copy.deepcopy(state)
     _,editable=settings(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"],os.environ["GOOGLE_SHEET_ID"])
     if a.mode=="publish-questions":
         revision=publish_questions(state,editable)
@@ -57,6 +58,12 @@ def main():
         result=sync(state,events,lambda event,config,usage:
             classify_with_fallback(event,os.environ["GOCATH_OPENAI"],config,usage),max_paid=a.max_paid,mode=mode)
         print(json.dumps(result,ensure_ascii=False))
+    def material(data):
+        return {key:value for key,value in data.items() if key not in ("last_run","last_sync_at")}
+    if material(before)==material(state):
+        print("No catalog changes; skipping rc-data publication",flush=True)
+        Path("state/rc-no-changes.flag").write_text("unchanged",encoding="utf-8")
+        return
     write(a.state,state)
     dest=Path(a.public)
     dest.parent.mkdir(parents=True,exist_ok=True)

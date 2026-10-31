@@ -138,3 +138,28 @@ class CatalogTests(unittest.TestCase):
         new_revision=publish_questions(state,second)
         self.assertNotEqual(old_revision,new_revision)
         self.assertEqual(public_feed(state)["questionnaire"]["criteria"][0]["label"],"Neu")
+
+    def test_model_failure_is_retried_only_after_content_change(self):
+        state={"schema_version":1,"events":{}}
+        publish_questions(state,{"criteria":[{"id":"prayer","weight":1}]})
+        event={"url":"https://www.regnumchristi.eu/demnaechst/?vid=81","title":"Gebet","description":"Text"}
+        calls=[]
+        def broken(e,c,u):
+            calls.append(e["description"])
+            raise ValueError("Decisions answer type mismatch for prayer: expected predicate, got 'refusal'")
+        first=sync(state,[event],broken)
+        self.assertEqual(first["queued"],1)
+        self.assertTrue(first["failures"][0]["retry_on_change_only"])
+        self.assertEqual(sync(state,[event],broken)["queued"],0)
+        changed=dict(event,description="Text geändert")
+        self.assertEqual(sync(state,[changed],broken)["queued"],1)
+        self.assertEqual(len(calls),2)
+
+    def test_transport_failure_can_retry(self):
+        state={"schema_version":1,"events":{}}
+        publish_questions(state,{"criteria":[{"id":"prayer","weight":1}]})
+        event={"url":"https://www.regnumchristi.eu/demnaechst/?vid=82","title":"Gebet","description":"Text"}
+        def outage(e,c,u):
+            raise RuntimeError("OpenAI Decisions API HTTP 503")
+        self.assertFalse(sync(state,[event],outage)["failures"][0]["retry_on_change_only"])
+        self.assertEqual(sync(state,[event],outage)["queued"],1)
