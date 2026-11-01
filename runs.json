@@ -260,6 +260,27 @@
       },
       "pricing_model": "gpt-6-luna",
       "cost_note": "Estimate based on configured per-million-token prices; not an API invoice"
+    },
+    {
+      "kind": "tagging",
+      "run_id": "41283326663",
+      "started_at": "2026-11-01T07:05:02.920545+00:00",
+      "finished_at": "2026-11-01T07:05:45.921165+00:00",
+      "mode": "retag",
+      "source_count": 127,
+      "queued": 118,
+      "attempted": 10,
+      "tagged": 10,
+      "failed": 0,
+      "usage": {
+        "input_tokens": 18556,
+        "output_tokens": 2042,
+        "total_tokens": 20598,
+        "cached_tokens": 0
+      },
+      "pricing_model": "gpt-6-luna",
+      "cost_usd_estimated": 0.0018556,
+      "cost_note": "Estimate using Luna input, cached input and output token prices; null when not configured"
     }
   ]
 }

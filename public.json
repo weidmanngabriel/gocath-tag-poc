@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T06:52:45.124956+00:00",
+  "generated_at": "2026-11-01T07:05:07.790542+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -10011,15 +10011,11 @@
       },
       "tagging": {
         "tags": [
-          "Exerzitien",
-          "Selbstdisziplin",
-          "Ritual",
-          "Spirituelles Wachstum",
+          "Exodus 90",
           "Memento Mori",
-          "Exodus 90 App",
           "Monat der Toten"
         ],
-        "revision": "8045b69a78570da183e71809746948ba0f776a499565617831b7b119b4493a72",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "049dca8c102edf13db0c71235355a1ed54c96d2806ac3c43af34a2c225240218",
         "classification_signature": "7727aa09f6c12ec77dac02471cf5a6b0d9a322d49b59cadfebfd5519bb4dc5ff"
       },
@@ -22315,15 +22311,11 @@
       },
       "tagging": {
         "tags": [
-          "Helden des Glaubens",
-          "Kartbahn",
-          "Patrone des ECYD",
-          "spirituelle Inspiration",
-          "Herausforderungen meistern",
-          "Jungenprogramm",
-          "Glaubensvertiefung"
+          "Kartfahren",
+          "Glaubensvorbilder",
+          "ECYD-Patrone"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "0c55c35ab1da8a5a284e8a386ace64f0b29597ee1b14fcdf0488f591dbd72d8e",
         "classification_signature": "d299e4849658628c9891143c23b9a763eedebc3c09e8112a005029f949578e6a"
       },
@@ -25397,15 +25389,11 @@
       },
       "tagging": {
         "tags": [
-          "Jumphouse",
-          "Glaubenszweifel",
-          "Glaubensgespräche",
           "Glaube im Alltag",
-          "Spirituelle Praxis",
-          "Jugendfreizeit",
-          "Outdoorevents"
+          "Glaubenszweifel",
+          "Jumphouse"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "63b17581a28829e79c1e7de2c34b265dd9d84cc91477024590d3c605fba80d50",
         "classification_signature": "fb6f3c2d33d185eef7d1d1694eba3aaa4fdf8b296e54b22de3e77f26b5aa517f"
       },
@@ -36662,16 +36650,11 @@
       },
       "tagging": {
         "tags": [
-          "Ignatianische Spiritualität",
+          "Ignatianische Exerzitien",
           "Schweigeexerzitien",
-          "Einzelgespräch",
-          "Geistliche Begleitung",
-          "Naturerlebnis",
-          "Emotionales Coaching",
-          "Spirituelle Vertiefung",
-          "Frauenexerzitien"
+          "Einzelgespräch"
         ],
-        "revision": "8045b69a78570da183e71809746948ba0f776a499565617831b7b119b4493a72",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "25a13543694293e5ac5f36b69f81f2b191e44ec6adf0e2f6de51bd99f9275b2b",
         "classification_signature": "c686760380021586daca9c539bf42ba73c7bb704d38bb90009eb9ca6a6e03c38"
       },
@@ -37701,12 +37684,9 @@
         "tags": [
           "Marienerscheinung",
           "Gebet für Verstorbene",
-          "Zeitzeugen",
-          "Emsland",
-          "Familienorientiert",
-          "Geistliche Leitung"
+          "Zeitzeugenberichte"
         ],
-        "revision": "8045b69a78570da183e71809746948ba0f776a499565617831b7b119b4493a72",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "65dc402caed1209553e84e6f54ea58b253d6142bd2f854abb508121e63ab0954",
         "classification_signature": "02a64f119f36aba3354726bd1ad7ba63f84fddc527409bb089804eb2432996ef"
       },
@@ -38732,16 +38712,12 @@
       },
       "tagging": {
         "tags": [
+          "Spider-Man und Glaube",
           "Kinoabend",
           "Geländespiele",
-          "Sportliche Herausforderungen",
-          "Heilige Messe feiern",
-          "Anbetungszeiten",
-          "Christliches Vorbild",
-          "Jungen 11-15 Jahre",
-          "Verantwortungsbewusstsein"
+          "Sportliche Herausforderungen"
         ],
-        "revision": "8045b69a78570da183e71809746948ba0f776a499565617831b7b119b4493a72",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "d1e064fd05ded2bc7ae8daf2ba1d268328788c78b27e81dbc1a887118a68d95f",
         "classification_signature": "7faabaed21e582e860157542038a8d346f89e74f4e7ee5924963dc22bfe5f3b0"
       },
@@ -39768,14 +39744,12 @@
       "tagging": {
         "tags": [
           "Sanftmut",
-          "Gebetsleben vertiefen",
-          "Bowling",
+          "Gebetsleben im Alltag",
           "Abend der Barmherzigkeit",
-          "Challenge",
-          "Get-together",
-          "Morgengebet"
+          "Bowling",
+          "Gemeinschafts-Challenge"
         ],
-        "revision": "8045b69a78570da183e71809746948ba0f776a499565617831b7b119b4493a72",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "a1f92e27c6a24e667606de6c1d95d1cf4560748713ede9adb66f36061e0af4b9",
         "classification_signature": "c2e07e17e3eeeeab7de10ffd990115ed89c0241b7ca7ac313e8385ed2cfb7033"
       },
@@ -106852,16 +106826,9 @@
       },
       "tagging": {
         "tags": [
-          "Jungenfreizeit",
-          "Geistliche Leitung",
-          "Religiöses Wochenende",
-          "Gruppenaufenthalt",
-          "Jugendveranstaltung",
-          "Spirituelle Begleitung",
-          "Kreativangebote",
-          "Workshops"
+          "Jungen von 10 bis 16 Jahren"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "ff9b8eaa0c322520776cb2745980dde826b742117a50e2737794f6679b8d0259",
         "classification_signature": "b93444a7e1a1249c17cedff8d57e86886a9e82155c6b3e307fd260e46a6b7006"
       },
@@ -111097,15 +111064,10 @@
       },
       "tagging": {
         "tags": [
-          "geistliche Begleitung",
-          "Inspiration durch Praxisimpulse",
-          "innere Stärke",
-          "geistliche Vertiefung",
-          "strategisches Projektmanagement",
-          "Herzlicher Austausch",
-          "Spiritualität und Lebensführung"
+          "Geistliche Begleitung",
+          "Innere Stärke"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "95650dce7af169a6bb998ac1ad34f51daf6ed4c1802db20aa1da9fa1ef9ccdb1",
         "classification_signature": "9f7e5d16e6df4b966eb8e8b23c76288f075f7f03e58d698b4f1decfd6df0700f"
       },
@@ -117260,13 +117222,10 @@
       "tagging": {
         "tags": [
           "Firmvorbereitung",
-          "Spirituelle Challenges",
-          "Online-Treffen",
-          "WhatsApp-Gruppe",
-          "ApostelHaus Alzgern",
-          "Persönliches Glaubenswachstum"
+          "Firmung",
+          "Online-Treffen"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "2b1dcfced6b4aecd237a9cdb9349df320b1f1439ac186beaca141c36feb1176f",
         "classification_signature": "c75bef61ad79528a7f35fe068b283fb99bb75fb8a8b43b40e728f179bf903b12"
       },
