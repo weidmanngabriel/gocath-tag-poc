@@ -2,7 +2,7 @@
 **Kriterieneditor (aktuell):** Die Bereiche werden in Tabs gruppiert. Innerhalb der Fragen werden nur Titel, Regel, Fragetyp, passende Antwortoptionen, Relevanzgewicht und Trefferschwelle bearbeitet. Der Bereich bestehender Fragen bleibt intern erhalten. Neue Fragen übernehmen automatisch den aktiven Tab-Bereich. Das Löschen einer Frage erfordert eine Bestätigung und löscht ihre ganze Zeile aus `Criteria`; historische RC-Ergebnisse bleiben davon getrennt. Der Editor hat reduzierte Feldabstände.
 
 
-Die Startseite enthält ausschließlich die Kriterienbearbeitung mit OAuth. Sie lädt und bearbeitet nur `Criteria!A:I`; die historische Ergebnis-, Tag- und Run-Oberfläche wurde entfernt. Fragen können im Editor aktualisiert und neu angelegt werden. Das Original-Sheet wird erst bereinigt, nachdem der aktualisierte Code die CI bestanden hat. Die folgenden Abschnitte beschreiben den historischen POC.
+Die Startseite enthält nach OAuth zwei Haupttabs: **Kriterien** (`Criteria!A:I`) und **Konfiguration** (`Config!A:B`). Beide Tabellen werden geladen; im Konfigurations-Tab lassen sich vorhandene Schlüssel/Wert-Zeilen direkt bearbeiten und beim Verlassen des Feldes speichern. Der technische Tagging-Prompt bleibt im Python-Code; `Config!B7` steuert nur fachliche Hinweise. Die Startseite enthält keine Ergebnisverwaltung; die historische Ergebnis-, Tag- und Run-Oberfläche wurde entfernt. Fragen können im Editor aktualisiert und neu angelegt werden. Das Original-Sheet wird erst bereinigt, nachdem der aktualisierte Code die CI bestanden hat. Die folgenden Abschnitte beschreiben den historischen POC.
 
 # GoCath Tagging Dashboard – einfacher POC
 
