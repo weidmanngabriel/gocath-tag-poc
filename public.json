@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T06:29:17.887711+00:00",
+  "generated_at": "2026-11-01T06:52:15.571758+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -1798,7 +1798,18 @@
         "estimated_cost_usd": 0.0013162,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Männerabend",
+          "Gesprächsabend",
+          "Austausch",
+          "Spiritueller Impuls",
+          "Apostelhaus"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "faaedca369b54fd5e693f85212658c526b886213ee578095a1706505f27f864c",
+        "classification_signature": "cc2a24c3d0ce04b708b15dbd69f2a23aad72e9903c05907840550bf7d8927a85"
+      },
       "inactive": false,
       "stale": false
     },
@@ -7937,7 +7948,21 @@
         "estimated_cost_usd": 0.0013343,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Lebensziele",
+          "Innere Freiheit",
+          "Freundschaft",
+          "Sinnfindung",
+          "Prioritäten setzen",
+          "Aktive Lebensgestaltung",
+          "Reflexion",
+          "Selbstfindung"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "9558bbd9c19ef899f0be4f0560b13f77abc23ade17a9fcd3dfe4743d6a041e93",
+        "classification_signature": "d573c97f08f260159b58f6648f9de1d579e5b9b2b0a635d42229e035852e66a4"
+      },
       "inactive": false,
       "stale": false
     },
@@ -22274,7 +22299,20 @@
         "estimated_cost_usd": 0.0013153,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Helden des Glaubens",
+          "Kartbahn",
+          "Patrone des ECYD",
+          "spirituelle Inspiration",
+          "Herausforderungen meistern",
+          "Jungenprogramm",
+          "Glaubensvertiefung"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "0c55c35ab1da8a5a284e8a386ace64f0b29597ee1b14fcdf0488f591dbd72d8e",
+        "classification_signature": "d299e4849658628c9891143c23b9a763eedebc3c09e8112a005029f949578e6a"
+      },
       "inactive": false,
       "stale": false
     },
@@ -25343,7 +25381,20 @@
         "estimated_cost_usd": 0.0013181,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Jumphouse",
+          "Glaubenszweifel",
+          "Glaubensgespräche",
+          "Glaube im Alltag",
+          "Spirituelle Praxis",
+          "Jugendfreizeit",
+          "Outdoorevents"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "63b17581a28829e79c1e7de2c34b265dd9d84cc91477024590d3c605fba80d50",
+        "classification_signature": "fb6f3c2d33d185eef7d1d1694eba3aaa4fdf8b296e54b22de3e77f26b5aa517f"
+      },
       "inactive": false,
       "stale": false
     },
@@ -40734,7 +40785,20 @@
         "estimated_cost_usd": 0.0013066,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Präventionsschulung",
+          "Kinder- und Jugendschutz",
+          "Hauptamtliche",
+          "Ehrenamtliche",
+          "Regnum Christi",
+          "Schulung für Apostolate",
+          "Gottgeweihte Frauen"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "ce5ec668e5bb8e2c0913581b7b1d7b165998866bcdd45157de0d21982b8414a6",
+        "classification_signature": "717c872e6fef109ebb2a17bc0421916aa8eea31ccdeeefa1521f43c357d4ee7f"
+      },
       "inactive": false,
       "stale": false
     },
@@ -106683,7 +106747,21 @@
         "estimated_cost_usd": 0.0013074,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Jungenfreizeit",
+          "Geistliche Leitung",
+          "Religiöses Wochenende",
+          "Gruppenaufenthalt",
+          "Jugendveranstaltung",
+          "Spirituelle Begleitung",
+          "Kreativangebote",
+          "Workshops"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "ff9b8eaa0c322520776cb2745980dde826b742117a50e2737794f6679b8d0259",
+        "classification_signature": "b93444a7e1a1249c17cedff8d57e86886a9e82155c6b3e307fd260e46a6b7006"
+      },
       "inactive": false,
       "stale": false
     },
@@ -110886,7 +110964,20 @@
         "estimated_cost_usd": 0.0013267,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "geistliche Begleitung",
+          "Inspiration durch Praxisimpulse",
+          "innere Stärke",
+          "geistliche Vertiefung",
+          "strategisches Projektmanagement",
+          "Herzlicher Austausch",
+          "Spiritualität und Lebensführung"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "95650dce7af169a6bb998ac1ad34f51daf6ed4c1802db20aa1da9fa1ef9ccdb1",
+        "classification_signature": "9f7e5d16e6df4b966eb8e8b23c76288f075f7f03e58d698b4f1decfd6df0700f"
+      },
       "inactive": false,
       "stale": false
     },
@@ -112930,7 +113021,20 @@
         "estimated_cost_usd": 0.0013336,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Postkartengestaltung",
+          "Jahresrückblick",
+          "Bilderrahmen kreativ",
+          "Pizza essen",
+          "Schwimmbadbesuch",
+          "Dankbarkeit",
+          "Mädelswochenende"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "5ff391c3e584fefd933fd73149c5280f0dfd0fe1f7cd80759a6484fedff69aad",
+        "classification_signature": "7ffabe1e531e49d58953a3fd954a53fcba3f947108b600c886f6c1eec472254d"
+      },
       "inactive": false,
       "stale": false
     },
@@ -117022,7 +117126,19 @@
         "estimated_cost_usd": 0.001325,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Firmvorbereitung",
+          "Spirituelle Challenges",
+          "Online-Treffen",
+          "WhatsApp-Gruppe",
+          "ApostelHaus Alzgern",
+          "Persönliches Glaubenswachstum"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "2b1dcfced6b4aecd237a9cdb9349df320b1f1439ac186beaca141c36feb1176f",
+        "classification_signature": "c75bef61ad79528a7f35fe068b283fb99bb75fb8a8b43b40e728f179bf903b12"
+      },
       "inactive": false,
       "stale": false
     },
@@ -125460,7 +125576,18 @@
         "estimated_cost_usd": 0.0013123,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "spirituelle Übungen",
+          "Jungenfreizeit",
+          "Persönlichkeitsentwicklung",
+          "glaubensorientiert",
+          "Wochenendseminar"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "89ac090c1cdaebc04643a622579d9c2bdf10a2e6b16ea322266869ff9525b268",
+        "classification_signature": "ccd2f27487f775846cd8957a12ae2a7bc738b56ed9083be3f10103897571ab94"
+      },
       "inactive": false,
       "stale": false
     },
