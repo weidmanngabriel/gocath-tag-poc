@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T07:12:22.851774+00:00",
+  "generated_at": "2026-11-01T07:13:07.780995+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -27571,7 +27571,16 @@
         "estimated_cost_usd": 0.001321,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Rittercamp",
+          "Ritterspiele",
+          "Burgbesichtigung"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "d99fda3afd81acfd2dcf49abc4b7f136ac11c1cf4001953f72f3605cbf517001",
+        "classification_signature": "2080c3e791e7780d5adc842c97508b3104cfc407ac8e47d175fadf3c6760a279"
+      },
       "inactive": false,
       "stale": false
     },
@@ -47148,7 +47157,16 @@
         "estimated_cost_usd": 0.0013352,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Paarcoaching",
+          "Ehekrise"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "d019d0e1c24c4a6aeb3301cfb3f52d32cc87eee2632290cd9600a90884745490",
+        "classification_signature": "d86f3bfa7e31c881b65623c74d43d0001fcc244179e76d647833b999ce2ea072"
+      },
       "inactive": false,
       "stale": false
     },
@@ -57651,7 +57669,18 @@
         "estimated_cost_usd": 0.0013533,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Heilungsgebet",
+          "Einzelsegen",
+          "Fürbittgebet",
+          "Seelsorgegespräche",
+          "Predigten"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "a0f2d5192ff9e5b6ed315b66eb8e465e2db8f895d69763193a889b3b31117af2",
+        "classification_signature": "3d778263fc5d7a15f2f792ef5b8007e8f1d16432e97617a54d1622a5260a3003"
+      },
       "inactive": false,
       "stale": false
     },
@@ -71607,7 +71636,14 @@
         "estimated_cost_usd": 0.001309,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Städtetrip"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "9e379cbab24bc699884af5c79f22edaf3d33ba63e806ecba2231ae47de35043c",
+        "classification_signature": "0e82b1c48fe422b3e158d55b9fc724659a7ea28004686494220d33afe0e3f743"
+      },
       "inactive": false,
       "stale": false
     },
@@ -72630,7 +72666,12 @@
         "estimated_cost_usd": 0.0013072,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "54c73eeb026eb7a1e1c16a400b5646079e62638810aaad4d76bcdfa1d35560e0",
+        "classification_signature": "df6a116c51d6e92bab3051ee8d0a34ba9691ec72133eef95f7a8d1b1aeca63f1"
+      },
       "inactive": false,
       "stale": false
     },
@@ -79927,7 +79968,15 @@
         "estimated_cost_usd": 0.0013102,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Rollstuhlrallye",
+          "Kartfahren"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "2c75b7fea24649991890b6d88f85b210759970f62b0d26b83c4af6c4cc14fff3",
+        "classification_signature": "7c3145b07ff1f7663f57169b0d182741568a380f5a9b3534be189fc1ded62133"
+      },
       "inactive": false,
       "stale": false
     },
@@ -104111,7 +104160,16 @@
         "estimated_cost_usd": 0.0013469,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Priesterweihe",
+          "Primizmesse",
+          "Stadtbesichtigung"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "038d313db3c7fba075e8b8a08e96969d17fef9f9bec40d5625f5bc5cb3c03a3e",
+        "classification_signature": "940c1ebcc5b8f69cb34375ed1190e8855d438a3486fa120d605b0b1a39796a72"
+      },
       "inactive": false,
       "stale": false
     },
@@ -118644,7 +118702,12 @@
         "estimated_cost_usd": 0.0013081,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "d217d812f4f002895828e6b4aa0fdcc6157b2d8e6517d05ce91c2c728b7051e7",
+        "classification_signature": "e42bec34769ba465b6d48a9002261750e8de253271e96e625fc45388ef8dbf78"
+      },
       "inactive": false,
       "stale": false
     },
@@ -120690,7 +120753,14 @@
         "estimated_cost_usd": 0.0013075,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Jungen"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "ab2ad7c66be593d41f161fc1216c7f4ab75c8dc4bb5cfadf1e20e83fbaed7f52",
+        "classification_signature": "0318fbd0b0846d57ffa2c15090559776409fe0580a22f31b55d56fcc108e83ba"
+      },
       "inactive": false,
       "stale": false
     },
@@ -123764,7 +123834,12 @@
         "estimated_cost_usd": 0.0013102,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "284450f2b9cd4b05c7cd2c071d297d5dff4c5f160261eaec6a45fdd2fe2385ec",
+        "classification_signature": "14cca2295e6eb1a8ea8c7823977e8f2a8c6c794a41658a837a024add8cde516e"
+      },
       "inactive": false,
       "stale": false
     },
