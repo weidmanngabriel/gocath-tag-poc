@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 14,
+      "missing_checks": 15,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 14,
+      "missing_checks": 15,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 14,
+      "missing_checks": 15,
       "inactive": true,
       "classification": {
         "scores": [
@@ -79274,7 +79274,17 @@
       },
       "classification_hash": "5178b134b3e01562775db9c543794e1fce58ef18fdcfb939940c9fe7672f0319",
       "last_attempt_hash": "5178b134b3e01562775db9c543794e1fce58ef18fdcfb939940c9fe7672f0319",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Heilige Messe",
+          "Messdiener",
+          "Talentshow"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "5178b134b3e01562775db9c543794e1fce58ef18fdcfb939940c9fe7672f0319",
+        "classification_signature": "8951c7cd4949f379b97a9e42a1354cb4cfdc1a8c02200fd177b425573f0f3c61"
+      }
     },
     "rc-38169": {
       "event": {
@@ -80299,7 +80309,13 @@
       },
       "classification_hash": "cc7c52a1131c5a23986ecfc5bc6bb77856f3613c541dbf9e353422504d387e19",
       "last_attempt_hash": "cc7c52a1131c5a23986ecfc5bc6bb77856f3613c541dbf9e353422504d387e19",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "cc7c52a1131c5a23986ecfc5bc6bb77856f3613c541dbf9e353422504d387e19",
+        "classification_signature": "921c69575e9c1d5c9110686fda455fb80d363dd4a04b00fe5a3aee56b9f94919"
+      }
     },
     "rc-38068": {
       "event": {
@@ -81322,7 +81338,19 @@
       },
       "classification_hash": "0696c26e1ecee98dca3f54f82bdd9a22a471d7498f4662bfb32436a3626b5ac4",
       "last_attempt_hash": "0696c26e1ecee98dca3f54f82bdd9a22a471d7498f4662bfb32436a3626b5ac4",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Evangeliumsbetrachtung",
+          "Unterscheidung der Geister",
+          "Geistliche Einzelbegleitung",
+          "Stillschweigen",
+          "Nachfolge Jesu"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "0696c26e1ecee98dca3f54f82bdd9a22a471d7498f4662bfb32436a3626b5ac4",
+        "classification_signature": "2ca3be302718c6f9490400203d293aa50634bc7e039eb3ef01d882ff2fe8a825"
+      }
     },
     "rc-38235": {
       "event": {
@@ -82347,7 +82375,19 @@
       },
       "classification_hash": "fa94b125086b7871858518d7bfab51e60ea22b632a0455879d814975c9c24654",
       "last_attempt_hash": "fa94b125086b7871858518d7bfab51e60ea22b632a0455879d814975c9c24654",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Innere Heilung",
+          "Heilungsgebet",
+          "Geistliche Begleitung",
+          "Einzelsegen",
+          "Fürbittgebet"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "fa94b125086b7871858518d7bfab51e60ea22b632a0455879d814975c9c24654",
+        "classification_signature": "c75b9a244e2c550aee653cbef14f00eb2a1550af84da70f20c3e1c80bac0a430"
+      }
     },
     "rc-38423": {
       "event": {
@@ -83372,7 +83412,13 @@
       },
       "classification_hash": "2a475db0cfcad1c1b2e4c5eb0cfe10fed8d3b3f6cad382c9efbf887c5b8df7c4",
       "last_attempt_hash": "2a475db0cfcad1c1b2e4c5eb0cfe10fed8d3b3f6cad382c9efbf887c5b8df7c4",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "2a475db0cfcad1c1b2e4c5eb0cfe10fed8d3b3f6cad382c9efbf887c5b8df7c4",
+        "classification_signature": "ce54665e4faee9adee1bc7dabbdbf44d3d5ff1707b75ada72012c2004ae81835"
+      }
     },
     "rc-38219": {
       "event": {
@@ -84397,7 +84443,16 @@
       },
       "classification_hash": "2c5aa9b92000b0a01299e6202ab950c547d4b5f7d1c34a434cce1c395c6c982d",
       "last_attempt_hash": "2c5aa9b92000b0a01299e6202ab950c547d4b5f7d1c34a434cce1c395c6c982d",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Flugreise",
+          "Glaubensreise"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "2c5aa9b92000b0a01299e6202ab950c547d4b5f7d1c34a434cce1c395c6c982d",
+        "classification_signature": "9342e06bc9054a9fc7c2afb597a527766e8cdb18365c793c94ccb584a877b2c2"
+      }
     },
     "rc-38218": {
       "event": {
@@ -85422,7 +85477,17 @@
       },
       "classification_hash": "2a4339b76e259fc092feb8c3da40ba3cc8255435f365fb33b37149822efd93e4",
       "last_attempt_hash": "2a4339b76e259fc092feb8c3da40ba3cc8255435f365fb33b37149822efd93e4",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Karwoche",
+          "Osterfeier",
+          "Papstaudienz"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "2a4339b76e259fc092feb8c3da40ba3cc8255435f365fb33b37149822efd93e4",
+        "classification_signature": "4ec2ac0109b936adff7d251841b37209ea75c6d4dcdae5a31d3d7aa7f46947cf"
+      }
     },
     "rc-38000": {
       "event": {
@@ -86447,7 +86512,19 @@
       },
       "classification_hash": "cc8a5e071f1b7f57289ffb08c604e4b1689264f19739eb239b7e4de8f6a5f0de",
       "last_attempt_hash": "cc8a5e071f1b7f57289ffb08c604e4b1689264f19739eb239b7e4de8f6a5f0de",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Karwoche",
+          "Papstaudienz",
+          "Osterfeier",
+          "Christliche Sehenswürdigkeiten",
+          "Busreise"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "cc8a5e071f1b7f57289ffb08c604e4b1689264f19739eb239b7e4de8f6a5f0de",
+        "classification_signature": "c7400c6acf77c1c4971daa31ec78ef5614af460654aa019bd60edb2ff6204599"
+      }
     },
     "rc-37883": {
       "event": {
@@ -87472,7 +87549,15 @@
       },
       "classification_hash": "220687970d0853a3140ba7219b6a47e320f6b4eb6e591bbd6dd07315bc562964",
       "last_attempt_hash": "220687970d0853a3140ba7219b6a47e320f6b4eb6e591bbd6dd07315bc562964",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Busreise"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "220687970d0853a3140ba7219b6a47e320f6b4eb6e591bbd6dd07315bc562964",
+        "classification_signature": "c2cf161997a016fc4b6259b4c49125d937a0d5d2e1cb393ee873a47a57e802dd"
+      }
     },
     "rc-38243": {
       "event": {
@@ -89525,7 +89610,20 @@
       },
       "classification_hash": "c5e528e615df2635d07fc72638faa8dc64a54cc0be0add7ffc3f610a9bf137c4",
       "last_attempt_hash": "c5e528e615df2635d07fc72638faa8dc64a54cc0be0add7ffc3f610a9bf137c4",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "LEGO-Camp",
+          "Lego bauen",
+          "Kreatives Bauen",
+          "Spiele",
+          "Bewegung",
+          "Freundschaft mit Jesus"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "c5e528e615df2635d07fc72638faa8dc64a54cc0be0add7ffc3f610a9bf137c4",
+        "classification_signature": "35023e7172c4ebd632b9278fbd5007c94beb20a3b0ecd3bf013cc538f39bfbce"
+      }
     },
     "rc-37962": {
       "event": {
@@ -132698,7 +132796,7 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-01T07:11:39.195378+00:00",
+  "last_sync_at": "2026-11-01T07:12:22.851774+00:00",
   "last_run": {
     "mode": "refresh",
     "source_count": 127,
@@ -132708,7 +132806,7 @@
     "remaining": 0
   },
   "last_tag_run": {
-    "queued": 58,
+    "queued": 48,
     "tagged": 10,
     "failures": [],
     "mode": "retag"
