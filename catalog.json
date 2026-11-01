@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 11,
+      "missing_checks": 12,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 11,
+      "missing_checks": 12,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 11,
+      "missing_checks": 12,
       "inactive": true,
       "classification": {
         "scores": [
@@ -45156,7 +45156,16 @@
       },
       "classification_hash": "fbeeefd902388e02cfad2488ff15983a25749a095c80c586105aaa5e47742830",
       "last_attempt_hash": "fbeeefd902388e02cfad2488ff15983a25749a095c80c586105aaa5e47742830",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Männerabend",
+          "Bierabend"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "fbeeefd902388e02cfad2488ff15983a25749a095c80c586105aaa5e47742830",
+        "classification_signature": "ca198520d55e929edc0f9f90e6e7ac1cc8c6de6281aa3a77014610231e093a11"
+      }
     },
     "rc-38124": {
       "event": {
@@ -47211,7 +47220,17 @@
       },
       "classification_hash": "dd60af356bd9a216459ff85796a076f850d717e2946e6b8516d844e85fa52208",
       "last_attempt_hash": "dd60af356bd9a216459ff85796a076f850d717e2946e6b8516d844e85fa52208",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Gottes Barmherzigkeit",
+          "Sakramente",
+          "Persönliche Beziehung zu Christus"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "dd60af356bd9a216459ff85796a076f850d717e2946e6b8516d844e85fa52208",
+        "classification_signature": "a8c9b1d29ea2f60de300c00c4c0aa03482e72e7717b772b880cb42096f21552e"
+      }
     },
     "rc-38194": {
       "event": {
@@ -48236,7 +48255,18 @@
       },
       "classification_hash": "133437da3ee3940f7d1ff7996b94c49df947660bc782f10b11ca7cf73bcf895a",
       "last_attempt_hash": "133437da3ee3940f7d1ff7996b94c49df947660bc782f10b11ca7cf73bcf895a",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Unterscheidung der Geister",
+          "Priestertum",
+          "Ordensleben",
+          "Geistliche Begleitung"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "133437da3ee3940f7d1ff7996b94c49df947660bc782f10b11ca7cf73bcf895a",
+        "classification_signature": "ab415074fe8be5a5cf7ba670506403cc18244a2a51863d3f1e01bad2f3cd7035"
+      }
     },
     "rc-37879": {
       "event": {
@@ -49261,7 +49291,17 @@
       },
       "classification_hash": "56807bf52e7772e36b111de9ec7f6c04293bc8ab0b6843cd77284962402e84fb",
       "last_attempt_hash": "56807bf52e7772e36b111de9ec7f6c04293bc8ab0b6843cd77284962402e84fb",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Skifahren",
+          "Wintersport",
+          "Skifreizeit"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "56807bf52e7772e36b111de9ec7f6c04293bc8ab0b6843cd77284962402e84fb",
+        "classification_signature": "211078001737f5dddc1a0116c1bd858ad99bef24820b7e4b6cdedd90eab4e53d"
+      }
     },
     "rc-37878": {
       "event": {
@@ -50286,7 +50326,18 @@
       },
       "classification_hash": "87ba177e52f34b29c144f9c177485bff637dad44bad334380fea971714190bc7",
       "last_attempt_hash": "87ba177e52f34b29c144f9c177485bff637dad44bad334380fea971714190bc7",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Skifahren",
+          "Skicamp",
+          "Lagerfeuer",
+          "Spiele"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "87ba177e52f34b29c144f9c177485bff637dad44bad334380fea971714190bc7",
+        "classification_signature": "1a052c799578930fa00f6a1bce60651001eb3a96e2939774e435fec277974aa4"
+      }
     },
     "rc-37789": {
       "event": {
@@ -51312,7 +51363,16 @@
       },
       "classification_hash": "877409076fee4f270031e646faf2783d66145ddac8901d4b463057b2fd44e22b",
       "last_attempt_hash": "877409076fee4f270031e646faf2783d66145ddac8901d4b463057b2fd44e22b",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Exodus 90",
+          "Männergruppe"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "877409076fee4f270031e646faf2783d66145ddac8901d4b463057b2fd44e22b",
+        "classification_signature": "cc6afeca99a9b821a037fff3a19b1ff4b4918f9295413c7e3b4b0f5d9eb1420d"
+      }
     },
     "rc-38059": {
       "event": {
@@ -52335,7 +52395,20 @@
       },
       "classification_hash": "df95464c55ea0926f3382550659738d5f76e62f1a8995ff714296b812bedeef9",
       "last_attempt_hash": "df95464c55ea0926f3382550659738d5f76e62f1a8995ff714296b812bedeef9",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Ignatianische Exerzitien",
+          "Evangeliumsbetrachtung",
+          "Unterscheidung der Geister",
+          "Geistliche Einzelbegleitung",
+          "Schweigeexerzitien",
+          "Nachfolge Jesu"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "df95464c55ea0926f3382550659738d5f76e62f1a8995ff714296b812bedeef9",
+        "classification_signature": "f44602c1a56e96bcd084ea30853d010059f7b32a015bc311bce390cf85f3e5c1"
+      }
     },
     "rc-38101": {
       "event": {
@@ -53360,7 +53433,19 @@
       },
       "classification_hash": "39441158df0236d9a54b700b3cbd545c20e887ae0db0040011e12ab01658fbfd",
       "last_attempt_hash": "39441158df0236d9a54b700b3cbd545c20e887ae0db0040011e12ab01658fbfd",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Schweigeexerzitien",
+          "Ignatianische Exerzitien",
+          "Bibelmeditation",
+          "Geistliche Einzelgespräche",
+          "Tischlesungen"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "39441158df0236d9a54b700b3cbd545c20e887ae0db0040011e12ab01658fbfd",
+        "classification_signature": "9d648a38285e3fc13a4c90f76324552ed27df4d5078b6e5173976b2494800571"
+      }
     },
     "rc-38080": {
       "event": {
@@ -54385,7 +54470,16 @@
       },
       "classification_hash": "ffe11047285f115f0b1d2ab79d899be13616ebe8a17dbd48a567a6d3a0cedc47",
       "last_attempt_hash": "ffe11047285f115f0b1d2ab79d899be13616ebe8a17dbd48a567a6d3a0cedc47",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Skifahren",
+          "Wintersport"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "ffe11047285f115f0b1d2ab79d899be13616ebe8a17dbd48a567a6d3a0cedc47",
+        "classification_signature": "598421a4759428e751cf34014a32ee39b32fb4d543afe4706cbf435b84adc3b5"
+      }
     },
     "rc-36376": {
       "event": {
@@ -55410,7 +55504,15 @@
       },
       "classification_hash": "a70543497070638b269406da14dd91af9a4ab0ecd89eb40731cf9424872b4be1",
       "last_attempt_hash": "a70543497070638b269406da14dd91af9a4ab0ecd89eb40731cf9424872b4be1",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Bierabend"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "a70543497070638b269406da14dd91af9a4ab0ecd89eb40731cf9424872b4be1",
+        "classification_signature": "276d0a3d982bb5fb5cc715bb0827d88842e40ec1a775ccd7c2af121131ef4724"
+      }
     },
     "rc-38110": {
       "event": {
@@ -132416,7 +132518,7 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-01T07:09:31.332932+00:00",
+  "last_sync_at": "2026-11-01T07:10:12.000136+00:00",
   "last_run": {
     "mode": "refresh",
     "source_count": 127,
@@ -132426,7 +132528,7 @@
     "remaining": 0
   },
   "last_tag_run": {
-    "queued": 88,
+    "queued": 78,
     "tagged": 10,
     "failures": [],
     "mode": "retag"
