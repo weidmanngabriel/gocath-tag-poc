@@ -19,8 +19,8 @@ def main():
     publish_questions(state,config)
     events=fetch_all_events()
     sync(state,events,lambda *args:None,mode="refresh")
-    def make_tags(event,config,usage):
-        return generate(event,os.environ["GOCATH_OPENAI"],config,usage)
+    def make_tags(event,config,usage,classification):
+        return generate(event,os.environ["GOCATH_OPENAI"],config,usage,classification)
     result=tag_sync(state,events,config,make_tags,mode=a.mode,limit=a.max_paid)
     write(a.state,state)
     path=Path(a.public)
