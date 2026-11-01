@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T07:13:46.230409+00:00",
+  "generated_at": "2026-11-01T07:14:29.406573+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -16244,7 +16244,18 @@
         "estimated_cost_usd": 0.0013405,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Weltjugendtag",
+          "Papst Leo XIV.",
+          "internationale Jugendbegegnung",
+          "Vorbereitungstreffen",
+          "gemeinsame Ausflüge"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "55cac538c0e3bf175c1646df73b05fb1cccc62c05dab9de4f61cb9d6c5ed2a03",
+        "classification_signature": "85459e64f3a78c2bccfc0e1926df6522304b9cfc734a40205c323f2dd941e137"
+      },
       "inactive": false,
       "stale": false
     },
@@ -49241,7 +49252,17 @@
         "estimated_cost_usd": 0.0013355,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Ehekrise",
+          "Paarcoaching",
+          "Einzelcoaching"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "07f3a9b9d2c5126e6ae84e4edd47e566d535ea751de59129bb4d447ce3bed013",
+        "classification_signature": "97422bfd29591663e5f3d79a4d0b84aebcba389d0dae6040ae2ca12ae5a23994"
+      },
       "inactive": false,
       "stale": false
     },
@@ -55652,7 +55673,18 @@
         "estimated_cost_usd": 0.001348,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Innere Heilung",
+          "Heilungsgebet",
+          "Fürbittgebet",
+          "Einzelsegen",
+          "Seelsorgerische Gespräche"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "7a758d27dff29572530f1d71e0d259ebbd51e73d6ef7b1555fec600dfa7f420f",
+        "classification_signature": "12c286a459d93f2cb7b12a124a8e41aafb8bd8115e80e8e08b7cce6287974c0a"
+      },
       "inactive": false,
       "stale": false
     },
@@ -58732,7 +58764,16 @@
         "estimated_cost_usd": 0.0013495,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Innere Heilung",
+          "Gesunde Leiterschaft",
+          "Gemeindeerneuerung"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "fdf5db8764298678041ed3c697771fb180100a122f135bdfa190e9ac6e40cb29",
+        "classification_signature": "a972d1f7f771a601372d83e20f37982c3200f71be25dd5fb19dcef91114c2d71"
+      },
       "inactive": false,
       "stale": false
     },
@@ -63885,7 +63926,14 @@
         "estimated_cost_usd": 0.0013089,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Sommercamp"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "8afef0067764734cf022d2b1f006804f0551a48d18ba6f2d6f9bf46d1e245145",
+        "classification_signature": "60bfe1d7ffe4672a27ade9b97cb3f13acbcb8610368de86e41f7390562a4fe3c"
+      },
       "inactive": false,
       "stale": false
     },
@@ -65019,7 +65067,14 @@
         "estimated_cost_usd": 0.001309,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Hüttenwochenende"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "20cf9f241f0a9fd657b50073250f7482579a75bb5a4f89e4459c3e3b58a88943",
+        "classification_signature": "800ed029913d0b1b7630271cbdacce329a7d58532970331a51bfe1ba561d6de6"
+      },
       "inactive": false,
       "stale": false
     },
@@ -66042,7 +66097,14 @@
         "estimated_cost_usd": 0.0013081,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Sommercamp"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "2d475ce5d5a5b4568f7e9f927e531aa5497397fffa7c7fc17e7cbad71aaf8462",
+        "classification_signature": "bb67606829f2c392d9dd851709dae8ce5878730f65fe772a156d485f5252be92"
+      },
       "inactive": false,
       "stale": false
     },
@@ -67065,7 +67127,12 @@
         "estimated_cost_usd": 0.0013072,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "23e9d115151bd7d25ce2dc7bcbf8f2ee04324d0e417bdd09535861c179e9e18a",
+        "classification_signature": "79d7980a8c70e9fed71e8acd38ac5c8f3d9c47f8a8b799a5b43fa453a032c792"
+      },
       "inactive": false,
       "stale": false
     },
@@ -101930,7 +101997,17 @@
         "estimated_cost_usd": 0.0013952,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Strandurlaub",
+          "Geistliche Begleitung",
+          "Kultureller Ausflug",
+          "Impulse für Kinder"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "22de928bd266f157066661ad50730e3efef7468ada05896a3dac4beae6155c10",
+        "classification_signature": "c00cbbc925c5df84df52ceecd2948672e062bb72810a606ccf5b6ef2fa0b357e"
+      },
       "inactive": false,
       "stale": false
     },
@@ -119801,7 +119878,14 @@
         "estimated_cost_usd": 0.0013075,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Zelten"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "4ca485665a31340c1f3e3e5d7690d29018f38f1a1c40509a034bde280930e7a8",
+        "classification_signature": "2b6b3c24ceb8acb2ac23a580f8848cff2e6691ed2230402162a57da6d21a3228"
+      },
       "inactive": false,
       "stale": false
     },
