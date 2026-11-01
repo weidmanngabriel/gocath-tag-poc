@@ -39,5 +39,5 @@ class TagTests(unittest.TestCase):
         supplied=__import__('json').loads(payload['input'])
         self.assertEqual(supplied['klassifizierung'][0]['id'],'ehe')
         self.assertIn('Bitte gib standard_tags und reason zurück',payload['instructions'])
-        self.assertIn('Maximal 3 Tags',payload['instructions'])
+        self.assertIn('maximal 3 Tags',payload['instructions'])
         self.assertNotIn('standard_tags',payload['text']['format']['schema']['properties'])
