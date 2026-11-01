@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T07:08:48.383749+00:00",
+  "generated_at": "2026-11-01T07:09:31.332932+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -5909,7 +5909,15 @@
         "estimated_cost_usd": 0.0013221,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Kartfahren",
+          "Sammelaktion"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "8618782c841f80daec0f732aa2c6a139ca8edb6c1f65b56bd5e01e290b282bfa",
+        "classification_signature": "f599b70b80f8e64a2db39d8e83ac7559d0b2738b74f61a937a497ef559075b51"
+      },
       "inactive": false,
       "stale": false
     },
@@ -8991,7 +8999,16 @@
         "estimated_cost_usd": 0.0013358,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Backen",
+          "Basteln",
+          "Junge Leute Helfen Hilfsaktion"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "15eeefebd48c5fd96f718720de4a242986ac5edb2f9a397b0d48f97dbc901655",
+        "classification_signature": "06a958590ddedb9e20f191278eb49d9d32e93469e379373f05cd0c2d6ba3a8a0"
+      },
       "inactive": false,
       "stale": false
     },
@@ -11048,7 +11065,16 @@
         "estimated_cost_usd": 0.0013124,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Exodus 90",
+          "Advent-Herausforderung",
+          "Exodus-90-Gruppe"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "598b182d22a815e58def034311a9135cefa29c8caa2826017927e8edb051ae96",
+        "classification_signature": "8ac12444f348314a3455f2d98a58089aef40f6bd597f5556148632edeb46bf89"
+      },
       "inactive": false,
       "stale": false
     },
@@ -14128,7 +14154,17 @@
         "estimated_cost_usd": 0.0013269,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ignatianische Exerzitien",
+          "Schweigeexerzitien",
+          "Advent",
+          "Geistliche Begleitgespräche"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "fbc5fdc5d819bd350d7bbb86e20db70f4e001350d9ff7b4d829997eff9b28270",
+        "classification_signature": "48cbb5b907b3643c637a21646b92b6a942b4c5a37b6d05adc83a1a5bb23520fe"
+      },
       "inactive": false,
       "stale": false
     },
@@ -62545,7 +62581,12 @@
         "estimated_cost_usd": 0.0013072,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "1bb69e04f8750b702f7b0bad32766a4f85592dcf084a5fa81af25d9655371da1",
+        "classification_signature": "d985477fbe9792732a1a878a72b68dbbca11ca5a2044d2aa6056a0a79360f562"
+      },
       "inactive": false,
       "stale": false
     },
@@ -91943,7 +91984,16 @@
         "estimated_cost_usd": 0.0013294,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Adventsimpuls",
+          "Kinderprogramm",
+          "Fette-Wette-Show"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "91d1b03df83aa7ff026d4610a6b5bd19a9af43236032fe1831b86a63822f9a83",
+        "classification_signature": "5d1b1688026c45a18553da83884f21fc8eccc25cd793299fdc4d117fce95c6e3"
+      },
       "inactive": false,
       "stale": false
     },
@@ -95023,7 +95073,17 @@
         "estimated_cost_usd": 0.0013606,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Gebet für Vorfahren",
+          "Familiensegen",
+          "Weihe an das Heiligste Herz Jesu",
+          "Weihe an das Unbefleckte Herz Mariens"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "25066a496d8c324ee78566462d6994f59aa355fa6d02e857e7ccb83fc4186d9f",
+        "classification_signature": "ee91bb7dea4b285a48b086f80545f93868321e02c419459aed7b12ea9dc8e37a"
+      },
       "inactive": false,
       "stale": false
     },
@@ -112081,7 +112141,17 @@
         "estimated_cost_usd": 0.001338,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Weihnachtsmarktbesuch",
+          "Adventswochenende",
+          "geistliche Impulse",
+          "Momente der Stille"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "abb1a204909dee460e92423f7626c6cc5c3e1b574fa899e0b2af000ac4693470",
+        "classification_signature": "a554e10cc59e101d5aa1cb9932660e87a7a8aa601a0988655f3462682d3eed22"
+      },
       "inactive": false,
       "stale": false
     },
@@ -124631,7 +124701,12 @@
         "estimated_cost_usd": 0.0013089,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "4cc372a27316dfba9dfdd6b75a4b4e359dd44636a560da11783dac47e82c70a7",
+        "classification_signature": "ed47c37bb3a857aada34c982ceba4ffa4b6f87eb5f439f843c8ecc9207141744"
+      },
       "inactive": false,
       "stale": false
     },
@@ -126684,7 +126759,16 @@
         "estimated_cost_usd": 0.0013242,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Mannsein und Frausein",
+          "Hilfspakete packen",
+          "Gemeinsames Gebet"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "b7e16ea442cb12247d8f4b8929fd5aa382cfcad276b2e384af3407c3453c82a9",
+        "classification_signature": "f9a25584badfd1749586d0e00ecfdc05ed907615bd41e1fa06dc2c18602e89f2"
+      },
       "inactive": false,
       "stale": false
     }
