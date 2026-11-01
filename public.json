@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T05:59:19.232131+00:00",
+  "generated_at": "2026-11-01T06:08:25.746635+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -1798,6 +1798,7 @@
         "estimated_cost_usd": 0.0013162,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -2820,6 +2821,7 @@
         "estimated_cost_usd": 0.0013155,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -3842,6 +3844,7 @@
         "estimated_cost_usd": 0.0013155,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -4864,6 +4867,7 @@
         "estimated_cost_usd": 0.001337,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -5886,6 +5890,7 @@
         "estimated_cost_usd": 0.0013221,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -6908,6 +6913,7 @@
         "estimated_cost_usd": 0.001325,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -7931,6 +7937,7 @@
         "estimated_cost_usd": 0.0013343,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -8953,6 +8960,7 @@
         "estimated_cost_usd": 0.0013358,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -9975,6 +9983,20 @@
         },
         "estimated_cost_usd": 0.0013126,
         "pending_criteria": []
+      },
+      "tagging": {
+        "tags": [
+          "Exodus 90",
+          "Memento Mori",
+          "Monat der Toten",
+          "Spirituelle Herausforderung",
+          "Männergestaltung",
+          "Glaubensübungen zu Hause",
+          "Mehrteiliger Glaubenskurs"
+        ],
+        "revision": "29a223c396e8d13396e81ac47ad165cb2e030730492f6a93e26df9266d3d3675",
+        "content_hash": "049dca8c102edf13db0c71235355a1ed54c96d2806ac3c43af34a2c225240218",
+        "classification_signature": "7727aa09f6c12ec77dac02471cf5a6b0d9a322d49b59cadfebfd5519bb4dc5ff"
       },
       "inactive": false,
       "stale": false
@@ -10999,6 +11021,7 @@
         "estimated_cost_usd": 0.0013124,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -12022,6 +12045,7 @@
         "estimated_cost_usd": 0.0013121,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -13044,6 +13068,7 @@
         "estimated_cost_usd": 0.0013519,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -14067,6 +14092,7 @@
         "estimated_cost_usd": 0.0013269,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -15089,6 +15115,7 @@
         "estimated_cost_usd": 0.0013269,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -16113,6 +16140,7 @@
         "estimated_cost_usd": 0.0013405,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -17135,6 +17163,7 @@
         "estimated_cost_usd": 0.0013206,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -18157,6 +18186,7 @@
         "estimated_cost_usd": 0.001322,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -19177,6 +19207,7 @@
         "estimated_cost_usd": 0.001315,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -20199,6 +20230,7 @@
         "estimated_cost_usd": 0.0013115,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -21219,6 +21251,7 @@
         "estimated_cost_usd": 0.0013139,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -22241,6 +22274,7 @@
         "estimated_cost_usd": 0.0013153,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -23263,6 +23297,7 @@
         "estimated_cost_usd": 0.0013147,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -24285,6 +24320,7 @@
         "estimated_cost_usd": 0.0013157,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -25307,6 +25343,7 @@
         "estimated_cost_usd": 0.0013181,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -26329,6 +26366,7 @@
         "estimated_cost_usd": 0.0013164,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -27349,6 +27387,7 @@
         "estimated_cost_usd": 0.001321,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -28372,7 +28411,8 @@
         "estimated_cost_usd": 0.0013213,
         "pending_criteria": []
       },
-      "inactive": false,
+      "tagging": null,
+      "inactive": true,
       "stale": false
     },
     {
@@ -29395,6 +29435,7 @@
         "estimated_cost_usd": 0.0013156,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -30417,6 +30458,7 @@
         "estimated_cost_usd": 0.0013167,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -31439,6 +31481,7 @@
         "estimated_cost_usd": 0.0013178,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -32461,6 +32504,7 @@
         "estimated_cost_usd": 0.0013154,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -33483,6 +33527,7 @@
         "estimated_cost_usd": 0.0013183,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -34503,6 +34548,7 @@
         "estimated_cost_usd": 0.0013203,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -35525,6 +35571,7 @@
         "estimated_cost_usd": 0.0013498,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -36548,6 +36595,21 @@
         "estimated_cost_usd": 0.0013677,
         "pending_criteria": []
       },
+      "tagging": {
+        "tags": [
+          "Ignatianische Exerzitien",
+          "Schweigeexerzitien",
+          "Geistliche Begleitung",
+          "Exerzitien für Frauen",
+          "Spirituelle Persönlichkeitsentwicklung",
+          "Eucharistie",
+          "Beichte",
+          "Exerzitien mit Einzelgesprächen"
+        ],
+        "revision": "29a223c396e8d13396e81ac47ad165cb2e030730492f6a93e26df9266d3d3675",
+        "content_hash": "25a13543694293e5ac5f36b69f81f2b191e44ec6adf0e2f6de51bd99f9275b2b",
+        "classification_signature": "c686760380021586daca9c539bf42ba73c7bb704d38bb90009eb9ca6a6e03c38"
+      },
       "inactive": false,
       "stale": false
     },
@@ -37570,6 +37632,21 @@
         "estimated_cost_usd": 0.0013131,
         "pending_criteria": []
       },
+      "tagging": {
+        "tags": [
+          "Marienwallfahrt",
+          "Heiligenbildstätte",
+          "Gebetszeit",
+          "Andacht für Verstorbene",
+          "Familiäre Glaubensveranstaltung",
+          "Pilgerreise Deutschland",
+          "Spirituelle Gemeinschaft",
+          "Anmeldung erforderlich"
+        ],
+        "revision": "29a223c396e8d13396e81ac47ad165cb2e030730492f6a93e26df9266d3d3675",
+        "content_hash": "65dc402caed1209553e84e6f54ea58b253d6142bd2f854abb508121e63ab0954",
+        "classification_signature": "02a64f119f36aba3354726bd1ad7ba63f84fddc527409bb089804eb2432996ef"
+      },
       "inactive": false,
       "stale": false
     },
@@ -38589,6 +38666,21 @@
         },
         "estimated_cost_usd": 0.0013198,
         "pending_criteria": []
+      },
+      "tagging": {
+        "tags": [
+          "Jungenfreizeit",
+          "Glaubensvertiefung für Jugendliche",
+          "Christliche Jungenfreizeit",
+          "Sport und Glaube",
+          "Gemeinschaft unter Jungen",
+          "Anbetung und Messe für Jugendliche",
+          "Workshops für Jungen",
+          "Religiöses Jugendcamp"
+        ],
+        "revision": "29a223c396e8d13396e81ac47ad165cb2e030730492f6a93e26df9266d3d3675",
+        "content_hash": "d1e064fd05ded2bc7ae8daf2ba1d268328788c78b27e81dbc1a887118a68d95f",
+        "classification_signature": "7faabaed21e582e860157542038a8d346f89e74f4e7ee5924963dc22bfe5f3b0"
       },
       "inactive": false,
       "stale": false
@@ -39610,6 +39702,21 @@
         "estimated_cost_usd": 0.0013402,
         "pending_criteria": []
       },
+      "tagging": {
+        "tags": [
+          "Spirituelles Wochenende",
+          "Gebetsleben vertiefen",
+          "Tugend Sanftmut",
+          "Glaubensimpulse",
+          "Katholische Gemeinschaft",
+          "Messe und Gebet",
+          "Junge Erwachsene 23-35 Jahre",
+          "Religiöse Freizeit"
+        ],
+        "revision": "29a223c396e8d13396e81ac47ad165cb2e030730492f6a93e26df9266d3d3675",
+        "content_hash": "a1f92e27c6a24e667606de6c1d95d1cf4560748713ede9adb66f36061e0af4b9",
+        "classification_signature": "c2e07e17e3eeeeab7de10ffd990115ed89c0241b7ca7ac313e8385ed2cfb7033"
+      },
       "inactive": false,
       "stale": false
     },
@@ -40630,6 +40737,7 @@
         "estimated_cost_usd": 0.0013066,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -41650,6 +41758,7 @@
         "estimated_cost_usd": 0.0013263,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -42670,6 +42779,7 @@
         "estimated_cost_usd": 0.0013261,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -43690,6 +43800,7 @@
         "estimated_cost_usd": 0.0013275,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -44712,6 +44823,7 @@
         "estimated_cost_usd": 0.0013339,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -45732,6 +45844,7 @@
         "estimated_cost_usd": 0.0013245,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -46754,6 +46867,7 @@
         "estimated_cost_usd": 0.0013352,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -47776,6 +47890,7 @@
         "estimated_cost_usd": 0.0013333,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -48798,6 +48913,7 @@
         "estimated_cost_usd": 0.0013355,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -49820,6 +49936,7 @@
         "estimated_cost_usd": 0.0013371,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -50842,6 +50959,7 @@
         "estimated_cost_usd": 0.0013371,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -51864,6 +51982,7 @@
         "estimated_cost_usd": 0.001337,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -52886,6 +53005,7 @@
         "estimated_cost_usd": 0.001317,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -53908,6 +54028,7 @@
         "estimated_cost_usd": 0.0013522,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -54161,6 +54282,7 @@
           "v2_charakter_und_ziel_freizeit_gestalten"
         ]
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -55183,6 +55305,7 @@
         "estimated_cost_usd": 0.001348,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -56205,6 +56328,7 @@
         "estimated_cost_usd": 0.0013483,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -57227,6 +57351,7 @@
         "estimated_cost_usd": 0.0013533,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -58249,6 +58374,7 @@
         "estimated_cost_usd": 0.0013495,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -59274,6 +59400,7 @@
         "estimated_cost_usd": 0.0013718,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -60296,6 +60423,7 @@
         "estimated_cost_usd": 0.001341,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -61319,6 +61447,7 @@
         "estimated_cost_usd": 0.0013228,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -62341,6 +62470,7 @@
         "estimated_cost_usd": 0.0013072,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -63363,6 +63493,7 @@
         "estimated_cost_usd": 0.0013089,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -63473,6 +63604,7 @@
           "v2_teilnahmeort_form"
         ]
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -64495,6 +64627,7 @@
         "estimated_cost_usd": 0.001309,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -65517,6 +65650,7 @@
         "estimated_cost_usd": 0.0013081,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -66539,6 +66673,7 @@
         "estimated_cost_usd": 0.0013072,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -67561,6 +67696,7 @@
         "estimated_cost_usd": 0.0013102,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -68583,6 +68719,7 @@
         "estimated_cost_usd": 0.0013091,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -69605,6 +69742,7 @@
         "estimated_cost_usd": 0.0013119,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -69858,6 +69996,7 @@
           "v2_charakter_und_ziel_freizeit_gestalten"
         ]
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -70111,6 +70250,7 @@
           "v2_charakter_und_ziel_freizeit_gestalten"
         ]
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -71133,6 +71273,7 @@
         "estimated_cost_usd": 0.001309,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -72155,6 +72296,7 @@
         "estimated_cost_usd": 0.0013072,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -73177,6 +73319,7 @@
         "estimated_cost_usd": 0.0013087,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -74197,6 +74340,7 @@
         "estimated_cost_usd": 0.0013089,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -75219,6 +75363,7 @@
         "estimated_cost_usd": 0.001311,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -76241,7 +76386,8 @@
         "estimated_cost_usd": 0.0013063,
         "pending_criteria": []
       },
-      "inactive": false,
+      "tagging": null,
+      "inactive": true,
       "stale": false
     },
     {
@@ -77263,6 +77409,7 @@
         "estimated_cost_usd": 0.001309,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -77373,6 +77520,7 @@
           "v2_teilnahmeort_form"
         ]
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -78395,6 +78543,7 @@
         "estimated_cost_usd": 0.0013147,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -79417,6 +79566,7 @@
         "estimated_cost_usd": 0.0013102,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -80439,6 +80589,7 @@
         "estimated_cost_usd": 0.0013113,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -81461,6 +81612,7 @@
         "estimated_cost_usd": 0.0013113,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -82483,6 +82635,7 @@
         "estimated_cost_usd": 0.0013111,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -83505,6 +83658,7 @@
         "estimated_cost_usd": 0.0013113,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -84527,6 +84681,7 @@
         "estimated_cost_usd": 0.0013124,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -85549,6 +85704,7 @@
         "estimated_cost_usd": 0.0013123,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -86571,6 +86727,7 @@
         "estimated_cost_usd": 0.0013339,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -87593,6 +87750,7 @@
         "estimated_cost_usd": 0.0013123,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -88616,6 +88774,7 @@
         "estimated_cost_usd": 0.0013774,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -89638,6 +89797,7 @@
         "estimated_cost_usd": 0.0013186,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -90660,6 +90820,7 @@
         "estimated_cost_usd": 0.0013119,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -91683,6 +91844,7 @@
         "estimated_cost_usd": 0.0013294,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -92703,7 +92865,21 @@
         "estimated_cost_usd": 0.0013208,
         "pending_criteria": []
       },
-      "inactive": false,
+      "tagging": {
+        "tags": [
+          "Kinderveranstaltung",
+          "Kindergebetsaktion",
+          "Heiligenfest",
+          "Allerheiligen",
+          "Religiöse Kinderaktivität",
+          "Familienveranstaltung",
+          "Kinderkirche",
+          "Messfeierstagendeskindesfokus"
+        ],
+        "revision": "42f1c0844139f7b58a62f644d8a52d10fdc64cf491d2717448ce1491048187b0",
+        "content_hash": "63d2d91307eed1d2359fe79c1ea45b3ec03243fd0d24576b1872b7d26eda695d"
+      },
+      "inactive": true,
       "stale": false
     },
     {
@@ -93725,6 +93901,7 @@
         "estimated_cost_usd": 0.0013444,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -94747,6 +94924,7 @@
         "estimated_cost_usd": 0.0013606,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -95769,6 +95947,7 @@
         "estimated_cost_usd": 0.0013072,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -96020,6 +96199,7 @@
           "v2_charakter_und_ziel_freizeit_gestalten"
         ]
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -97043,6 +97223,7 @@
         "estimated_cost_usd": 0.0013376,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -98065,6 +98246,7 @@
         "estimated_cost_usd": 0.0013634,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -99087,6 +99269,7 @@
         "estimated_cost_usd": 0.0013156,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -100110,6 +100293,7 @@
         "estimated_cost_usd": 0.0013964,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -101133,6 +101317,7 @@
         "estimated_cost_usd": 0.0013952,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -102156,6 +102341,7 @@
         "estimated_cost_usd": 0.0013952,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -102409,6 +102595,7 @@
           "v2_charakter_und_ziel_freizeit_gestalten"
         ]
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -103431,6 +103618,7 @@
         "estimated_cost_usd": 0.0013469,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -104454,6 +104642,7 @@
         "estimated_cost_usd": 0.0013627,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -105476,6 +105665,7 @@
         "estimated_cost_usd": 0.0013076,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -106496,6 +106686,7 @@
         "estimated_cost_usd": 0.0013074,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -107518,6 +107709,7 @@
         "estimated_cost_usd": 0.0013249,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -107628,6 +107820,7 @@
           "v2_teilnahmeort_form"
         ]
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -108652,6 +108845,7 @@
         "estimated_cost_usd": 0.0013268,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -109674,6 +109868,7 @@
         "estimated_cost_usd": 0.0013172,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -110694,6 +110889,7 @@
         "estimated_cost_usd": 0.0013267,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -111714,6 +111910,7 @@
         "estimated_cost_usd": 0.001338,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -112736,6 +112933,7 @@
         "estimated_cost_usd": 0.0013336,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -113758,6 +113956,7 @@
         "estimated_cost_usd": 0.0013088,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -114780,6 +114979,7 @@
         "estimated_cost_usd": 0.0013102,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -115802,6 +116002,7 @@
         "estimated_cost_usd": 0.0013102,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -116824,6 +117025,7 @@
         "estimated_cost_usd": 0.001325,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -117846,6 +118048,7 @@
         "estimated_cost_usd": 0.0013081,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -118868,6 +119071,7 @@
         "estimated_cost_usd": 0.0013075,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -119890,6 +120094,7 @@
         "estimated_cost_usd": 0.0013075,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -120912,6 +121117,7 @@
         "estimated_cost_usd": 0.0013079,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -121934,6 +122140,7 @@
         "estimated_cost_usd": 0.0013105,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -122956,6 +123163,7 @@
         "estimated_cost_usd": 0.0013102,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -123209,6 +123417,7 @@
           "v2_charakter_und_ziel_freizeit_gestalten"
         ]
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -124231,6 +124440,7 @@
         "estimated_cost_usd": 0.0013089,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -125253,6 +125463,7 @@
         "estimated_cost_usd": 0.0013123,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     },
@@ -126275,6 +126486,7 @@
         "estimated_cost_usd": 0.0013242,
         "pending_criteria": []
       },
+      "tagging": null,
       "inactive": false,
       "stale": false
     }
