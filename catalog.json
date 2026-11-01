@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 9,
+      "missing_checks": 10,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 9,
+      "missing_checks": 10,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 9,
+      "missing_checks": 10,
       "inactive": true,
       "classification": {
         "scores": [
@@ -25497,14 +25497,11 @@
       "classification_status": "success",
       "tagging": {
         "tags": [
-          "Christkönigfest",
-          "liturgisches Jahresende",
+          "Christkönigsfest",
           "Patronatsfest",
-          "Spendenveranstaltung",
-          "Regnum Christi Gemeinschaft",
-          "feierliche Messe"
+          "Regnum Christi"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "2d7b967a466d8eeea0cf7676d3b79cc6978f07b61e0f45bc9619f6c10572fb1f",
         "classification_signature": "3d927b48255bb7172fa7bf971b5a52edd5d1915cc171544aea63187deb9cd536"
       }
@@ -26535,16 +26532,11 @@
       "classification_status": "success",
       "tagging": {
         "tags": [
-          "Mitbring-Buffet",
-          "Kinder- und Jugendprogramm",
-          "Apostelgemeinschaft",
-          "Bibliothek als Veranstaltungsort",
-          "Getränkespende",
-          "Vortrag zu Charisma und Vision",
-          "Kaffeetrinken",
-          "Spirituelles Impulsprogramm"
+          "Christkönigsfest",
+          "Charisma des Regnum Christi",
+          "Vision der Apostelgemeinschaft"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "c3a20962549a5d3f992a6ae63c0c115f4a229dd1aa492c25044fbacab0516744",
         "classification_signature": "62ca4667298d4fc893b4308c8a2f07818ad374096d30b857f03e16cb26f6c843"
       }
@@ -27576,16 +27568,12 @@
       "classification_status": "success",
       "tagging": {
         "tags": [
-          "Christkönig",
-          "Patrozinium",
-          "Zirkellauf",
-          "Heilige Messe mit Anbetung",
-          "Kinderbetreuung",
-          "Brunch",
-          "Kuchen und Café",
-          "Apostelgemeinschaft"
+          "Christkönigsfest",
+          "Regnum Christi",
+          "Apostolatsarbeit",
+          "Zirkellauf"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "9715ce20f64c7dd7342f58cace83dd601a07f02f05a087aa1eb50aefe995fab8",
         "classification_signature": "7a9bd7159900ab7c3f6f73c2ccc5d0373feff912dc8c2a6d09b62e80dc9686b5"
       }
@@ -28619,15 +28607,11 @@
       "classification_status": "success",
       "tagging": {
         "tags": [
-          "Hl. Messe",
+          "Christkönigsfest",
           "Prozession",
-          "Andacht",
-          "geistliche Impulse",
-          "Mittagessen inklusive",
-          "Kaffeepause",
-          "familienfreundlich"
+          "Andacht"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "6e4584424a7406cef576dfc20c2eb36c82df6fb39b2b98dc7e89d21dee10c23d",
         "classification_signature": "5c14a01a46dbe96677bd886244f9046fd8131a90f00eee9b592af3b1b6c428f6"
       }
@@ -29659,16 +29643,11 @@
       "classification_status": "success",
       "tagging": {
         "tags": [
-          "Hl. Messe",
-          "Impuls",
-          "Austausch",
-          "Beichtgelegenheit",
-          "Gebetszeit",
+          "Christkönigsfest",
           "Einzelsegen",
-          "Stationen",
-          "Mittagessen"
+          "geistliche Impulse"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "a6cc6906ec387f2c168fc21d9f6431c565f7c4a5cd0eb0715cb59bec5b876dec",
         "classification_signature": "0893310439e2c99d2b2593b032de27b307aeb441b545ae6e8a4553fd2e085b8b"
       }
@@ -30696,7 +30675,18 @@
       },
       "classification_hash": "8ce36a8b07c466aeec3cbd00a36b3f1634a2b24dc1fc4165da21dc2c885dab5f",
       "last_attempt_hash": "8ce36a8b07c466aeec3cbd00a36b3f1634a2b24dc1fc4165da21dc2c885dab5f",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Christkönigsfest",
+          "Wilhelm Buntz",
+          "Bibelraucher",
+          "Erneuerung der Weihe"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "8ce36a8b07c466aeec3cbd00a36b3f1634a2b24dc1fc4165da21dc2c885dab5f",
+        "classification_signature": "05a7f9d34d2cd2d0abe79ce9cd97373fd49f632ccfed61ab2886ab667512c085"
+      }
     },
     "rc-38135": {
       "event": {
@@ -31721,7 +31711,17 @@
       },
       "classification_hash": "7d21d6ad532eb5a9c8cbd0ae4fe09dd749befab6c8ee812b144815fc1ef63295",
       "last_attempt_hash": "7d21d6ad532eb5a9c8cbd0ae4fe09dd749befab6c8ee812b144815fc1ef63295",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Heilungsgebet",
+          "Lobpreis",
+          "Gebetsteams"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "7d21d6ad532eb5a9c8cbd0ae4fe09dd749befab6c8ee812b144815fc1ef63295",
+        "classification_signature": "3d2dbff652d7553671636c84df43861f40f1961e10b6bf0de548ae7fffea023e"
+      }
     },
     "rc-37361": {
       "event": {
@@ -32746,7 +32746,18 @@
       },
       "classification_hash": "1a6d391a49fc6826fb4ad37648106ae7ce7dcfc978ae2a7eaf6364e535a18615",
       "last_attempt_hash": "1a6d391a49fc6826fb4ad37648106ae7ce7dcfc978ae2a7eaf6364e535a18615",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Ehekrise",
+          "Paarcoaching",
+          "Einzelcoaching"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "1a6d391a49fc6826fb4ad37648106ae7ce7dcfc978ae2a7eaf6364e535a18615",
+        "classification_signature": "e6765ed52a8ac7aeb37e85b79f13574065cdb20d23093109c67926e813ab0030"
+      }
     },
     "rc-38009": {
       "event": {
@@ -33771,7 +33782,19 @@
       },
       "classification_hash": "e821c7dfda4a43557477c7e79aeefa17a8a265f9ee9bdb97f866efaa40787795",
       "last_attempt_hash": "e821c7dfda4a43557477c7e79aeefa17a8a265f9ee9bdb97f866efaa40787795",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Innere Heilung",
+          "Heilungsgebet",
+          "Seelsorge",
+          "Einzelsegen",
+          "Fürbittgebet"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "e821c7dfda4a43557477c7e79aeefa17a8a265f9ee9bdb97f866efaa40787795",
+        "classification_signature": "10437976580e8d9299bcb91dddda571c1ab453b368c2134f74d52d58d7d3552e"
+      }
     },
     "rc-38232": {
       "event": {
@@ -35824,7 +35847,15 @@
       },
       "classification_hash": "aa25c0638677de90158e4583482b40afd63a9cad06dcca41ec0d0e7ea71f2de0",
       "last_attempt_hash": "aa25c0638677de90158e4583482b40afd63a9cad06dcca41ec0d0e7ea71f2de0",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Spiele"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "aa25c0638677de90158e4583482b40afd63a9cad06dcca41ec0d0e7ea71f2de0",
+        "classification_signature": "afa0a16e16b689416f8cb4b8c4b470d0516057ce5b46ffeda7659f6dd0b4caf5"
+      }
     },
     "rc-37394": {
       "event": {
@@ -132291,7 +132322,7 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-01T07:08:02.730565+00:00",
+  "last_sync_at": "2026-11-01T07:08:48.383749+00:00",
   "last_run": {
     "mode": "refresh",
     "source_count": 127,
@@ -132301,7 +132332,7 @@
     "remaining": 0
   },
   "last_tag_run": {
-    "queued": 108,
+    "queued": 98,
     "tagged": 10,
     "failures": [],
     "mode": "retag"

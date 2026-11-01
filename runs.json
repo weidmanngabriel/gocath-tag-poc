@@ -286,22 +286,24 @@
       "kind": "tagging",
       "run_id": "41283526088",
       "started_at": "2026-11-01T07:07:57.925988+00:00",
-      "finished_at": "2026-11-01T07:08:32.113575+00:00",
+      "finished_at": "2026-11-01T07:09:15.315076+00:00",
       "mode": "retag",
       "source_count": 127,
       "queued": 108,
-      "attempted": 10,
-      "tagged": 10,
+      "attempted": 20,
+      "tagged": 20,
       "failed": 0,
       "usage": {
-        "input_tokens": 16076,
-        "output_tokens": 2153,
-        "total_tokens": 18229,
+        "input_tokens": 37566,
+        "output_tokens": 4137,
+        "total_tokens": 41703,
         "cached_tokens": 0
       },
       "pricing_model": "gpt-6-luna",
-      "cost_usd_estimated": 0.0016076,
-      "cost_note": "Estimate using Luna input, cached input and output token prices; null when not configured"
+      "cost_usd_estimated": 0.0037566,
+      "cost_note": "Estimate using Luna input, cached input and output token prices; null when not configured",
+      "classified": 0,
+      "remaining": 0
     }
   ]
 }
