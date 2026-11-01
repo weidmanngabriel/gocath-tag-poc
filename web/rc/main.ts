@@ -2,7 +2,7 @@ import "./style.css";
 type Score={id:string,category:string,label:string,score:number,matched:boolean,type?:string,answer?:{choice?:string,confidence?:number,score?:number,probabilities?:{value:string|number,label?:string,probability:number}[]}};
 type Criterion={id:string,label:string,category:string,description?:string,type?:string,threshold?:number,weight?:number,options?:{value?:string,label?:string,description?:string}[]};
 type Questionnaire={revision:string,published_at:string,criteria:Criterion[]};
-type Event={id:string,event:{title:string,description:string,url:string,location?:string,starts_at?:string},inactive?:boolean,stale?:boolean,classification?:{scores:Score[],pending_criteria?:string[],questionnaire_revision?:string,relevance:{status:string,score:number}}};
+type Event={id:string,event:{title:string,description:string,url:string,location?:string,starts_at?:string},inactive?:boolean,stale?:boolean,tagging?:{tags:string[],revision:string,content_hash:string},classification?:{scores:Score[],pending_criteria?:string[],questionnaire_revision?:string,relevance:{status:string,score:number}}};
 const SOURCE="https://raw.githubusercontent.com/weidmanngabriel/gocath-tag-poc/rc-data/public.json";
 const root=document.querySelector<HTMLElement>("#app")!;
 const esc=(s:unknown)=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]||c));
@@ -15,6 +15,7 @@ function scoreColor(s:Score):string {if(!Number.isFinite(s.score))return "unknow
 function scoreRow(s:Score){const distribution=s.answer?.probabilities||[];return `<div class="score score-${scoreColor(s)}"><div class="score-head"><span>${esc(s.label)}</span><b>${pct(s.score)}</b></div><div class="track"><div style="width:${Math.max(0,Math.min(100,s.score*100))}%"></div></div>${distribution.map(p=>`<small>${esc(p.value)}: ${pct(p.probability)}</small>`).join("")}</div>`;}
 function card(item:Event){
  const c=item.classification;
+ const tagChips=(item.tagging?.tags||[]).map(t=>`<span class="match-chip match-relevant">${esc(t)}</span>`).join("");
  const groups=[...new Set((c?.scores||[]).map(s=>s.category))].sort((a,b)=>a.localeCompare(b,"de"));
  const hits=(c?.scores||[]).filter(s=>s.type!=="choice"&&s.type!=="score"&&s.matched).sort((a,b)=>b.score-a.score);
  const nonPredicates=(c?.scores||[]).filter(s=>s.type==="choice"||s.type==="score");
@@ -52,7 +53,7 @@ function card(item:Event){
  const panels=tabs.map((g,i)=>`<div role="tabpanel" id="panel-${esc(item.id)}-${i}" aria-labelledby="tab-${esc(item.id)}-${i}" ${i!==0?"hidden":""}>${g==="Beschreibung"?`<p class="description">${esc(item.event.description||"Keine Beschreibung verfügbar.")}</p><a href="${esc(item.event.url)}" target="_blank" rel="noopener noreferrer">Originalveranstaltung öffnen</a>`:((c?.scores.filter(s=>s.category===g).sort((a,b)=>b.score-a.score).map(scoreRow).join("")||"")+
  pending.filter(q=>q.category===g).map(q=>`<div class="score score-unknown"><div class="score-head"><span>${esc(q.label)}</span><small>Noch nicht bewertet</small></div></div>`).join("")+
  (!c?.scores.some(s=>s.category===g)&&!pending.some(q=>q.category===g)?"<p>Keine Bewertung verfügbar.</p>":""))}</div>`).join("");
- return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div></div><div class="matched-groups" aria-label="Erkannte Merkmale">${matchedGroups.length?groupedHits:`<p class="no-hits">${c?"Keine Kriterien oberhalb ihrer Trefferschwelle":"Noch keine Bewertung vorhanden"}</p>`}</div><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}${pending.length?`<p class="pending-note">${pending.length} Kriterien noch nicht mit der aktuellen Konfiguration bewertet.</p>`:""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
+ return `<article class="card"><div class="top"><div><h2>${esc(item.event.title)}</h2><p>${esc(item.event.location||"")} ${esc(item.event.starts_at||"")}</p></div></div><div class="matched-groups" aria-label="Erkannte Merkmale">${matchedGroups.length?groupedHits:`<p class="no-hits">${c?"Keine Kriterien oberhalb ihrer Trefferschwelle":"Noch keine Bewertung vorhanden"}</p>`}</div><section class="match-group" aria-label="Suchbegriffe"><div class="match-group-heading"><strong>Suchbegriffe</strong></div><div class="match-list">${tagChips||`<span class="match-empty">Noch keine Tags vorhanden</span>`}</div></section><details><summary>Einzelbewertungen ansehen</summary>${item.stale?"<p>Veranstaltung geändert – Neubewertung ausstehend.</p>":""}${pending.length?`<p class="pending-note">${pending.length} Kriterien noch nicht mit der aktuellen Konfiguration bewertet.</p>`:""}<div class="item-tabs" role="tablist" aria-label="Details zur Veranstaltung">${buttons}</div><div class="item-panels">${panels}</div></details></article>`;
 }
 function switchItemTab(button:HTMLButtonElement,focus=false){
  const tabs=button.closest<HTMLElement>(".item-tabs");
@@ -81,7 +82,7 @@ function display(){
  const q=(document.querySelector<HTMLInputElement>("#q")?.value||"").toLocaleLowerCase("de");
  const selected=new Set(Array.from(document.querySelectorAll<HTMLInputElement>(".criterion-options input:checked")).map(el=>el.value));
  const sort=document.querySelector<HTMLSelectElement>("#sort")?.value||"date";
- const filtered=records.filter(e=>!e.inactive&&(!q||[e.event.title,e.event.description,e.event.location].join(" ").toLocaleLowerCase("de").includes(q))&&(!selected.size||e.classification?.scores.some(s=>selected.has(s.id)&&s.matched)));
+ const filtered=records.filter(e=>!e.inactive&&(!q||[e.event.title,e.event.description,e.event.location,...(e.tagging?.tags||[])].join(" ").toLocaleLowerCase("de").includes(q))&&(!selected.size||e.classification?.scores.some(s=>selected.has(s.id)&&s.matched)));
  filtered.sort((a,b)=>sort==="date"?(a.event.starts_at||"9999").localeCompare(b.event.starts_at||"9999"):(a.event.title||"").localeCompare(b.event.title||"","de"));
  document.querySelector<HTMLElement>("#count")!.textContent=`${filtered.length} von ${records.filter(e=>!e.inactive).length} Veranstaltungen`;
  document.querySelector<HTMLElement>("#results")!.innerHTML=filtered.map(card).join("")||"<p>Keine Veranstaltungen gefunden.</p>";

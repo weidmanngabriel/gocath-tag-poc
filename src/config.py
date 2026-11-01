@@ -45,5 +45,8 @@ def settings(credentials_json, sheet_id):
         "rc_cache_write_per_million_usd": config.get("rc_cache_write_per_million_usd", "0.125"),
         "rc_cache_write_12h_per_million_usd": config.get("rc_cache_write_12h_per_million_usd", "0.25"),
         "rc_output_per_million_usd": config.get("rc_output_per_million_usd", "0"),
+        "tag_prompt": config.get("gemini_prompt", "").strip(),
+        "tag_model": config.get("tag_model", "gpt-4.1-mini").strip() or "gpt-4.1-mini",
+        "tag_limit": max(0, min(8, int(config.get("max_additional_tags", "8")))) if config.get("additional_tags_enabled", "true").lower() == "true" else 0,
         "criteria": criteria,
     }

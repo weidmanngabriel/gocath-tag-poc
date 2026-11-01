@@ -6,7 +6,7 @@ on:
     inputs:
       mode:
         type: choice
-        options: [delta, reclassify, refresh]
+        options: [delta, reclassify, refresh, tag-delta, retag, tag-refresh]
         default: delta
       max_paid:
         default: '200'
@@ -36,4 +36,8 @@ jobs:
           GOCATH_OPENAI: ${{ secrets.GOCATH_OPENAI }}
           RC_MODE: ${{ github.event_name == 'schedule' && 'delta' || inputs.mode }}
           RC_LIMIT: ${{ github.event_name == 'schedule' && '25' || inputs.max_paid }}
-        run: bash scripts/rc_checkpoint_run.sh
+        run: |
+          bash scripts/rc_checkpoint_run.sh
+          if [[ "$GITHUB_EVENT_NAME" == "schedule" ]]; then
+            RC_MODE=tag-delta bash scripts/rc_checkpoint_run.sh
+          fi
