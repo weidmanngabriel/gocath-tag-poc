@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 19,
+      "missing_checks": 20,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 19,
+      "missing_checks": 20,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 19,
+      "missing_checks": 20,
       "inactive": true,
       "classification": {
         "scores": [
@@ -133145,9 +133145,9 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-01T07:15:12.475227+00:00",
+  "last_sync_at": "2026-11-01T13:18:27.961987+00:00",
   "last_run": {
-    "mode": "refresh",
+    "mode": "delta",
     "source_count": 127,
     "queued": 0,
     "classified": 0,
