@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T06:52:15.571758+00:00",
+  "generated_at": "2026-11-01T06:52:45.124956+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -13093,7 +13093,21 @@
         "estimated_cost_usd": 0.0013519,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "stillgebet",
+          "eucharistische-anbetung",
+          "geistliche-leitung",
+          "spirituelle-erneuerung",
+          "glaubensvertiefung",
+          "gemeinschaft",
+          "herzliche-einladung",
+          "einladung-zur-beichte"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "1aec8b6c90c20d4f4d35c8309cc1536b8cdf88e49f5f4f0d409260dab455ce3c",
+        "classification_signature": "929cfa8fd6089e1fa552db0b7fad573a6ab40791f2b57f7b41f7d213dbc3df88"
+      },
       "inactive": false,
       "stale": false
     },
@@ -59461,7 +59475,20 @@
         "estimated_cost_usd": 0.0013718,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Hl. Messe",
+          "Prozession",
+          "Andacht",
+          "geistliche Impulse",
+          "Mittagessen inklusive",
+          "Kaffeepause",
+          "familienfreundlich"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "6e4584424a7406cef576dfc20c2eb36c82df6fb39b2b98dc7e89d21dee10c23d",
+        "classification_signature": "5c14a01a46dbe96677bd886244f9046fd8131a90f00eee9b592af3b1b6c428f6"
+      },
       "inactive": false,
       "stale": false
     },
@@ -61508,7 +61535,21 @@
         "estimated_cost_usd": 0.0013228,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Hl. Messe",
+          "Impuls",
+          "Austausch",
+          "Beichtgelegenheit",
+          "Gebetszeit",
+          "Einzelsegen",
+          "Stationen",
+          "Mittagessen"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "a6cc6906ec387f2c168fc21d9f6431c565f7c4a5cd0eb0715cb59bec5b876dec",
+        "classification_signature": "0893310439e2c99d2b2593b032de27b307aeb441b545ae6e8a4553fd2e085b8b"
+      },
       "inactive": false,
       "stale": false
     },
@@ -77470,7 +77511,19 @@
         "estimated_cost_usd": 0.001309,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Wochenendveranstaltung",
+          "Jugendfreizeit",
+          "geistliche Begleitung",
+          "männliche Jugendliche 10-16",
+          "organisierte Gruppenaktivität",
+          "Austria"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "bada3d34dee28908f023eb127e8b3dfccea5da9f16dd060755debd45ddd1c0c4",
+        "classification_signature": "ff3047a088c003e30afed3018db5f3cdc13e2aa0ff8b69c370ecac1fb2e9a489"
+      },
       "inactive": false,
       "stale": false
     },
@@ -96008,7 +96061,17 @@
         "estimated_cost_usd": 0.0013072,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Jugendliche Mädchen",
+          "Ein-Tages-Veranstaltung",
+          "Pater Michael Hemm LC",
+          "St. Monika München"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "5515b716c215e6955697298e352bd61bf22ba4aa17316c87580f51690eecfc2a",
+        "classification_signature": "f8e16447ea59ee85f2eaaee59c242bab539b98e03fc231ff1a4b28ffde0e89fc"
+      },
       "inactive": false,
       "stale": false
     },
@@ -99330,7 +99393,19 @@
         "estimated_cost_usd": 0.0013156,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Christkönigfest",
+          "liturgisches Jahresende",
+          "Patronatsfest",
+          "Spendenveranstaltung",
+          "Regnum Christi Gemeinschaft",
+          "feierliche Messe"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "2d7b967a466d8eeea0cf7676d3b79cc6978f07b61e0f45bc9619f6c10572fb1f",
+        "classification_signature": "3d927b48255bb7172fa7bf971b5a52edd5d1915cc171544aea63187deb9cd536"
+      },
       "inactive": false,
       "stale": false
     },
@@ -104703,7 +104778,21 @@
         "estimated_cost_usd": 0.0013627,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Christkönig",
+          "Patrozinium",
+          "Zirkellauf",
+          "Heilige Messe mit Anbetung",
+          "Kinderbetreuung",
+          "Brunch",
+          "Kuchen und Café",
+          "Apostelgemeinschaft"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "9715ce20f64c7dd7342f58cace83dd601a07f02f05a087aa1eb50aefe995fab8",
+        "classification_signature": "7a9bd7159900ab7c3f6f73c2ccc5d0373feff912dc8c2a6d09b62e80dc9686b5"
+      },
       "inactive": false,
       "stale": false
     },
@@ -105726,7 +105815,21 @@
         "estimated_cost_usd": 0.0013076,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Jungenveranstaltung",
+          "Tagesveranstaltung",
+          "Herbst",
+          "Spirituelle Begleitung",
+          "Betreuung durch Pater LC",
+          "St. Monika",
+          "Teilnahmegebühr",
+          "Altersgruppe 11-16"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "a0c36b2bf8051f0039ebf745df4a7edd9503a569da4aaee99fb52d3474b3a003",
+        "classification_signature": "00992a61885cbd7881efaae3f360854135fc69bc022a6ab50374a459531759f9"
+      },
       "inactive": false,
       "stale": false
     },
@@ -107784,7 +107887,21 @@
         "estimated_cost_usd": 0.0013249,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Mitbring-Buffet",
+          "Kinder- und Jugendprogramm",
+          "Apostelgemeinschaft",
+          "Bibliothek als Veranstaltungsort",
+          "Getränkespende",
+          "Vortrag zu Charisma und Vision",
+          "Kaffeetrinken",
+          "Spirituelles Impulsprogramm"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "c3a20962549a5d3f992a6ae63c0c115f4a229dd1aa492c25044fbacab0516744",
+        "classification_signature": "62ca4667298d4fc893b4308c8a2f07818ad374096d30b857f03e16cb26f6c843"
+      },
       "inactive": false,
       "stale": false
     },
@@ -108920,7 +109037,21 @@
         "estimated_cost_usd": 0.0013268,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Christkönigsfest",
+          "Patronatsfest",
+          "Hingabe an Christus",
+          "Kuchenspenden",
+          "Inspirierende Begegnungen",
+          "NET Kinderprogramm",
+          "LookingGood",
+          "GetStrong"
+        ],
+        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "content_hash": "f397b28c4c7439adc3ce2c15b1441dc2c526a5f83a44c6a8ff18dc7f76879a63",
+        "classification_signature": "65c9333eada77b62ff4126158704400738e0d557b0c0c4e574822e8b9e21084b"
+      },
       "inactive": false,
       "stale": false
     },
