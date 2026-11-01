@@ -24,3 +24,19 @@ class TagTests(unittest.TestCase):
         event={'url':'https://www.regnumchristi.eu/demnaechst/?vid=22','title':'Gebet','description':'Gebet'}
         state={'events':{'rc-22':{'event':event}}}
         self.assertEqual(tag_sync(state,[event],cfg,lambda *args: self.fail('must not tag'))['tagged'],0)
+
+    def test_prompt_cannot_change_technical_output_format(self):
+        from unittest.mock import Mock,patch
+        from src.rc_tags import generate
+        cfg={'tag_prompt':'Bitte gib standard_tags und reason zurück','tag_model':'gpt-4.1-mini','tag_limit':3}
+        fake=Mock(ok=True)
+        fake.json.return_value={'status':'completed','output':[{'content':[{'type':'output_text','text':'{"tags":["Eheseminar"]}'}]}]}
+        with patch('src.rc_tags.requests.post',return_value=fake) as api:
+            result=generate({'title':'Eheseminar'},'test-key',cfg,{},[{'id':'ehe','label':'Ehe','matched':True}])
+        self.assertEqual(result,['Eheseminar'])
+        payload=api.call_args.kwargs['json']
+        self.assertEqual(payload['text']['format']['schema']['required'],['tags'])
+        supplied=__import__('json').loads(payload['input'])
+        self.assertEqual(supplied['klassifizierung'][0]['id'],'ehe')
+        self.assertIn('fachliche_hinweise',supplied)
+        self.assertNotIn('standard_tags',payload['text']['format']['schema']['properties'])
