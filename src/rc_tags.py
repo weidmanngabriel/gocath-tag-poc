@@ -27,7 +27,7 @@ def generate(event,key,cfg,usage,classification=None):
         + "\\nTechnische Obergrenze: maximal " + str(cfg["tag_limit"]) + " Tags.")
 
     payload = {
-        "model":cfg["tag_model"],
+        "model":"gpt-6-luna",
         "instructions":technical_rules,
         "input":json.dumps({
             "veranstaltung":event,
@@ -51,7 +51,9 @@ def generate(event,key,cfg,usage,classification=None):
     for value in raw:
         tag=" ".join(value.split())
         if 2<=len(tag)<=60 and tag.casefold() not in {t.casefold() for t in tags}:tags.append(tag)
+    details=(body.get("usage") or {}).get("input_tokens_details") or {}
     usage.update({k:int((body.get("usage") or {}).get(k,0)) for k in ("input_tokens","output_tokens","total_tokens")})
+    usage["cached_tokens"]=int(details.get("cached_tokens",0))
     return tags[:cfg["tag_limit"]]
 
 def tag_sync(state,events,cfg,tagger,mode="delta",limit=10,run_usage=None):

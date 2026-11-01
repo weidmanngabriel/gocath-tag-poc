@@ -27,18 +27,21 @@ def main():
     result=tag_sync(state,events,config,make_tags,mode=a.mode,limit=a.max_paid,run_usage=usage)
     attempts=result["tagged"]+len(result["failures"])
     input_rate=config.get("tag_input_per_million_usd")
+    cached_rate=config.get("tag_cached_input_per_million_usd")
     output_rate=config.get("tag_output_per_million_usd")
     cost=None
-    if input_rate not in (None,"") and output_rate not in (None,""):
-        rates=(float(input_rate),float(output_rate))
+    if all(v not in (None,"") for v in (input_rate,cached_rate,output_rate)):
+        rates=(float(input_rate),float(cached_rate),float(output_rate))
         if any(not (0<=v<1000000) for v in rates):raise ValueError("Invalid tag pricing")
-        cost=round((usage.get("input_tokens",0)*rates[0]+usage.get("output_tokens",0)*rates[1])/1000000,8)
+        ordinary=usage.get("input_tokens",0)-usage.get("cached_tokens",0)
+        if ordinary<0:raise ValueError("Cached tokens exceed input tokens")
+        cost=round((ordinary*rates[0]+usage.get("cached_tokens",0)*rates[1]+usage.get("output_tokens",0)*rates[2])/1000000,8)
     record={"kind":"tagging","run_id":os.environ.get("GITHUB_RUN_ID","manual"),
         "started_at":started_at,"finished_at":datetime.now(timezone.utc).isoformat(),
         "mode":a.mode,"source_count":len(events),"queued":result["queued"],
         "attempted":attempts,"tagged":result["tagged"],"failed":len(result["failures"]),
-        "usage":usage,"pricing_model":config["tag_model"],"cost_usd_estimated":cost,
-        "cost_note":"Estimate using configured tag token prices; null when not configured"}
+        "usage":usage,"pricing_model":"gpt-6-luna","cost_usd_estimated":cost,
+        "cost_note":"Estimate using Luna input, cached input and output token prices; null when not configured"}
     Path("state/rc-run-record.json").write_text(json.dumps(record,ensure_ascii=False),encoding="utf-8")
     write(a.state,state)
     path=Path(a.public)
