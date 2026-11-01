@@ -47,13 +47,16 @@ path=Path(os.environ["RC_WORKTREE"])/"runs.json"
 data=json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"runs":[]}
 new=json.loads(Path(os.environ["RC_RECORD_PATH"]).read_text(encoding="utf-8"))
 runs=data.setdefault("runs",[])
-prior=next((r for r in runs if r.get("run_id")==new["run_id"]),None)
+new_kind=new.get("kind","classification")
+prior=next((r for r in runs if r.get("run_id")==new["run_id"] and r.get("kind","classification")==new_kind),None)
 if prior:
-    for key in ("attempted","classified","failed"):
+    for key in ("attempted","classified","tagged","failed"):
         prior[key]=prior.get(key,0)+new.get(key,0)
     for key,value in new.get("usage",{}).items():
         prior.setdefault("usage",{})[key]=prior["usage"].get(key,0)+value
-    prior["cost_usd_estimated"]=round(prior.get("cost_usd_estimated",0)+new.get("cost_usd_estimated",0),8)
+    old_cost=prior.get("cost_usd_estimated")
+    added_cost=new.get("cost_usd_estimated")
+    prior["cost_usd_estimated"]=round(old_cost+added_cost,8) if old_cost is not None and added_cost is not None else None
     prior["finished_at"]=new["finished_at"]
     prior["remaining"]=new.get("remaining",0)
 else:
