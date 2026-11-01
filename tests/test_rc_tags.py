@@ -32,8 +32,12 @@ class TagTests(unittest.TestCase):
         fake=Mock(ok=True)
         fake.json.return_value={'status':'completed','output':[{'content':[{'type':'output_text','text':'{"tags":["Eheseminar"]}'}]}], 'usage':{'input_tokens':120,'output_tokens':15,'total_tokens':135,'input_tokens_details':{'cached_tokens':100}}}
         with patch('src.rc_tags.requests.post',return_value=fake) as api:
-            result=generate({'title':'Eheseminar'},'test-key',cfg,{},[{'id':'ehe','label':'Ehe','matched':True}])
+            measured={}
+            result=generate({'title':'Eheseminar'},'test-key',cfg,measured,[{'id':'ehe','label':'Ehe','matched':True}])
         self.assertEqual(result,['Eheseminar'])
+        self.assertEqual(measured['input_tokens'],120)
+        self.assertEqual(measured['cached_tokens'],100)
+        self.assertEqual(measured['output_tokens'],15)
         self.assertEqual(api.call_args.kwargs["json"]["model"],"gpt-6-luna")
         payload=api.call_args.kwargs['json']
         self.assertEqual(payload['text']['format']['schema']['required'],['tags'])
