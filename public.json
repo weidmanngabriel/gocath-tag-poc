@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T07:14:29.406573+00:00",
+  "generated_at": "2026-11-01T07:15:12.475227+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -6955,7 +6955,17 @@
         "estimated_cost_usd": 0.001325,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Basketball",
+          "Sport",
+          "Deep Talk",
+          "Feiern"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "0a00651f0fa3322539b954805ecbc0ec758098ede02239d7275561721dfa2c1b",
+        "classification_signature": "72fad5acc010817590e51ac9575d19d07d5d7515e843e567c0b983b961701fcb"
+      },
       "inactive": false,
       "stale": false
     },
@@ -44101,7 +44111,19 @@
         "estimated_cost_usd": 0.0013275,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ignatianische Exerzitien",
+          "Evangeliumsbetrachtung",
+          "Unterscheidung der Geister",
+          "Geistliche Einzelbegleitung",
+          "Schweigeexerzitien",
+          "Versöhnung mit sich selbst"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "de4e95dc71789a855c2f761ab5a05d5176bae9e657aa396eff3d37a9f27f0cec",
+        "classification_signature": "f5987dcf0ceae5dd6bb7e77d8f14b6fb75b2902b96ca25987bbec1d6d0cccf84"
+      },
       "inactive": false,
       "stale": false
     },
@@ -50285,7 +50307,16 @@
         "estimated_cost_usd": 0.0013371,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Ehekrise",
+          "Paarcoaching"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "e7b160ed5a347c55a3eb8ad16a17c499587a137801ff002caf650478eaa61067",
+        "classification_signature": "86af25f996675bad0713d70ec84149e5d4ded1275a1d842db5993fd5dedbc32a"
+      },
       "inactive": false,
       "stale": false
     },
@@ -51308,7 +51339,16 @@
         "estimated_cost_usd": 0.0013371,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Ehekrise",
+          "Paarcoaching"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "f508c4bb6d7cd55b9b9b1ec920e3f28da4ed855c65324435e8851acc05a58a79",
+        "classification_signature": "7ff16738d8009205e469462ad1f697bb50c8f2d1f0d3fc36303a6a9534b83427"
+      },
       "inactive": false,
       "stale": false
     },
@@ -52331,7 +52371,16 @@
         "estimated_cost_usd": 0.001337,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Paarcoaching",
+          "Ehekrise"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "f2307a2b56b946b240f51b9beed5b735147fbe605c9d7a1b3a56f17f0769a545",
+        "classification_signature": "f569269dff269b64ec33c64170eac980233037f8bd4236e8b4c1efe68061e7d8"
+      },
       "inactive": false,
       "stale": false
     },
@@ -56707,7 +56756,17 @@
         "estimated_cost_usd": 0.0013483,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "innere Heilung",
+          "Heilungsgebet",
+          "seelsorgerische Gespräche",
+          "innerer Frieden"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "b82cd70ec5015dbeaecc375ee72e1824f3f94222846fe981b8a885f1eaeb04d3",
+        "classification_signature": "a1c71fcabf8f08e8c00bd1804041df37a413650053fcc41d9a45d0ad5a1c57db"
+      },
       "inactive": false,
       "stale": false
     },
@@ -74835,7 +74894,14 @@
         "estimated_cost_usd": 0.0013089,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Betreuerfahrt"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "1f6d65496828f44502de80f211fa0bebe3c22914c7e93e5896a4d3ad40953ad7",
+        "classification_signature": "8f545e626ac41dfb3fa7218fabe23e09811be97e02b55127022ede48d41b4517"
+      },
       "inactive": false,
       "stale": false
     },
@@ -103031,7 +103097,17 @@
         "estimated_cost_usd": 0.0013952,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Familienurlaub am Strand",
+          "Geistliche Begleitung",
+          "Glaubensimpulse für Kinder",
+          "Kultureller Ausflug"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "f4630ef4a478854f26689da9b26ccf5a4f57e4cbcc09164128053d10227c67a0",
+        "classification_signature": "6f669614ac9c89d61b0352a1dffeac3bb704648b27ed59b4e6746c78217255c8"
+      },
       "inactive": false,
       "stale": false
     },

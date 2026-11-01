@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 18,
+      "missing_checks": 19,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 18,
+      "missing_checks": 19,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 18,
+      "missing_checks": 19,
       "inactive": true,
       "classification": {
         "scores": [
@@ -123042,7 +123042,18 @@
       },
       "classification_hash": "f4630ef4a478854f26689da9b26ccf5a4f57e4cbcc09164128053d10227c67a0",
       "last_attempt_hash": "f4630ef4a478854f26689da9b26ccf5a4f57e4cbcc09164128053d10227c67a0",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Familienurlaub am Strand",
+          "Geistliche Begleitung",
+          "Glaubensimpulse für Kinder",
+          "Kultureller Ausflug"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "f4630ef4a478854f26689da9b26ccf5a4f57e4cbcc09164128053d10227c67a0",
+        "classification_signature": "6f669614ac9c89d61b0352a1dffeac3bb704648b27ed59b4e6746c78217255c8"
+      }
     },
     "rc-38130": {
       "event": {
@@ -124065,7 +124076,15 @@
       },
       "classification_hash": "1f6d65496828f44502de80f211fa0bebe3c22914c7e93e5896a4d3ad40953ad7",
       "last_attempt_hash": "1f6d65496828f44502de80f211fa0bebe3c22914c7e93e5896a4d3ad40953ad7",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Betreuerfahrt"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "1f6d65496828f44502de80f211fa0bebe3c22914c7e93e5896a4d3ad40953ad7",
+        "classification_signature": "8f545e626ac41dfb3fa7218fabe23e09811be97e02b55127022ede48d41b4517"
+      }
     },
     "rc-38062": {
       "event": {
@@ -125088,7 +125107,20 @@
       },
       "classification_hash": "de4e95dc71789a855c2f761ab5a05d5176bae9e657aa396eff3d37a9f27f0cec",
       "last_attempt_hash": "de4e95dc71789a855c2f761ab5a05d5176bae9e657aa396eff3d37a9f27f0cec",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Ignatianische Exerzitien",
+          "Evangeliumsbetrachtung",
+          "Unterscheidung der Geister",
+          "Geistliche Einzelbegleitung",
+          "Schweigeexerzitien",
+          "Versöhnung mit sich selbst"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "de4e95dc71789a855c2f761ab5a05d5176bae9e657aa396eff3d37a9f27f0cec",
+        "classification_signature": "f5987dcf0ceae5dd6bb7e77d8f14b6fb75b2902b96ca25987bbec1d6d0cccf84"
+      }
     },
     "rc-38073": {
       "event": {
@@ -126113,7 +126145,17 @@
       },
       "classification_hash": "e7b160ed5a347c55a3eb8ad16a17c499587a137801ff002caf650478eaa61067",
       "last_attempt_hash": "e7b160ed5a347c55a3eb8ad16a17c499587a137801ff002caf650478eaa61067",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Ehekrise",
+          "Paarcoaching"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "e7b160ed5a347c55a3eb8ad16a17c499587a137801ff002caf650478eaa61067",
+        "classification_signature": "86af25f996675bad0713d70ec84149e5d4ded1275a1d842db5993fd5dedbc32a"
+      }
     },
     "rc-38106": {
       "event": {
@@ -127138,7 +127180,18 @@
       },
       "classification_hash": "b82cd70ec5015dbeaecc375ee72e1824f3f94222846fe981b8a885f1eaeb04d3",
       "last_attempt_hash": "b82cd70ec5015dbeaecc375ee72e1824f3f94222846fe981b8a885f1eaeb04d3",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "innere Heilung",
+          "Heilungsgebet",
+          "seelsorgerische Gespräche",
+          "innerer Frieden"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "b82cd70ec5015dbeaecc375ee72e1824f3f94222846fe981b8a885f1eaeb04d3",
+        "classification_signature": "a1c71fcabf8f08e8c00bd1804041df37a413650053fcc41d9a45d0ad5a1c57db"
+      }
     },
     "rc-38074": {
       "event": {
@@ -128163,7 +128216,17 @@
       },
       "classification_hash": "f508c4bb6d7cd55b9b9b1ec920e3f28da4ed855c65324435e8851acc05a58a79",
       "last_attempt_hash": "f508c4bb6d7cd55b9b9b1ec920e3f28da4ed855c65324435e8851acc05a58a79",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Ehekrise",
+          "Paarcoaching"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "f508c4bb6d7cd55b9b9b1ec920e3f28da4ed855c65324435e8851acc05a58a79",
+        "classification_signature": "7ff16738d8009205e469462ad1f697bb50c8f2d1f0d3fc36303a6a9534b83427"
+      }
     },
     "rc-38075": {
       "event": {
@@ -129188,7 +129251,17 @@
       },
       "classification_hash": "f2307a2b56b946b240f51b9beed5b735147fbe605c9d7a1b3a56f17f0769a545",
       "last_attempt_hash": "f2307a2b56b946b240f51b9beed5b735147fbe605c9d7a1b3a56f17f0769a545",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Paarcoaching",
+          "Ehekrise"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "f2307a2b56b946b240f51b9beed5b735147fbe605c9d7a1b3a56f17f0769a545",
+        "classification_signature": "f569269dff269b64ec33c64170eac980233037f8bd4236e8b4c1efe68061e7d8"
+      }
     },
     "rc-37582": {
       "event": {
@@ -130213,7 +130286,18 @@
       },
       "classification_hash": "0a00651f0fa3322539b954805ecbc0ec758098ede02239d7275561721dfa2c1b",
       "last_attempt_hash": "0a00651f0fa3322539b954805ecbc0ec758098ede02239d7275561721dfa2c1b",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Basketball",
+          "Sport",
+          "Deep Talk",
+          "Feiern"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "0a00651f0fa3322539b954805ecbc0ec758098ede02239d7275561721dfa2c1b",
+        "classification_signature": "72fad5acc010817590e51ac9575d19d07d5d7515e843e567c0b983b961701fcb"
+      }
     },
     "rc-38275": {
       "event": {
@@ -133061,7 +133145,7 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-01T07:14:29.406573+00:00",
+  "last_sync_at": "2026-11-01T07:15:12.475227+00:00",
   "last_run": {
     "mode": "refresh",
     "source_count": 127,
@@ -133071,8 +133155,8 @@
     "remaining": 0
   },
   "last_tag_run": {
-    "queued": 18,
-    "tagged": 10,
+    "queued": 8,
+    "tagged": 8,
     "failures": [],
     "mode": "retag"
   }
