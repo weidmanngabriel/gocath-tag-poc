@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T07:10:58.332189+00:00",
+  "generated_at": "2026-11-01T07:11:39.195378+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -15210,7 +15210,16 @@
         "estimated_cost_usd": 0.0013269,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ignatianische Exerzitien",
+          "Geistliche Begleitung",
+          "Stille"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "fa4fe7448dcba55412c2e6500676ec4d36911ef14afe49e52d9049424a9355cf",
+        "classification_signature": "2c890e361da875a15680c4190bfb8904ef398637186d6015066175a6aaae3050"
+      },
       "inactive": false,
       "stale": false
     },
@@ -19321,7 +19330,15 @@
         "estimated_cost_usd": 0.001315,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "ECYD",
+          "Seilbrücken"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "f4c65ed0939bfe89e4c4ba08ec2143a8daa103775350641f0db5af1e2b783a40",
+        "classification_signature": "916d8b519ccd99c86d00041703d9e9254d1a2608b4ec6c5368fccada36ca117d"
+      },
       "inactive": false,
       "stale": false
     },
@@ -29583,7 +29600,14 @@
         "estimated_cost_usd": 0.0013156,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Gesprächsabend"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "c01bf6f6896e04f6e20ca856a40095d0dc6c26c556c3b08b47fd34abd3ac800a",
+        "classification_signature": "0afcfefead80fa76546c67fcb3153727d2b3bb9bd20263ebeae27c21accf852e"
+      },
       "inactive": false,
       "stale": false
     },
@@ -33675,7 +33699,19 @@
         "estimated_cost_usd": 0.0013183,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Social Media",
+          "Selbstbild",
+          "Medienkompetenz",
+          "Vorbilder",
+          "Offline-Zeit",
+          "Besuch im Altenheim"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "0f5591240deddbfa1c10c78552fb2cb28c6bd9a1285a5ef0d9b88ab2a36cba24",
+        "classification_signature": "f43965aa8556bf35e73ddc6e7e032a9918692458eec5f43161d3b17540511083"
+      },
       "inactive": false,
       "stale": false
     },
@@ -34696,7 +34732,18 @@
         "estimated_cost_usd": 0.0013203,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Stadtrallye",
+          "Kriminalfall lösen",
+          "Glaube im Alltag",
+          "persönliche Glaubenszeugnisse",
+          "Freundschaften"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "527547a81ac83272624b61c25e2974160a38376075739d9ffb88281aa40365d2",
+        "classification_signature": "861d64823fca1fba17510e841488cc0e9e6ad43b62ddc524409041acb219595d"
+      },
       "inactive": false,
       "stale": false
     },
@@ -42942,7 +42989,19 @@
         "estimated_cost_usd": 0.0013261,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Auferstehung Jesu",
+          "Leiden und Sterben Jesu",
+          "Unterscheidung der Geister",
+          "Evangeliumsbetrachtung",
+          "Ignatianische Spiritualität",
+          "Geistliche Einzelbegleitung"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "af5ecfd323fd5483643c69e2f8014d58f230241d2da6f05cbe11afd37f61fc6f",
+        "classification_signature": "af5ceb9a17156adc9fbfe3cab84f7c9deeeedf0fb9738bbcae0978ee356862a3"
+      },
       "inactive": false,
       "stale": false
     },
@@ -82901,7 +82960,14 @@
         "estimated_cost_usd": 0.0013111,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Spiele"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "9d84f2d85491fa501b4df20fc4d237d1c7500f7a3ee21638aba1e6bdd8467213",
+        "classification_signature": "61bc51b7225efb0f88bd50f135c97e72d32a0760236ede1d57fecdb17ecd6ec2"
+      },
       "inactive": false,
       "stale": false
     },
@@ -89055,7 +89121,18 @@
         "estimated_cost_usd": 0.0013774,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ignatianische Spiritualität",
+          "Bibelmeditation",
+          "Geistliche Einzelgespräche",
+          "Nachfolge Jesu",
+          "Altes und Neues Testament"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "7af3845daa2f81fc26f1d72cafefec0b9d847cd0f0ae1327d19370bb39ad36b0",
+        "classification_signature": "64b06d888cc674dab8f9e2e9bc614a7e69af14a8a9d3a2ee11958a6e33c2405b"
+      },
       "inactive": false,
       "stale": false
     },
@@ -97537,7 +97614,17 @@
         "estimated_cost_usd": 0.0013376,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Gebetsformen",
+          "Beten lernen",
+          "Gottes Stimme hören",
+          "Geistliche Gespräche"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "1c632c13d73452205a38a6ccb36fc36cdbfc6c0cb6c023e966b9f90754a694e3",
+        "classification_signature": "6af7568d265ff4c18b9431ca472df53e2b6ec17b4ccf4fea5bdc9ba9307c5b1c"
+      },
       "inactive": false,
       "stale": false
     },
@@ -114358,7 +114445,12 @@
         "estimated_cost_usd": 0.0013088,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "8728fb4067ba79d5cec3e3ee3db71133a75012aacbfa3bf6bc035773b64e7174",
+        "classification_signature": "9b8adb7d676d8e3d4f7c233da8548a83c5998d18f5a06dd031147aacbc1b6e56"
+      },
       "inactive": false,
       "stale": false
     },

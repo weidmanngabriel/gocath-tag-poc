@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 13,
+      "missing_checks": 14,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 13,
+      "missing_checks": 14,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 13,
+      "missing_checks": 14,
       "inactive": true,
       "classification": {
         "scores": [
@@ -67893,7 +67893,19 @@
       },
       "classification_hash": "527547a81ac83272624b61c25e2974160a38376075739d9ffb88281aa40365d2",
       "last_attempt_hash": "527547a81ac83272624b61c25e2974160a38376075739d9ffb88281aa40365d2",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Stadtrallye",
+          "Kriminalfall lösen",
+          "Glaube im Alltag",
+          "persönliche Glaubenszeugnisse",
+          "Freundschaften"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "527547a81ac83272624b61c25e2974160a38376075739d9ffb88281aa40365d2",
+        "classification_signature": "861d64823fca1fba17510e841488cc0e9e6ad43b62ddc524409041acb219595d"
+      }
     },
     "rc-37881": {
       "event": {
@@ -68916,7 +68928,16 @@
       },
       "classification_hash": "f4c65ed0939bfe89e4c4ba08ec2143a8daa103775350641f0db5af1e2b783a40",
       "last_attempt_hash": "f4c65ed0939bfe89e4c4ba08ec2143a8daa103775350641f0db5af1e2b783a40",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "ECYD",
+          "Seilbrücken"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "f4c65ed0939bfe89e4c4ba08ec2143a8daa103775350641f0db5af1e2b783a40",
+        "classification_signature": "916d8b519ccd99c86d00041703d9e9254d1a2608b4ec6c5368fccada36ca117d"
+      }
     },
     "rc-38234": {
       "event": {
@@ -69942,7 +69963,18 @@
       },
       "classification_hash": "1c632c13d73452205a38a6ccb36fc36cdbfc6c0cb6c023e966b9f90754a694e3",
       "last_attempt_hash": "1c632c13d73452205a38a6ccb36fc36cdbfc6c0cb6c023e966b9f90754a694e3",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Gebetsformen",
+          "Beten lernen",
+          "Gottes Stimme hören",
+          "Geistliche Gespräche"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "1c632c13d73452205a38a6ccb36fc36cdbfc6c0cb6c023e966b9f90754a694e3",
+        "classification_signature": "6af7568d265ff4c18b9431ca472df53e2b6ec17b4ccf4fea5bdc9ba9307c5b1c"
+      }
     },
     "rc-37980": {
       "event": {
@@ -70968,7 +71000,15 @@
       },
       "classification_hash": "c01bf6f6896e04f6e20ca856a40095d0dc6c26c556c3b08b47fd34abd3ac800a",
       "last_attempt_hash": "c01bf6f6896e04f6e20ca856a40095d0dc6c26c556c3b08b47fd34abd3ac800a",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Gesprächsabend"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "c01bf6f6896e04f6e20ca856a40095d0dc6c26c556c3b08b47fd34abd3ac800a",
+        "classification_signature": "0afcfefead80fa76546c67fcb3153727d2b3bb9bd20263ebeae27c21accf852e"
+      }
     },
     "rc-38214": {
       "event": {
@@ -71994,7 +72034,19 @@
       },
       "classification_hash": "7af3845daa2f81fc26f1d72cafefec0b9d847cd0f0ae1327d19370bb39ad36b0",
       "last_attempt_hash": "7af3845daa2f81fc26f1d72cafefec0b9d847cd0f0ae1327d19370bb39ad36b0",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Ignatianische Spiritualität",
+          "Bibelmeditation",
+          "Geistliche Einzelgespräche",
+          "Nachfolge Jesu",
+          "Altes und Neues Testament"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "7af3845daa2f81fc26f1d72cafefec0b9d847cd0f0ae1327d19370bb39ad36b0",
+        "classification_signature": "64b06d888cc674dab8f9e2e9bc614a7e69af14a8a9d3a2ee11958a6e33c2405b"
+      }
     },
     "rc-37869": {
       "event": {
@@ -73019,7 +73071,17 @@
       },
       "classification_hash": "fa4fe7448dcba55412c2e6500676ec4d36911ef14afe49e52d9049424a9355cf",
       "last_attempt_hash": "fa4fe7448dcba55412c2e6500676ec4d36911ef14afe49e52d9049424a9355cf",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Ignatianische Exerzitien",
+          "Geistliche Begleitung",
+          "Stille"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "fa4fe7448dcba55412c2e6500676ec4d36911ef14afe49e52d9049424a9355cf",
+        "classification_signature": "2c890e361da875a15680c4190bfb8904ef398637186d6015066175a6aaae3050"
+      }
     },
     "rc-38060": {
       "event": {
@@ -74042,7 +74104,20 @@
       },
       "classification_hash": "af5ecfd323fd5483643c69e2f8014d58f230241d2da6f05cbe11afd37f61fc6f",
       "last_attempt_hash": "af5ecfd323fd5483643c69e2f8014d58f230241d2da6f05cbe11afd37f61fc6f",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Auferstehung Jesu",
+          "Leiden und Sterben Jesu",
+          "Unterscheidung der Geister",
+          "Evangeliumsbetrachtung",
+          "Ignatianische Spiritualität",
+          "Geistliche Einzelbegleitung"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "af5ecfd323fd5483643c69e2f8014d58f230241d2da6f05cbe11afd37f61fc6f",
+        "classification_signature": "af5ceb9a17156adc9fbfe3cab84f7c9deeeedf0fb9738bbcae0978ee356862a3"
+      }
     },
     "rc-38126": {
       "event": {
@@ -76097,7 +76172,15 @@
       },
       "classification_hash": "9d84f2d85491fa501b4df20fc4d237d1c7500f7a3ee21638aba1e6bdd8467213",
       "last_attempt_hash": "9d84f2d85491fa501b4df20fc4d237d1c7500f7a3ee21638aba1e6bdd8467213",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Spiele"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "9d84f2d85491fa501b4df20fc4d237d1c7500f7a3ee21638aba1e6bdd8467213",
+        "classification_signature": "61bc51b7225efb0f88bd50f135c97e72d32a0760236ede1d57fecdb17ecd6ec2"
+      }
     },
     "rc-38277": {
       "event": {
@@ -77122,7 +77205,13 @@
       },
       "classification_hash": "8728fb4067ba79d5cec3e3ee3db71133a75012aacbfa3bf6bc035773b64e7174",
       "last_attempt_hash": "8728fb4067ba79d5cec3e3ee3db71133a75012aacbfa3bf6bc035773b64e7174",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "8728fb4067ba79d5cec3e3ee3db71133a75012aacbfa3bf6bc035773b64e7174",
+        "classification_signature": "9b8adb7d676d8e3d4f7c233da8548a83c5998d18f5a06dd031147aacbc1b6e56"
+      }
     },
     "rc-38002": {
       "event": {
@@ -78147,7 +78236,20 @@
       },
       "classification_hash": "0f5591240deddbfa1c10c78552fb2cb28c6bd9a1285a5ef0d9b88ab2a36cba24",
       "last_attempt_hash": "0f5591240deddbfa1c10c78552fb2cb28c6bd9a1285a5ef0d9b88ab2a36cba24",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Social Media",
+          "Selbstbild",
+          "Medienkompetenz",
+          "Vorbilder",
+          "Offline-Zeit",
+          "Besuch im Altenheim"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "0f5591240deddbfa1c10c78552fb2cb28c6bd9a1285a5ef0d9b88ab2a36cba24",
+        "classification_signature": "f43965aa8556bf35e73ddc6e7e032a9918692458eec5f43161d3b17540511083"
+      }
     },
     "rc-38001": {
       "event": {
@@ -132596,7 +132698,7 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-01T07:10:58.332189+00:00",
+  "last_sync_at": "2026-11-01T07:11:39.195378+00:00",
   "last_run": {
     "mode": "refresh",
     "source_count": 127,
@@ -132606,7 +132708,7 @@
     "remaining": 0
   },
   "last_tag_run": {
-    "queued": 68,
+    "queued": 58,
     "tagged": 10,
     "failures": [],
     "mode": "retag"
