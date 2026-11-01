@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T07:05:07.790542+00:00",
+  "generated_at": "2026-11-01T07:08:02.730565+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -1801,12 +1801,10 @@
       "tagging": {
         "tags": [
           "Männerabend",
-          "Gesprächsabend",
-          "Austausch",
-          "Spiritueller Impuls",
-          "Apostelhaus"
+          "Bierabend",
+          "Gesprächsabend"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "faaedca369b54fd5e693f85212658c526b886213ee578095a1706505f27f864c",
         "classification_signature": "cc2a24c3d0ce04b708b15dbd69f2a23aad72e9903c05907840550bf7d8927a85"
       },
@@ -7950,16 +7948,14 @@
       },
       "tagging": {
         "tags": [
+          "Männlichkeit",
           "Lebensziele",
-          "Innere Freiheit",
+          "Prioritätensetzung",
+          "innere Freiheit",
           "Freundschaft",
-          "Sinnfindung",
-          "Prioritäten setzen",
-          "Aktive Lebensgestaltung",
-          "Reflexion",
-          "Selbstfindung"
+          "Sinn des Lebens"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "9558bbd9c19ef899f0be4f0560b13f77abc23ade17a9fcd3dfe4743d6a041e93",
         "classification_signature": "d573c97f08f260159b58f6648f9de1d579e5b9b2b0a635d42229e035852e66a4"
       },
@@ -13091,16 +13087,11 @@
       },
       "tagging": {
         "tags": [
-          "stillgebet",
-          "eucharistische-anbetung",
-          "geistliche-leitung",
-          "spirituelle-erneuerung",
-          "glaubensvertiefung",
-          "gemeinschaft",
-          "herzliche-einladung",
-          "einladung-zur-beichte"
+          "Eucharistische Anbetung",
+          "Stilles Gebet",
+          "Geistliche Begleitung"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "1aec8b6c90c20d4f4d35c8309cc1536b8cdf88e49f5f4f0d409260dab455ce3c",
         "classification_signature": "929cfa8fd6089e1fa552db0b7fad573a6ab40791f2b57f7b41f7d213dbc3df88"
       },
@@ -40775,15 +40766,11 @@
       },
       "tagging": {
         "tags": [
-          "Präventionsschulung",
-          "Kinder- und Jugendschutz",
-          "Hauptamtliche",
-          "Ehrenamtliche",
-          "Regnum Christi",
-          "Schulung für Apostolate",
-          "Gottgeweihte Frauen"
+          "Kinderschutz",
+          "Jugendschutz",
+          "Präventionsschulung"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "ce5ec668e5bb8e2c0913581b7b1d7b165998866bcdd45157de0d21982b8414a6",
         "classification_signature": "717c872e6fef109ebb2a17bc0421916aa8eea31ccdeeefa1521f43c357d4ee7f"
       },
@@ -77487,14 +77474,10 @@
       },
       "tagging": {
         "tags": [
-          "Wochenendveranstaltung",
-          "Jugendfreizeit",
-          "geistliche Begleitung",
-          "männliche Jugendliche 10-16",
-          "organisierte Gruppenaktivität",
-          "Austria"
+          "GetStrong",
+          "Christkönig"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "bada3d34dee28908f023eb127e8b3dfccea5da9f16dd060755debd45ddd1c0c4",
         "classification_signature": "ff3047a088c003e30afed3018db5f3cdc13e2aa0ff8b69c370ecac1fb2e9a489"
       },
@@ -96036,13 +96019,8 @@
         "pending_criteria": []
       },
       "tagging": {
-        "tags": [
-          "Jugendliche Mädchen",
-          "Ein-Tages-Veranstaltung",
-          "Pater Michael Hemm LC",
-          "St. Monika München"
-        ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "5515b716c215e6955697298e352bd61bf22ba4aa17316c87580f51690eecfc2a",
         "classification_signature": "f8e16447ea59ee85f2eaaee59c242bab539b98e03fc231ff1a4b28ffde0e89fc"
       },
@@ -105790,17 +105768,8 @@
         "pending_criteria": []
       },
       "tagging": {
-        "tags": [
-          "Jungenveranstaltung",
-          "Tagesveranstaltung",
-          "Herbst",
-          "Spirituelle Begleitung",
-          "Betreuung durch Pater LC",
-          "St. Monika",
-          "Teilnahmegebühr",
-          "Altersgruppe 11-16"
-        ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "a0c36b2bf8051f0039ebf745df4a7edd9503a569da4aaee99fb52d3474b3a003",
         "classification_signature": "00992a61885cbd7881efaae3f360854135fc69bc022a6ab50374a459531759f9"
       },
@@ -109008,14 +108977,9 @@
         "tags": [
           "Christkönigsfest",
           "Patronatsfest",
-          "Hingabe an Christus",
-          "Kuchenspenden",
-          "Inspirierende Begegnungen",
-          "NET Kinderprogramm",
-          "LookingGood",
-          "GetStrong"
+          "NET-Kinderprogramm"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "f397b28c4c7439adc3ce2c15b1441dc2c526a5f83a44c6a8ff18dc7f76879a63",
         "classification_signature": "65c9333eada77b62ff4126158704400738e0d557b0c0c4e574822e8b9e21084b"
       },
@@ -113116,15 +113080,13 @@
       },
       "tagging": {
         "tags": [
-          "Postkartengestaltung",
-          "Jahresrückblick",
-          "Bilderrahmen kreativ",
-          "Pizza essen",
-          "Schwimmbadbesuch",
           "Dankbarkeit",
-          "Mädelswochenende"
+          "Postkarten gestalten",
+          "Bilderrahmen basteln",
+          "Jahresrückblick",
+          "Schwimmbadbesuch"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "5ff391c3e584fefd933fd73149c5280f0dfd0fe1f7cd80759a6484fedff69aad",
         "classification_signature": "7ffabe1e531e49d58953a3fd954a53fcba3f947108b600c886f6c1eec472254d"
       },
@@ -125668,13 +125630,9 @@
       },
       "tagging": {
         "tags": [
-          "spirituelle Übungen",
-          "Jungenfreizeit",
-          "Persönlichkeitsentwicklung",
-          "glaubensorientiert",
-          "Wochenendseminar"
+          "Aktion"
         ],
-        "revision": "64cec11f8d1f7260fc1f54b354305e4e4fe42cda246361b51c76d977d8c14e96",
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
         "content_hash": "89ac090c1cdaebc04643a622579d9c2bdf10a2e6b16ea322266869ff9525b268",
         "classification_signature": "ccd2f27487f775846cd8957a12ae2a7bc738b56ed9083be3f10103897571ab94"
       },
