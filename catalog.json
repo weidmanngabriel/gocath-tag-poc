@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 16,
+      "missing_checks": 17,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 16,
+      "missing_checks": 17,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 16,
+      "missing_checks": 17,
       "inactive": true,
       "classification": {
         "scores": [
@@ -100981,7 +100981,15 @@
       },
       "classification_hash": "c47f43c98586d46042d8ce3c132231b0a866f2e26e4afeeab4e3d91d5fd289ac",
       "last_attempt_hash": "c47f43c98586d46042d8ce3c132231b0a866f2e26e4afeeab4e3d91d5fd289ac",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Fußballcamp"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "c47f43c98586d46042d8ce3c132231b0a866f2e26e4afeeab4e3d91d5fd289ac",
+        "classification_signature": "5e29d998c8331bfdfd969fcd4780d1f5e428e941743dd20ba5a9b404f4d5be9d"
+      }
     },
     "rc-38070": {
       "event": {
@@ -102006,7 +102014,17 @@
       },
       "classification_hash": "2e83d421b30a531dd24e6a64823942e7c0ca3b254c9489fb169be7f0b9ecf99c",
       "last_attempt_hash": "2e83d421b30a531dd24e6a64823942e7c0ca3b254c9489fb169be7f0b9ecf99c",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Ehekrise",
+          "Temperamentenanalyse"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "2e83d421b30a531dd24e6a64823942e7c0ca3b254c9489fb169be7f0b9ecf99c",
+        "classification_signature": "58fed3ab6477cc6a113a52c858e9b750d68d36b9bf59f3d9cd30054cd9346d7b"
+      }
     },
     "rc-38170": {
       "event": {
@@ -103031,7 +103049,13 @@
       },
       "classification_hash": "b25f06ed75603c1eda25285755c91258f05aec62d6d8a3bb6b1023ba22ad0a0b",
       "last_attempt_hash": "b25f06ed75603c1eda25285755c91258f05aec62d6d8a3bb6b1023ba22ad0a0b",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "b25f06ed75603c1eda25285755c91258f05aec62d6d8a3bb6b1023ba22ad0a0b",
+        "classification_signature": "ee19acdb76af70e29048e376283e2d524ad7c0261671f1990e35af53a8b9eb30"
+      }
     },
     "rc-38240": {
       "event": {
@@ -104057,7 +104081,18 @@
       },
       "classification_hash": "4af5d4c8043aecced9387f1694fb3dbdac625cf3f2c6615603435ce6a7ef6b61",
       "last_attempt_hash": "4af5d4c8043aecced9387f1694fb3dbdac625cf3f2c6615603435ce6a7ef6b61",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Strandurlaub mit Kindern",
+          "Geistliche Begleitung",
+          "Glaubensimpulse für Kinder",
+          "Kultureller Ausflug"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "4af5d4c8043aecced9387f1694fb3dbdac625cf3f2c6615603435ce6a7ef6b61",
+        "classification_signature": "bdf5f56670a210722b403472721e709a35b08257a61f855935cc0f23d33d3036"
+      }
     },
     "rc-38142": {
       "event": {
@@ -105082,7 +105117,16 @@
       },
       "classification_hash": "57b578a0ecc1760f2b6c4eee4f539740903f307d5c3a92598efab9aad0b5bd38",
       "last_attempt_hash": "57b578a0ecc1760f2b6c4eee4f539740903f307d5c3a92598efab9aad0b5bd38",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Spiele",
+          "ab 16 Jahren"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "57b578a0ecc1760f2b6c4eee4f539740903f307d5c3a92598efab9aad0b5bd38",
+        "classification_signature": "7f6ca94069ddae1ed9164126d11009548ced6de8ba6a9d2938674817025fbe24"
+      }
     },
     "rc-38426": {
       "event": {
@@ -107137,7 +107181,13 @@
       },
       "classification_hash": "e0ea9a739f5f6858ea9086c8bdf6a54dfe30b73743945aff18619104755b190e",
       "last_attempt_hash": "e0ea9a739f5f6858ea9086c8bdf6a54dfe30b73743945aff18619104755b190e",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "e0ea9a739f5f6858ea9086c8bdf6a54dfe30b73743945aff18619104755b190e",
+        "classification_signature": "8ad253a85f8c2cd0c953b1150e4a97c24c43f720eb3e6c11c815456722367348"
+      }
     },
     "rc-37999": {
       "event": {
@@ -108162,7 +108212,19 @@
       },
       "classification_hash": "db9f0bb655485ad176377bdba40d8b607e4bf51705ecfb77714c1733fa7ad3f5",
       "last_attempt_hash": "db9f0bb655485ad176377bdba40d8b607e4bf51705ecfb77714c1733fa7ad3f5",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Modetipps",
+          "Auftreten",
+          "Gutes Benehmen",
+          "Tanzkurs",
+          "Stil und Eleganz"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "db9f0bb655485ad176377bdba40d8b607e4bf51705ecfb77714c1733fa7ad3f5",
+        "classification_signature": "f201c551f3e749b7c23f0ef5c422f1d63696d15548bd71bb0a4761cea6d3d7ce"
+      }
     },
     "rc-37919": {
       "event": {
@@ -109187,7 +109249,17 @@
       },
       "classification_hash": "2697bd9d55005de8992d855e357a4e5c02bbd344f7016d8dfcf2063c92c9dce4",
       "last_attempt_hash": "2697bd9d55005de8992d855e357a4e5c02bbd344f7016d8dfcf2063c92c9dce4",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Knigge",
+          "Tischmanieren",
+          "Small Talk"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "2697bd9d55005de8992d855e357a4e5c02bbd344f7016d8dfcf2063c92c9dce4",
+        "classification_signature": "1ce7847b67de94aa4c84d61d6850782d0a891bbd23cbd8998cbc7da05ba10738"
+      }
     },
     "rc-38123": {
       "event": {
@@ -110212,7 +110284,15 @@
       },
       "classification_hash": "fdf7e40b38a77cbb1a5911f6d3ae855c5bce30dc671a53d332b41151e73f4856",
       "last_attempt_hash": "fdf7e40b38a77cbb1a5911f6d3ae855c5bce30dc671a53d332b41151e73f4856",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Jungen (10–16 Jahre)"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "fdf7e40b38a77cbb1a5911f6d3ae855c5bce30dc671a53d332b41151e73f4856",
+        "classification_signature": "6b13d9bfa8fdc7fd51a48a1b78504b7da3596ad89308e916352109eb9b1fccf2"
+      }
     },
     "rc-38121": {
       "event": {
@@ -111237,7 +111317,13 @@
       },
       "classification_hash": "d26974612c617772447261f226ebedc349cac25cc34ec982aa7142692543d1db",
       "last_attempt_hash": "d26974612c617772447261f226ebedc349cac25cc34ec982aa7142692543d1db",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "d26974612c617772447261f226ebedc349cac25cc34ec982aa7142692543d1db",
+        "classification_signature": "3b15f0d40f976be91d9f32c245a67e1197bfb780df3883fdb59a53aea0183fc2"
+      }
     },
     "rc-38071": {
       "event": {
@@ -132881,7 +132967,7 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-01T07:13:07.780995+00:00",
+  "last_sync_at": "2026-11-01T07:13:46.230409+00:00",
   "last_run": {
     "mode": "refresh",
     "source_count": 127,
@@ -132891,7 +132977,7 @@
     "remaining": 0
   },
   "last_tag_run": {
-    "queued": 38,
+    "queued": 28,
     "tagged": 10,
     "failures": [],
     "mode": "retag"
