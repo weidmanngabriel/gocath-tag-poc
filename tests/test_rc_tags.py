@@ -57,3 +57,19 @@ class TagTests(unittest.TestCase):
         cfg={'tag_prompt':'','tag_model':'gpt-4.1-mini','tag_limit':8}
         self.assertEqual(tag_sync(state,[event],cfg,tagger)['tagged'],1)
         self.assertEqual([s['id'] for s in observed],['yes'])
+
+    def test_tag_run_usage_is_aggregated(self):
+        from src.rc_delta import fingerprints
+        event={'url':'https://www.regnumchristi.eu/demnaechst/?vid=31','title':'Gebet','description':'Gebet'}
+        cfg={'tag_prompt':'Prompt','tag_model':'gpt-4.1-mini','tag_limit':4}
+        state={'active_questionnaire':{'criteria':[{'id':'prayer','type':'predicate','threshold':0.5}]},
+            'events':{'rc-31':{'classification_status':'success',
+                'classification_hash':fingerprints(event)['classification_hash'],
+                'classification':{'scores':[{'id':'prayer','score':0.8}]}}}}
+        def fake(event,cfg,usage,classification):
+            usage.update(input_tokens=100,output_tokens=20,total_tokens=120)
+            return ['Gebetsabend']
+        usage={}
+        result=tag_sync(state,[event],cfg,fake,run_usage=usage)
+        self.assertEqual(result['tagged'],1)
+        self.assertEqual(usage,{'input_tokens':100,'output_tokens':20,'total_tokens':120})
