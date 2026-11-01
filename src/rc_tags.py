@@ -27,7 +27,7 @@ def generate(event,key,cfg,usage,classification=None):
         + "\\nTechnische Obergrenze: maximal " + str(cfg["tag_limit"]) + " Tags.")
 
     payload = {
-        "model":cfg["tag_model"],
+        "model":"gpt-6-luna",
         "instructions":technical_rules,
         "input":json.dumps({
             "veranstaltung":event,
@@ -51,10 +51,12 @@ def generate(event,key,cfg,usage,classification=None):
     for value in raw:
         tag=" ".join(value.split())
         if 2<=len(tag)<=60 and tag.casefold() not in {t.casefold() for t in tags}:tags.append(tag)
+    details=(body.get("usage") or {}).get("input_tokens_details") or {}
     usage.update({k:int((body.get("usage") or {}).get(k,0)) for k in ("input_tokens","output_tokens","total_tokens")})
+    usage["cached_tokens"]=int(details.get("cached_tokens",0))
     return tags[:cfg["tag_limit"]]
 
-def tag_sync(state,events,cfg,tagger,mode="delta",limit=10):
+def tag_sync(state,events,cfg,tagger,mode="delta",limit=10,run_usage=None):
     if mode not in ("delta","retag","refresh"):raise ValueError("Unknown mode")
     rev=revision(cfg)
     pending=[]
@@ -81,7 +83,13 @@ def tag_sync(state,events,cfg,tagger,mode="delta",limit=10):
             classified=[s for s in scores if criteria.get(s.get("id"),{}).get("type","predicate")=="predicate"
                         and isinstance(s.get("score"),(int,float))
                         and s["score"]>=criteria[s["id"]].get("threshold",0.65)]
-            tags=tagger(event,cfg,{},classified)
+            usage={}
+            try:
+                tags=tagger(event,cfg,usage,classified)
+            finally:
+                if run_usage is not None:
+                    for k,v in usage.items():
+                        run_usage[k]=run_usage.get(k,0)+int(v or 0)
             state["events"][key]["tagging"]={"tags":tags,"revision":rev,"content_hash":content,"classification_signature":signature}
             successes+=1
         except Exception as exc:
