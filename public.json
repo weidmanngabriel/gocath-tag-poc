@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T07:10:12.000136+00:00",
+  "generated_at": "2026-11-01T07:10:58.332189+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -24443,7 +24443,15 @@
         "estimated_cost_usd": 0.0013157,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Nightfever",
+          "Soccerhalle"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "f396d32d091724e09a5cc21c0a8c80dad0a31ea4f50bd6a378e80ba34ae5370e",
+        "classification_signature": "df7e3e51f84de0480820d3f1bf4d5ab4221a87355bbe514296b4bb040f2232f0"
+      },
       "inactive": false,
       "stale": false
     },
@@ -26498,7 +26506,15 @@
         "estimated_cost_usd": 0.0013164,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Schlittschuhlaufen",
+          "Geschlechterunterschiede"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "71433c6943574821457ad22ce777a40c3cbd2c7b646475182da74073e489d2cb",
+        "classification_signature": "8cb3a999771811cdd3785583eb9d843a7f83168c2282d936395572d94053406a"
+      },
       "inactive": false,
       "stale": false
     },
@@ -44970,7 +44986,16 @@
         "estimated_cost_usd": 0.0013339,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Ehevorbereitung",
+          "Ehekrise",
+          "Paarcoaching"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "6aad0c387ffba5ca8c96ce583c3f633592a8d9cc99c41fc3a956801b6f0f4ec8",
+        "classification_signature": "4019f49eb6be92d0d35b500f75b03cd4308e34d28ae04ccd61c6a2e4b08cda40"
+      },
       "inactive": false,
       "stale": false
     },
@@ -60598,7 +60623,18 @@
         "estimated_cost_usd": 0.001341,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Firmvorbereitung",
+          "Heiliger Geist",
+          "Glaubenszweifel",
+          "Schöpfung",
+          "Heilsgeschichte"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "956d5cd82d902229a5ef425ab2e2dc24cf75717ae8138c4b40cabe22d1a806f5",
+        "classification_signature": "889637325f34c2d360617eafa7b5befe6909f6a27c85934430692a815522e36f"
+      },
       "inactive": false,
       "stale": false
     },
@@ -73508,7 +73544,12 @@
         "estimated_cost_usd": 0.0013087,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "dab54c2a94d3edb8f35d99fd88c5f9d8ef42b82a50ba48f6c3c43990ea67e65d",
+        "classification_signature": "8e1d1ce989f42d2edd95f2160e0c2647269b017633b31acd3a0e9ed7f3a682d1"
+      },
       "inactive": false,
       "stale": false
     },
@@ -75552,7 +75593,12 @@
         "estimated_cost_usd": 0.001311,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "3386161ee2d7e6682de0a00ce0b118e88ac15d9f46e882e855286753bba425a9",
+        "classification_signature": "0e24554e97a8fc29ebbf254539f3d9c1a4ab04cc1cfa844757b037a5a6630f0f"
+      },
       "inactive": false,
       "stale": false
     },
@@ -81825,7 +81871,14 @@
         "estimated_cost_usd": 0.0013113,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [
+          "Spiele"
+        ],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "e9255b10edea7b79a1eceb6994db02396738a9da01dd7b0e83ecb7102928f818",
+        "classification_signature": "8446f77e0cefe8b1ae78cb5b9a3206810672df311aa306604b181d1b5463a9e2"
+      },
       "inactive": false,
       "stale": false
     },
@@ -87973,7 +88026,12 @@
         "estimated_cost_usd": 0.0013123,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "fe6c3a991ff45436f26b70c8aa1d2846e06a2f12f31509adcf637cb00623a0a4",
+        "classification_signature": "9937361213da0f6ac0534580a1cbf56fa2ec6ebce200426678473bf3d8f408f9"
+      },
       "inactive": false,
       "stale": false
     },
@@ -115323,7 +115381,12 @@
         "estimated_cost_usd": 0.0013102,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "46292b2ee92b300e34e1e7e5e6adeb6ff5148d0c893fb97b9a754d2b9aaadca6",
+        "classification_signature": "b37767cdb84b5fce0a43b9c75c659a9d6d468bfb422e67b54033cbdd95a609d6"
+      },
       "inactive": false,
       "stale": false
     },
@@ -116346,7 +116409,12 @@
         "estimated_cost_usd": 0.0013102,
         "pending_criteria": []
       },
-      "tagging": null,
+      "tagging": {
+        "tags": [],
+        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
+        "content_hash": "35533946953ea87567b66ef859e676eba66be46d660b2930231bc82a6ac7e90b",
+        "classification_signature": "9126065c94c74636e22a69a11f6046f7bb1c587f090908165558f1b266cd9a99"
+      },
       "inactive": false,
       "stale": false
     },
