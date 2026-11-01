@@ -41,3 +41,19 @@ class TagTests(unittest.TestCase):
         self.assertIn('Bitte gib standard_tags und reason zurück',payload['instructions'])
         self.assertIn('maximal 3 Tags',payload['instructions'])
         self.assertNotIn('standard_tags',payload['text']['format']['schema']['properties'])
+
+    def test_only_positive_predicate_scores_reach_tagger(self):
+        from src.rc_delta import fingerprints
+        event={'url':'https://www.regnumchristi.eu/demnaechst/?vid=30','title':'Workshop','description':'Praxis'}
+        state={'events':{'rc-30':{'classification_status':'success',
+            'classification_hash':fingerprints(event)['classification_hash'],
+            'classification':{'scores':[{'id':'yes','score':0.9},{'id':'no','score':0.2},{'id':'choice','score':0.99}]}}}},
+            'active_questionnaire':{'criteria':[{'id':'yes','type':'predicate','threshold':0.7},
+              {'id':'no','type':'predicate','threshold':0.7},{'id':'choice','type':'choice','threshold':0.5}]}}
+        observed=[]
+        def tagger(event,cfg,usage,classified):
+            observed.extend(classified)
+            return ['Workshop']
+        cfg={'tag_prompt':'','tag_model':'gpt-4.1-mini','tag_limit':8}
+        self.assertEqual(tag_sync(state,[event],cfg,tagger)['tagged'],1)
+        self.assertEqual([s['id'] for s in observed],['yes'])
