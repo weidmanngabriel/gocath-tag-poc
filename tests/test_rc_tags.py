@@ -47,7 +47,7 @@ class TagTests(unittest.TestCase):
         event={'url':'https://www.regnumchristi.eu/demnaechst/?vid=30','title':'Workshop','description':'Praxis'}
         state={'events':{'rc-30':{'classification_status':'success',
             'classification_hash':fingerprints(event)['classification_hash'],
-            'classification':{'scores':[{'id':'yes','score':0.9},{'id':'no','score':0.2},{'id':'choice','score':0.99}]}}}},
+            'classification':{'scores':[{'id':'yes','score':0.9},{'id':'no','score':0.2},{'id':'choice','score':0.99}]}}},
             'active_questionnaire':{'criteria':[{'id':'yes','type':'predicate','threshold':0.7},
               {'id':'no','type':'predicate','threshold':0.7},{'id':'choice','type':'choice','threshold':0.5}]}}
         observed=[]
