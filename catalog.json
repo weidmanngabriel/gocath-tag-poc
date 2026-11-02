@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 25,
+      "missing_checks": 26,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 25,
+      "missing_checks": 26,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 25,
+      "missing_checks": 26,
       "inactive": true,
       "classification": {
         "scores": [
@@ -3106,7 +3106,7 @@
       },
       "display_hash": "7dd9cdf64e86620bf21a39f74154ddb13aa7a086fa52c01422dcacb806344aba",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 1,
+      "missing_checks": 2,
       "inactive": false,
       "classification": {
         "scores": [
@@ -11715,7 +11715,7 @@
     "rc-38417": {
       "event": {
         "title": "Firmkurs-Anfangswochenende in Alzgern",
-        "description": "13.11. - 15.11.2026 Jugendliche Neuötting-Alzgern Deutschland Neuötting-Alzgern (DE) Beginn: 18:00 Ende: 13:00 Preis: 100 EUR Unterkunft und Verpflegung, sowie Teilnahme an allen Programmpunkten Verwendungszweck bei Überweisungen: ECAZ26FIRMNO Direktlink Termin speichern Kontakt Mariano Hernández Tel: +49 176 22898790 E-Mail: Geistliche Leitung P. Peter Hemm LC Emmertinger Str. 12 Neuötting (Alzgern) Tel: +49 15560359267 E-Mail: Der Firmkurs besteht aus: Zwei Präsenz-Treffen im ApostelHaus Alzgern: Anfangswochenende (13.-15. November 2026), Abschlusswochenende (April 2027, genaues Datum wird noch bekanntgegeben) Monatliches Online-Treffen (Sonntagabend) Wöchentliche persönliche Challenges , um im Glauben zu wachsen (läuft über eine WhatsApp-Gruppe) Um in die WhatsApp-Gruppe aufgenommen zu werden, könnt ihr Mariano Hernández anschreiben: +49 176 22898790. Gottes Segen! P. Peter, P. Michael und Mariano Adresse ApostelHaus Alzgern, Emmertinger Straße 12 84524 Neuötting-Alzgern Deutschland",
+        "description": "13.11. - 15.11.2026 Jugendliche Neuötting-Alzgern Deutschland Neuötting-Alzgern (DE) anmelden Beginn: 18:00 Ende: 13:00 Preis: 100 EUR Unterkunft und Verpflegung, sowie Teilnahme an allen Programmpunkten Verwendungszweck bei Überweisungen: ECAZ26FIRMNO Direktlink Termin speichern Kontakt Mariano Hernández Tel: +49 176 22898790 E-Mail: Geistliche Leitung P. Peter Hemm LC Emmertinger Str. 12 Neuötting (Alzgern) Tel: +49 15560359267 E-Mail: Der Firmkurs besteht aus: Zwei Präsenz-Treffen im ApostelHaus Alzgern: Anfangswochenende (13.-15. November 2026), Abschlusswochenende (April 2027, genaues Datum wird noch bekanntgegeben) Monatliches Online-Treffen (Sonntagabend) Wöchentliche persönliche Challenges , um im Glauben zu wachsen (läuft über eine WhatsApp-Gruppe) Um in die WhatsApp-Gruppe aufgenommen zu werden, könnt ihr Mariano Hernández anschreiben: +49 176 22898790. Gottes Segen! P. Peter, P. Michael und Mariano Adresse ApostelHaus Alzgern, Emmertinger Straße 12 84524 Neuötting-Alzgern Deutschland anmelden",
         "organizer": "",
         "target_groups": [
           "Jugendliche Neuötting-Alzgern Deutschland Neuö"
@@ -11726,7 +11726,7 @@
         "ends_at": "2026-11-15",
         "url": "https://www.regnumchristi.eu/demnaechst/?vid=38417"
       },
-      "display_hash": "4e46b0467cf62b2cb7bd5b49a51f48f28f9a182defb109f18f3f9ff5ba72f25c",
+      "display_hash": "78a831e0e19572f2732c8de0fe2a8d01095792f13795b4422491783cec25973f",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
       "missing_checks": 0,
       "inactive": false,
@@ -11749,11 +11749,11 @@
             "category": "Zielgruppe",
             "label": "Jugendliche",
             "type": "predicate",
-            "score": 0.99,
+            "score": 1.0,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.99
+              "probability": 1.0
             }
           },
           {
@@ -11833,11 +11833,11 @@
             "category": "Zielgruppe",
             "label": "Einzelpersonen",
             "type": "predicate",
-            "score": 0.31,
+            "score": 0.35,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.31
+              "probability": 0.35
             }
           },
           {
@@ -11917,11 +11917,11 @@
             "category": "Geschlecht",
             "label": "Für Männer und Frauen gleichermaßen",
             "type": "predicate",
-            "score": 0.51,
+            "score": 0.59,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.51
+              "probability": 0.59
             }
           },
           {
@@ -11929,11 +11929,11 @@
             "category": "Veranstaltungsformat",
             "label": "Heilige Messe",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.0,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.0
             }
           },
           {
@@ -11953,11 +11953,11 @@
             "category": "Veranstaltungsformat",
             "label": "Beichte",
             "type": "predicate",
-            "score": 0.25,
+            "score": 0.17,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.25
+              "probability": 0.17
             }
           },
           {
@@ -11977,11 +11977,11 @@
             "category": "Veranstaltungsformat",
             "label": "Vortrag",
             "type": "predicate",
-            "score": 0.08,
+            "score": 0.1,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.08
+              "probability": 0.1
             }
           },
           {
@@ -11989,11 +11989,11 @@
             "category": "Veranstaltungsformat",
             "label": "Workshop",
             "type": "predicate",
-            "score": 0.19,
+            "score": 0.25,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.19
+              "probability": 0.25
             }
           },
           {
@@ -12001,11 +12001,11 @@
             "category": "Veranstaltungsformat",
             "label": "Bibelkreis",
             "type": "predicate",
-            "score": 0.0,
+            "score": 0.02,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.0
+              "probability": 0.02
             }
           },
           {
@@ -12049,11 +12049,11 @@
             "category": "Veranstaltungsformat",
             "label": "Gemeinschaftstreffen",
             "type": "predicate",
-            "score": 0.29,
+            "score": 0.21,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.29
+              "probability": 0.21
             }
           },
           {
@@ -12061,11 +12061,11 @@
             "category": "Veranstaltungsformat",
             "label": "Freizeit",
             "type": "predicate",
-            "score": 0.04,
+            "score": 0.0,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.04
+              "probability": 0.0
             }
           },
           {
@@ -12085,11 +12085,11 @@
             "category": "Veranstaltungsformat",
             "label": "Katechese",
             "type": "predicate",
-            "score": 0.93,
+            "score": 0.95,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.93
+              "probability": 0.95
             }
           },
           {
@@ -12121,11 +12121,11 @@
             "category": "Thema und Inhalt",
             "label": "Bibel",
             "type": "predicate",
-            "score": 0.11,
+            "score": 0.14,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.11
+              "probability": 0.14
             }
           },
           {
@@ -12133,11 +12133,11 @@
             "category": "Thema und Inhalt",
             "label": "Gebet",
             "type": "predicate",
-            "score": 0.28,
+            "score": 0.35,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.28
+              "probability": 0.35
             }
           },
           {
@@ -12145,11 +12145,11 @@
             "category": "Thema und Inhalt",
             "label": "Berufung",
             "type": "predicate",
-            "score": 0.14,
+            "score": 0.19,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.14
+              "probability": 0.19
             }
           },
           {
@@ -12181,53 +12181,17 @@
             "category": "Thema und Inhalt",
             "label": "Kirchenlehre",
             "type": "predicate",
-            "score": 0.16,
+            "score": 0.38,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.16
+              "probability": 0.38
             }
           },
           {
             "id": "v2_thema_und_inhalt_personlichkeitsentwicklung",
             "category": "Thema und Inhalt",
             "label": "Persönlichkeitsentwicklung",
-            "type": "predicate",
-            "score": 0.28,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.28
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_gesellschaft_und_ethik",
-            "category": "Thema und Inhalt",
-            "label": "Gesellschaft und Ethik",
-            "type": "predicate",
-            "score": 0.07,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.07
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_mission_und_evangelisierung",
-            "category": "Thema und Inhalt",
-            "label": "Mission und Evangelisierung",
-            "type": "predicate",
-            "score": 0.7,
-            "matched": true,
-            "evidence": "",
-            "answer": {
-              "probability": 0.7
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_lebensfragen",
-            "category": "Thema und Inhalt",
-            "label": "Lebensfragen",
             "type": "predicate",
             "score": 0.17,
             "matched": false,
@@ -12237,15 +12201,51 @@
             }
           },
           {
+            "id": "v2_thema_und_inhalt_gesellschaft_und_ethik",
+            "category": "Thema und Inhalt",
+            "label": "Gesellschaft und Ethik",
+            "type": "predicate",
+            "score": 0.08,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.08
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_mission_und_evangelisierung",
+            "category": "Thema und Inhalt",
+            "label": "Mission und Evangelisierung",
+            "type": "predicate",
+            "score": 0.9,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.9
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_lebensfragen",
+            "category": "Thema und Inhalt",
+            "label": "Lebensfragen",
+            "type": "predicate",
+            "score": 0.23,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.23
+            }
+          },
+          {
             "id": "v2_thema_und_inhalt_gemeinschaft",
             "category": "Thema und Inhalt",
             "label": "Gemeinschaft",
             "type": "predicate",
-            "score": 0.48,
+            "score": 0.62,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.48
+              "probability": 0.62
             }
           },
           {
@@ -12253,11 +12253,11 @@
             "category": "Thema und Inhalt",
             "label": "Katholischer Veranstalter",
             "type": "predicate",
-            "score": 0.18,
+            "score": 0.26,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.18
+              "probability": 0.26
             }
           },
           {
@@ -12265,11 +12265,11 @@
             "category": "Vorkenntnisse und Glaubensniveau",
             "label": "Für Glaubensinteressierte ohne kirchliche Bindung geeignet",
             "type": "predicate",
-            "score": 0.37,
+            "score": 0.19,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.37
+              "probability": 0.19
             }
           },
           {
@@ -12277,11 +12277,11 @@
             "category": "Zugang und Teilnahmevoraussetzungen",
             "label": "Offen für alle",
             "type": "predicate",
-            "score": 0.05,
+            "score": 0.07,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.05
+              "probability": 0.07
             }
           },
           {
@@ -12289,11 +12289,11 @@
             "category": "Zugang und Teilnahmevoraussetzungen",
             "label": "Nur für Mitglieder",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.02,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.02
             }
           },
           {
@@ -12301,11 +12301,11 @@
             "category": "Zugang und Teilnahmevoraussetzungen",
             "label": "Anmeldung erforderlich",
             "type": "predicate",
-            "score": 0.07,
-            "matched": false,
+            "score": 0.99,
+            "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.07
+              "probability": 0.99
             }
           },
           {
@@ -12325,11 +12325,11 @@
             "category": "Zugang und Teilnahmevoraussetzungen",
             "label": "Kostenlos",
             "type": "predicate",
-            "score": 0.04,
+            "score": 0.08,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.04
+              "probability": 0.08
             }
           },
           {
@@ -12409,11 +12409,11 @@
             "category": "Zeitlicher Charakter",
             "label": "Mehrteiliger Kurs",
             "type": "predicate",
-            "score": 0.98,
+            "score": 1.0,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.98
+              "probability": 1.0
             }
           },
           {
@@ -12445,11 +12445,11 @@
             "category": "Zeitlicher Charakter",
             "label": "Verbindliche Teilnahme über mehrere Termine",
             "type": "predicate",
-            "score": 0.82,
+            "score": 0.85,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.82
+              "probability": 0.85
             }
           },
           {
@@ -12469,11 +12469,11 @@
             "category": "Charakter und Ziel",
             "label": "Glauben vertiefen",
             "type": "predicate",
-            "score": 0.96,
+            "score": 0.97,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.96
+              "probability": 0.97
             }
           },
           {
@@ -12481,11 +12481,11 @@
             "category": "Charakter und Ziel",
             "label": "Wissen erwerben",
             "type": "predicate",
-            "score": 0.16,
+            "score": 0.17,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.16
+              "probability": 0.17
             }
           },
           {
@@ -12493,11 +12493,11 @@
             "category": "Charakter und Ziel",
             "label": "Beten",
             "type": "predicate",
-            "score": 0.06,
+            "score": 0.13,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.06
+              "probability": 0.13
             }
           },
           {
@@ -12505,65 +12505,17 @@
             "category": "Charakter und Ziel",
             "label": "Sakramente empfangen",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.1,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.1
             }
           },
           {
             "id": "v2_charakter_und_ziel_sich_austauschen",
             "category": "Charakter und Ziel",
             "label": "Sich austauschen",
-            "type": "predicate",
-            "score": 0.06,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.06
-            }
-          },
-          {
-            "id": "v2_charakter_und_ziel_praktisch_mitarbeiten",
-            "category": "Charakter und Ziel",
-            "label": "Praktisch mitarbeiten",
-            "type": "predicate",
-            "score": 0.11,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.11
-            }
-          },
-          {
-            "id": "v2_charakter_und_ziel_anderen_helfen",
-            "category": "Charakter und Ziel",
-            "label": "Anderen helfen",
-            "type": "predicate",
-            "score": 0.02,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.02
-            }
-          },
-          {
-            "id": "v2_charakter_und_ziel_zur_ruhe_kommen",
-            "category": "Charakter und Ziel",
-            "label": "Zur Ruhe kommen",
-            "type": "predicate",
-            "score": 0.0,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.0
-            }
-          },
-          {
-            "id": "v2_charakter_und_ziel_freizeit_gestalten",
-            "category": "Charakter und Ziel",
-            "label": "Freizeit gestalten",
             "type": "predicate",
             "score": 0.04,
             "matched": false,
@@ -12573,26 +12525,74 @@
             }
           },
           {
+            "id": "v2_charakter_und_ziel_praktisch_mitarbeiten",
+            "category": "Charakter und Ziel",
+            "label": "Praktisch mitarbeiten",
+            "type": "predicate",
+            "score": 0.13,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.13
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_anderen_helfen",
+            "category": "Charakter und Ziel",
+            "label": "Anderen helfen",
+            "type": "predicate",
+            "score": 0.01,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.01
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_zur_ruhe_kommen",
+            "category": "Charakter und Ziel",
+            "label": "Zur Ruhe kommen",
+            "type": "predicate",
+            "score": 0.01,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.01
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_freizeit_gestalten",
+            "category": "Charakter und Ziel",
+            "label": "Freizeit gestalten",
+            "type": "predicate",
+            "score": 0.03,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.03
+            }
+          },
+          {
             "id": "v2_vorkenntnisse_stufe",
             "category": "Vorkenntnisse und Glaubensniveau",
             "label": "Erforderliche Vorkenntnisse",
             "type": "score",
-            "score": 0.02,
+            "score": 0.0233,
             "matched": false,
             "evidence": "",
             "answer": {
-              "score": 0.06,
-              "confidence": 0.94,
+              "score": 0.07,
+              "confidence": 0.93,
               "probabilities": [
                 {
                   "value": 0,
                   "label": "Keine Vorkenntnisse",
-                  "probability": 0.94
+                  "probability": 0.93
                 },
                 {
                   "value": 1,
                   "label": "Grundwissen",
-                  "probability": 0.06
+                  "probability": 0.07
                 },
                 {
                   "value": 2,
@@ -12612,39 +12612,39 @@
             "category": "Teilnahmeort und Durchführung",
             "label": "Teilnahmeform",
             "type": "choice",
-            "score": 0.94,
+            "score": 0.99,
             "matched": false,
             "evidence": "",
             "answer": {
               "choice": "Vor Ort",
-              "confidence": 0.92,
+              "confidence": 0.99,
               "probabilities": [
                 {
                   "value": "Vor Ort",
-                  "probability": 0.94
+                  "probability": 0.99
                 },
                 {
                   "value": "Online",
-                  "probability": 0.01
+                  "probability": 0.0
                 },
                 {
                   "value": "Hybrid",
-                  "probability": 0.04
+                  "probability": 0.01
                 },
                 {
                   "value": "Nicht erkennbar",
-                  "probability": 0.01
+                  "probability": 0.0
                 }
               ]
             }
           }
         ],
         "relevance": {
-          "score": 0.93,
+          "score": 0.95,
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T16:19:55.299218+00:00",
+        "classified_at": "2026-11-02T10:59:35.268018+00:00",
         "questionnaire_revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
         "classification_config_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
         "classification_config_updated_at": "2026-10-31T15:32:39.635006+00:00",
@@ -12723,18 +12723,18 @@
           "v2_teilnahmeort_form": "c5e61b4fba7951bfc20b9d6c1ff932226fc6c39c1c49f0798fdebd266a7d9dc4"
         },
         "usage": {
-          "input_tokens": 13250,
+          "input_tokens": 13252,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
           "cache_write_tokens": 0,
           "cache_write_12h_tokens": 0,
-          "total_tokens": 13250
+          "total_tokens": 13252
         },
-        "estimated_cost_usd": 0.001325
+        "estimated_cost_usd": 0.0013252
       },
-      "classification_hash": "2b1dcfced6b4aecd237a9cdb9349df320b1f1439ac186beaca141c36feb1176f",
-      "last_attempt_hash": "2b1dcfced6b4aecd237a9cdb9349df320b1f1439ac186beaca141c36feb1176f",
+      "classification_hash": "c65e30e26ea2db9e2cdbdeb62409b3846217587dac339c329c49bd42612116eb",
+      "last_attempt_hash": "c65e30e26ea2db9e2cdbdeb62409b3846217587dac339c329c49bd42612116eb",
       "classification_status": "success",
       "tagging": {
         "tags": [
@@ -21375,7 +21375,7 @@
     "rc-38271": {
       "event": {
         "title": "Christkönigsfest APG München",
-        "description": "21.11.2026 Familien - Paare & Ehepaare - Erwachsene - Junge Erwachsene - Kinder (bis 11) München Deutschland München (DE) anmelden Beginn: 10:00 Ende: 18:00 Preis: 0 EUR Kuchenspenden sind willkommen Verwendungszweck bei Überweisungen: APMU26CKFEST Direktlink Termin speichern Kontakt Johanna Schmid E-Mail: Geistliche Leitung Pater Michael Hemm LC Tel: +49 176 4177 8568 E-Mail: Das Christkönigsfest ist als zentrales Patronatsfest ein besonderer Höhepunkt im Jahr des Regnum Christi. Die Apostelgemeinschaft München lädt herzlich ein, diesen Tag des Glaubens und der Verbundenheit gemeinsam zu begehen. An diesem Festtag erneuern wir unsere Hingabe an Christus und danken für das gemeinsame Wirken in unserer geistlichen Familie. Es erwarten Sie eine feierliche Heilige Messe, inspirierende Begegnungen und ein lebendiger Austausch in freudiger Atmosphäre. Parallel zu dieser Veranstaltung finden auch LookingGood, GetStrong und NET statt. Für LookingGood und GetStrong gibt es separate Veranstaltungen. Wir bitten daher, die Jugendlichen jeweils über die entsprechende Veranstaltung anzumelden. NET findet bis 15:00 Uhr statt. Im Anschluss daran setzen die Kinder das Programm gemeinsam mit ihren Eltern fort. Die Anmeldung für NET erfolgt über diese Veranstaltung. Adresse St. Monika München, Max-Kolmsperger-Straße 7 81735 München Deutschland anmelden",
+        "description": "21.11.2026 Kinder (bis 11) - Junge Erwachsene - Erwachsene - Paare & Ehepaare - Familien München Deutschland München (DE) anmelden Beginn: 10:00 Ende: 18:00 Preis: 0 EUR Kuchenspenden sind willkommen Verwendungszweck bei Überweisungen: APMU26CKFEST Direktlink Termin speichern Kontakt Johanna Schmid E-Mail: Geistliche Leitung Pater Michael Hemm LC Tel: +49 176 4177 8568 E-Mail: Das Christkönigsfest ist als zentrales Patronatsfest ein besonderer Höhepunkt im Jahr des Regnum Christi. Die Apostelgemeinschaft München lädt herzlich ein, diesen Tag des Glaubens und der Verbundenheit gemeinsam zu begehen. An diesem Festtag erneuern wir unsere Hingabe an Christus und danken für das gemeinsame Wirken in unserer geistlichen Familie. Es erwarten Sie eine feierliche Heilige Messe, inspirierende Begegnungen und ein lebendiger Austausch in freudiger Atmosphäre. Parallel zu dieser Veranstaltung finden auch LookingGood, GetStrong und NET statt. Für LookingGood und GetStrong gibt es separate Veranstaltungen. Wir bitten daher, die Jugendlichen jeweils über die entsprechende Veranstaltung anzumelden. NET findet bis 15:00 Uhr statt. Im Anschluss daran setzen die Kinder das Programm gemeinsam mit ihren Eltern fort. Die Anmeldung für NET erfolgt über diese Veranstaltung. Adresse St. Monika München, Max-Kolmsperger-Straße 7 81735 München Deutschland anmelden",
         "organizer": "",
         "target_groups": [
           "Familien",
@@ -21388,7 +21388,7 @@
         "ends_at": "",
         "url": "https://www.regnumchristi.eu/demnaechst/?vid=38271"
       },
-      "display_hash": "62c4264742e3d67410d715d11efe25ed884973800cd46b985b1e96febf3b6d6d",
+      "display_hash": "c7203381e9e51bbfa085eb2d63a715a839fcc0172a3eeb9bb8490148c60fd141",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
       "missing_checks": 0,
       "inactive": false,
@@ -21423,11 +21423,11 @@
             "category": "Zielgruppe",
             "label": "Junge Erwachsene",
             "type": "predicate",
-            "score": 0.17,
+            "score": 0.09,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.17
+              "probability": 0.09
             }
           },
           {
@@ -21435,11 +21435,11 @@
             "category": "Zielgruppe",
             "label": "Erwachsene",
             "type": "predicate",
-            "score": 0.99,
+            "score": 0.86,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.99
+              "probability": 0.86
             }
           },
           {
@@ -21459,11 +21459,11 @@
             "category": "Zielgruppe",
             "label": "Ehepaare",
             "type": "predicate",
-            "score": 0.98,
-            "matched": true,
+            "score": 0.35,
+            "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.98
+              "probability": 0.35
             }
           },
           {
@@ -21471,11 +21471,11 @@
             "category": "Zielgruppe",
             "label": "Paare",
             "type": "predicate",
-            "score": 0.95,
-            "matched": true,
+            "score": 0.16,
+            "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.95
+              "probability": 0.16
             }
           },
           {
@@ -21483,11 +21483,11 @@
             "category": "Zielgruppe",
             "label": "Singles",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.0,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.0
             }
           },
           {
@@ -21495,11 +21495,11 @@
             "category": "Zielgruppe",
             "label": "Einzelpersonen",
             "type": "predicate",
-            "score": 0.03,
+            "score": 0.05,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.03
+              "probability": 0.05
             }
           },
           {
@@ -21507,11 +21507,11 @@
             "category": "Zielgruppe",
             "label": "Familien",
             "type": "predicate",
-            "score": 1.0,
+            "score": 0.99,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 1.0
+              "probability": 0.99
             }
           },
           {
@@ -21519,11 +21519,11 @@
             "category": "Zielgruppe",
             "label": "Eltern",
             "type": "predicate",
-            "score": 0.7,
+            "score": 0.74,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.7
+              "probability": 0.74
             }
           },
           {
@@ -21579,11 +21579,11 @@
             "category": "Geschlecht",
             "label": "Für Männer und Frauen gleichermaßen",
             "type": "predicate",
-            "score": 0.93,
+            "score": 0.92,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.93
+              "probability": 0.92
             }
           },
           {
@@ -21603,11 +21603,11 @@
             "category": "Veranstaltungsformat",
             "label": "Anbetung",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.0,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.0
             }
           },
           {
@@ -21615,11 +21615,11 @@
             "category": "Veranstaltungsformat",
             "label": "Beichte",
             "type": "predicate",
-            "score": 0.03,
+            "score": 0.0,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.03
+              "probability": 0.0
             }
           },
           {
@@ -21627,11 +21627,11 @@
             "category": "Veranstaltungsformat",
             "label": "Gebetsabend",
             "type": "predicate",
-            "score": 0.07,
+            "score": 0.05,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.07
+              "probability": 0.05
             }
           },
           {
@@ -21639,11 +21639,11 @@
             "category": "Veranstaltungsformat",
             "label": "Vortrag",
             "type": "predicate",
-            "score": 0.1,
+            "score": 0.11,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.1
+              "probability": 0.11
             }
           },
           {
@@ -21663,11 +21663,11 @@
             "category": "Veranstaltungsformat",
             "label": "Bibelkreis",
             "type": "predicate",
-            "score": 0.0,
+            "score": 0.01,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.0
+              "probability": 0.01
             }
           },
           {
@@ -21711,11 +21711,11 @@
             "category": "Veranstaltungsformat",
             "label": "Gemeinschaftstreffen",
             "type": "predicate",
-            "score": 0.94,
+            "score": 0.95,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.94
+              "probability": 0.95
             }
           },
           {
@@ -21723,11 +21723,11 @@
             "category": "Veranstaltungsformat",
             "label": "Freizeit",
             "type": "predicate",
-            "score": 0.05,
+            "score": 0.01,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.05
+              "probability": 0.01
             }
           },
           {
@@ -21735,11 +21735,11 @@
             "category": "Veranstaltungsformat",
             "label": "Sozialaktion",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.0,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.0
             }
           },
           {
@@ -21759,11 +21759,11 @@
             "category": "Veranstaltungsformat",
             "label": "Konzert",
             "type": "predicate",
-            "score": 0.0,
+            "score": 0.01,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.0
+              "probability": 0.01
             }
           },
           {
@@ -21783,11 +21783,11 @@
             "category": "Thema und Inhalt",
             "label": "Bibel",
             "type": "predicate",
-            "score": 0.05,
+            "score": 0.01,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.05
+              "probability": 0.01
             }
           },
           {
@@ -21795,11 +21795,11 @@
             "category": "Thema und Inhalt",
             "label": "Gebet",
             "type": "predicate",
-            "score": 0.17,
+            "score": 0.19,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.17
+              "probability": 0.19
             }
           },
           {
@@ -21807,17 +21807,149 @@
             "category": "Thema und Inhalt",
             "label": "Berufung",
             "type": "predicate",
-            "score": 0.14,
+            "score": 0.13,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.14
+              "probability": 0.13
             }
           },
           {
             "id": "v2_thema_und_inhalt_ehe_und_beziehung",
             "category": "Thema und Inhalt",
             "label": "Ehe und Beziehung",
+            "type": "predicate",
+            "score": 0.0,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.0
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_familie_und_erziehung",
+            "category": "Thema und Inhalt",
+            "label": "Familie und Erziehung",
+            "type": "predicate",
+            "score": 0.02,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.02
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_kirchenlehre",
+            "category": "Thema und Inhalt",
+            "label": "Kirchenlehre",
+            "type": "predicate",
+            "score": 0.06,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.06
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_personlichkeitsentwicklung",
+            "category": "Thema und Inhalt",
+            "label": "Persönlichkeitsentwicklung",
+            "type": "predicate",
+            "score": 0.07,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.07
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_gesellschaft_und_ethik",
+            "category": "Thema und Inhalt",
+            "label": "Gesellschaft und Ethik",
+            "type": "predicate",
+            "score": 0.07,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.07
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_mission_und_evangelisierung",
+            "category": "Thema und Inhalt",
+            "label": "Mission und Evangelisierung",
+            "type": "predicate",
+            "score": 0.21,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.21
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_lebensfragen",
+            "category": "Thema und Inhalt",
+            "label": "Lebensfragen",
+            "type": "predicate",
+            "score": 0.12,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.12
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_gemeinschaft",
+            "category": "Thema und Inhalt",
+            "label": "Gemeinschaft",
+            "type": "predicate",
+            "score": 0.94,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.94
+            }
+          },
+          {
+            "id": "v2_thema_und_inhalt_katholischer_veranstalter",
+            "category": "Thema und Inhalt",
+            "label": "Katholischer Veranstalter",
+            "type": "predicate",
+            "score": 0.76,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.76
+            }
+          },
+          {
+            "id": "v2_vorkenntnisse_und_glaubensniveau_fur_glaubensinteressierte_ohne_kirchliche_bindung_",
+            "category": "Vorkenntnisse und Glaubensniveau",
+            "label": "Für Glaubensinteressierte ohne kirchliche Bindung geeignet",
+            "type": "predicate",
+            "score": 0.03,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.03
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_offen_fur_alle",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Offen für alle",
+            "type": "predicate",
+            "score": 0.29,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.29
+            }
+          },
+          {
+            "id": "v2_zugang_und_teilnahmevoraussetzungen_nur_fur_mitglieder",
+            "category": "Zugang und Teilnahmevoraussetzungen",
+            "label": "Nur für Mitglieder",
             "type": "predicate",
             "score": 0.01,
             "matched": false,
@@ -21827,147 +21959,15 @@
             }
           },
           {
-            "id": "v2_thema_und_inhalt_familie_und_erziehung",
-            "category": "Thema und Inhalt",
-            "label": "Familie und Erziehung",
-            "type": "predicate",
-            "score": 0.04,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.04
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_kirchenlehre",
-            "category": "Thema und Inhalt",
-            "label": "Kirchenlehre",
-            "type": "predicate",
-            "score": 0.08,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.08
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_personlichkeitsentwicklung",
-            "category": "Thema und Inhalt",
-            "label": "Persönlichkeitsentwicklung",
-            "type": "predicate",
-            "score": 0.04,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.04
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_gesellschaft_und_ethik",
-            "category": "Thema und Inhalt",
-            "label": "Gesellschaft und Ethik",
-            "type": "predicate",
-            "score": 0.09,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.09
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_mission_und_evangelisierung",
-            "category": "Thema und Inhalt",
-            "label": "Mission und Evangelisierung",
-            "type": "predicate",
-            "score": 0.25,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.25
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_lebensfragen",
-            "category": "Thema und Inhalt",
-            "label": "Lebensfragen",
-            "type": "predicate",
-            "score": 0.15,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.15
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_gemeinschaft",
-            "category": "Thema und Inhalt",
-            "label": "Gemeinschaft",
-            "type": "predicate",
-            "score": 0.95,
-            "matched": true,
-            "evidence": "",
-            "answer": {
-              "probability": 0.95
-            }
-          },
-          {
-            "id": "v2_thema_und_inhalt_katholischer_veranstalter",
-            "category": "Thema und Inhalt",
-            "label": "Katholischer Veranstalter",
-            "type": "predicate",
-            "score": 0.81,
-            "matched": true,
-            "evidence": "",
-            "answer": {
-              "probability": 0.81
-            }
-          },
-          {
-            "id": "v2_vorkenntnisse_und_glaubensniveau_fur_glaubensinteressierte_ohne_kirchliche_bindung_",
-            "category": "Vorkenntnisse und Glaubensniveau",
-            "label": "Für Glaubensinteressierte ohne kirchliche Bindung geeignet",
-            "type": "predicate",
-            "score": 0.25,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.25
-            }
-          },
-          {
-            "id": "v2_zugang_und_teilnahmevoraussetzungen_offen_fur_alle",
-            "category": "Zugang und Teilnahmevoraussetzungen",
-            "label": "Offen für alle",
-            "type": "predicate",
-            "score": 0.2,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.2
-            }
-          },
-          {
-            "id": "v2_zugang_und_teilnahmevoraussetzungen_nur_fur_mitglieder",
-            "category": "Zugang und Teilnahmevoraussetzungen",
-            "label": "Nur für Mitglieder",
-            "type": "predicate",
-            "score": 0.14,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.14
-            }
-          },
-          {
             "id": "v2_zugang_und_teilnahmevoraussetzungen_anmeldung_erforderlich",
             "category": "Zugang und Teilnahmevoraussetzungen",
             "label": "Anmeldung erforderlich",
             "type": "predicate",
-            "score": 0.92,
+            "score": 0.94,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.92
+              "probability": 0.94
             }
           },
           {
@@ -22023,11 +22023,11 @@
             "category": "Zugang und Teilnahmevoraussetzungen",
             "label": "Kinderbetreuung vorhanden",
             "type": "predicate",
-            "score": 0.0,
+            "score": 0.01,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.0
+              "probability": 0.01
             }
           },
           {
@@ -22059,11 +22059,11 @@
             "category": "Zeitlicher Charakter",
             "label": "Regelmäßige Veranstaltung",
             "type": "predicate",
-            "score": 0.03,
+            "score": 0.01,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.03
+              "probability": 0.01
             }
           },
           {
@@ -22071,11 +22071,11 @@
             "category": "Zeitlicher Charakter",
             "label": "Mehrteiliger Kurs",
             "type": "predicate",
-            "score": 0.06,
+            "score": 0.05,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.06
+              "probability": 0.05
             }
           },
           {
@@ -22095,11 +22095,11 @@
             "category": "Zeitlicher Charakter",
             "label": "Offener Einstieg möglich",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.0,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.0
             }
           },
           {
@@ -22119,11 +22119,11 @@
             "category": "Charakter und Ziel",
             "label": "Gemeinschaft erleben",
             "type": "predicate",
-            "score": 0.95,
+            "score": 0.96,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.95
+              "probability": 0.96
             }
           },
           {
@@ -22131,11 +22131,11 @@
             "category": "Charakter und Ziel",
             "label": "Glauben vertiefen",
             "type": "predicate",
-            "score": 0.95,
+            "score": 0.94,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.95
+              "probability": 0.94
             }
           },
           {
@@ -22143,11 +22143,11 @@
             "category": "Charakter und Ziel",
             "label": "Wissen erwerben",
             "type": "predicate",
-            "score": 0.07,
+            "score": 0.04,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.07
+              "probability": 0.04
             }
           },
           {
@@ -22155,11 +22155,11 @@
             "category": "Charakter und Ziel",
             "label": "Beten",
             "type": "predicate",
-            "score": 0.2,
+            "score": 0.19,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.2
+              "probability": 0.19
             }
           },
           {
@@ -22167,11 +22167,11 @@
             "category": "Charakter und Ziel",
             "label": "Sakramente empfangen",
             "type": "predicate",
-            "score": 0.44,
+            "score": 0.39,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.44
+              "probability": 0.39
             }
           },
           {
@@ -22179,11 +22179,11 @@
             "category": "Charakter und Ziel",
             "label": "Sich austauschen",
             "type": "predicate",
-            "score": 0.86,
+            "score": 0.92,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.86
+              "probability": 0.92
             }
           },
           {
@@ -22191,11 +22191,11 @@
             "category": "Charakter und Ziel",
             "label": "Praktisch mitarbeiten",
             "type": "predicate",
-            "score": 0.13,
+            "score": 0.12,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.13
+              "probability": 0.12
             }
           },
           {
@@ -22203,11 +22203,11 @@
             "category": "Charakter und Ziel",
             "label": "Anderen helfen",
             "type": "predicate",
-            "score": 0.04,
+            "score": 0.02,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.04
+              "probability": 0.02
             }
           },
           {
@@ -22215,11 +22215,11 @@
             "category": "Charakter und Ziel",
             "label": "Zur Ruhe kommen",
             "type": "predicate",
-            "score": 0.04,
+            "score": 0.0,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.04
+              "probability": 0.0
             }
           },
           {
@@ -22227,11 +22227,11 @@
             "category": "Charakter und Ziel",
             "label": "Freizeit gestalten",
             "type": "predicate",
-            "score": 0.1,
+            "score": 0.09,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.1
+              "probability": 0.09
             }
           },
           {
@@ -22306,7 +22306,7 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-10-31T16:20:16.192512+00:00",
+        "classified_at": "2026-11-02T10:59:35.268018+00:00",
         "questionnaire_revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
         "classification_config_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
         "classification_config_updated_at": "2026-10-31T15:32:39.635006+00:00",
@@ -22395,8 +22395,8 @@
         },
         "estimated_cost_usd": 0.0013268
       },
-      "classification_hash": "f397b28c4c7439adc3ce2c15b1441dc2c526a5f83a44c6a8ff18dc7f76879a63",
-      "last_attempt_hash": "f397b28c4c7439adc3ce2c15b1441dc2c526a5f83a44c6a8ff18dc7f76879a63",
+      "classification_hash": "f05843a735938f2f16e77038cfad2e1102ddcc478e9ccee19297c029fbd10216",
+      "last_attempt_hash": "f05843a735938f2f16e77038cfad2e1102ddcc478e9ccee19297c029fbd10216",
       "classification_status": "success",
       "tagging": {
         "tags": [
@@ -133140,12 +133140,12 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-02T02:29:39.904950+00:00",
+  "last_sync_at": "2026-11-02T10:59:35.268018+00:00",
   "last_run": {
     "mode": "delta",
     "source_count": 126,
-    "queued": 0,
-    "classified": 0,
+    "queued": 2,
+    "classified": 2,
     "failures": [],
     "remaining": 0
   },

@@ -470,6 +470,36 @@
       },
       "pricing_model": "gpt-6-luna",
       "cost_note": "Estimate based on configured per-million-token prices; not an API invoice"
+    },
+    {
+      "run_id": "41433104395",
+      "started_at": "2026-11-02T10:59:30.154008+00:00",
+      "finished_at": "2026-11-02T10:59:37.194071+00:00",
+      "mode": "delta",
+      "source_count": 126,
+      "queued": 2,
+      "attempted": 2,
+      "classified": 2,
+      "failed": 0,
+      "usage": {
+        "input_tokens": 26520,
+        "output_tokens": 0,
+        "thinking_tokens": 0,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "cache_write_12h_tokens": 0,
+        "total_tokens": 26520
+      },
+      "cost_usd_estimated": 0.002652,
+      "prices_per_million_usd": {
+        "rc_input_per_million_usd": 0.1,
+        "rc_cached_input_per_million_usd": 0.01,
+        "rc_cache_write_per_million_usd": 0.125,
+        "rc_cache_write_12h_per_million_usd": 0.25,
+        "rc_output_per_million_usd": 0.5
+      },
+      "pricing_model": "gpt-6-luna",
+      "cost_note": "Estimate based on configured per-million-token prices; not an API invoice"
     }
   ]
 }
