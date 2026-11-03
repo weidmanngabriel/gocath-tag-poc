@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 29,
+      "missing_checks": 30,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 29,
+      "missing_checks": 30,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 29,
+      "missing_checks": 30,
       "inactive": true,
       "classification": {
         "scores": [
@@ -3106,7 +3106,7 @@
       },
       "display_hash": "7dd9cdf64e86620bf21a39f74154ddb13aa7a086fa52c01422dcacb806344aba",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 5,
+      "missing_checks": 6,
       "inactive": true,
       "classification": {
         "scores": [
@@ -133145,7 +133145,7 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-03T10:48:34.776430+00:00",
+  "last_sync_at": "2026-11-03T18:26:15.927019+00:00",
   "last_run": {
     "mode": "delta",
     "source_count": 126,
