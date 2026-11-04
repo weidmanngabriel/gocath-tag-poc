@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T23:58:24.331796+00:00",
+  "generated_at": "2026-11-04T06:15:47.540640+00:00",
   "questionnaire": {
     "revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
     "semantic_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
@@ -54453,7 +54453,7 @@
       "id": "rc-38103",
       "event": {
         "title": "BLESSED-MARIENFRIED",
-        "description": "21.01. - 24.01.2027 Paare & Ehepaare - Priester & Gottgeweihte Frauen - Erwachsene - Junge Erwachsene Pfaffenhofen an der Roth Deutschland Pfaffenhofen an der Roth (DE) anmelden Beginn: 15:00 Ende: 14:00 Preis: 150 EUR Teilnehmergebühr. Die Übernachtung und Verpflegung muss gesondert gebucht und bezahlt werden. Verwendungszweck bei Überweisungen: BLXX27MARIEN Direktlink Termin speichern Geistliche Leitung Pater Klaus Einsle LC Tel: +49 176 10028867 E-Mail: BLESSED - Tage innerer Heilung DIE ANMELDUNG IST AB 1. NOV. 26, 18.00 Uhr MÖGLICH. MELDEN SIE SICH NUR AN, WENN SIE VERLÄSSLICH TEILNEHMEN WERDEN. DIE TEILNAHME IST AB 23 JAHREN MÖGLICH UND VERPFLICHTEND VON DONNERSTAG NACHMITTAG. Eine spätere Anreise ist NICHT möglich. Viele tragen Verletzungen in sich, die sich wie eine „Bremse“ im Leben und auf die Beziehungen auswirken können. Frustration, Wut, Verletzlichkeit, Leistungsdenken, Perfektionismus, Ängstlichkeit… Wir können Licht in dieses Dunkel bringen. Gott möchte uns mit seiner Liebe und Güte erfüllen und uns Freiheit, inneren Frieden und neue Kraft schenken. Spirituelle und seelsorgerische Angebote: Predigten, Beichte, Gespräche, Heilungsgebet, Heilige Messe, Eucharistische Anbetung, Einzelsegen, Fürbittgebet. Geistliche Leitung: P. Klaus Einsle. Vorträge: Pater Klaus Einsle LC, Maria Boeselager, P. Georg Rota Großes Team: Mehrere Priester und ausgebildete Laien Buchen Sie Übernachtung und Verpflegung in Marienfried selbstständig. WICHTIG: BUCHEN SIE ERST, NACHDEM SIE DIE SCHRIFTLICHE BESTÄTIGUNG ERHALTEN HABEN, dass sie angenommen sind. Diese erste Mail stellt lediglich eine Eingangsbestätigung Ihrer Anmeldung dar. Teilnehmergebühr: 150,-€ Die Kosten für die Mahlzeiten in Marienfried selbstständig an der Anmeldung erbringen. Info: Bärbel Matthaei. E-Mail: Für Menschen mit starken psychischen Problemen ist diese Veranstaltung nicht geeignet. ! Wenn Sie mehrere Personen anmelden, die NICHT in EINEM HAUSHALT leben (selbe Adresse), dann müssen Sie JEDE PERSON EINZELN ANMELDEN . ! Adresse Gebetsstätte Marienfried, Marienfriedstraße 62 89284 Pfaffenhofen an der Roth Deutschland anmelden",
+        "description": "21.01. - 24.01.2027 Paare & Ehepaare - Priester & Gottgeweihte Frauen - Erwachsene - Junge Erwachsene Pfaffenhofen an der Roth Deutschland Pfaffenhofen an der Roth (DE) ausgebucht Beginn: 15:00 Ende: 14:00 Preis: 150 EUR Teilnehmergebühr. Die Übernachtung und Verpflegung muss gesondert gebucht und bezahlt werden. Verwendungszweck bei Überweisungen: BLXX27MARIEN Direktlink Termin speichern Geistliche Leitung Pater Klaus Einsle LC Tel: +49 176 10028867 E-Mail: BLESSED - Tage innerer Heilung DIE ANMELDUNG IST AB 1. NOV. 26, 18.00 Uhr MÖGLICH. MELDEN SIE SICH NUR AN, WENN SIE VERLÄSSLICH TEILNEHMEN WERDEN. DIE TEILNAHME IST AB 23 JAHREN MÖGLICH UND VERPFLICHTEND VON DONNERSTAG NACHMITTAG. Eine spätere Anreise ist NICHT möglich. Viele tragen Verletzungen in sich, die sich wie eine „Bremse“ im Leben und auf die Beziehungen auswirken können. Frustration, Wut, Verletzlichkeit, Leistungsdenken, Perfektionismus, Ängstlichkeit… Wir können Licht in dieses Dunkel bringen. Gott möchte uns mit seiner Liebe und Güte erfüllen und uns Freiheit, inneren Frieden und neue Kraft schenken. Spirituelle und seelsorgerische Angebote: Predigten, Beichte, Gespräche, Heilungsgebet, Heilige Messe, Eucharistische Anbetung, Einzelsegen, Fürbittgebet. Geistliche Leitung: P. Klaus Einsle. Vorträge: Pater Klaus Einsle LC, Maria Boeselager, P. Georg Rota Großes Team: Mehrere Priester und ausgebildete Laien Buchen Sie Übernachtung und Verpflegung in Marienfried selbstständig. WICHTIG: BUCHEN SIE ERST, NACHDEM SIE DIE SCHRIFTLICHE BESTÄTIGUNG ERHALTEN HABEN, dass sie angenommen sind. Diese erste Mail stellt lediglich eine Eingangsbestätigung Ihrer Anmeldung dar. Teilnehmergebühr: 150,-€ Die Kosten für die Mahlzeiten in Marienfried selbstständig an der Anmeldung erbringen. Info: Bärbel Matthaei. E-Mail: Für Menschen mit starken psychischen Problemen ist diese Veranstaltung nicht geeignet. ! Wenn Sie mehrere Personen anmelden, die NICHT in EINEM HAUSHALT leben (selbe Adresse), dann müssen Sie JEDE PERSON EINZELN ANMELDEN . ! Adresse Gebetsstätte Marienfried, Marienfriedstraße 62 89284 Pfaffenhofen an der Roth Deutschland",
         "organizer": "",
         "target_groups": [
           "Paare & Ehepaare"
@@ -54495,11 +54495,11 @@
             "category": "Zielgruppe",
             "label": "Junge Erwachsene",
             "type": "predicate",
-            "score": 0.23,
+            "score": 0.24,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.23
+              "probability": 0.24
             }
           },
           {
@@ -54507,11 +54507,11 @@
             "category": "Zielgruppe",
             "label": "Erwachsene",
             "type": "predicate",
-            "score": 0.99,
+            "score": 0.97,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.99
+              "probability": 0.97
             }
           },
           {
@@ -54531,11 +54531,11 @@
             "category": "Zielgruppe",
             "label": "Ehepaare",
             "type": "predicate",
-            "score": 0.99,
+            "score": 1.0,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.99
+              "probability": 1.0
             }
           },
           {
@@ -54567,11 +54567,11 @@
             "category": "Zielgruppe",
             "label": "Einzelpersonen",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.03,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.03
             }
           },
           {
@@ -54603,11 +54603,11 @@
             "category": "Zielgruppe",
             "label": "Priester",
             "type": "predicate",
-            "score": 1.0,
+            "score": 0.94,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 1.0
+              "probability": 0.94
             }
           },
           {
@@ -54615,11 +54615,11 @@
             "category": "Zielgruppe",
             "label": "Ordensleute",
             "type": "predicate",
-            "score": 0.98,
-            "matched": true,
+            "score": 0.56,
+            "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.98
+              "probability": 0.56
             }
           },
           {
@@ -54639,11 +54639,11 @@
             "category": "Geschlecht",
             "label": "Speziell für Frauen",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.03,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.03
             }
           },
           {
@@ -54651,11 +54651,11 @@
             "category": "Geschlecht",
             "label": "Für Männer und Frauen gleichermaßen",
             "type": "predicate",
-            "score": 0.97,
+            "score": 0.94,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.97
+              "probability": 0.94
             }
           },
           {
@@ -54699,11 +54699,11 @@
             "category": "Veranstaltungsformat",
             "label": "Gebetsabend",
             "type": "predicate",
-            "score": 0.13,
+            "score": 0.09,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.13
+              "probability": 0.09
             }
           },
           {
@@ -54723,11 +54723,11 @@
             "category": "Veranstaltungsformat",
             "label": "Workshop",
             "type": "predicate",
-            "score": 0.04,
+            "score": 0.09,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.04
+              "probability": 0.09
             }
           },
           {
@@ -54735,11 +54735,11 @@
             "category": "Veranstaltungsformat",
             "label": "Bibelkreis",
             "type": "predicate",
-            "score": 0.0,
+            "score": 0.01,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.0
+              "probability": 0.01
             }
           },
           {
@@ -54747,11 +54747,11 @@
             "category": "Veranstaltungsformat",
             "label": "Exerzitien",
             "type": "predicate",
-            "score": 0.88,
+            "score": 0.84,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.88
+              "probability": 0.84
             }
           },
           {
@@ -54759,11 +54759,11 @@
             "category": "Veranstaltungsformat",
             "label": "Wallfahrt",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.0,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.0
             }
           },
           {
@@ -54783,11 +54783,11 @@
             "category": "Veranstaltungsformat",
             "label": "Gemeinschaftstreffen",
             "type": "predicate",
-            "score": 0.12,
+            "score": 0.13,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.12
+              "probability": 0.13
             }
           },
           {
@@ -54819,11 +54819,11 @@
             "category": "Veranstaltungsformat",
             "label": "Katechese",
             "type": "predicate",
-            "score": 0.23,
+            "score": 0.19,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.23
+              "probability": 0.19
             }
           },
           {
@@ -54867,11 +54867,11 @@
             "category": "Thema und Inhalt",
             "label": "Gebet",
             "type": "predicate",
-            "score": 0.99,
+            "score": 0.98,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.99
+              "probability": 0.98
             }
           },
           {
@@ -54879,11 +54879,11 @@
             "category": "Thema und Inhalt",
             "label": "Berufung",
             "type": "predicate",
-            "score": 0.1,
+            "score": 0.18,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.1
+              "probability": 0.18
             }
           },
           {
@@ -54891,11 +54891,11 @@
             "category": "Thema und Inhalt",
             "label": "Ehe und Beziehung",
             "type": "predicate",
-            "score": 0.84,
+            "score": 0.93,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.84
+              "probability": 0.93
             }
           },
           {
@@ -54915,11 +54915,11 @@
             "category": "Thema und Inhalt",
             "label": "Kirchenlehre",
             "type": "predicate",
-            "score": 0.09,
+            "score": 0.1,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.09
+              "probability": 0.1
             }
           },
           {
@@ -54927,11 +54927,11 @@
             "category": "Thema und Inhalt",
             "label": "Persönlichkeitsentwicklung",
             "type": "predicate",
-            "score": 0.95,
+            "score": 0.94,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.95
+              "probability": 0.94
             }
           },
           {
@@ -54963,11 +54963,11 @@
             "category": "Thema und Inhalt",
             "label": "Lebensfragen",
             "type": "predicate",
-            "score": 0.8,
+            "score": 0.86,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.8
+              "probability": 0.86
             }
           },
           {
@@ -54975,11 +54975,11 @@
             "category": "Thema und Inhalt",
             "label": "Gemeinschaft",
             "type": "predicate",
-            "score": 0.54,
+            "score": 0.55,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.54
+              "probability": 0.55
             }
           },
           {
@@ -54987,11 +54987,11 @@
             "category": "Thema und Inhalt",
             "label": "Katholischer Veranstalter",
             "type": "predicate",
-            "score": 0.17,
+            "score": 0.26,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.17
+              "probability": 0.26
             }
           },
           {
@@ -54999,11 +54999,11 @@
             "category": "Vorkenntnisse und Glaubensniveau",
             "label": "Für Glaubensinteressierte ohne kirchliche Bindung geeignet",
             "type": "predicate",
-            "score": 0.09,
+            "score": 0.16,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.09
+              "probability": 0.16
             }
           },
           {
@@ -55071,11 +55071,11 @@
             "category": "Zugang und Teilnahmevoraussetzungen",
             "label": "Geschlossene Gruppe",
             "type": "predicate",
-            "score": 0.0,
+            "score": 0.01,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.0
+              "probability": 0.01
             }
           },
           {
@@ -55119,11 +55119,11 @@
             "category": "Zeitlicher Charakter",
             "label": "Einzelveranstaltung",
             "type": "predicate",
-            "score": 0.97,
+            "score": 0.98,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.97
+              "probability": 0.98
             }
           },
           {
@@ -55131,11 +55131,11 @@
             "category": "Zeitlicher Charakter",
             "label": "Regelmäßige Veranstaltung",
             "type": "predicate",
-            "score": 0.04,
+            "score": 0.02,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.04
+              "probability": 0.02
             }
           },
           {
@@ -55143,11 +55143,11 @@
             "category": "Zeitlicher Charakter",
             "label": "Mehrteiliger Kurs",
             "type": "predicate",
-            "score": 0.16,
+            "score": 0.09,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.16
+              "probability": 0.09
             }
           },
           {
@@ -55179,11 +55179,11 @@
             "category": "Zeitlicher Charakter",
             "label": "Verbindliche Teilnahme über mehrere Termine",
             "type": "predicate",
-            "score": 0.86,
+            "score": 0.93,
             "matched": true,
             "evidence": "",
             "answer": {
-              "probability": 0.86
+              "probability": 0.93
             }
           },
           {
@@ -55203,42 +55203,6 @@
             "category": "Charakter und Ziel",
             "label": "Glauben vertiefen",
             "type": "predicate",
-            "score": 0.96,
-            "matched": true,
-            "evidence": "",
-            "answer": {
-              "probability": 0.96
-            }
-          },
-          {
-            "id": "v2_charakter_und_ziel_wissen_erwerben",
-            "category": "Charakter und Ziel",
-            "label": "Wissen erwerben",
-            "type": "predicate",
-            "score": 0.12,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.12
-            }
-          },
-          {
-            "id": "v2_charakter_und_ziel_beten",
-            "category": "Charakter und Ziel",
-            "label": "Beten",
-            "type": "predicate",
-            "score": 0.62,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.62
-            }
-          },
-          {
-            "id": "v2_charakter_und_ziel_sakramente_empfangen",
-            "category": "Charakter und Ziel",
-            "label": "Sakramente empfangen",
-            "type": "predicate",
             "score": 0.95,
             "matched": true,
             "evidence": "",
@@ -55247,9 +55211,57 @@
             }
           },
           {
+            "id": "v2_charakter_und_ziel_wissen_erwerben",
+            "category": "Charakter und Ziel",
+            "label": "Wissen erwerben",
+            "type": "predicate",
+            "score": 0.15,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.15
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_beten",
+            "category": "Charakter und Ziel",
+            "label": "Beten",
+            "type": "predicate",
+            "score": 0.26,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.26
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_sakramente_empfangen",
+            "category": "Charakter und Ziel",
+            "label": "Sakramente empfangen",
+            "type": "predicate",
+            "score": 0.98,
+            "matched": true,
+            "evidence": "",
+            "answer": {
+              "probability": 0.98
+            }
+          },
+          {
             "id": "v2_charakter_und_ziel_sich_austauschen",
             "category": "Charakter und Ziel",
             "label": "Sich austauschen",
+            "type": "predicate",
+            "score": 0.11,
+            "matched": false,
+            "evidence": "",
+            "answer": {
+              "probability": 0.11
+            }
+          },
+          {
+            "id": "v2_charakter_und_ziel_praktisch_mitarbeiten",
+            "category": "Charakter und Ziel",
+            "label": "Praktisch mitarbeiten",
             "type": "predicate",
             "score": 0.07,
             "matched": false,
@@ -55259,9 +55271,9 @@
             }
           },
           {
-            "id": "v2_charakter_und_ziel_praktisch_mitarbeiten",
+            "id": "v2_charakter_und_ziel_anderen_helfen",
             "category": "Charakter und Ziel",
-            "label": "Praktisch mitarbeiten",
+            "label": "Anderen helfen",
             "type": "predicate",
             "score": 0.04,
             "matched": false,
@@ -55271,27 +55283,15 @@
             }
           },
           {
-            "id": "v2_charakter_und_ziel_anderen_helfen",
-            "category": "Charakter und Ziel",
-            "label": "Anderen helfen",
-            "type": "predicate",
-            "score": 0.06,
-            "matched": false,
-            "evidence": "",
-            "answer": {
-              "probability": 0.06
-            }
-          },
-          {
             "id": "v2_charakter_und_ziel_zur_ruhe_kommen",
             "category": "Charakter und Ziel",
             "label": "Zur Ruhe kommen",
             "type": "predicate",
-            "score": 0.14,
+            "score": 0.13,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.14
+              "probability": 0.13
             }
           },
           {
@@ -55299,11 +55299,11 @@
             "category": "Charakter und Ziel",
             "label": "Freizeit gestalten",
             "type": "predicate",
-            "score": 0.01,
+            "score": 0.05,
             "matched": false,
             "evidence": "",
             "answer": {
-              "probability": 0.01
+              "probability": 0.05
             }
           },
           {
@@ -55378,7 +55378,7 @@
           "status": "likely_relevant"
         },
         "model": "gpt-6-luna",
-        "classified_at": "2026-11-01T18:54:58.859011+00:00",
+        "classified_at": "2026-11-04T06:15:47.540640+00:00",
         "questionnaire_revision": "c96d9941a66c19b43a17a5b36ac7b8c2b188794c5e172be3d4737fe65adf7361",
         "classification_config_revision": "3cf2c6e69b96c017d4a675de49a7dca54fcd8b5ba67c38d94b8143a4417d980b",
         "classification_config_updated_at": "2026-10-31T15:32:39.635006+00:00",
@@ -55457,15 +55457,15 @@
           "v2_teilnahmeort_form": "c5e61b4fba7951bfc20b9d6c1ff932226fc6c39c1c49f0798fdebd266a7d9dc4"
         },
         "usage": {
-          "input_tokens": 13555,
+          "input_tokens": 13556,
           "output_tokens": 0,
           "thinking_tokens": 0,
           "cached_tokens": 0,
           "cache_write_tokens": 0,
           "cache_write_12h_tokens": 0,
-          "total_tokens": 13555
+          "total_tokens": 13556
         },
-        "estimated_cost_usd": 0.0013555,
+        "estimated_cost_usd": 0.0013556,
         "pending_criteria": []
       },
       "tagging": null,
