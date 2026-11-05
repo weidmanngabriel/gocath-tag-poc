@@ -15,7 +15,7 @@
       },
       "display_hash": "64f382f69a8b395bd6c32ee14ce2d6ae83a5d497c5cf45f93234c56a07bed16d",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 36,
+      "missing_checks": 37,
       "inactive": true,
       "classification": {
         "scores": [
@@ -1055,7 +1055,7 @@
       },
       "display_hash": "fc319e2df8a2b31b144b9cb4f828d90374c42d22eb4b6b04e884f850cb0f827e",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 36,
+      "missing_checks": 37,
       "inactive": true,
       "classification": {
         "scores": [
@@ -2080,7 +2080,7 @@
       },
       "display_hash": "3cd8375a6382e74e77d4744491d6eb392afa7c367af7a4dbcf51a0bb496292f3",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 36,
+      "missing_checks": 37,
       "inactive": true,
       "classification": {
         "scores": [
@@ -3106,7 +3106,7 @@
       },
       "display_hash": "7dd9cdf64e86620bf21a39f74154ddb13aa7a086fa52c01422dcacb806344aba",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 12,
+      "missing_checks": 13,
       "inactive": true,
       "classification": {
         "scores": [
@@ -4139,7 +4139,7 @@
       },
       "display_hash": "0e285e7467ad381e107cc624bd63f5ced98078fcd373d36b6c7ec162c12237be",
       "last_seen_at": "2026-10-31T12:13:54.598373+00:00",
-      "missing_checks": 6,
+      "missing_checks": 7,
       "inactive": true,
       "classification": {
         "scores": [
@@ -12739,12 +12739,11 @@
       "tagging": {
         "tags": [
           "Firmvorbereitung",
-          "Firmung",
-          "Online-Treffen"
+          "Firmung"
         ],
-        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
-        "content_hash": "2b1dcfced6b4aecd237a9cdb9349df320b1f1439ac186beaca141c36feb1176f",
-        "classification_signature": "c75bef61ad79528a7f35fe068b283fb99bb75fb8a8b43b40e728f179bf903b12"
+        "revision": "6befe48a8d2f28db0c530ead825a32a389a4a446fb0266e6a615c4c326a97f91",
+        "content_hash": "c65e30e26ea2db9e2cdbdeb62409b3846217587dac339c329c49bd42612116eb",
+        "classification_signature": "8c45b8e2c5761925259f874633ce233510d84b51e2a024b72fe7ecec3e09f1e8"
       }
     },
     "rc-38274": {
@@ -22400,13 +22399,13 @@
       "classification_status": "success",
       "tagging": {
         "tags": [
-          "Christkönigsfest",
           "Patronatsfest",
-          "NET-Kinderprogramm"
+          "Kinderprogramm",
+          "NET für Kinder"
         ],
-        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
-        "content_hash": "f397b28c4c7439adc3ce2c15b1441dc2c526a5f83a44c6a8ff18dc7f76879a63",
-        "classification_signature": "65c9333eada77b62ff4126158704400738e0d557b0c0c4e574822e8b9e21084b"
+        "revision": "6befe48a8d2f28db0c530ead825a32a389a4a446fb0266e6a615c4c326a97f91",
+        "content_hash": "f05843a735938f2f16e77038cfad2e1102ddcc478e9ccee19297c029fbd10216",
+        "classification_signature": "7994d688980cd82ef98253a9a0c1663dc2eb5cbd87626b466e3bee3b9fd58702"
       }
     },
     "rc-38247": {
@@ -29643,13 +29642,11 @@
       "classification_status": "success",
       "tagging": {
         "tags": [
-          "Christkönigsfest",
-          "Einzelsegen",
-          "geistliche Impulse"
+          "Mittagessen"
         ],
-        "revision": "a960d29a3174079628e340aa67f991c5abb1b6053eb1d4be06ba2a24ba8b9cf0",
-        "content_hash": "a6cc6906ec387f2c168fc21d9f6431c565f7c4a5cd0eb0715cb59bec5b876dec",
-        "classification_signature": "0893310439e2c99d2b2593b032de27b307aeb441b545ae6e8a4553fd2e085b8b"
+        "revision": "6befe48a8d2f28db0c530ead825a32a389a4a446fb0266e6a615c4c326a97f91",
+        "content_hash": "9ae0c0dad884850aa908e92de636925f7d574fba1fc5903e174975a5fc0bb117",
+        "classification_signature": "4aa43a796a6e4b8cd5e1f47c1636d0fe5d2bdf980a1454cb8d965374c185fd1d"
       }
     },
     "rc-38273": {
@@ -60673,7 +60670,19 @@
       },
       "classification_hash": "2c0dd15f06ef5fa5198c17212e50fb2a0ce43e0514e99ebd0f992b0d056f0294",
       "last_attempt_hash": "2c0dd15f06ef5fa5198c17212e50fb2a0ce43e0514e99ebd0f992b0d056f0294",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "innere Heilung",
+          "Heilungsgebet",
+          "Fürbittgebet",
+          "Einzelsegen",
+          "seelsorgerische Gespräche"
+        ],
+        "revision": "6befe48a8d2f28db0c530ead825a32a389a4a446fb0266e6a615c4c326a97f91",
+        "content_hash": "2c0dd15f06ef5fa5198c17212e50fb2a0ce43e0514e99ebd0f992b0d056f0294",
+        "classification_signature": "266bf955cfd95961d529a5b7ec0aba4724f33a42a3e797ec938ac2354f7bf192"
+      }
     },
     "rc-38140": {
       "event": {
@@ -133389,7 +133398,17 @@
       },
       "classification_hash": "106d4b541d435c743d6d8211724cffb774ed1fbec9b0eeb8025de43503f91041",
       "last_attempt_hash": "106d4b541d435c743d6d8211724cffb774ed1fbec9b0eeb8025de43503f91041",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Christkönigsfest",
+          "The Chosen",
+          "Stille"
+        ],
+        "revision": "6befe48a8d2f28db0c530ead825a32a389a4a446fb0266e6a615c4c326a97f91",
+        "content_hash": "106d4b541d435c743d6d8211724cffb774ed1fbec9b0eeb8025de43503f91041",
+        "classification_signature": "797d1aa2b10279e1eab83441b0e37b33e3d4da548e1a5d70d17d80fa45652fc5"
+      }
     },
     "rc-38431": {
       "event": {
@@ -134414,7 +134433,20 @@
       },
       "classification_hash": "5fdf49e218018748afa6c7391f730d414b24b89fbd9c739cdf0a154500754530",
       "last_attempt_hash": "5fdf49e218018748afa6c7391f730d414b24b89fbd9c739cdf0a154500754530",
-      "classification_status": "success"
+      "classification_status": "success",
+      "tagging": {
+        "tags": [
+          "Priesterweihe",
+          "Primizmesse",
+          "Angelus mit dem Papst",
+          "Führungen",
+          "Audioguide",
+          "Italienische Küche"
+        ],
+        "revision": "6befe48a8d2f28db0c530ead825a32a389a4a446fb0266e6a615c4c326a97f91",
+        "content_hash": "5fdf49e218018748afa6c7391f730d414b24b89fbd9c739cdf0a154500754530",
+        "classification_signature": "00010ff527fdea481f7ed15235242ec6db1e06ebee75eb6b92eec88bf4d2ba06"
+      }
     }
   },
   "active_questionnaire": {
@@ -135194,9 +135226,9 @@
     ],
     "published_at": "2026-10-31T15:32:39.635006+00:00"
   },
-  "last_sync_at": "2026-11-05T06:41:47.199941+00:00",
+  "last_sync_at": "2026-11-05T06:42:17.980074+00:00",
   "last_run": {
-    "mode": "delta",
+    "mode": "refresh",
     "source_count": 127,
     "queued": 0,
     "classified": 0,
@@ -135204,8 +135236,8 @@
     "remaining": 0
   },
   "last_tag_run": {
-    "queued": 0,
-    "tagged": 0,
+    "queued": 6,
+    "tagged": 6,
     "failures": [],
     "mode": "delta"
   }
