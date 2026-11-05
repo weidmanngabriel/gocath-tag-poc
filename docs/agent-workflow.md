@@ -18,3 +18,7 @@
 
 ## Spezielle RC-Betriebsregel
 Der RC-Runner lädt bei jedem Workflowbeginn einen eingefrorenen Google-Sheet-Snapshot. Für reguläre neue/geänderte Events `delta`, für veraltete semantische Bewertungen `reclassify` verwenden. Niemals automatischen Reclassify-Run allein aufgrund einer geänderten Fragebogenversion starten. Nach jeweils höchstens zehn Versuchen auf `rc-data` checkpointen und pro GitHub-Run aggregierte Metriken erhalten. Eine unterbrochene Verarbeitung durch erneuten Aufruf desselben Modus fortsetzen; keine Kampagnenwarteschlange und kein `continue` erforderlich. Reine Anzeigeänderungen dürfen keine bezahlten Neubewertungen auslösen.
+
+## RC Catalog: manueller Betrieb
+
+Der Zeitplan (`schedule`) ist deaktiviert; Workflow-Ausführung nur per `workflow_dispatch`. Klassifizierung und Tagging werden getrennt gestartet. Ein eindeutiges temporäres Git-Worktree-Verzeichnis pro Skriptaufruf verhindert Konflikte, falls der Checkpoint-Runner mehrfach innerhalb desselben GitHub-Jobs verwendet wird. Bereits gestartete GitHub-Actions-Läufe werden durch Entfernen des Zeitplans nicht nachträglich abgebrochen.
