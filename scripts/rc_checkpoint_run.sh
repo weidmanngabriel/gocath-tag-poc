@@ -20,7 +20,8 @@ PY
 git config user.name 'github-actions[bot]'
 git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 git fetch origin rc-data:refs/remotes/origin/rc-data
-worktree="$RUNNER_TEMP/rc-catalog-data"
+worktree="$(mktemp -d "$RUNNER_TEMP/rc-catalog-data.XXXXXX")"
+rmdir "$worktree"
 git worktree add --detach "$worktree" origin/rc-data
 for ((offset=0;offset<limit;offset+=10)); do
   batch=10
